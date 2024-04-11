@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".TelaPrimeirosPassos">
+
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="344dp"
+      android:layout_marginTop="653dp"
+      android:layout_marginEnd="25dp"
+      android:layout_marginBottom="28dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/btn_background" />
+
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="25dp"
+      android:layout_marginTop="653dp"
+      android:layout_marginBottom="28dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/btn_background" />
+
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar5"
+      android:layout_width="411dp"
+      android:layout_height="78dp"
+      android:layout_marginBottom="653dp"
+      android:background="@color/green"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="?attr/actionBarTheme"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/imageView12"
+      android:layout_width="82dp"
+      android:layout_height="76dp"
+      android:layout_marginStart="164dp"
+      android:layout_marginEnd="164dp"
+      android:layout_marginBottom="655dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/whatsapp_image_2024_03_26_at_10_37_34_removebg_preview" />
+
+  <TextView
+      android:id="@+id/textView11"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="25dp"
+      android:layout_marginTop="27dp"
+      android:layout_marginEnd="209dp"
+      android:text="Wow, seja bem-vindo(a)!"
+      android:textSize="16dp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@+id/textView12"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
+
+  <TextView
+      android:id="@+id/textView12"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="25dp"
+      android:layout_marginEnd="133dp"
+      android:layout_marginBottom="23dp"
+      android:text="Nossa especialidade por aqui é eventos!"
+      app:layout_constraintBottom_toTopOf="@+id/divider3"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+  <View
+      android:id="@+id/divider3"
+      android:layout_width="409dp"
+      android:layout_height="1dp"
+      android:layout_marginStart="1dp"
+      android:layout_marginTop="169dp"
+      android:layout_marginEnd="1dp"
+      android:layout_marginBottom="10dp"
+      android:background="?android:attr/listDivider"
+      app:layout_constraintBottom_toTopOf="@+id/textView13"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/textView13"
+      android:layout_width="359dp"
+      android:layout_height="76dp"
+      android:layout_marginStart="26dp"
+      android:layout_marginTop="24dp"
+      android:layout_marginEnd="26dp"
+      android:layout_marginBottom="29dp"
+      android:text="Essa é a Trixxie, a raposinha especialista em bons eventos! Ela está aqui para te fazer companhia... (Cuidado, ela tem cara de anjinho, mas na verdade é uma pestinha!)"
+      app:layout_constraintBottom_toTopOf="@+id/imageView15"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+  <ImageView
+      android:id="@+id/imageView15"
+      android:layout_width="260dp"
+      android:layout_height="260dp"
+      android:layout_marginStart="75dp"
+      android:layout_marginTop="299dp"
+      android:layout_marginEnd="76dp"
+      android:layout_marginBottom="172dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/btn_background" />
+
+  <ImageView
+      android:id="@+id/imageView16"
+      android:layout_width="259dp"
+      android:layout_height="262dp"
+      android:layout_marginStart="76dp"
+      android:layout_marginTop="27dp"
+      android:layout_marginEnd="76dp"
+      android:layout_marginBottom="172dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView13"
+      app:layout_constraintVertical_bias="1.0"
+      app:srcCompat="@drawable/whatsapp_image_2024_04_02_at_16_13_54__3__removebg_preview" />
+
+  <ImageView
+      android:id="@+id/imageView17"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="39dp"
+      android:layout_marginTop="665dp"
+      android:layout_marginEnd="348dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+
+  <ImageView
+      android:id="@+id/imageView18"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="352dp"
+      android:layout_marginTop="665dp"
+      android:layout_marginEnd="35dp"
+      android:layout_marginBottom="42dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/baseline_arrow_forward_ios_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TaskTide"
+        tools:targetApi="31">
+        <activity
+            android:name=".MeusEventos"
+            android:exported="false" />
+        <activity
+            android:name=".MeusCertificados"
+            android:exported="false" />
+        <activity
+            android:name=".MinhaConta"
+            android:exported="false" />
+        <activity
+            android:name=".CriarEvento"
+            android:exported="false" />
+        <activity
+            android:name=".EventoIdentidade"
+            android:exported="false" />
+        <activity
+            android:name=".EventoInformacoes"
+            android:exported="false" />
+        <activity
+            android:name=".EventoParticipante"
+            android:exported="false" />
+        <activity
+            android:name=".TelaBoasVindas"
+            android:exported="false" />
+        <activity
+            android:name=".TelaPrimeirosPassos"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".EventoConfirmacao"
+            android:exported="false" />
+        <activity
+            android:name=".TelaCadastro"
+            android:exported="false" />
+        <activity
+            android:name=".TelaInicial"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
