@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
         <activity
+            android:name=".MeusEventosCriador"
+            android:exported="false" />
+        <activity
             android:name=".MeusEventos"
             android:exported="false" />
         <activity

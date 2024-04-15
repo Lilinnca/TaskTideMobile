@@ -90,17 +90,20 @@
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="370dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="21dp"
         android:layout_marginTop="258dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="423dp"
         android:background="#d9d9d9"
         android:ems="10"
+        android:hint="Digite seu endereço de e-mail"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textView4"
@@ -127,7 +130,9 @@
         android:layout_marginBottom="327dp"
         android:background="#D9D9D9"
         android:ems="10"
+        android:hint="Digite sua senha"
         android:inputType="textPassword"
+        android:textColorHint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +157,7 @@
     <Button
         android:id="@+id/btnEsqueciSenha"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="113dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="114dp"

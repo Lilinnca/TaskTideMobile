@@ -7,216 +7,6 @@
     android:background="@color/white"
     tools:context=".MeusCertificados">
 
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="546dp"
-        android:layout_marginEnd="87dp"
-        android:layout_marginBottom="162dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="545dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="162dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="261dp"
-        android:layout_marginTop="546dp"
-        android:layout_marginEnd="126dp"
-        android:layout_marginBottom="162dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="546dp"
-        android:layout_marginEnd="280dp"
-        android:layout_marginBottom="162dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="546dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginBottom="162dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="545dp"
-        android:layout_marginEnd="313dp"
-        android:layout_marginBottom="162dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="291dp"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="379dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="411dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="541dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar12"
-        android:layout_width="411dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="654dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="242dp"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="145dp"
-        android:layout_marginBottom="379dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/silhueta_de_formato_simples_de_coracao" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="193dp"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="194dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mais" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/calendario__1_" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/perfil_de_usuario" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="366dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/toolbar4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/casa" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar13"
         android:layout_width="411dp"
@@ -280,84 +70,244 @@
         android:id="@+id/textView61"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="304dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
         android:text="Certificados"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
     <TextView
         android:id="@+id/textView62"
-        android:layout_width="335dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="178dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="513dp"
+        android:layout_width="350dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="36dp"
         android:text="Estes certificados são dos eventos gerenciados por nós!"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+    <ImageView
+        android:id="@+id/imageView28"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="241dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView62"
+        app:srcCompat="@drawable/rectangle_17" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="215dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView62"
+        app:srcCompat="@drawable/rectangle_17" />
+
+    <Button
+        android:id="@+id/btnInfo9"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="318dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de informações"
+        android:drawablePadding="6dp"
+        android:padding="15dp"
+        app:icon="@android:drawable/ic_menu_info_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView28"
+        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+    <Button
+        android:id="@+id/btnSalvar9"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de salvar"
+        android:drawablePadding="6dp"
+        android:padding="16dp"
+        app:icon="@drawable/downloda_5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+    <Button
+        android:id="@+id/btnInfo11"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="123dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de informação"
+        android:drawablePadding="6dp"
+        android:padding="15dp"
+        app:icon="@android:drawable/ic_menu_info_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView30"
+        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+
+    <Button
+        android:id="@+id/btnSalvar12"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de salvar"
+        android:drawablePadding="6dp"
+        android:padding="16dp"
+        app:icon="@drawable/downloda_5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
 
     <TextView
-        android:id="@+id/textView63"
+        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="238dp"
-        android:layout_marginBottom="348dp"
-        android:text="Certificados inseridos"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Certificados Inseridos"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnInfo9" />
 
     <TextView
-        android:id="@+id/textView64"
-        android:layout_width="335dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="383dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="308dp"
+        android:id="@+id/textView16"
+        android:layout_width="347dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="25dp"
         android:text="Estes certificados são inseridos por você, de eventos externos, para contabilização das horas!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar6"
+        android:layout_width="411dp"
+        android:layout_height="78dp"
+        android:background="@color/green"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="304dp"
-        android:layout_marginBottom="379dp"
+        android:id="@+id/imageView34"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="225dp"
+        android:layout_marginBottom="137dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:srcCompat="@drawable/rectangle_17" />
+
+    <Button
+        android:id="@+id/btnInfo13"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de informações"
+        android:drawablePadding="6dp"
+        android:padding="15dp"
+        app:icon="@android:drawable/ic_menu_info_details"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView34"
+        app:layout_constraintTop_toBottomOf="@+id/imageView34" />
+
+    <Button
+        android:id="@+id/btnSalvar14"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de salvar"
+        android:drawablePadding="6dp"
+        android:padding="16dp"
+        app:icon="@drawable/downloda_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView34" />
 
     <ImageView
-        android:id="@+id/imageView48"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="255dp"
-        android:layout_marginBottom="379dp"
+        android:id="@+id/imageView35"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="215dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="137dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:srcCompat="@drawable/rectangle_17" />
+
+    <Button
+        android:id="@+id/btnInfo15"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de informações"
+        android:drawablePadding="6dp"
+        android:padding="15dp"
+        app:icon="@android:drawable/ic_menu_info_details"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView35"
+        app:layout_constraintTop_toBottomOf="@+id/imageView35" />
+
+    <Button
+        android:id="@+id/btnSalvar16"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="Botão de salvar"
+        android:drawablePadding="6dp"
+        android:padding="16dp"
+        app:icon="@drawable/downloda_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView35" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

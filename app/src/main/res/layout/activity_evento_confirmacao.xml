@@ -130,6 +130,7 @@
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="320dp"
         android:backgroundTint="@color/green"
+        android:contentDescription="Botão para voltar à tela anterior"
         android:text="Voltar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,11 +146,13 @@
         android:layout_marginEnd="143dp"
         android:layout_marginBottom="223dp"
         android:backgroundTint="@color/green"
+        android:contentDescription="Botão para criar um novo evento"
         android:text="Criar Evento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/txtOu"
