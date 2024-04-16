@@ -134,10 +134,10 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/mais" />
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="310dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="135dp"
         android:layout_marginEnd="80dp"
@@ -156,6 +156,7 @@
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="556dp"
         android:backgroundTint="@color/white"
+        android:contentDescription="Botao de ajuste"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
         <activity
-            android:name=".MeusEventosCriador"
+            android:name=".TelaInicial"
             android:exported="false" />
         <activity
             android:name=".MeusEventos"
@@ -55,7 +55,7 @@
             android:name=".TelaCadastro"
             android:exported="false" />
         <activity
-            android:name=".TelaInicial"
+            android:name=".MeusEventosCriador"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
