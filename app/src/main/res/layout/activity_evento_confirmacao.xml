@@ -131,6 +131,7 @@
         android:layout_marginBottom="320dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Botão para voltar à tela anterior"
+        android:onClick="eventoidentidadex"
         android:text="Voltar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -25,7 +25,7 @@
             android:name=".MinhaConta"
             android:exported="false" />
         <activity
-            android:name=".CriarEvento"
+            android:name=".MeusEventosCriador"
             android:exported="false" />
         <activity
             android:name=".EventoIdentidade"
@@ -55,7 +55,7 @@
             android:name=".TelaCadastro"
             android:exported="false" />
         <activity
-            android:name=".MeusEventosCriador"
+            android:name=".CriarEvento"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
