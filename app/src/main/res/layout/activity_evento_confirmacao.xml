@@ -11,18 +11,15 @@
         android:id="@+id/toolbar1"
         android:layout_width="411dp"
         android:layout_height="78dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="652dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgLogoC"
+        android:id="@+id/imgLogo2"
         android:layout_width="78dp"
         android:layout_height="78dp"
         android:layout_marginStart="166dp"
@@ -33,18 +30,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_03_26_at_10_37_34_removebg_preview" />
+        app:srcCompat="@drawable/logo_tasktide" />
 
     <TextView
         android:id="@+id/txtQuaseLa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="248dp"
-        android:layout_marginBottom="598dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="210dp"
+        android:layout_marginBottom="599dp"
         android:text="Estamos quase lá..."
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,24 +52,24 @@
         android:id="@+id/txtPasso5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="133dp"
-        android:layout_marginEnd="307dp"
-        android:layout_marginBottom="579dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="294dp"
+        android:layout_marginBottom="577dp"
         android:text="Passo 5 de 5"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQuaseLa" />
 
     <View
         android:id="@+id/divider8"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="178dp"
+        android:layout_marginTop="169dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="552dp"
+        android:layout_marginBottom="561dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,78 +78,76 @@
 
     <TextView
         android:id="@+id/txtTexto1"
-        android:layout_width="370dp"
+        android:layout_width="365dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="475dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="474dp"
         android:text="Essa é a última etapa para o procedimento de criação de evento, se você não tiver certeza se está tudo correto, volte e verifique."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
     <TextView
         android:id="@+id/txtTexto2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="256dp"
-        android:layout_marginEnd="166dp"
-        android:layout_marginBottom="456dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="459dp"
         android:text="A Trixxie te espera, não se preocupe."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTexto1" />
 
     <TextView
         android:id="@+id/txtTexto3"
-        android:layout_width="370dp"
+        android:layout_width="365dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="275dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="420dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="423dp"
         android:text="Ah, não se esqueça! Todas as informações podem ser editadas até 2 dias antes do evento!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTexto2" />
 
     <Button
         android:id="@+id/btnVoltar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="363dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="320dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Botão para voltar à tela anterior"
         android:onClick="eventoidentidadex"
         android:text="Voltar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTexto3" />
 
     <Button
         android:id="@+id/btnCriarEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="142dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="143dp"
-        android:layout_marginBottom="223dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Botão para criar um novo evento"
         android:text="Criar Evento"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtOu" />
 
 
     <TextView
@@ -160,12 +155,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="197dp"
-        android:layout_marginTop="426dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="198dp"
-        android:layout_marginBottom="286dp"
         android:text="ou"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar1" />
+
+    <ImageView
+        android:id="@+id/imgBackgroundRaposaConfirmacao"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCriarEvento"
+        app:srcCompat="@drawable/btn_background" />
+
+    <ImageView
+        android:id="@+id/imgRaposaConfirmacao"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBackgroundRaposaConfirmacao"
+        app:layout_constraintEnd_toEndOf="@+id/imgBackgroundRaposaConfirmacao"
+        app:layout_constraintStart_toStartOf="@+id/imgBackgroundRaposaConfirmacao"
+        app:layout_constraintTop_toTopOf="@+id/imgBackgroundRaposaConfirmacao"
+        app:srcCompat="@drawable/raposa_confirmacao" />
 </androidx.constraintlayout.widget.ConstraintLayout>

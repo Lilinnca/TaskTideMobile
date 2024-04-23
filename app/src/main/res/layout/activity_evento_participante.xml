@@ -11,17 +11,15 @@
         android:id="@+id/toolbar7"
         android:layout_width="411dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="653dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView25"
+        android:id="@+id/imgLogo3"
         android:layout_width="78dp"
         android:layout_height="78dp"
         android:layout_marginStart="166dp"
@@ -31,18 +29,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_03_26_at_10_37_34_removebg_preview" />
+        app:srcCompat="@drawable/logo_tasktide" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/txtSobreParticipantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="217dp"
-        android:layout_marginBottom="601dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="599dp"
         android:text="Sobre os participantes..."
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,55 +48,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/txtPasso2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="131dp"
-        android:layout_marginEnd="314dp"
-        android:layout_marginBottom="581dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="294dp"
+        android:layout_marginBottom="577dp"
         android:text="Passo 2 de 5"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSobreParticipantes" />
 
     <View
         android:id="@+id/divider5"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="166dp"
+        android:layout_marginTop="169dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="564dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/txtQntdParticipantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="190dp"
-        android:layout_marginEnd="220dp"
+        android:layout_marginEnd="199dp"
         android:layout_marginBottom="522dp"
         android:text="Quantidade de participantes"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine3"
-        android:layout_width="370dp"
+        android:id="@+id/editTextTextMultiLineParticipantes"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="210dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="481dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="473dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:gravity="start|top"
@@ -107,74 +103,85 @@
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQntdParticipantes" />
 
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/txtTipoParticipante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="263dp"
-        android:layout_marginBottom="447dp"
+        android:layout_marginEnd="247dp"
+        android:layout_marginBottom="434dp"
         android:text="Tipo de participantes"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLineParticipantes" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBoxDiscenteEM"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="186dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="363dp"
         android:contentDescription="Selecione esta opção se for discente de ensino médio"
         android:text="Discentes de Ensino Médio"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSelecioneTipoParticipante" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/checkBoxServidorG"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="231dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="217dp"
+        android:layout_marginBottom="267dp"
         android:contentDescription="Selecione esta opção se for servidor em geral"
         android:text="Servidores em geral"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDiscenteES" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBoxDocente"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="289dp"
+        android:layout_marginBottom="219dp"
         android:contentDescription="Selecione esta opção se for docente"
         android:text="Docentes"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxServidorG" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBoxDiscenteES"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="171dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="153dp"
+        android:layout_marginBottom="315dp"
         android:contentDescription="Selecione esta opção se for discente de ensino superior"
         android:text="Discentes de Ensino Superior"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDiscenteEM" />
 
     <ImageView
         android:id="@+id/imageView26"
@@ -187,7 +194,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDocente"
         app:srcCompat="@drawable/btn_background" />
 
     <ImageView
@@ -201,8 +208,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3"
-        app:srcCompat="@drawable/whatsapp_image_2024_04_02_at_16_13_54__1__removebg_preview" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDocente"
+        app:srcCompat="@drawable/raposa_participante" />
 
     <Button
         android:id="@+id/btnVoltar3"
@@ -214,7 +221,7 @@
         android:backgroundTint="@color/green"
         android:contentDescription="Voltar à tela anterior"
         android:onClick="criarevento"
-        app:icon="@drawable/baseline_arrow_back_ios_24"
+        app:icon="@drawable/voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -230,21 +237,23 @@
         android:backgroundTint="@color/green"
         android:contentDescription="Avançar para a próxima tela"
         android:onClick="eventoinformacoes"
-        app:icon="@drawable/baseline_arrow_forward_ios_24"
+        app:icon="@drawable/avancar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/txtSelecioneTipoParticipante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="192dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="183dp"
+        android:layout_marginBottom="414dp"
         android:text="Selecione no mínimo uma opção"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoParticipante" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,23 +11,21 @@
         android:id="@+id/toolbar11"
         android:layout_width="411dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="653dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView48"
+        android:id="@+id/txtMinhaConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="29dp"
-        android:layout_marginEnd="300dp"
-        android:layout_marginBottom="680dp"
+        android:layout_marginEnd="284dp"
+        android:layout_marginBottom="678dp"
         android:text="Minha Conta"
         android:textColor="@color/white"
         android:textSize="18dp"
@@ -49,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView46" />
+        app:layout_constraintTop_toBottomOf="@+id/imgFotoUsuario" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar12"
@@ -77,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnInicial"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
@@ -92,7 +90,7 @@
         app:srcCompat="@drawable/casa" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnFavoritos"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="99dp"
@@ -102,12 +100,12 @@
         android:contentDescription="botao favoritos"
         android:onClick="telafavoritos"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/btnNovoEvento"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/silhueta_de_formato_simples_de_coracao" />
+        app:srcCompat="@drawable/favoritos" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btnNovoEvento"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="181dp"
@@ -122,7 +120,7 @@
         app:srcCompat="@drawable/mais" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnMeusEventos"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="262dp"
@@ -132,12 +130,12 @@
         android:contentDescription="botao eventosmarcados"
         android:onClick="telameuseventos"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+        app:layout_constraintEnd_toStartOf="@+id/btnPerfil"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/calendario__1_" />
+        app:srcCompat="@drawable/calendario" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/btnPerfil"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="344dp"
@@ -149,10 +147,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/perfil_de_usuario" />
+        app:srcCompat="@drawable/perfil" />
 
     <ImageView
-        android:id="@+id/imageView46"
+        android:id="@+id/imgFotoUsuario"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="31dp"
@@ -164,7 +162,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView49"
+        android:id="@+id/txtNomeUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
@@ -172,87 +170,91 @@
         android:text="Annabeth Chase"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView46"
+        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/toolbar11" />
 
     <TextView
-        android:id="@+id/textView50"
+        android:id="@+id/txtEmailUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:text="annabethchase@gmail.com"
-        app:layout_constraintStart_toEndOf="@+id/imageView46"
-        app:layout_constraintTop_toBottomOf="@+id/textView49" />
+        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeUsuario" />
 
     <TextView
-        android:id="@+id/textView51"
+        android:id="@+id/txtTipoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:text="Discente - Ensino Médio"
-        app:layout_constraintStart_toEndOf="@+id/imageView46"
-        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
 
     <TextView
-        android:id="@+id/textView52"
+        android:id="@+id/txtMatriculaUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:text="2021316789"
-        app:layout_constraintStart_toEndOf="@+id/imageView46"
-        app:layout_constraintTop_toBottomOf="@+id/textView51" />
+        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoUsuario" />
 
     <TextView
-        android:id="@+id/textView53"
+        android:id="@+id/txtHorasUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:text="192 horas contabilizadas"
-        app:layout_constraintStart_toEndOf="@+id/imageView46"
-        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtMatriculaUsuario" />
 
     <TextView
-        android:id="@+id/textView54"
+        android:id="@+id/txtMeusCertificadosConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="192dp"
         android:text="Meus Certificados"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider9" />
 
     <TextView
-        android:id="@+id/textView55"
+        android:id="@+id/txtEditarCertificados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="25dp"
         android:text="Editar Certificados"
-        app:layout_constraintStart_toEndOf="@+id/imageView36"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imgEditarCertificados"
         app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
     <TextView
-        android:id="@+id/textView56"
+        android:id="@+id/txtExcluirPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="25dp"
         android:text="Excluir Perfil"
-        app:layout_constraintStart_toEndOf="@+id/imageView38"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imgExcluitPerfil"
         app:layout_constraintTop_toBottomOf="@+id/divider11" />
 
     <TextView
-        android:id="@+id/textView57"
+        android:id="@+id/txtSobreNos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="240dp"
         android:text="Sobre Nós"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView41"
+        app:layout_constraintStart_toEndOf="@+id/imgSobreNos"
         app:layout_constraintTop_toBottomOf="@+id/divider12" />
 
     <View
@@ -267,7 +269,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView54" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMeusCertificadosConta" />
 
     <View
         android:id="@+id/divider11"
@@ -281,7 +283,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView55" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarCertificados" />
 
     <View
         android:id="@+id/divider12"
@@ -290,10 +292,10 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/textView57"
+        app:layout_constraintBottom_toTopOf="@+id/txtSobreNos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView56" />
+        app:layout_constraintTop_toBottomOf="@+id/txtExcluirPerfil" />
 
     <View
         android:id="@+id/divider13"
@@ -305,46 +307,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView57" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSobreNos" />
 
     <ImageView
-        android:id="@+id/imageView29"
+        android:id="@+id/imgCertificados"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider9"
-        app:srcCompat="@drawable/certificados_1" />
+        app:srcCompat="@drawable/certificados_minhaconta" />
 
     <ImageView
-        android:id="@+id/imageView36"
+        android:id="@+id/imgEditarCertificados"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider10"
-        app:srcCompat="@drawable/editar_icon_1" />
+        app:srcCompat="@drawable/editar" />
 
     <ImageView
-        android:id="@+id/imageView38"
+        android:id="@+id/imgExcluitPerfil"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider11"
-        app:srcCompat="@drawable/excluir_3" />
+        app:srcCompat="@drawable/excluir" />
 
     <ImageView
-        android:id="@+id/imageView41"
+        android:id="@+id/imgSobreNos"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider12"
-        app:srcCompat="@drawable/sobre_nos_1" />
+        app:srcCompat="@drawable/sobre_nos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

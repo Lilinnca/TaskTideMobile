@@ -11,17 +11,15 @@
         android:id="@+id/toolbar8"
         android:layout_width="411dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="653dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView31"
+        android:id="@+id/imgLogo4"
         android:layout_width="78dp"
         android:layout_height="78dp"
         android:layout_marginStart="166dp"
@@ -31,18 +29,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_03_26_at_10_37_34_removebg_preview" />
+        app:srcCompat="@drawable/logo_tasktide" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/txtOutrasInf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="232dp"
-        android:layout_marginBottom="601dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="189dp"
+        android:layout_marginBottom="599dp"
         android:text="Outras informações..."
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,197 +48,173 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/txtPasso3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="307dp"
-        android:layout_marginBottom="582dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="294dp"
+        android:layout_marginBottom="577dp"
         android:text="Passo 3 de 5"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtOutrasInf" />
 
     <View
         android:id="@+id/divider6"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginBottom="560dp"
+        android:layout_marginTop="169dp"
+        android:layout_marginBottom="561dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="370dp"
+        android:id="@+id/editTextDatePrevisto"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="221dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="470dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Selecione uma data"
         android:inputType="date"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDataPrevista" />
 
 
     <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="370dp"
+        android:id="@+id/editTextTimeInicio"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="390dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Selecione um horário de início"
         android:inputType="time"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioInicio" />
 
     <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="435dp"
-        android:layout_marginEnd="354dp"
-        android:layout_marginBottom="277dp"
-        android:text="Local"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/txtLocal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="202dp"
-        android:layout_marginEnd="303dp"
-        android:layout_marginBottom="510dp"
-        android:text="Data prevista"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="351dp"
+        android:layout_marginBottom="276dp"
+        android:text="Local"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimeTermino" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/txtDataPrevista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="361dp"
-        android:layout_marginEnd="270dp"
-        android:layout_marginBottom="351dp"
-        android:text="Horário de término"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="299dp"
+        android:layout_marginBottom="510dp"
+        android:text="Data prevista"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+    <TextView
+        android:id="@+id/txtHorarioTermino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="357dp"
+        android:layout_marginEnd="262dp"
+        android:layout_marginBottom="354dp"
+        android:text="Horário de término"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
-        android:id="@+id/editTextTime2"
-        android:layout_width="370dp"
+        android:id="@+id/editTextTimeTermino"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="380dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="311dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Selecione um horário término"
         android:inputType="time"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioTermino" />
 
 
     <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="370dp"
+        android:id="@+id/editTextTextLocal"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="453dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="21dp"
-        android:layout_marginBottom="238dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Digite seu texto aqui"
         android:inputType="text"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/txtLocal" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/txtHorarioInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="281dp"
-        android:layout_marginEnd="283dp"
-        android:layout_marginBottom="431dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="277dp"
+        android:layout_marginBottom="432dp"
         android:text="Horário de Início"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDatePrevisto" />
 
     <TextView
-        android:id="@+id/textView31"
-        android:layout_width="370dp"
+        android:id="@+id/txtDescricaoInformacoes"
+        android:layout_width="365dp"
         android:layout_height="0dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="505dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="21dp"
         android:layout_marginBottom="174dp"
         android:text="Caso o seu evento ocorrer em mais de um dia, você pode ajustar isso no painel de eventos após o processo de criação."
         android:textColor="#707070"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextLocal" />
 
     <ImageView
-        android:id="@+id/imageView32"
+        android:id="@+id/imgBackgroundRaposaInf"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="130dp"
@@ -254,7 +228,7 @@
         app:srcCompat="@drawable/btn_background" />
 
     <ImageView
-        android:id="@+id/imageView33"
+        android:id="@+id/imgRaposaInf"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="130dp"
@@ -265,7 +239,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_04_02_at_16_13_54__2__removebg_preview" />
+        app:srcCompat="@drawable/raposa_informacoes" />
 
     <Button
         android:id="@+id/btnVoltar2"
@@ -277,7 +251,7 @@
         android:backgroundTint="@color/green"
         android:contentDescription="Voltar à tela anterior"
         android:onClick="eventoparticipantex"
-        app:icon="@drawable/baseline_arrow_back_ios_24"
+        app:icon="@drawable/voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -293,7 +267,7 @@
         android:backgroundTint="@color/green"
         android:contentDescription="Avançar para a próxima tela"
         android:onClick="eventoidentidade"
-        app:icon="@drawable/baseline_arrow_forward_ios_24"
+        app:icon="@drawable/avancar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

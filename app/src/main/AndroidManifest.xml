@@ -37,7 +37,7 @@
             android:name=".EventoParticipante"
             android:exported="false" />
         <activity
-            android:name=".TelaBoasVindas"
+            android:name=".CriarEvento"
             android:exported="false" />
         <activity
             android:name=".TelaPrimeirosPassos"
@@ -55,7 +55,7 @@
             android:name=".TelaCadastro"
             android:exported="false" />
         <activity
-            android:name=".CriarEvento"
+            android:name=".TelaBoasVindas"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

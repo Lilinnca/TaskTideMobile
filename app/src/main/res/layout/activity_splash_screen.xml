@@ -7,7 +7,7 @@
     tools:context=".SplashScreen">
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/imgFundo"
         android:layout_width="412dp"
         android:layout_height="736dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,7 +17,7 @@
         app:srcCompat="@color/green" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/imgLogoSplash"
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:layout_marginStart="75dp"
@@ -28,5 +28,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_03_26_at_10_37_34_removebg_preview" />
+        app:srcCompat="@drawable/logo_tasktide" />
 </androidx.constraintlayout.widget.ConstraintLayout>

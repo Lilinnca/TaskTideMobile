@@ -11,11 +11,9 @@
         android:id="@+id/toolbar"
         android:layout_width="411dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="653dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,18 +29,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_03_26_at_10_37_34_removebg_preview" />
+        app:srcCompat="@drawable/logo_tasktide" />
 
     <TextView
         android:id="@+id/txtCriarEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="217dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="167dp"
         android:layout_marginBottom="590dp"
         android:text="Vamos criar seu evento!"
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,10 +51,11 @@
         android:id="@+id/txtPasso1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="309dp"
-        android:layout_marginBottom="571dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="294dp"
+        android:layout_marginBottom="572dp"
         android:text="Passo 1 de 5"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,22 +79,22 @@
         android:id="@+id/txtNomeEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="206dp"
-        android:layout_marginEnd="287dp"
-        android:layout_marginBottom="506dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="277dp"
+        android:layout_marginBottom="505dp"
         android:text="Nome do evento"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
     <EditText
         android:id="@+id/etxtNomeEvento"
-        android:layout_width="370dp"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
@@ -106,29 +105,29 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeEvento" />
 
     <TextView
         android:id="@+id/txtTipoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="279dp"
-        android:layout_marginEnd="297dp"
-        android:layout_marginBottom="433dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="432dp"
         android:text="Tipo de evento"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtNomeEvento" />
 
     <EditText
         android:id="@+id/etxtmTipoEvento"
-        android:layout_width="370dp"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="298dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:gravity="start|top"
@@ -139,30 +138,30 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoEvento" />
 
 
     <TextView
         android:id="@+id/txtQuantidadeHoras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="353dp"
-        android:layout_marginEnd="146dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="130dp"
         android:layout_marginBottom="359dp"
         android:text="Quantidade de horas complementares:"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtmTipoEvento" />
 
     <EditText
         android:id="@+id/etxtnHoras"
-        android:layout_width="370dp"
+        android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="372dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Insira o número de horas"
@@ -172,52 +171,47 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQuantidadeHoras" />
 
     <TextView
         android:id="@+id/txtSeuEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="427dp"
-        android:layout_marginEnd="303dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="293dp"
         android:layout_marginBottom="285dp"
         android:text="Seu evento é?"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtnHoras" />
 
     <RadioButton
         android:id="@+id/rbtnHibrido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="311dp"
-        android:layout_marginTop="446dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="237dp"
+        android:layout_marginEnd="21dp"
         android:text="Híbrido"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSeuEvento" />
 
     <RadioButton
         android:id="@+id/rbtnOnline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="446dp"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="237dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="56dp"
         android:text="Online"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rbtnPresencial"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSeuEvento" />
 
     <ImageView
-        android:id="@+id/imgBackground"
+        android:id="@+id/imgBackgroundRaposaCriarEvento"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="130dp"
@@ -233,32 +227,27 @@
         app:srcCompat="@drawable/btn_background" />
 
     <ImageView
-        android:id="@+id/imgRaposa"
+        android:id="@+id/imgRaposaCriarEvento"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="130dp"
         android:layout_marginTop="522dp"
-        android:layout_marginEnd="131dp"
         android:layout_marginBottom="59dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imgBackgroundRaposaCriarEvento"
+        app:layout_constraintStart_toStartOf="@+id/imgBackgroundRaposaCriarEvento"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2024_04_02_at_16_13_53__1__removebg_preview" />
+        app:srcCompat="@drawable/raposa_criarevento" />
 
     <RadioButton
         android:id="@+id/rbtnPresencial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="154dp"
-        android:layout_marginTop="446dp"
-        android:layout_marginEnd="157dp"
-        android:layout_marginBottom="237dp"
+        android:layout_marginEnd="57dp"
         android:text="Presencial"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rbtnHibrido"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSeuEvento" />
 
     <Button
         android:id="@+id/btnVoltar"
@@ -270,7 +259,7 @@
         android:backgroundTint="@color/green"
         android:contentDescription="Voltar à tela anterior"
         android:onClick="telainicial"
-        app:icon="@drawable/baseline_arrow_back_ios_24"
+        app:icon="@drawable/voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -286,7 +275,7 @@
         android:backgroundTint="@color/green"
         android:contentDescription="Avançar para a próxima tela"
         android:onClick="eventoparticipante"
-        app:icon="@drawable/baseline_arrow_forward_ios_24"
+        app:icon="@drawable/avancar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
