@@ -11,11 +11,9 @@
         android:id="@+id/toolbar13"
         android:layout_width="411dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="653dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

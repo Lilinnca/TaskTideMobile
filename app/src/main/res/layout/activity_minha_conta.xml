@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:backgroundTint="@color/white"
     tools:context=".MinhaConta">
 
     <androidx.appcompat.widget.Toolbar
@@ -34,20 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/divider9"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="501dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgFotoUsuario" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar12"
@@ -149,204 +136,133 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/perfil" />
 
-    <ImageView
-        android:id="@+id/imgFotoUsuario"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="280dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar11"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
         android:id="@+id/txtNomeUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="25dp"
-        android:text="Annabeth Chase"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="142dp"
+        android:text="Amity Blight"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar11" />
-
-    <TextView
-        android:id="@+id/txtEmailUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:text="annabethchase@gmail.com"
-        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeUsuario" />
-
-    <TextView
-        android:id="@+id/txtTipoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:text="Discente - Ensino Médio"
-        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
-
-    <TextView
-        android:id="@+id/txtMatriculaUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:text="2021316789"
-        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/txtTipoUsuario" />
 
     <TextView
         android:id="@+id/txtHorasUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="73dp"
         android:text="192 horas contabilizadas"
-        app:layout_constraintStart_toEndOf="@+id/imgFotoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/txtMatriculaUsuario" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoUsuario" />
 
     <TextView
-        android:id="@+id/txtMeusCertificadosConta"
+        android:id="@+id/txtTipoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="80dp"
+        android:text="Discente - Ensino Médio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="192dp"
+        android:layout_marginEnd="246dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar11"
+        app:srcCompat="@drawable/ellipse_13" />
+
+    <TextView
+        android:id="@+id/txtEmailUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="82dp"
+        android:text="amityblight@gmail.com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeUsuario" />
+
+    <Button
+        android:id="@+id/btnMeusCertificados"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="91dp"
+        android:backgroundTint="@color/white"
+        android:onClick="meuscerticados"
         android:text="Meus Certificados"
-        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:icon="@drawable/certificados_1__1_"
+        app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider9" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHorasUsuario" />
 
-    <TextView
-        android:id="@+id/txtEditarCertificados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="25dp"
-        android:text="Editar Certificados"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/imgEditarCertificados"
-        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+    <Button
+        android:id="@+id/btnEditarPerfil"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="91dp"
+        android:backgroundTint="@color/white"
+        android:onClick="editarperfil"
+        android:text="Editar Perfil"
+        android:textColor="@color/black"
+        app:icon="@drawable/editar"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMeusCertificados" />
 
-    <TextView
-        android:id="@+id/txtExcluirPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="25dp"
+    <Button
+        android:id="@+id/btnExcluirPerfil"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="91dp"
+        android:backgroundTint="@color/white"
+        android:onClick="excluirperfil"
         android:text="Excluir Perfil"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/imgExcluitPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+        android:textColor="@color/black"
+        app:icon="@drawable/excluir"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditarPerfil" />
 
-    <TextView
-        android:id="@+id/txtSobreNos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="240dp"
+    <Button
+        android:id="@+id/btnSobreNos"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="91dp"
+        android:backgroundTint="@color/white"
+        android:onClick="sobrenos"
         android:text="Sobre Nós"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgSobreNos"
-        app:layout_constraintTop_toBottomOf="@+id/divider12" />
-
-    <View
-        android:id="@+id/divider10"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="430dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        app:icon="@drawable/sobre_nos_1__1_"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMeusCertificadosConta" />
-
-    <View
-        android:id="@+id/divider11"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="359dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditarCertificados" />
-
-    <View
-        android:id="@+id/divider12"
-        android:layout_width="411dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtSobreNos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtExcluirPerfil" />
-
-    <View
-        android:id="@+id/divider13"
-        android:layout_width="411dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="218dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSobreNos" />
-
-    <ImageView
-        android:id="@+id/imgCertificados"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider9"
-        app:srcCompat="@drawable/certificados_minhaconta" />
-
-    <ImageView
-        android:id="@+id/imgEditarCertificados"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider10"
-        app:srcCompat="@drawable/editar" />
-
-    <ImageView
-        android:id="@+id/imgExcluitPerfil"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider11"
-        app:srcCompat="@drawable/excluir" />
-
-    <ImageView
-        android:id="@+id/imgSobreNos"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider12"
-        app:srcCompat="@drawable/sobre_nos" />
+        app:layout_constraintTop_toBottomOf="@+id/btnExcluirPerfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

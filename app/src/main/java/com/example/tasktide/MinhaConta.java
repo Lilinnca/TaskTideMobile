@@ -34,4 +34,24 @@ public class MinhaConta extends AppCompatActivity {
         Intent in = new Intent(MinhaConta.this, TelaInicial.class);
         startActivity(in);
     }
+
+    public void meuscerticados(View view){
+        Intent in = new Intent(MinhaConta.this, MeusCertificados.class);
+        startActivity(in);
+    }
+
+    public void editarperfil(View view){
+        Intent in = new Intent(MinhaConta.this, EditarPerfil.class);
+        startActivity(in);
+    }
+
+    public void excluirperfil(View view){
+        Intent in = new Intent(MinhaConta.this, ExcluirPerfil.class);
+        startActivity(in);
+    }
+
+    public void sobrenos(View view){
+        Intent in = new Intent(MinhaConta.this, SobreNos.class);
+        startActivity(in);
+    }
 }
