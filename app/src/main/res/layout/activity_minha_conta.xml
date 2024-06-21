@@ -147,7 +147,7 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
         app:layout_constraintTop_toBottomOf="@+id/toolbar11" />
 
     <TextView
@@ -159,7 +159,7 @@
         android:layout_marginEnd="73dp"
         android:text="192 horas contabilizadas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
         app:layout_constraintTop_toBottomOf="@+id/txtTipoUsuario" />
 
     <TextView
@@ -171,11 +171,11 @@
         android:layout_marginEnd="80dp"
         android:text="Discente - Ensino Médio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgPerfil"
         android:layout_width="120dp"
         android:layout_height="125dp"
         android:layout_marginStart="45dp"
@@ -184,7 +184,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar11"
-        app:srcCompat="@drawable/ellipse_13" />
+        app:srcCompat="@drawable/icone_perfil" />
 
     <TextView
         android:id="@+id/txtEmailUsuario"
@@ -195,7 +195,7 @@
         android:layout_marginEnd="82dp"
         android:text="amityblight@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeUsuario" />
 
     <Button
@@ -209,7 +209,7 @@
         android:onClick="meuscerticados"
         android:text="Meus Certificados"
         android:textColor="@color/black"
-        app:icon="@drawable/certificados_1__1_"
+        app:icon="@drawable/certificados_minhaconta_perfil"
         app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -260,7 +260,7 @@
         android:onClick="sobrenos"
         android:text="Sobre Nós"
         android:textColor="@color/black"
-        app:icon="@drawable/sobre_nos_1__1_"
+        app:icon="@drawable/sobre_nos_perfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnExcluirPerfil" />
