@@ -13,10 +13,7 @@
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
         <activity
-            android:name=".EditarPerfil"
-            android:exported="false" />
-        <activity
-            android:name=".ExcluirPerfil"
+            android:name=".Configuracoes"
             android:exported="false" />
         <activity
             android:name=".SobreNos"

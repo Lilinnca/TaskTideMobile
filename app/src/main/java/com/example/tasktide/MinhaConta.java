@@ -40,13 +40,8 @@ public class MinhaConta extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void editarperfil(View view){
-        Intent in = new Intent(MinhaConta.this, EditarPerfil.class);
-        startActivity(in);
-    }
-
-    public void excluirperfil(View view){
-        Intent in = new Intent(MinhaConta.this, ExcluirPerfil.class);
+    public void configuracoes(View view){
+        Intent in = new Intent(MinhaConta.this, Configuracoes.class);
         startActivity(in);
     }
 

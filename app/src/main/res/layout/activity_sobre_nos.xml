@@ -6,4 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".SobreNos">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar17"
+        android:layout_width="411dp"
+        android:layout_height="78dp"
+        android:background="@color/green"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Sobre Nós"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/toolbar17"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="371dp"
+        android:layout_height="630dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar17">
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Olá!"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:text="O TaskTide é um aplicativo projetado para simplificar a gestão de eventos e a contabilização de horas complementares para estudantes do nosso campus."
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:text="Nosso objetivo é facilitar a organização de eventos acadêmicos e extracurriculares, proporcionando uma maneira mais simples de acompanhar suas atividades e horas complementares ao longo da jornada acadêmica."
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:text="Explore todas as funcionalidades que oferecemos e participe conosco na melhoria contínua do aplicativo! Estamos comprometidos em tornar a gestão de eventos mais eficiente e satisfatória para todos os envolvidos."
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:text="Caso tenha alguma dúvida, feedback ou sugestão, não hesite em nos contatar. Estamos ansiosos para ouvir suas opiniões e trabalhar juntos para aprimorar ainda mais nossa ferramenta, tornando-a indispensável para a comunidade acadêmica do IFAM Campus Manaus Centro."
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:text="Agradecemos sua participação nesta jornada!"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:text="Equipe TaskTide"
+                android:textSize="19dp" />
+
+            <Button
+                android:id="@+id/btnVoltarMinhaConta"
+                android:layout_width="55dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/green"
+                android:contentDescription='botao voltar "minha conta"'
+                android:onClick="minhacontasn"
+                app:icon="@drawable/voltar" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

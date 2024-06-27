@@ -204,106 +204,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificados" />
 
-    <ImageView
-        android:id="@+id/imgCertificado1"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="241dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados"
-        app:srcCompat="@drawable/certificados_meuscertificados" />
-
-    <ImageView
-        android:id="@+id/imgCertificado2"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="215dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados"
-        app:srcCompat="@drawable/certificados_meuscertificados" />
-
-    <Button
-        android:id="@+id/btnInfo1"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="318dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de informações"
-        android:drawablePadding="6dp"
-        android:padding="15dp"
-        app:icon="@android:drawable/ic_menu_info_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imgCertificado1"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado1" />
-
-    <Button
-        android:id="@+id/btnSalvar1"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de salvar"
-        android:drawablePadding="6dp"
-        android:padding="16dp"
-        app:icon="@drawable/download"
-        app:layout_constraintEnd_toEndOf="@+id/imgCertificado1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado1" />
-
-    <Button
-        android:id="@+id/btnInfo2"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="123dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de informação"
-        android:drawablePadding="6dp"
-        android:padding="15dp"
-        app:icon="@android:drawable/ic_menu_info_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imgCertificado2"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado2" />
-
-    <Button
-        android:id="@+id/btnSalvar2"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de salvar"
-        android:drawablePadding="6dp"
-        android:padding="16dp"
-        app:icon="@drawable/download"
-        app:layout_constraintEnd_toEndOf="@+id/imgCertificado2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado2" />
-
     <TextView
         android:id="@+id/txtCertificadosInseridos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
         android:text="Certificados Inseridos"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnInfo1" />
+        tools:layout_editor_absoluteY="407dp" />
 
     <TextView
         android:id="@+id/txtCertificadosInseridosDescricao"
@@ -313,106 +222,6 @@
         android:text="Estes certificados são inseridos por você, de eventos externos, para contabilização das horas!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridos" />
-
-    <ImageView
-        android:id="@+id/imgCertificado3"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="225dp"
-        android:layout_marginBottom="137dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridosDescricao"
-        app:srcCompat="@drawable/certificados_meuscertificados" />
-
-    <Button
-        android:id="@+id/btnInfo3"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="312dp"
-        android:layout_marginBottom="84dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de informações"
-        android:drawablePadding="6dp"
-        android:padding="15dp"
-        app:icon="@android:drawable/ic_menu_info_details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imgCertificado3"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado3" />
-
-    <Button
-        android:id="@+id/btnSalvar3"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="84dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de salvar"
-        android:drawablePadding="6dp"
-        android:padding="16dp"
-        app:icon="@drawable/download"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imgCertificado3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado3" />
-
-    <ImageView
-        android:id="@+id/imgCertificado4"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="215dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="137dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridosDescricao"
-        app:srcCompat="@drawable/certificados_meuscertificados" />
-
-    <Button
-        android:id="@+id/btnInfo4"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="123dp"
-        android:layout_marginBottom="84dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de informações"
-        android:drawablePadding="6dp"
-        android:padding="15dp"
-        app:icon="@android:drawable/ic_menu_info_details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imgCertificado4"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado4" />
-
-    <Button
-        android:id="@+id/btnSalvar4"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="84dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Botão de salvar"
-        android:drawablePadding="6dp"
-        android:padding="16dp"
-        app:icon="@drawable/download"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imgCertificado4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCertificado4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
