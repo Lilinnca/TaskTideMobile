@@ -13,9 +13,6 @@
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
         <activity
-            android:name=".CertificadoActivity"
-            android:exported="false" />
-        <activity
             android:name=".Configuracoes"
             android:exported="false" />
         <activity

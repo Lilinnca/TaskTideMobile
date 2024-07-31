@@ -196,7 +196,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="90dp"
         android:backgroundTint="@color/white"
-        android:onClick="meuscerticados"
+        android:onClick="meuscertificados"
         android:text="Meus Certificados"
         android:textColor="@color/black"
         app:icon="@drawable/certificados_minhaconta_perfil"

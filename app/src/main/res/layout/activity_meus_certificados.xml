@@ -205,16 +205,89 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCertificados" />
 
     <TextView
-        android:id="@+id/txtCertificadosInseridosDescricao"
-        android:layout_width="330dp"
-        android:layout_height="32dp"
+        android:id="@+id/txtCertificadosInseridos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="56dp"
-        android:text="Os certificados inseridos por você são:"
-        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="245dp"
+        android:text="Certificados Inseridos"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView5" />
+
+    <TextView
+        android:id="@+id/txtCertificadosInseridosDescricao"
+        android:layout_width="347dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="25dp"
+        android:text="Estes certificados são inseridos por você, de eventos externos, para contabilização das horas!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridos" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView5"
+        android:layout_width="409dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados"
+        app:layout_constraintVertical_bias="0.204">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:contentDescription="certificado 1"
+                app:srcCompat="@drawable/certificados_meuscertificados" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="certificado 2"
+                app:srcCompat="@drawable/certificados_meuscertificados" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="certificado 3"
+                app:srcCompat="@drawable/certificados_meuscertificados" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="certificado 4"
+                app:srcCompat="@drawable/certificados_meuscertificados" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="19dp"
+        android:backgroundTint="@color/green"
+        android:hint="kk"
+        app:constraint_referenced_tags="botão adicionar certificado"
+        app:icon="@drawable/mais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView6" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView6"
@@ -222,27 +295,28 @@
         android:layout_height="140dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
-        android:contentDescription="scroll view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridosDescricao">
 
         <LinearLayout
-            android:id="@+id/linearLayoutCertificados"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:contentDescription="certificado inserido 1"
+                app:srcCompat="@drawable/certificados_meuscertificados" />
+
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="certificado inserido 2"
+                app:srcCompat="@drawable/certificados_meuscertificados" />
+        </LinearLayout>
     </HorizontalScrollView>
-
-    <Button
-        android:id="@+id/buttonAddCertificado"
-        android:layout_width="55dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="185dp"
-        android:layout_marginEnd="19dp"
-        android:backgroundTint="@color/green"
-        android:hint="kk"
-        app:icon="@drawable/mais"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView6" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

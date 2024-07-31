@@ -59,6 +59,11 @@ public class MinhaConta extends AppCompatActivity {
     public void telafavoritos(View view) {
     }
 
+    public void meuscertificados(View view){
+     Intent in = new Intent(MinhaConta.this, MeusCertificados.class);
+     startActivity(in);
+    }
+
     public void telainicial(View view) {
         Intent in = new Intent(MinhaConta.this, TelaInicial.class);
         startActivity(in);
