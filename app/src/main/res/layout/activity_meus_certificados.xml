@@ -205,23 +205,44 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCertificados" />
 
     <TextView
-        android:id="@+id/txtCertificadosInseridos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/txtCertificadosInseridosDescricao"
+        android:layout_width="330dp"
+        android:layout_height="32dp"
         android:layout_marginStart="25dp"
-        android:text="Certificados Inseridos"
+        android:layout_marginEnd="56dp"
+        android:text="Os certificados inseridos por você são:"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="407dp" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados" />
 
-    <TextView
-        android:id="@+id/txtCertificadosInseridosDescricao"
-        android:layout_width="347dp"
-        android:layout_height="43dp"
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView6"
+        android:layout_width="409dp"
+        android:layout_height="140dp"
         android:layout_marginStart="25dp"
-        android:text="Estes certificados são inseridos por você, de eventos externos, para contabilização das horas!"
+        android:layout_marginTop="5dp"
+        android:contentDescription="scroll view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridos" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridosDescricao">
 
+        <LinearLayout
+            android:id="@+id/linearLayoutCertificados"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/buttonAddCertificado"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="185dp"
+        android:layout_marginEnd="19dp"
+        android:backgroundTint="@color/green"
+        android:hint="kk"
+        app:icon="@drawable/mais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
