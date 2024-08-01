@@ -6,26 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class TelaInicial extends AppCompatActivity {
+public class InfoEvento extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_inicial);
+        setContentView(R.layout.activity_info_evento);
     }
 
     public void telaperfil(View view) {
-        Intent in = new Intent(TelaInicial.this, MinhaConta.class);
+        Intent in = new Intent(InfoEvento.this, MinhaConta.class);
         startActivity(in);
     }
 
     public void telameuseventos(View view) {
-        Intent in = new Intent(TelaInicial.this, MeusEventos.class);
-        startActivity(in);
     }
 
     public void telacriarevento(View view) {
-        Intent in = new Intent(TelaInicial.this, CriarEvento.class);
+        Intent in = new Intent(InfoEvento.this, CriarEvento.class);
         startActivity(in);
     }
 
@@ -33,7 +31,12 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     public void telainicial(View view) {
-        Intent in = new Intent(TelaInicial.this, TelaInicial.class);
+        Intent in = new Intent(InfoEvento.this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void telameuseventosb(View view){
+        Intent in = new Intent(InfoEvento.this, MeusEventos.class);
         startActivity(in);
     }
 }

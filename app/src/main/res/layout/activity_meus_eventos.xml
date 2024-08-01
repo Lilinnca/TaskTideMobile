@@ -242,6 +242,8 @@
                 android:id="@+id/imgEvento4"
                 android:layout_width="200dp"
                 android:layout_height="140dp"
+                android:contentDescription="evento 1"
+                android:onClick="informacaoevento"
                 app:srcCompat="@drawable/capa_julieandthephantoms" />
         </LinearLayout>
     </HorizontalScrollView>

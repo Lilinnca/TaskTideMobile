@@ -277,14 +277,12 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAddCertificado"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/green"
-        android:hint="kk"
-        app:constraint_referenced_tags="botão adicionar certificado"
         app:icon="@drawable/mais"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView6" />
