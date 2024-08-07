@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
         <activity
+            android:name=".TelaBoasVindas"
+            android:exported="false" />
+        <activity
             android:name=".InfoEvento"
             android:exported="false" />
         <activity
@@ -52,9 +55,6 @@
             android:name=".TelaPrimeirosPassos"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
-            android:exported="false" />
-        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
@@ -64,7 +64,7 @@
             android:name=".TelaCadastro"
             android:exported="false" />
         <activity
-            android:name=".TelaBoasVindas"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
