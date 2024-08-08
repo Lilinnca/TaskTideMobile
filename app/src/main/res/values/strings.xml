@@ -1,3 +1,54 @@
 <resources>
     <string name="app_name">TaskTide</string>
+    <string name="voltar">Voltar</string>
+    <string name="NomedoEvento">Nome do Evento</string>
+    <string name="proximo">Próximo</string>
+
+
+    <string-array name="datas_array">
+        <item>Data 1</item>
+        <item>Data 2</item>
+        <item>Data 3</item>
+    </string-array>
+
+
+    <string-array name="tipos_atividade_array">
+        <item>Tipo 1</item>
+        <item>Tipo 2</item>
+        <item>Tipo 3</item>
+    </string-array>
+
+
+    <string name="next">Next</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+    <string name="previous">Previous</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+
+    <string-array name="tipos_evento">
+        <item>   </item>
+        <item>Atividade cultural</item>
+        <item>Atividade esportiva</item>
+        <item>Colóquio</item>
+        <item>Conferência</item>
+        <item>Congresso</item>
+        <item>Encontro</item>
+        <item>Fórum</item>
+        <item>Mesa-redonda</item>
+        <item>Palestra</item>
+        <item>Seminário</item>
+        <item>Visita técnica</item>
+        <item>Workshop</item>
+    </string-array>
+
+
+    <string-array name="QuantidadePessoas">
+        <item>   </item>
+        <item>1 - 100 participantes</item>
+        <item>100 - 200 participantes</item>
+        <item>200 - 300 participantes</item>
+        <item>300 - 400 participantes</item>
+        <item>400 - 500 participantes</item>
+    </string-array>
 </resources>

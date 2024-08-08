@@ -2,258 +2,226 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:onClick="onClick"
     tools:context=".EventoParticipante">
 
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar7"
-        android:layout_width="411dp"
+        android:id="@+id/tblSuperiorVG"
+        android:layout_width="424.1dp"
         android:layout_height="78dp"
-        android:background="@color/green"
+        android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
-        android:id="@+id/imgLogo3"
+        android:id="@+id/imgLogo"
         android:layout_width="78dp"
         android:layout_height="78dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginEnd="167dp"
-        android:layout_marginBottom="653dp"
+        android:src="@drawable/logo_tasktide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tblSuperiorVG"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <CheckBox
+        android:id="@+id/chbDiscentesES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="144dp"
+        android:text="Discentes de Ensino Superior"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chbDiscentesEM" />
+
+
+    <TextView
+        android:id="@+id/txtPassoDdC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="288dp"
+        android:text="Passo 2 de 5"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSobreParticipantes" />
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassoDdC" />
+
+
+    <TextView
+        android:id="@+id/txtQuantParticipantes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="177dp"
+        android:text="Quantidade de participantes"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
+    <Spinner
+        android:id="@+id/spnQuantParticipantes"
+        android:layout_width="373.4dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
+        android:entries="@array/QuantidadePessoas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtQuantParticipantes" />
+
+
+    <TextView
+        android:id="@+id/txtTipoParticipantes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Tipo de participantes"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnQuantParticipantes" />
+
+
+    <CheckBox
+        android:id="@+id/chbDiscentesEM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="159dp"
+        android:text="Discentes do Ensino Médio"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Selecione no mínimo uma opção"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoParticipantes" />
+
+
+    <CheckBox
+        android:id="@+id/chbServidoresGeral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="213dp"
+        android:text="Servidores em geral"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chbDocentes" />
+
+
+    <CheckBox
+        android:id="@+id/chbDocentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="289dp"
+        android:text="Docentes"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chbDiscentesES" />
+
+
+    <ImageView
+        android:id="@+id/imgTrixxieParticipantes"
+        android:layout_width="121dp"
+        android:layout_height="124dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_tasktide" />
+        app:srcCompat="@drawable/trixxie_em_pe" />
+
 
     <TextView
         android:id="@+id/txtSobreParticipantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="599dp"
-        android:text="Sobre os participantes..."
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtPasso2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="294dp"
-        android:layout_marginBottom="577dp"
-        android:text="Passo 2 de 5"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSobreParticipantes" />
-
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="169dp"
-        android:layout_marginEnd="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtQntdParticipantes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="190dp"
-        android:layout_marginEnd="199dp"
-        android:layout_marginBottom="522dp"
-        android:text="Quantidade de participantes"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLineParticipantes"
-        android:layout_width="365dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="473dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Digite seu texto aqui"
-        android:inputType="textMultiLine"
-        android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtQntdParticipantes" />
-
-
-    <TextView
-        android:id="@+id/txtTipoParticipante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="247dp"
-        android:layout_marginBottom="434dp"
-        android:text="Tipo de participantes"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLineParticipantes" />
-
-    <CheckBox
-        android:id="@+id/checkBoxDiscenteEM"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="363dp"
-        android:contentDescription="Selecione esta opção se for discente de ensino médio"
-        android:text="Discentes de Ensino Médio"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSelecioneTipoParticipante" />
-
-    <CheckBox
-        android:id="@+id/checkBoxServidorG"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="217dp"
-        android:layout_marginBottom="267dp"
-        android:contentDescription="Selecione esta opção se for servidor em geral"
-        android:text="Servidores em geral"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDiscenteES" />
-
-    <CheckBox
-        android:id="@+id/checkBoxDocente"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="289dp"
-        android:layout_marginBottom="219dp"
-        android:contentDescription="Selecione esta opção se for docente"
-        android:text="Docentes"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxServidorG" />
-
-    <CheckBox
-        android:id="@+id/checkBoxDiscenteES"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="153dp"
-        android:layout_marginBottom="315dp"
-        android:contentDescription="Selecione esta opção se for discente de ensino superior"
-        android:text="Discentes de Ensino Superior"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDiscenteEM" />
-
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="59dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDocente"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView27"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="59dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDocente"
-        app:srcCompat="@drawable/raposa_participante" />
-
-    <Button
-        android:id="@+id/btnVoltar3"
-        android:layout_width="55dp"
-        android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="655dp"
-        android:layout_marginEnd="336dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Voltar à tela anterior"
-        android:onClick="criarevento"
-        app:icon="@drawable/voltar"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="194dp"
+        android:text="Sobre os participantes..."
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+
 
     <Button
-        android:id="@+id/btnAvancar3"
-        android:layout_width="55dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="336dp"
-        android:layout_marginTop="655dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Avançar para a próxima tela"
-        android:onClick="eventoinformacoes"
-        app:icon="@drawable/avancar"
+        android:id="@+id/btnVoltarParaTelaCriarEvento"
+        android:layout_width="57dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="#338B85"
+        android:contentDescription="botão voltar"
+        android:onClick="onClick"
+        app:icon="@drawable/baseline_chevron_left_24"
+        app:iconGravity="top"
+        app:iconSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imgTrixxieParticipantes" />
 
-    <TextView
-        android:id="@+id/txtSelecioneTipoParticipante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="183dp"
-        android:layout_marginBottom="414dp"
-        android:text="Selecione no mínimo uma opção"
+
+    <Button
+        android:id="@+id/btnIrParaTelaOutrasInformacoes"
+        android:layout_width="57dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="#338B85"
+        android:contentDescription="botão avançar"
+        android:onClick="setOnClickListener"
+        app:icon="@drawable/avanca"
+        app:iconGravity="top"
+        app:iconSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTipoParticipante" />
+        app:layout_constraintTop_toTopOf="@+id/imgTrixxieParticipantes" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

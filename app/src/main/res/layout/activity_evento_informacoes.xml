@@ -2,275 +2,252 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".EventoInformacoes">
 
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar8"
-        android:layout_width="411dp"
+        android:id="@+id/tblSuperiorVG"
+        android:layout_width="424.1dp"
         android:layout_height="78dp"
-        android:background="@color/green"
+        android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
-        android:id="@+id/imgLogo4"
+        android:id="@+id/imgLogo"
         android:layout_width="78dp"
         android:layout_height="78dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginEnd="167dp"
-        android:layout_marginBottom="653dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/logo_tasktide"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_tasktide" />
+        app:layout_constraintStart_toStartOf="@+id/tblSuperiorVG"
+        app:layout_constraintTop_toTopOf="@+id/tblSuperiorVG" />
+
 
     <TextView
-        android:id="@+id/txtOutrasInf"
+        android:id="@+id/txtOutrasInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="189dp"
-        android:layout_marginBottom="599dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="216dp"
         android:text="Outras informações..."
-        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+
 
     <TextView
-        android:id="@+id/txtPasso3"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="294dp"
-        android:layout_marginBottom="577dp"
+        android:layout_marginStart="20dp"
         android:text="Passo 3 de 5"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        android:textSize="17dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtOutrasInf" />
+        app:layout_constraintTop_toBottomOf="@+id/txtOutrasInformacoes" />
+
 
     <View
-        android:id="@+id/divider6"
+        android:id="@+id/dvdSuperiorT"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="169dp"
-        android:layout_marginBottom="561dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/editTextDatePrevisto"
-        android:layout_width="365dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:hint="Selecione uma data"
-        android:inputType="date"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDataPrevista" />
-
-
-    <EditText
-        android:id="@+id/editTextTimeInicio"
-        android:layout_width="365dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:hint="Selecione um horário de início"
-        android:inputType="time"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHorarioInicio" />
-
-    <TextView
-        android:id="@+id/txtLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="351dp"
-        android:layout_marginBottom="276dp"
-        android:text="Local"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTimeTermino" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
 
     <TextView
-        android:id="@+id/txtDataPrevista"
+        android:id="@+id/txtDataPrevis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="299dp"
-        android:layout_marginBottom="510dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="291dp"
         android:text="Data prevista"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+        app:layout_constraintTop_toBottomOf="@+id/dvdSuperiorT" />
 
-    <TextView
-        android:id="@+id/txtHorarioTermino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="357dp"
-        android:layout_marginEnd="262dp"
-        android:layout_marginBottom="354dp"
-        android:text="Horário de término"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/editTextTimeTermino"
-        android:layout_width="365dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:hint="Selecione um horário término"
-        android:inputType="time"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHorarioTermino" />
-
-
-    <EditText
-        android:id="@+id/editTextTextLocal"
-        android:layout_width="365dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:hint="Digite seu texto aqui"
-        android:inputType="text"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLocal" />
 
     <TextView
         android:id="@+id/txtHorarioInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="277dp"
-        android:layout_marginBottom="432dp"
-        android:text="Horário de Início"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="260dp"
+        android:text="Horário de início"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDatePrevisto" />
+        app:layout_constraintTop_toBottomOf="@+id/edtxtDataPrevis" />
+
 
     <TextView
-        android:id="@+id/txtDescricaoInformacoes"
-        android:layout_width="365dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="174dp"
-        android:text="Caso o seu evento ocorrer em mais de um dia, você pode ajustar isso no painel de eventos após o processo de criação."
-        android:textColor="#707070"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextLocal" />
-
-    <ImageView
-        android:id="@+id/imgBackgroundRaposaInf"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="565dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imgRaposaInf"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="565dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/raposa_informacoes" />
-
-    <Button
-        android:id="@+id/btnVoltar2"
-        android:layout_width="55dp"
-        android:layout_height="60dp"
+        android:id="@+id/txtHorarioTermino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="655dp"
-        android:layout_marginEnd="336dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Voltar à tela anterior"
-        android:onClick="eventoparticipantex"
-        app:icon="@drawable/voltar"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="241dp"
+        android:text="Horário de término"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtxTimeInicio" />
 
-    <Button
-        android:id="@+id/btnAvancar2"
-        android:layout_width="55dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="336dp"
-        android:layout_marginTop="655dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Avançar para a próxima tela"
-        android:onClick="eventoidentidade"
-        app:icon="@drawable/avancar"
+
+    <EditText
+        android:id="@+id/etxtxTimeInicio"
+        android:layout_width="373.4dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="hh:mm"
+        android:inputType="time"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioInicio" />
+
+
+    <EditText
+        android:id="@+id/edtxtDataPrevis"
+        android:layout_width="373.4dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="dd/mm/aaaa"
+        android:inputType="date"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDataPrevis" />
+
+
+    <EditText
+        android:id="@+id/edtxtTimeTermino"
+        android:layout_width="373.4dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="hh:mm"
+        android:inputType="time"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioTermino" />
+
+
+    <TextView
+        android:id="@+id/txtLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="348dp"
+        android:text="Local"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtxtTimeTermino" />
+
+
+    <EditText
+        android:id="@+id/edtxtLocal"
+        android:layout_width="373.4dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="local"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLocal" />
+
+
+    <TextView
+        android:id="@+id/txtAtencao"
+        android:layout_width="374dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="17dp"
+        android:text="Caso o seu evento ocorre em mais de um dia, você pode ajustar isso no painel de eventos após o processo de criação."
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtxtLocal" />
+
+
+    <ImageView
+        android:id="@+id/imgTrixixeInformacoes"
+        android:layout_width="121dp"
+        android:layout_height="124dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/trixxiecomputador" />
+
+
+    <Button
+        android:id="@+id/btnVoltarParaTelaSobreParticipantes"
+        android:layout_width="57dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="28dp"
+        android:backgroundTint="#338B85"
+        android:contentDescription="botão voltar"
+        android:onClick="voltarParaTelaSobreParticipantes"
+        app:icon="@drawable/baseline_chevron_left_24"
+        app:iconGravity="top"
+        app:iconSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgTrixixeInformacoes"
+        app:layout_constraintVertical_bias="0.812" />
+
+
+    <Button
+        android:id="@+id/btnIrParaTelaConfirmarIdentidade"
+        android:layout_width="57dp"
+        android:layout_height="66dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="#338B85"
+        android:contentDescription="botão avançar"
+        android:onClick="telaIrConfirmarIdentidade"
+        app:icon="@drawable/avanca"
+        app:iconGravity="top"
+        app:iconSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAtencao"
+        app:layout_constraintVertical_bias="0.816" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

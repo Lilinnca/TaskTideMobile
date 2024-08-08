@@ -1,0 +1,5 @@
+<!-- res/drawable/round_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#338B85"/> <!-- Cor de fundo, ajuste conforme necessário -->
+    <corners android:radius="28.5dp"/> <!-- Radius = metade do menor lado (57dp/2) -->
+</shape>
