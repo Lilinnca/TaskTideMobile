@@ -35,6 +35,10 @@ public class MeusCertificados extends AppCompatActivity {
         Intent in = new Intent(MeusCertificados.this, MinhaConta.class);
         startActivity(in);
     }
-}
 
+    public void infoCertificado(View view) {
+        Intent in = new Intent(MeusCertificados.this, InfoCertificado.class);
+        startActivity(in);
+    }
+}
 

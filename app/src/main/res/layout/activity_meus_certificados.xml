@@ -306,6 +306,7 @@
                 android:layout_width="150dp"
                 android:layout_height="130dp"
                 android:contentDescription="certificado inserido 1"
+                android:onClick="infoCertificado"
                 app:srcCompat="@drawable/certificados_meuscertificados" />
 
             <ImageButton

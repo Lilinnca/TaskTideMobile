@@ -135,11 +135,13 @@
         android:layout_width="373.4dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="dd/mm/aaaa"
         android:inputType="date"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDataPrevis" />
 
@@ -180,12 +182,14 @@
         android:layout_width="373.4dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="local"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLocal" />
 

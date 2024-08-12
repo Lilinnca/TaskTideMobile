@@ -38,10 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="234dp"
         android:text="Estamos quase lá..."
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
 
@@ -122,14 +124,17 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="157dp"
         android:backgroundTint="#338B85"
         android:onClick="telaVoltarConfirmarIdentidade"
         android:text="Voltar"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtencaoT"
-        tools:layout_editor_absoluteX="156dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAtencaoT" />
 
     <TextView
         android:id="@+id/textView8"
@@ -150,14 +155,17 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="131dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="131dp"
         android:backgroundTint="#338B85"
         android:onClick="criarEvento"
         android:text="Criar Evento"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:layout_editor_absoluteX="131dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ImageView
         android:id="@+id/imgvTrixxieQuaseLa"
