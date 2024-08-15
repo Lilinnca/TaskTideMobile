@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tblSuperiorVG"
-        android:layout_width="424.1dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
@@ -35,13 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="216dp"
+        android:layout_marginTop="40dp"
         android:text="Outras informações..."
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
@@ -53,7 +51,7 @@
         android:layout_marginStart="20dp"
         android:text="Passo 3 de 5"
         android:textColor="@color/black"
-        android:textSize="17dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtOutrasInformacoes" />
 
@@ -62,7 +60,7 @@
         android:id="@+id/dvdSuperiorT"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,12 +72,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="291dp"
+        android:layout_marginTop="30dp"
         android:text="Data prevista"
         android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dvdSuperiorT" />
 
@@ -89,12 +85,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="260dp"
+        android:layout_marginTop="20dp"
         android:text="Horário de início"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtxtDataPrevis" />
 
@@ -104,12 +98,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="241dp"
+        android:layout_marginTop="20dp"
         android:text="Horário de término"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtxTimeInicio" />
 
@@ -167,12 +159,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="348dp"
+        android:layout_marginTop="20dp"
         android:text="Local"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtxtTimeTermino" />
 
@@ -200,23 +190,23 @@
         android:layout_height="64dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="11dp"
-        android:layout_marginEnd="17dp"
         android:text="Caso o seu evento ocorre em mais de um dia, você pode ajustar isso no painel de eventos após o processo de criação."
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtxtLocal" />
 
 
     <ImageView
         android:id="@+id/imgTrixixeInformacoes"
-        android:layout_width="121dp"
-        android:layout_height="124dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAtencao"
         app:srcCompat="@drawable/trixxiecomputador" />
 
 
@@ -224,34 +214,28 @@
         android:id="@+id/btnVoltarParaTelaSobreParticipantes"
         android:layout_width="57dp"
         android:layout_height="66dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="708dp"
         android:backgroundTint="#338B85"
         android:contentDescription="botão voltar"
         android:onClick="voltarParaTelaSobreParticipantes"
-        app:icon="@drawable/baseline_chevron_left_24"
-        app:iconGravity="top"
-        app:iconSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:icon="@drawable/voltar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgTrixixeInformacoes"
-        app:layout_constraintVertical_bias="0.812" />
+        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
 
 
     <Button
         android:id="@+id/btnIrParaTelaConfirmarIdentidade"
         android:layout_width="57dp"
         android:layout_height="66dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="708dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#338B85"
         android:contentDescription="botão avançar"
         android:onClick="telaIrConfirmarIdentidade"
-        app:icon="@drawable/avanca"
-        app:iconGravity="top"
-        app:iconSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:icon="@drawable/avancar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtencao"
-        app:layout_constraintVertical_bias="0.816" />
+        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

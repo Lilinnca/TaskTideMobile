@@ -46,7 +46,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar15"
-        android:layout_width="426dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -68,7 +68,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar4"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -170,12 +170,10 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="265dp"
-        android:layout_marginBottom="679dp"
         android:text="Meus Eventos"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar15"
         app:layout_constraintTop_toTopOf="@+id/toolbar15" />

@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="112dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -24,12 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="140dp"
         android:text="Bem-vindo(a) ao TaskTide!"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar3"
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
@@ -38,19 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="652dp"
         android:text="Encontre e se inscreva em eventos de seu interesse"
         android:textColor="@color/white"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBemVindoInicial" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar4"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -65,28 +59,24 @@
         android:layout_width="310dp"
         android:layout_height="48dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginBottom="556dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAjusteInicial"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <ImageButton
         android:id="@+id/btnAjusteInicial"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="344dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="19dp"
-        android:layout_marginBottom="556dp"
         android:backgroundTint="@color/white"
         android:contentDescription="Botao de ajuste"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
         app:srcCompat="@drawable/ajustamento" />
 
     <TextView
@@ -94,13 +84,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="295dp"
-        android:layout_marginBottom="512dp"
         android:text="Em destaque "
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchViewInicial" />
@@ -110,13 +98,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="337dp"
-        android:layout_marginBottom="364dp"
         android:text="Cultura"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView4" />
@@ -126,13 +112,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="341dp"
-        android:layout_marginBottom="215dp"
         android:text="Outros"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView3" />

@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar17"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -32,7 +32,7 @@
 
     <ScrollView
         android:layout_width="371dp"
-        android:layout_height="630dp"
+        android:layout_height="720dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
@@ -101,7 +101,7 @@
                 android:layout_width="55dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/green"
-                android:contentDescription='botao voltar "minha conta"'
+                android:contentDescription='botao voltar minha conta'
                 android:onClick="minhacontasn"
                 app:icon="@drawable/voltar" />
         </LinearLayout>

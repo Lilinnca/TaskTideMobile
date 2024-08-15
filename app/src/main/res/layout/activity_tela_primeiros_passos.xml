@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar5"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -24,12 +24,12 @@
         android:layout_height="76dp"
         android:layout_marginStart="164dp"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="655dp"
+        android:layout_marginBottom="2dp"
         android:contentDescription="imagem da logo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar5"
         app:srcCompat="@drawable/logo_tasktide" />
 
     <TextView
@@ -37,12 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="163dp"
         android:text="Wow, seja bem-vindo(a)!"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoPrimeirosPassos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
@@ -53,39 +52,33 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="23dp"
         android:text="Nossa especialidade por aqui é eventos!"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtWow" />
 
     <View
         android:id="@+id/divider3"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="10dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtApresentacaoPrimeirosPassos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoPrimeirosPassos" />
 
     <TextView
         android:id="@+id/txtApresentacaoPrimeirosPassos"
         android:layout_width="359dp"
         android:layout_height="76dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="27dp"
-        android:layout_marginBottom="29dp"
         android:text="Essa é a Trixxie, a raposinha especialista em bons eventos! Ela está aqui para te fazer companhia... (Cuidado, ela tem cara de anjinho, mas na verdade é uma pestinha!)"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/imgBackgroundPrimeirosPassos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
@@ -95,62 +88,47 @@
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:layout_marginStart="75dp"
-        android:layout_marginTop="299dp"
+        android:layout_marginTop="115dp"
         android:layout_marginEnd="76dp"
-        android:layout_marginBottom="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imgRaposaPrimeirosPassos"
-        android:layout_width="259dp"
-        android:layout_height="262dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtApresentacaoPrimeirosPassos"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/raposa_identidade" />
+        app:srcCompat="@drawable/btn_background" />
 
     <Button
         android:id="@+id/btnVoltar6"
         android:layout_width="55dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="655dp"
-        android:layout_marginEnd="336dp"
+        android:layout_marginTop="708dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Voltar à tela anterior"
         android:onClick="telaboasvindas"
         app:icon="@drawable/voltar"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
 
     <Button
         android:id="@+id/btnAvancar6"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        android:layout_marginStart="336dp"
-        android:layout_marginTop="655dp"
+        android:layout_marginTop="708dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Avançar para a próxima tela"
         android:onClick="telacadastro"
         app:icon="@drawable/avancar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgBackgroundPrimeirosPassos"
+        app:layout_constraintStart_toStartOf="@+id/imgBackgroundPrimeirosPassos"
+        app:layout_constraintTop_toTopOf="@+id/imgBackgroundPrimeirosPassos"
+        app:srcCompat="@drawable/raposa_login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

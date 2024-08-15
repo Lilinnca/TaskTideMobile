@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
@@ -20,46 +20,39 @@
 
     <Button
         android:id="@+id/btnVoltar"
-        android:layout_width="55dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="655dp"
+        android:layout_marginTop="708dp"
         android:layout_marginEnd="336dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Voltar à tela anterior"
         android:onClick="telaboasvindas"
         app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/txtBemVindo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="179dp"
-        android:layout_marginBottom="599dp"
+        android:layout_marginTop="40dp"
         android:text="Bem-vindo(a) de volta!"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/txtDescricao"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="22dp"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="222dp"
-        android:layout_marginBottom="577dp"
         android:text="Trixxie sentiu sua falta!"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBemVindo" />
 
@@ -73,12 +66,12 @@
         android:layout_width="409dp"
         android:layout_height="0.9dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#D9D9D9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricao" />
 
     <TextView
         android:id="@+id/txtEmail"
@@ -175,34 +168,30 @@
         android:layout_width="76dp"
         android:layout_height="76dp"
         android:layout_marginStart="167dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="168dp"
-        android:layout_marginBottom="653dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:srcCompat="@drawable/logo_tasktide" />
 
     <ImageView
         android:id="@+id/imgBackgroundLogin"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="131dp"
-        android:layout_marginBottom="67dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEsqueciSenha"
         app:srcCompat="@drawable/btn_background" />
 
     <ImageView
-        android:id="@+id/imgRaposaLogin"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgBackgroundLogin"
+        android:id="@+id/imageView4"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="@+id/imgBackgroundLogin"
         app:layout_constraintStart_toStartOf="@+id/imgBackgroundLogin"
         app:layout_constraintTop_toTopOf="@+id/imgBackgroundLogin"

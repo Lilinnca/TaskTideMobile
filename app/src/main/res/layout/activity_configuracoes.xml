@@ -43,45 +43,45 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="Você pode ajustar suas informações pessoais nesses campos."
-                android:textSize="15sp"
-                android:layout_marginBottom="16dp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtFoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Foto de Perfil"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/txtNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Nome"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextText"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
                 android:background="@color/gray"
                 android:ems="10"
                 android:hint="Nome"
                 android:inputType="text"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp"
-                android:layout_marginBottom="16dp"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/txtEmailC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="E-mail"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextTextEmailAddress"
@@ -99,9 +99,9 @@
                 android:id="@+id/txtSenhaC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Senha"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
@@ -119,9 +119,9 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Cargo/Disposição"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextTextMultiLine"
@@ -140,12 +140,12 @@
             <Button
                 android:id="@+id/btnSalvar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Salvar"
-                android:backgroundTint="@color/green"
-                android:textColor="@android:color/white"
+                android:layout_height="60dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="salvarAlteracoes" />
+                android:backgroundTint="@color/green"
+                android:onClick="salvarAlteracoes"
+                android:text="Salvar"
+                android:textColor="@android:color/white" />
 
 
             <View
@@ -168,14 +168,14 @@
                 android:id="@+id/txtExcluir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="Exclua permanentemente seus dados e tudo o que estiver associado à sua conta."
-                android:textSize="15sp"
-                android:layout_marginBottom="16dp"/>
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnDeletar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginBottom="32dp"
                 android:backgroundTint="#FF5252"
                 android:onClick="confirmacao"
