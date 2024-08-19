@@ -274,6 +274,8 @@
         android:layout_marginTop="615dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/green"
+        android:contentDescription="botao "
+        android:onClick="meuscertificadosinseridos"
         app:icon="@drawable/mais"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar13" />
@@ -288,25 +290,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridosDescricao">
 
         <LinearLayout
+            android:id="@+id/linearLayoutCertificados"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:contentDescription="certificado inserido 1"
-                android:onClick="infoCertificado"
-                app:srcCompat="@drawable/certificados_meuscertificados" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:layout_marginStart="20dp"
-                android:contentDescription="certificado inserido 2"
-                app:srcCompat="@drawable/certificados_meuscertificados" />
+            <!-- Certificados serão adicionados aqui -->
         </LinearLayout>
     </HorizontalScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
