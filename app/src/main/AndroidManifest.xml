@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +20,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
+        <activity
+            android:name=".EventoProgramacao"
+            android:exported="false" />
+        <activity
+            android:name=".EsqueciMinhaSenha"
+            android:exported="false" />
+        <activity
+            android:name=".EventoInfoTelaInicial"
+            android:exported="false" />
+        <activity
+            android:name=".PagamentoEvento"
+            android:exported="false" />
+        <activity
+            android:name=".Localizacao"
+            android:exported="false" />
         <activity
             android:name=".MeusCertificadosInseridos"
             android:exported="false" />
@@ -48,9 +69,6 @@
             android:name=".MeusEventosCriador"
             android:exported="false" />
         <activity
-            android:name=".EventoIdentidade"
-            android:exported="false" />
-        <activity
             android:name=".EventoInformacoes"
             android:exported="false" />
         <activity
@@ -80,6 +98,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD7T1cW2l6urJydoekE5RKky0KZtSRkeog" />
     </application>
 
 </manifest>

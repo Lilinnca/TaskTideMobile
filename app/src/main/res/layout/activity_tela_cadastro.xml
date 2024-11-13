@@ -7,63 +7,58 @@
     android:background="@color/white"
     tools:context=".TelaCadastro">
 
-    <Button
-        android:id="@+id/btnVoltar6"
-        android:layout_width="55dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="708dp"
-        android:layout_marginEnd="336dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="Voltar à tela anterior"
-        android:onClick="telaprimeirospassos"
-        app:icon="@drawable/voltar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
-
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbarCadastro"
         android:layout_width="match_parent"
         android:layout_height="78dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/txtTituloCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtInfNecessarias"
+        android:id="@+id/txtTituloCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="159dp"
         android:text="Informações necessárias"
+        android:textColor="#95000000"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarCadastro" />
 
     <TextView
         android:id="@+id/txtDescricaoCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginBottom="20dp"
         android:text="Preencha corretamente seus dados"
+        android:textColor="#95000000"
         android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfNecessarias" />
+        app:layout_constraintBottom_toTopOf="@+id/dividerCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTituloCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloCadastro" />
 
     <View
-        android:id="@+id/divider2"
+        android:id="@+id/dividerCadastro"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="30dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCadastro" />
@@ -72,24 +67,27 @@
         android:id="@+id/txtNomeCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginEnd="350dp"
+        android:layout_marginBottom="1dp"
         android:text="Nome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        android:textColor="#95000000"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNomeCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextNomeCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/dividerCadastro" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddressEmailCadastro"
+        android:id="@+id/editTextEmailCadastro"
         android:layout_width="365dp"
         android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Insira seu email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/txtCargoCadastro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailCadastro" />
 
@@ -97,40 +95,27 @@
         android:id="@+id/txtEmailCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="350dp"
         android:text="E-mail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextNomeCadastro" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLineCargoCadastro"
-        android:layout_width="365dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
-        android:background="#D9D9D9"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Insira seu cargo/disposição"
-        android:inputType="textMultiLine"
-        android:textColorHint="@color/gray"
+        android:textColor="#95000000"
+        app:layout_constraintBottom_toTopOf="@+id/editTextEmailCadastro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCargoCadastro" />
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeCadastro" />
 
     <EditText
-        android:id="@+id/editTextTextPasswordSenhaCadastro"
+        android:id="@+id/editTextSenhaCadastro"
         android:layout_width="365dp"
         android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="307dp"
         android:background="#D9D9D9"
         android:ems="10"
         android:hint="Insira sua senja"
         android:inputType="textPassword"
         android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSenhaCadastro" />
 
@@ -138,34 +123,43 @@
         android:id="@+id/txtSenhaCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="349dp"
+        android:layout_marginBottom="1dp"
         android:text="Senha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLineCargoCadastro" />
+        android:textColor="#95000000"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSenhaCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextSenhaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCargoCadastro" />
 
     <TextView
         android:id="@+id/txtCargoCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="1dp"
         android:text="Cargo/Disposição"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressEmailCadastro" />
+        android:textColor="#95000000"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCargoCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/spinnerCargoCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailCadastro" />
 
     <EditText
-        android:id="@+id/editTextTextNomeCadastro"
+        android:id="@+id/editTextNomeCadastro"
         android:layout_width="365dp"
         android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="25dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Insira seu nome"
         android:inputType="text"
         android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/txtEmailCadastro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeCadastro" />
 
@@ -174,26 +168,57 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="125dp"
         android:backgroundTint="@color/green"
         android:onClick="telaboasvindas"
         android:text="Criar minha conta"
         android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordSenhaCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenhaCadastro"
+        app:layout_constraintVertical_bias="0.056" />
 
     <ImageView
-        android:id="@+id/imgLogo6"
+        android:id="@+id/imgLogoCadastro"
         android:layout_width="77dp"
         android:layout_height="77dp"
         android:layout_marginStart="167dp"
         android:layout_marginEnd="167dp"
+        android:layout_marginBottom="41dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtTituloCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbarCadastro"
         app:srcCompat="@drawable/logo_tasktide" />
+
+    <Spinner
+        android:id="@+id/spinnerCargoCadastro"
+        android:layout_width="365dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/gray"
+        android:entries="@array/CargoUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/txtSenhaCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCargoCadastro" />
+
+    <Button
+        android:id="@+id/btnVoltarCadastro"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:onClick="voltarCadastro"
+        app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

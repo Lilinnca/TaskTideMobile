@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".PagamentoEvento">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarPagamento"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogoPagamento"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_tasktide" />
+
+    <TextView
+        android:id="@+id/txtTituloPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="287dp"
+        android:text="Pagamento"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPagamento" />
+
+    <TextView
+        android:id="@+id/txtDescricaoPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="20dp"
+        android:text="Escolha como você deseja realizar o pagamento"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/dividerPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloPagamento" />
+
+    <View
+        android:id="@+id/dividerPagamento"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="25dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/txtValorPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoPagamento" />
+
+    <TextView
+        android:id="@+id/txtValorPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="335dp"
+        android:text="Valor:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextValorPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerPagamento" />
+
+    <EditText
+        android:id="@+id/editTextValorPagamento"
+        android:layout_width="383dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="45dp"
+        android:background="@color/gray"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/txtFormaPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtValorPagamento"
+        tools:hint="Valor do Pagamento" />
+
+    <TextView
+        android:id="@+id/txtFormaPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="239dp"
+        android:layout_marginBottom="5dp"
+        android:text="Forma de pagamento:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupPagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextValorPagamento" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="450dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtFormaPagamento"
+        app:layout_constraintTop_toBottomOf="@+id/txtFormaPagamento">
+
+        <RadioButton
+            android:id="@+id/rbtnPixPagamento"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:text="Pix" />
+
+        <RadioButton
+            android:id="@+id/rbtnBoletoPagamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boleto Bancário" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnVoltarPagamento"
+        android:layout_width="57dp"
+        android:layout_height="66dp"
+        android:contentDescription="botão voltar"
+        android:onClick="voltarPagamento"
+        app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="75sp"
+        android:layout_height="75sp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupPagamento" />
+
+    <Button
+        android:id="@+id/btnConfirmarPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Confirmar Pagamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

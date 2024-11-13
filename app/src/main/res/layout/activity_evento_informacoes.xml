@@ -5,237 +5,381 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventoInformacoes">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tblSuperiorVG"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="#338B85"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
-        android:src="@drawable/logo_tasktide"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tblSuperiorVG"
-        app:layout_constraintTop_toTopOf="@+id/tblSuperiorVG" />
+    android:background="#FFFFFF">
 
 
     <TextView
-        android:id="@+id/txtOutrasInformacoes"
+        android:id="@+id/txtTituloInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="194dp"
         android:text="Outras informações..."
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarInformacoes" />
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Passo 3 de 5"
+    <EditText
+        android:id="@+id/editTextDataPrevista"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="226dp"
+        android:layout_marginBottom="20dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="dd/mm/aaaa"
+        android:inputType="date"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPrazoInscricaoInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtOutrasInformacoes" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDataInicioInformacoes" />
 
 
     <View
-        android:id="@+id/dvdSuperiorT"
+        android:id="@+id/dividerInformacoes"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/txtDataInicioInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoInformacoes" />
 
 
     <TextView
-        android:id="@+id/txtDataPrevis"
+        android:id="@+id/txtDataInicioInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="Data prevista"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="306dp"
+        android:layout_marginBottom="1dp"
+        android:text="Data de início"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDataPrevista"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextDataPrevista"
+        app:layout_constraintTop_toBottomOf="@+id/dividerInformacoes" />
+
+
+    <EditText
+        android:id="@+id/editTextDataFim"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="226dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="21dp"
+        android:background="#d9d9d9"
+        android:backgroundTint="#d9d9d9"
+        android:ems="10"
+        android:hint="dd/mm/aaaa"
+        android:inputType="date"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPrazoInscricaoInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dvdSuperiorT" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDataFimInformacoes" />
+
+
+    <TextView
+        android:id="@+id/txtDataFimInformacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="109dp"
+        android:text="Data de fim"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDataFim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextDataFim"
+        app:layout_constraintTop_toBottomOf="@+id/dividerInformacoes" />
+
+
+    <EditText
+        android:id="@+id/editTextHorarioFim"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="hh:mm"
+        android:inputType="time"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toEndOf="@+id/editTextHorarioInicio"
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioFim" />
+
+
+    <TextView
+        android:id="@+id/txtHorarioFim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Horário de fim"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/txtHorarioInicio"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDataFim" />
 
 
     <TextView
         android:id="@+id/txtHorarioInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:text="Horário de início"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtxtDataPrevis" />
-
-
-    <TextView
-        android:id="@+id/txtHorarioTermino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Horário de término"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtxTimeInicio" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDataPrevista" />
 
 
     <EditText
-        android:id="@+id/etxtxTimeInicio"
-        android:layout_width="373.4dp"
+        android:id="@+id/editTextHorarioInicio"
+        android:layout_width="170dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="hh:mm"
         android:inputType="time"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHorarioInicio" />
 
 
-    <EditText
-        android:id="@+id/edtxtDataPrevis"
-        android:layout_width="373.4dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="18dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:hint="dd/mm/aaaa"
-        android:inputType="date"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDataPrevis" />
-
-
-    <EditText
-        android:id="@+id/edtxtTimeTermino"
-        android:layout_width="373.4dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="18dp"
-        android:background="#d9d9d9"
-        android:ems="10"
-        android:hint="hh:mm"
-        android:inputType="time"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHorarioTermino" />
-
-
     <TextView
-        android:id="@+id/txtLocal"
+        android:id="@+id/txtPrazoInscricaoInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="Local"
+        android:layout_marginEnd="278dp"
+        android:text="Prazo de inscrição"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtxtTimeTermino" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextPrazoInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextPrazoInformacoes"
+        app:layout_constraintTop_toBottomOf="@+id/editTextHorarioInicio" />
 
 
     <EditText
-        android:id="@+id/edtxtLocal"
-        android:layout_width="373.4dp"
+        android:id="@+id/editTextPrazoInformacoes"
+        android:layout_width="383dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="20dp"
         android:background="#d9d9d9"
         android:ems="10"
-        android:hint="local"
+        android:hint="Prazo"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtLocalInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrazoInscricaoInformacoes" />
+
+
+    <EditText
+        android:id="@+id/editTextLocalInformacoes"
+        android:layout_width="383dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="21dp"
+        android:background="#d9d9d9"
+        android:ems="10"
+        android:hint="Local"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtEventoPagoInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLocal" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLocalInformacoes" />
 
 
     <TextView
-        android:id="@+id/txtAtencao"
-        android:layout_width="374dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="11dp"
-        android:text="Caso o seu evento ocorre em mais de um dia, você pode ajustar isso no painel de eventos após o processo de criação."
+        android:id="@+id/txtLocalInformacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="362dp"
+        android:text="Local"
+        android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextLocalInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextLocalInformacoes"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrazoInformacoes" />
+
+
+    <TextView
+        android:id="@+id/txtDescricaoInformacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="299dp"
+        android:layout_marginBottom="20dp"
+        android:text="Passo 2 de 4"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/dividerInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtxtLocal" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloInformacoes" />
 
 
-    <ImageView
-        android:id="@+id/imgTrixixeInformacoes"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
+    <TextView
+        android:id="@+id/txtEventoPagoInformacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="265dp"
+        android:text="Seu evento é pago?"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLocalInformacoes" />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/txtValorInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEventoPagoInformacoes">
+
+
+        <RadioButton
+            android:id="@+id/rbtnSimInformacoes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="100dp"
+            android:text="Sim"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+
+        <RadioButton
+            android:id="@+id/rbtnNaoInformacoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Não"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/editTextValorInformacoes"
+        android:layout_width="373.4dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="259dp"
+        android:background="#d9d9d9"
+        android:backgroundTint="#d9d9d9"
+        android:ems="10"
+        android:hint="valor "
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/gray"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtencao"
-        app:srcCompat="@drawable/trixxiecomputador" />
+        app:layout_constraintTop_toBottomOf="@+id/txtValorInformacoes" />
 
 
-    <Button
-        android:id="@+id/btnVoltarParaTelaSobreParticipantes"
-        android:layout_width="57dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="708dp"
-        android:backgroundTint="#338B85"
-        android:contentDescription="botão voltar"
-        android:onClick="voltarParaTelaSobreParticipantes"
-        app:icon="@drawable/voltar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
-
-
-    <Button
-        android:id="@+id/btnIrParaTelaConfirmarIdentidade"
-        android:layout_width="57dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="708dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="#338B85"
-        android:contentDescription="botão avançar"
-        android:onClick="telaIrConfirmarIdentidade"
-        app:icon="@drawable/avancar"
+    <TextView
+        android:id="@+id/txtValorInformacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="289dp"
+        android:text="Valor do evento"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextValorInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+        app:layout_constraintStart_toStartOf="@+id/editTextValorInformacoes"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarInformacoes"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/txtTituloInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogoInformacoes"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarInformacoes"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarInformacoes"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/toolbarInformacoes"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_tasktide" />
+
+    <Button
+        android:id="@+id/btnAvancarInformacoes"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="botao avancar"
+        android:onClick="avancarInformacoes"
+        android:text="Button"
+        app:icon="@drawable/avancar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <Button
+        android:id="@+id/btnVoltarInformacoes"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="botao voltar"
+        android:onClick="voltarInformacoes"
+        app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

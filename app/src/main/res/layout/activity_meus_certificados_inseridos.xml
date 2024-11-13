@@ -4,219 +4,232 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MeusCertificadosInceridos">
+    android:background="@color/white"
+    android:onClick="voltarMeusCertificadosInseridos"
+    tools:context=".MeusCertificadosInseridos">
+
+
+    <!-- Título -->
+
+
+    <!-- Contador de Certificados -->
+
+
+    <!-- Horizontal Scroll View para exibir os certificados -->
+
+
+    <!-- Botão para adicionar novos certificados -->
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/horizontal_scroll_view_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/btnAdicionarCertificado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/green"
+        android:text="Adicionar Certificado"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMeusCertificadosI" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar19"
-        android:layout_width="match_parent"
+        android:id="@+id/toolbarMeusCertificadosI"
+        android:layout_width="411dp"
         android:layout_height="78dp"
-        android:background="@color/green"
+        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgLogoI"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginEnd="167dp"
+    <TextView
+        android:id="@+id/txtMeusCertificadosI"
+        android:layout_width="366dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="25dp"
+        android:text="Preencha esses campos com as informações de eventos externos!"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_tasktide" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloMeusCertificadosI" />
 
     <TextView
-        android:id="@+id/textView43"
+        android:id="@+id/txtTituloMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
-        android:text="Certificados Inseridos"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="135dp"
+        android:text="Meus Certificados Inseridos"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar19" />
-
-    <TextView
-        android:id="@+id/textView44"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:text="descrição (ainda vou pensar)"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView43" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMeusCertificadosI" />
 
     <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
+        android:id="@+id/dividerMeusCertificadosI"
+        android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/textView44"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMeusCertificadosI" />
 
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/txtNomeMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:text="Inserir Certificado (PDF)"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
-
-    <Button
-        android:id="@+id/button_select_pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Selecionar PDF"
+        android:layout_marginEnd="350dp"
+        android:text="Nome:"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_selected_file" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerMeusCertificadosI" />
 
     <TextView
-        android:id="@+id/text_selected_file"
+        android:id="@+id/txtHorasMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_select_pdf"
-        android:layout_marginTop="10dp"
-        android:text="Nenhum arquivo selecionado"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="135dp"
+        android:text="Qntd. de horas:"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtDataMeusCertificadosI"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+    <TextView
+        android:id="@+id/txtDataMeusCertificadosI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="129dp"
+        android:text="Data:"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView45" />
-
-    <Spinner
-        android:id="@+id/spnTipoEvento"
-        android:layout_width="373.4dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:background="#d9d9d9"
-        android:entries="@array/tipos_evento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView48" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/txtTipoMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="Nome do Evento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_select_pdf" />
-
-    <TextView
-        android:id="@+id/textView47"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Carga Horária"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnTipoEvento" />
-
-    <TextView
-        android:id="@+id/textView48"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Tipo de Certificado"
+        android:layout_marginEnd="270dp"
+        android:text="Tipo de certificado:"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editTextText"
         android:layout_width="373.4dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="18dp"
         android:background="@color/gray"
         android:ems="10"
+        android:hint="Nome do certificado"
         android:inputType="text"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeMeusCertificadosI" />
 
     <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="150dp"
+        android:id="@+id/editTextText2"
+        android:layout_width="140dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:background="@color/gray"
         android:ems="10"
-        android:inputType="time"
+        android:hint="hh:mm"
+        android:inputType="datetime|time"
+        app:layout_constraintEnd_toStartOf="@+id/editTextText3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHorasMeusCertificadosI" />
 
-    <Button
-        android:id="@+id/btnAdicionarCertificado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Inserir"
+    <EditText
+        android:id="@+id/editTextText3"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/gray"
+        android:ems="10"
+        android:hint="dd/mm/aa"
+        android:inputType="datetime|date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextText2"
+        app:layout_constraintTop_toBottomOf="@+id/txtDataMeusCertificadosI" />
+
+    <Spinner
+        android:id="@+id/spinnerMeusCertificadosI"
+        android:layout_width="371dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/gray"
+        android:entries="@array/tipos_evento"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoMeusCertificadosI" />
+
+    <ImageView
+        android:id="@+id/imgLogoMeusCertificadosI"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="166dp"
+        android:layout_marginEnd="167dp"
+        android:src="@drawable/logo_tasktide"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarMeusCertificadosI"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarMeusCertificadosI"
+        app:layout_constraintStart_toStartOf="@+id/toolbarMeusCertificadosI"
+        app:layout_constraintTop_toTopOf="@+id/toolbarMeusCertificadosI" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnVoltarMeusCertificadosI"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="708dp"
-        android:onClick="voltarmeuscertificados"
-        app:constraint_referenced_tags="voltar"
+        android:contentDescription="botao voltar"
+        android:onClick="voltarMeusCertificadosInseridos"
         app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar19" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
 
-    <TextView
-        android:id="@+id/textView49"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Data de Emissão"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/spnTipoEvento" />
-
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="228dp"
-        android:background="@color/gray"
-        android:backgroundTint="@color/gray"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView49" />
-
-    <TextView
-        android:id="@+id/textView50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Nome do Emissor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
-
-    <EditText
-        android:id="@+id/editTextText4"
-        android:layout_width="373.4dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:background="@color/gray"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,19 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Usuario;
 
-import java.util.List;
-
 public class TelaCadastro extends AppCompatActivity {
 
-    EditText editTextTextNomeCadastro;
-    EditText editTextTextEmailAddressEmailCadastro;
-    EditText editTextTextMultiLineCargoCadastro;
-    EditText editTextTextPasswordSenhaCadastro;
+    EditText editTextNomeCadastro;
+    EditText editTextEmailCadastro;
+    Spinner spinnerCargoCadastro;
+    EditText editTextSenhaCadastro;
     Button btnCriarContaCadastro;
 
     DAO dao;
@@ -29,72 +28,70 @@ public class TelaCadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_cadastro);
 
-        // Inicialização das views
-        editTextTextNomeCadastro = findViewById(R.id.editTextTextNomeCadastro);
-        editTextTextEmailAddressEmailCadastro = findViewById(R.id.editTextTextEmailAddressEmailCadastro);
-        editTextTextMultiLineCargoCadastro = findViewById(R.id.editTextTextMultiLineCargoCadastro);
-        editTextTextPasswordSenhaCadastro = findViewById(R.id.editTextTextPasswordSenhaCadastro);
+        editTextNomeCadastro = findViewById(R.id.editTextNomeCadastro);
+        editTextEmailCadastro = findViewById(R.id.editTextEmailCadastro);
+        spinnerCargoCadastro = findViewById(R.id.spinnerCargoCadastro);
+        editTextSenhaCadastro = findViewById(R.id.editTextSenhaCadastro);
         btnCriarContaCadastro = findViewById(R.id.btnCriarContaCadastro);
 
-        // Inicialização do DAO
         dao = new DAO(this);
 
-        // Configuração do listener do botão
         btnCriarContaCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Verifica se todos os campos estão preenchidos
-                if (editTextTextNomeCadastro.getText().toString().isEmpty() ||
-                        editTextTextEmailAddressEmailCadastro.getText().toString().isEmpty() ||
-                        editTextTextPasswordSenhaCadastro.getText().toString().isEmpty() ||
-                        editTextTextMultiLineCargoCadastro.getText().toString().isEmpty()) {
+                if (isCamposPreenchidos()) {
 
-                    Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Verifica se o email já está cadastrado
-                String emailNovoUsuario = editTextTextEmailAddressEmailCadastro.getText().toString();
-                Usuario usuarioExistente = dao.buscarUsuarioPorEmail(emailNovoUsuario);
-                if (usuarioExistente != null) {
-                    Toast.makeText(getApplicationContext(), "Este email já está cadastrado!", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Cria um novo usuário com os dados inseridos
-                    Usuario novoUsuario = new Usuario();
-                    novoUsuario.setNome(editTextTextNomeCadastro.getText().toString());
-                    novoUsuario.setEmail(emailNovoUsuario);
-                    novoUsuario.setSenha(editTextTextPasswordSenhaCadastro.getText().toString());
-                    novoUsuario.setCargo(editTextTextMultiLineCargoCadastro.getText().toString());
-
-                    // Insere o novo usuário no banco de dados
-                    long id = dao.inserirUsuario(novoUsuario);
-
-                    // Feedback para o usuário
-                    if (id != -1) {
-                        Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-
-                        // Redireciona para a tela de boas-vindas
-                        Intent intent = new Intent(TelaCadastro.this, TelaBoasVindas.class);
-                        startActivity(intent);
-                        finish(); // Finaliza a activity atual para evitar o retorno incorreto
-
+                    String emailNovoUsuario = editTextEmailCadastro.getText().toString();
+                    Usuario usuarioExistente = dao.buscarUsuarioPorEmail(emailNovoUsuario);
+                    if (usuarioExistente != null) {
+                        Toast.makeText(getApplicationContext(), "Este email já está cadastrado!", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                        Usuario novoUsuario = new Usuario();
+                        novoUsuario.setNome(editTextNomeCadastro.getText().toString());
+                        novoUsuario.setEmail(emailNovoUsuario);
+                        novoUsuario.setSenha(editTextSenhaCadastro.getText().toString());
+                        novoUsuario.setCargo(spinnerCargoCadastro.getSelectedItem().toString());
+
+                        long id = dao.inserirUsuario(novoUsuario);
+
+                        if (id != -1) {
+                            Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(TelaCadastro.this, TelaBoasVindas.class);
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
         });
     }
 
-    // Método para redirecionamento para a tela de primeiros passos
-    public void telaprimeirospassos(View view) {
-        Intent in = new Intent(TelaCadastro.this, TelaPrimeirosPassos.class);
-        startActivity(in);
+    private boolean isCamposPreenchidos() {
+        if (editTextNomeCadastro.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha o nome", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (editTextEmailCadastro.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha o e-mail", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (editTextSenhaCadastro.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha a senha", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (spinnerCargoCadastro.getSelectedItem() == null || spinnerCargoCadastro.getSelectedItem().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Selecione um cargo", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
-    // Método para redirecionamento para a tela de boas-vindas
-    public void telaboasvindas(View view) {
-        Intent in = new Intent(TelaCadastro.this, TelaBoasVindas.class);
+    public void voltarCadastro(View view) {
+        Intent in = new Intent(TelaCadastro.this, TelaPrimeirosPassos.class);
         startActivity(in);
     }
 }

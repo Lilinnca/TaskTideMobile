@@ -3,81 +3,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="200dp"
+        android:id="@+id/imgBoasVindas"
+        android:layout_width="350sp"
+        android:layout_height="350sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/raposa_primeirospassos" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/green"
-        android:onClick="telalogin"
-        android:text="Entrar"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintVertical_bias="0.262"
+        app:srcCompat="@drawable/raposa_trevo" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/txtTituloBoasVindas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="4dp"
         android:text="Embarque nessa jornada!"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/textView38"
-        android:layout_width="260dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="75dp"
-        android:text="De forma prática, você pode ter acesso a diversos eventos de seu interesse."
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoBoasVindas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtDescricaoBoasVindas"
+        app:layout_constraintTop_toBottomOf="@+id/imgBoasVindas" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCriarConta"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="217dp"
         android:backgroundTint="@color/green"
-        android:onClick="telaprimeirospassos"
+        android:onClick="criarContaBoasVindas"
         android:text="Criar conta"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEntrar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoBoasVindas" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="208dp"
+        android:backgroundTint="@color/green"
+        android:onClick="entrarBoasVindas"
+        android:text="Entrar"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnCriarConta"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoBoasVindas" />
+
+    <TextView
+        android:id="@+id/txtDescricaoBoasVindas"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="De forma prática, você pode ter acesso a diversos eventos de seu interesse."
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCriarConta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloBoasVindas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

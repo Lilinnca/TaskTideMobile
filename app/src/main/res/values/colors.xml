@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#338b85</color>
     <color name="gray">#d9d9d9</color>
+    <color name="textColorDarkMode">#95000000</color>
 </resources>

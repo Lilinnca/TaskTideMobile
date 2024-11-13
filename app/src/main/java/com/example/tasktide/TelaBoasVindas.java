@@ -14,13 +14,13 @@ public class TelaBoasVindas extends AppCompatActivity {
         setContentView(R.layout.activity_tela_boas_vindas);
     }
 
-    public void telaprimeirospassos(View view) {
-        Intent in = new Intent(TelaBoasVindas.this, TelaPrimeirosPassos.class);
+    public void entrarBoasVindas(View view) {
+        Intent in = new Intent(TelaBoasVindas.this, Login.class);
         startActivity(in);
     }
 
-    public void telalogin(View view) {
-        Intent in = new Intent(TelaBoasVindas.this, Login.class);
+    public void criarContaBoasVindas(View view) {
+        Intent in = new Intent(TelaBoasVindas.this, TelaPrimeirosPassos.class);
         startActivity(in);
     }
 }

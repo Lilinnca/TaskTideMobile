@@ -8,159 +8,162 @@
     android:contentDescription="email">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tblSuperiorVG"
+        android:id="@+id/toolbarLogin"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/txtTituloLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgLogo"
+        android:id="@+id/imgLogoLogin"
         android:layout_width="78dp"
         android:layout_height="78dp"
         android:src="@drawable/logo_tasktide"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tblSuperiorVG"
+        app:layout_constraintStart_toStartOf="@+id/toolbarLogin"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/txtEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="352dp"
         android:text="E-mail"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextEmailLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailLogin"
+        app:layout_constraintTop_toBottomOf="@+id/dividerLogin" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/txtSenhaLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="19dp"
+        android:layout_marginEnd="350dp"
         android:text="Senha"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressLogin" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextSenhaLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextSenhaLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin" />
 
     <EditText
-        android:id="@+id/editTextTextPasswordLogin"
+        android:id="@+id/editTextSenhaLogin"
         android:layout_width="373.4dp"
         android:layout_height="48dp"
-        android:layout_marginStart="25dp"
         android:background="@color/gray"
         android:ems="10"
         android:hint="campo de senha"
         android:inputType="textPassword"
         android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntrarLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView40" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSenhaLogin" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/txtTituloLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="182dp"
         android:text="Bem-vindo(a) de volta!"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoLogin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin" />
 
     <TextView
-        android:id="@+id/textView42"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:id="@+id/txtDescricaoLogin"
+        android:layout_width="167dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="220dp"
+        android:layout_marginBottom="20dp"
         android:text="Trixxie sentiu sua falta!"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/dividerLogin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloLogin" />
 
     <View
-        android:id="@+id/divider4"
+        android:id="@+id/dividerLogin"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/textView42"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintBottom_toTopOf="@+id/txtEmailLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoLogin" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnEntrarLogin"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
-        android:onClick="telainicial"
+        android:onClick="entrarLogin"
         android:text="Entrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnEsqueciMinhaSenhaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenhaLogin" />
 
     <Button
-        android:id="@+id/button5"
-        android:layout_width="70dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="708dp"
+        android:id="@+id/btnVoltarLogin"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
         android:contentDescription="voltar"
-        android:onClick="telaboasvindas"
+        android:onClick="voltarLogin"
         app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/btnEsqueciMinhaSenhaLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="396dp"
         android:backgroundTint="@color/white"
-        android:onClick="esqueciminhasenha"
+        android:onClick="esqueciSenha"
         android:text="Esqueci minha senha"
         android:textColor="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrarLogin" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddressLogin"
+        android:id="@+id/editTextEmailLogin"
         android:layout_width="373.4dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="2dp"
         android:background="@color/gray"
         android:ems="10"
         android:hint="digite seu email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
-        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtSenhaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6"
-        app:srcCompat="@drawable/btn_background" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:srcCompat="@drawable/raposa_login" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

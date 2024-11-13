@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MeusEventosCriador">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="380dp"
         android:layout_height="550dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="6dp"
+        android:layout_marginBottom="130dp"
         android:contentDescription="Barra rolagem seus eventos"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtProximosEventos">
@@ -48,120 +52,14 @@
         android:id="@+id/toolbar15"
         android:layout_width="match_parent"
         android:layout_height="78dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/btnParticipanteCriador"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar16"
-        android:layout_width="426dp"
-        android:layout_height="78dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="343dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao tela inicial"
-        android:onClick="telainicial"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/casa" />
-
-    <ImageButton
-        android:id="@+id/btnFavoritos"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao favoritos"
-        android:onClick="telafavoritos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNovoEvento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/favoritos" />
-
-    <ImageButton
-        android:id="@+id/btnNovoEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao adicionar evento"
-        android:onClick="telacriarevento"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/mais" />
-
-    <ImageButton
-        android:id="@+id/btnMeusEventos"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="262dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao eventosmarcados"
-        android:onClick="telameuseventos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/calendario" />
-
-    <ImageButton
-        android:id="@+id/btnPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="344dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao perfil de usuario"
-        android:onClick="telaperfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/perfil" />
 
     <TextView
         android:id="@+id/txtMeusEventosCriador"
@@ -170,10 +68,12 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="265dp"
+        android:layout_marginBottom="26dp"
         android:text="Meus Eventos"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar15"
         app:layout_constraintTop_toTopOf="@+id/toolbar15" />
@@ -183,11 +83,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="35dp"
         android:backgroundTint="@color/gray"
         android:text="Participante"
         android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtProximosEventos"
+        app:layout_constraintEnd_toStartOf="@+id/btnCriadorCriador"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar15" />
 
@@ -195,6 +98,7 @@
         android:id="@+id/btnCriadorCriador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="49dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="@color/green"
@@ -202,6 +106,7 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnParticipanteCriador"
         app:layout_constraintTop_toBottomOf="@+id/toolbar15" />
 
     <TextView
@@ -209,13 +114,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="230dp"
         android:text="Seus próximos eventos"
         android:textSize="15sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnParticipanteCriador" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnInicialMeusEventosCriador"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="348dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@drawable/casa" />
+
+    <ImageButton
+        android:id="@+id/btnCriarEventoMeusEventosCriador"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@drawable/mais" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="348dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@drawable/perfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

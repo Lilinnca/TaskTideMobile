@@ -14,12 +14,12 @@ public class TelaPrimeirosPassos extends AppCompatActivity {
         setContentView(R.layout.activity_tela_primeiros_passos);
     }
 
-    public void telacadastro(View view) {
+    public void avancarPrimeirosPassos(View view) {
         Intent in = new Intent(TelaPrimeirosPassos.this, TelaCadastro.class);
         startActivity(in);
     }
 
-    public void telaboasvindas(View view){
+    public void voltarPrimeirosPassos(View view){
         Intent in = new Intent(TelaPrimeirosPassos.this, TelaBoasVindas.class);
         startActivity(in);
     }

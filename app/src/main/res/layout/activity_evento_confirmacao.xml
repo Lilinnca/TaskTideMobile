@@ -5,135 +5,126 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventoConfirmacao">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tblSuperiorVG"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="#338B85"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="1dp"
-        android:src="@drawable/logo_tasktide"
-        app:layout_constraintBottom_toBottomOf="@+id/tblSuperiorVG"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tblSuperiorVG"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="#FFFFFF">
 
 
     <TextView
-        android:id="@+id/txtEstamosQuaseLa"
+        android:id="@+id/txtTituloConfirmacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="215dp"
         android:text="Estamos quase lá..."
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoConfirmacao"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarConfirmacao" />
 
 
     <TextView
-        android:id="@+id/txtPassoCdC"
+        android:id="@+id/txtDescricaoConfirmacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Passo 5 de 5"
+        android:layout_marginEnd="299dp"
+        android:layout_marginBottom="20dp"
+        android:text="Passo 4 de 4"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/dividerConfirmacao"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEstamosQuaseLa" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloConfirmacao" />
 
 
     <View
-        android:id="@+id/dvdSuperiorC"
-        android:layout_width="409dp"
+        android:id="@+id/dividerConfirmacao"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="24dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/txtParagrafoUmConfirmacao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassoCdC" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoConfirmacao" />
 
 
     <TextView
-        android:id="@+id/txtAtencaoU"
+        android:id="@+id/txtParagrafoUmConfirmacao"
         android:layout_width="375dp"
         android:layout_height="73dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
         android:text="Essa é a última etapa do procedimento de criação de evento, se você não tiver certeza se está tudo correto, volte e verifique!  "
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtParagrafoDoisConfirmacao"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dvdSuperiorC" />
+        app:layout_constraintTop_toTopOf="@+id/dividerConfirmacao" />
 
 
     <TextView
-        android:id="@+id/txtAtencaoT"
-        android:layout_width="367dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:text="Ah, não se esqueça! Todas as informações podem ser editadas até 2 dias antes do evento!"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtencaoDc" />
-
-
-    <TextView
-        android:id="@+id/txtAtencaoDc"
+        android:id="@+id/txtParagrafoDoisConfirmacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="5dp"
         android:text="A Trixie te espera, não se preocupe."
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtParagrafoTresConfirmacao"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtencaoU" />
+        app:layout_constraintTop_toBottomOf="@+id/txtParagrafoUmConfirmacao" />
+
+    <TextView
+        android:id="@+id/txtParagrafoTresConfirmacao"
+        android:layout_width="367dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="26dp"
+        android:text="Ah, não se esqueça! Todas as informações podem ser editadas até 2 dias antes do evento!"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnVoltar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtParagrafoDoisConfirmacao" />
 
 
     <Button
         android:id="@+id/btnVoltar"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="157dp"
+        android:layout_width="181dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="9dp"
         android:backgroundTint="#338B85"
-        android:onClick="telaVoltarConfirmarIdentidade"
+        android:onClick="voltarConfirmacao"
         android:text="Voltar"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtEquipeSobreNos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtencaoT" />
+        app:layout_constraintTop_toBottomOf="@+id/txtParagrafoTresConfirmacao" />
+
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/txtEquipeSobreNos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:text="Ou"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCriarEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,30 +133,57 @@
 
     <Button
         android:id="@+id/btnCriarEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="131dp"
+        android:layout_width="181dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="336dp"
         android:backgroundTint="#338B85"
-        android:onClick="criarEvento"
+        android:onClick="avancarConfirmacao"
         android:text="Criar Evento"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEquipeSobreNos" />
+
 
     <ImageView
-        android:id="@+id/imgvTrixxieQuaseLa"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="30dp"
+        android:id="@+id/imgConfirmacao"
+        android:layout_width="170dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCriarEvento"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/trixxietablet" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarConfirmacao"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginBottom="40dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/txtTituloConfirmacao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogoConfirmacao"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="55dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarConfirmacao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.399"
+        app:layout_constraintStart_toStartOf="@+id/toolbarConfirmacao"
+        app:layout_constraintTop_toTopOf="@+id/toolbarConfirmacao"
+        app:srcCompat="@drawable/logo_tasktide" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

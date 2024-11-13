@@ -5,94 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".CriarEvento">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tblSuperiorVG"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="#338B85"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <TextView
-        android:id="@+id/txtVamosCriarEvento"
+        android:id="@+id/txtTituloCriarEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="180dp"
         android:text="Vamos criar um evento!"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoCriarEvento"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarCriarEvento" />
 
 
     <TextView
-        android:id="@+id/txtPassoUdC"
+        android:id="@+id/txtDescricaoCriarEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Passo 1 de 5"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="303dp"
+        android:layout_marginBottom="20dp"
+        android:text="Passo 1 de 4"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVamosCriarEvento" />
-
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
-        android:src="@drawable/logo_tasktide"
+        app:layout_constraintBottom_toTopOf="@+id/dividerCriarEvento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tblSuperiorVG"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloCriarEvento" />
 
 
     <View
-        android:id="@+id/dvdSuperior"
-        android:layout_width="match_parent"
+        android:id="@+id/dividerCriarEvento"
+        android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeCriarEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassoUdC" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCriarEvento" />
 
 
     <TextView
-        android:id="@+id/txtNomeEvento"
+        android:id="@+id/txtNomeCriarEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="282dp"
         android:text="Nome do Evento"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNomeEvento"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dvdSuperior" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerCriarEvento" />
 
 
     <EditText
-        android:id="@+id/edtxtNomeEvento"
+        android:id="@+id/editTextNomeEvento"
         android:layout_width="373.4dp"
         android:layout_height="48dp"
         android:background="#d9d9d9"
         android:ems="10"
-        android:hint="Nome"
+        android:hint="nome do evento"
         android:inputType="text"
         android:textColor="@color/black"
-        android:textColorHint="#d9d9d9"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/txtTipoEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeEvento" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeCriarEvento" />
 
 
     <TextView
@@ -100,12 +90,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="293dp"
+        android:layout_marginBottom="1dp"
         android:text="Tipo do Evento"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/spnTipoEvento"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtxtNomeEvento" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomeEvento" />
 
 
     <Spinner
@@ -114,6 +108,7 @@
         android:layout_height="48dp"
         android:background="#d9d9d9"
         android:entries="@array/tipos_evento"
+        app:layout_constraintBottom_toTopOf="@+id/txtHorasComplementares"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTipoEvento" />
@@ -125,9 +120,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="139dp"
         android:text="Quantidade de horas complementares"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/edtxtQuantHoras"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spnTipoEvento" />
 
@@ -139,9 +137,10 @@
         android:background="#d9d9d9"
         android:editable="false"
         android:ems="10"
-        android:hint="Horas"
+        android:hint="Quantidade de horas "
         android:inputType="none"
-        android:textColorHint="#d9d9d9"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/txtSeuEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHorasComplementares" />
@@ -152,10 +151,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="298dp"
         android:text="Seu evento é?"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtxtQuantHoras" />
 
@@ -164,79 +166,108 @@
         android:id="@+id/radioGroup"
         android:layout_width="383dp"
         android:layout_height="51dp"
-        android:layout_marginStart="15sp"
+        android:layout_marginBottom="356dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtSeuEvento">
 
 
         <RadioButton
-            android:id="@+id/rdbOnline"
+            android:id="@+id/rbtnOnline"
             android:layout_width="113dp"
             android:layout_height="match_parent"
             android:text="Online"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="16sp" />
 
 
         <RadioButton
-            android:id="@+id/rdbPresencial"
+            android:id="@+id/rbtnPresencial"
             android:layout_width="148dp"
             android:layout_height="match_parent"
-            android:layout_below="@+id/txtSeuEvento"
             android:text="Presencial"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="16sp" />
 
 
         <RadioButton
-            android:id="@+id/rdbHibrido"
+            android:id="@+id/rbtnHibrido"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:text="Híbrido"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="16sp" />
     </RadioGroup>
 
 
     <ImageView
-        android:id="@+id/imgTrixxieEvento"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="40dp"
+        android:id="@+id/imgCriarEvento"
+        android:layout_width="170dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="55dp"
         android:src="@drawable/trixxieescorada"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarCriarEvento"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/txtTituloCriarEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
-        android:id="@+id/btnProximo"
-        android:layout_width="57dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="708dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="#338B85"
-        android:contentDescription="botão avançar"
-        android:onClick="inserirEvento"
-        app:icon="@drawable/avancar"
+    <ImageView
+        android:id="@+id/imgLogoCriarEvento"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="56dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarCriarEvento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
-
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="@+id/toolbarCriarEvento"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_tasktide" />
 
     <Button
-        android:id="@+id/btnVoltarTelaInicial"
-        android:layout_width="57dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="708dp"
-        android:backgroundTint="#338B85"
-        android:contentDescription="botão voltar"
-        android:gravity="center"
-        android:src="@drawable/baseline_chevron_left_24"
+        android:id="@+id/btnVoltarCriarEvento"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="botao voltar"
+        android:onClick="voltarCriarEvento"
         app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorVG" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <Button
+        android:id="@+id/btnAvancarCriarEvento"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="botao avancar"
+        android:onClick="avancarCriarEvento"
+        app:icon="@drawable/avancar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

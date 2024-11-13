@@ -14,7 +14,7 @@ public class SobreNos extends AppCompatActivity {
         setContentView(R.layout.activity_sobre_nos);
     }
 
-    public void minhacontasn(View view) {
+    public void voltarSobreNos(View view) {
         Intent in = new Intent(SobreNos.this, MinhaConta.class);
         startActivity(in);
     }

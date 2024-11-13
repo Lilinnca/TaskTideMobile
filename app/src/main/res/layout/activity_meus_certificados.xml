@@ -18,114 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar6"
-        android:layout_width="411dp"
-        android:layout_height="78dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="343dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao tela inicial"
-        android:onClick="telainicial"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/casa" />
-
-    <ImageButton
-        android:id="@+id/btnFavoritos"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao favoritos"
-        android:onClick="telafavoritos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNovoEvento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/favoritos" />
-
-    <ImageButton
-        android:id="@+id/btnNovoEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao adicionar evento"
-        android:onClick="telacriarevento"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/mais" />
-
-    <ImageButton
-        android:id="@+id/btnMeusEventos"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="262dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao eventosmarcados"
-        android:onClick="telameuseventos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/calendario" />
-
-    <ImageButton
-        android:id="@+id/btnPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="344dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao perfil de usuario"
-        android:onClick="telaperfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:srcCompat="@drawable/perfil" />
-
     <TextView
         android:id="@+id/txtMeusCertificados"
         android:layout_width="wrap_content"
@@ -133,10 +25,12 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="220dp"
+        android:layout_marginBottom="26dp"
         android:text="Meus Certificados"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,11 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="237dp"
         android:text="Horas contabilizadas: "
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtCertificados"
+        app:layout_constraintEnd_toStartOf="@+id/txtHoras"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar13" />
 
@@ -160,11 +54,13 @@
         android:id="@+id/txtHoras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="125dp"
-        android:text="192 horas totais"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="51dp"
+        android:text="0 horas totais"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoCertificados"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtHorasCoontabilizadas"
         app:layout_constraintTop_toBottomOf="@+id/toolbar13" />
@@ -179,6 +75,7 @@
         android:text="Certificados"
         android:textSize="15sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoCertificados"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHorasCoontabilizadas" />
@@ -191,6 +88,7 @@
         android:layout_marginEnd="36dp"
         android:text="Estes certificados são dos eventos gerenciados por nós!"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificados" />
@@ -203,7 +101,9 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="245dp"
         android:text="Certificados Inseridos"
+        android:textSize="15sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridosDescricao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView5" />
@@ -213,7 +113,11 @@
         android:layout_width="347dp"
         android:layout_height="43dp"
         android:layout_marginStart="25dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="270dp"
         android:text="Estes certificados são inseridos por você, de eventos externos, para contabilização das horas!"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddCertificado"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridos" />
 
@@ -223,7 +127,6 @@
         android:layout_height="140dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados"
@@ -267,35 +170,96 @@
         </LinearLayout>
     </HorizontalScrollView>
 
+
     <Button
         android:id="@+id/buttonAddCertificado"
         android:layout_width="55dp"
         android:layout_height="60dp"
         android:layout_marginTop="615dp"
-        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/green"
-        android:contentDescription="botao "
-        android:onClick="meuscertificadosinseridos"
+        android:contentDescription="Adicionar Certificado"
+        android:onClick="adicionarCertificado"
         app:icon="@drawable/mais"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar13" />
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar13"
+        app:layout_constraintVertical_bias="0.326" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView6"
         android:layout_width="409dp"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="265dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddCertificado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridosDescricao">
 
         <LinearLayout
             android:id="@+id/linearLayoutCertificados"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <!-- Certificados serão adicionados aqui -->
         </LinearLayout>
     </HorizontalScrollView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnInicialMeusCertificados"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/green"
+        android:contentDescription="botao inicial"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/casa" />
+
+    <ImageButton
+        android:id="@+id/btnCriarEventoMeusCertificados"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/green"
+        android:contentDescription="botao criar evento"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:srcCompat="@drawable/mais" />
+
+    <ImageButton
+        android:id="@+id/btnPerfilMeusCertificados"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/green"
+        android:contentDescription="botao perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.062"
+        app:srcCompat="@drawable/perfil" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

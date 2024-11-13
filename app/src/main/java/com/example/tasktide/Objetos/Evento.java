@@ -1,6 +1,8 @@
 package com.example.tasktide.Objetos;
 
+
 import android.graphics.Bitmap;
+
 
 public class Evento {
     private int id;
@@ -33,7 +35,6 @@ public class Evento {
     public void setBannerBitmap(Bitmap banner) {
         this.banner = banner;
     }
-
     public int getId() {
         return id;
     }

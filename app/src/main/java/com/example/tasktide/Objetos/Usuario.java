@@ -1,30 +1,17 @@
 package com.example.tasktide.Objetos;
 
 public class Usuario {
-    private int id; // ID do usuário no banco de dados
+    private long id;
     private String nome;
     private String email;
     private String senha;
     private String cargo;
 
-    public Usuario() {
-        // Construtor vazio necessário para o SQLite
-    }
-
-    public Usuario(String nome, String email, String senha, String cargo) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cargo = cargo;
-    }
-
-    // Getters e setters
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

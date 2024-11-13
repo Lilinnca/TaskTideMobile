@@ -1,6 +1,5 @@
 package com.example.tasktide;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,20 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Evento;
 
-
 public class CriarEvento extends AppCompatActivity {
-
-
     private EditText edtxtNomeEvento;
     private EditText edtxtQuantHoras;
     private Spinner spnTipoEvento;
     private RadioGroup radioGroup;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +37,15 @@ public class CriarEvento extends AppCompatActivity {
             return insets;
         });
 
-
-        edtxtNomeEvento = findViewById(R.id.edtxtNomeEvento);
+        edtxtNomeEvento = findViewById(R.id.editTextNomeEvento);
         edtxtQuantHoras = findViewById(R.id.edtxtQuantHoras);
         spnTipoEvento = findViewById(R.id.spnTipoEvento);
         radioGroup = findViewById(R.id.radioGroup);
-
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.tipos_evento, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnTipoEvento.setAdapter(adapter);
-
 
         spnTipoEvento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -65,23 +55,15 @@ public class CriarEvento extends AppCompatActivity {
                 edtxtQuantHoras.setText(horas);
             }
 
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 edtxtQuantHoras.setText("");
             }
         });
 
-
-        Button btnProximo = findViewById(R.id.btnProximo);
-        btnProximo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inserirEvento();
-            }
-        });
+        Button btnAvancarCriarEvento = findViewById(R.id.btnAvancarCriarEvento);
+        btnAvancarCriarEvento.setOnClickListener(v -> inserirEvento());
     }
-
 
     private String calcularHorasComplementares(String selectedItem) {
         switch (selectedItem) {
@@ -107,12 +89,10 @@ public class CriarEvento extends AppCompatActivity {
         }
     }
 
-
     private void inserirEvento() {
         String nomeEvento = edtxtNomeEvento.getText().toString().trim();
         String tipoEvento = spnTipoEvento.getSelectedItem().toString();
         String horasComplementares = edtxtQuantHoras.getText().toString().trim();
-
 
         int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
         if (selectedRadioButtonId == -1) {
@@ -120,25 +100,20 @@ public class CriarEvento extends AppCompatActivity {
             return;
         }
 
-
         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
         String modalidade = selectedRadioButton.getText().toString();
 
-
         Evento evento = new Evento(nomeEvento, tipoEvento, horasComplementares, modalidade);
-
 
         DAO dao = new DAO(this);
         long id = dao.inserirEvento(evento);
         if (id != -1) {
             Log.i("CriarEvento", "Evento inserido com sucesso. ID: " + id);
 
-
-            // Passar o idEvento para a próxima atividade
-            Intent intent = new Intent(CriarEvento.this, EventoParticipante.class);
+            Intent intent = new Intent(CriarEvento.this, EventoInformacoes.class);
             intent.putExtra("ID_EVENTO", id);
             startActivity(intent);
-            finish(); // Finaliza a atividade atual para evitar voltar para ela pelo botão de voltar
+            finish();
         } else {
             Log.e("CriarEvento", "Erro ao inserir evento.");
         }

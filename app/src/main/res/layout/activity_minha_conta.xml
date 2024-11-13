@@ -9,12 +9,14 @@
     tools:context=".MinhaConta">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar11"
+        android:id="@+id/toolbarMinhaConta"
         android:layout_width="match_parent"
         android:layout_height="78dp"
+        android:layout_marginBottom="25dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/imgPerfilMinhaConta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,113 +28,15 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="284dp"
+        android:layout_marginBottom="29dp"
         android:text="Minha Conta"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarMinhaConta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar12"
-        android:layout_width="411dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="1dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_marginTop="541dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
-
-    <ImageButton
-        android:id="@+id/btnInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="343dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao tela inicial"
-        android:onClick="telainicial"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/casa" />
-
-    <ImageButton
-        android:id="@+id/btnFavoritos"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao favoritos"
-        android:onClick="telafavoritos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNovoEvento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/favoritos" />
-
-    <ImageButton
-        android:id="@+id/btnNovoEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="181dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao adicionar evento"
-        android:onClick="telacriarevento"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/mais" />
-
-    <ImageButton
-        android:id="@+id/btnMeusEventos"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="262dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao eventosmarcados"
-        android:onClick="telameuseventos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/calendario" />
-
-    <ImageButton
-        android:id="@+id/btnPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="344dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao perfil de usuario"
-        android:onClick="telaperfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/perfil" />
 
     <TextView
         android:id="@+id/txtNomeUsuario"
@@ -140,10 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="751dp"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar11" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfilMinhaConta"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMinhaConta" />
 
     <TextView
         android:id="@+id/txtHorasUsuario"
@@ -151,16 +57,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/txtTipoUsuario" />
+        android:layout_marginBottom="678dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfilMinhaConta"
+        app:layout_constraintTop_toBottomOf="@+id/txtCargoUsuario" />
 
     <TextView
-        android:id="@+id/txtTipoUsuario"
+        android:id="@+id/txtCargoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
+        android:layout_marginBottom="703dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfilMinhaConta"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
 
     <TextView
@@ -169,12 +79,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
+        android:layout_marginBottom="727dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfilMinhaConta"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeUsuario" />
 
 
     <ImageView
-        android:id="@+id/imgPerfil"
+        android:id="@+id/imgPerfilMinhaConta"
         android:layout_width="120dp"
         android:layout_height="125dp"
         android:layout_marginStart="45dp"
@@ -182,7 +94,7 @@
         android:layout_marginEnd="246dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar11"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMinhaConta"
         app:srcCompat="@drawable/usuario_perfil" />
 
 
@@ -193,6 +105,7 @@
         android:layout_marginStart="91dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="90dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/white"
         android:onClick="meuscertificados"
         android:text="Meus Certificados"
@@ -200,9 +113,10 @@
         app:icon="@drawable/certificados_minhaconta_perfil"
         app:iconSize="24dp"
         app:iconTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/dividerDoisMinhaConta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider9" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerUmMinhaConta" />
 
     <Button
         android:id="@+id/btnConfigurações"
@@ -211,6 +125,7 @@
         android:layout_marginStart="91dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="90dp"
+        android:layout_marginBottom="11dp"
         android:backgroundTint="@color/white"
         android:onClick="configuracoes"
         android:text="Configurações"
@@ -218,17 +133,18 @@
         app:icon="@drawable/configuracoes"
         app:iconSize="18dp"
         app:iconTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/dividerTresMinhaConta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerDoisMinhaConta" />
 
     <Button
         android:id="@+id/btnSobreNos"
         android:layout_width="230dp"
         android:layout_height="60dp"
         android:layout_marginStart="91dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="90dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/white"
         android:onClick="sobrenos"
         android:text="Sobre Nós"
@@ -236,12 +152,13 @@
         app:icon="@drawable/sobre_nos"
         app:iconSize="24dp"
         app:iconTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/dividerQuatroMinhaConta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerTresMinhaConta" />
 
     <View
-        android:id="@+id/divider9"
+        android:id="@+id/dividerUmMinhaConta"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="30dp"
@@ -250,37 +167,98 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPerfil"
+        app:layout_constraintTop_toBottomOf="@+id/imgPerfilMinhaConta"
         app:layout_constraintVertical_bias="0.5" />
 
     <View
-        android:id="@+id/divider10"
+        android:id="@+id/dividerDoisMinhaConta"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/btnConfigurações"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMeusCertificados" />
 
     <View
-        android:id="@+id/divider11"
+        android:id="@+id/dividerTresMinhaConta"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="11dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/btnSobreNos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnConfigurações" />
 
     <View
-        android:id="@+id/divider13"
+        android:id="@+id/dividerQuatroMinhaConta"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="298dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSobreNos" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnInicialMinhaConta"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/green"
+        android:backgroundTint="@color/green"
+        android:contentDescription="botao inicial"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/casa" />
+
+    <ImageButton
+        android:id="@+id/btnCriarEventoMinhaConta"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/green"
+        android:contentDescription="botao criar evento"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/mais" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/green"
+        android:contentDescription="botao perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/perfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

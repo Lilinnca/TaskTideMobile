@@ -42,6 +42,13 @@
         <item>Workshop</item>
     </string-array>
 
+    <string-array name="categoria_evento">
+        <item> </item>
+        <item>Educacional</item>
+        <item>Entreterimento</item>
+        <item> </item>
+    </string-array>
+
 
     <string-array name="QuantidadePessoas">
         <item>   </item>
@@ -51,4 +58,13 @@
         <item>300 - 400 participantes</item>
         <item>400 - 500 participantes</item>
     </string-array>
+
+    <string-array name="CargoUsuario">
+        <item>   </item>
+        <item>Discente - Ensino Médio</item>
+        <item>Discente - Ensino Superior</item>
+        <item>Docente</item>
+        <item>Administrador</item>
+    </string-array>
+
 </resources>

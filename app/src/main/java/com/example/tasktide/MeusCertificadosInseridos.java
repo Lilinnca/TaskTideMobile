@@ -1,159 +1,131 @@
 package com.example.tasktide;
 
-import android.Manifest;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
-import java.io.File;
-import java.io.IOException;
+
+import androidx.annotation.Nullable;
+
+
 import java.util.ArrayList;
 
-public class MeusCertificadosInseridos extends AppCompatActivity {
 
-    private static final int PICK_PDF_REQUEST_CODE = 1;
-    private static final int REQUEST_PERMISSION_CODE = 2;
-    private TextView selectedFileTextView;
-    private ArrayList<String> certificados;
+public class MeusCertificadosInseridos extends Activity {
+
+
+    private static final int PICK_PDF_FILE = 2;
+    private LinearLayout horizontalScrollViewLayout;
+    private ArrayList<Integer> certificados; // Lista de certificados
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meus_certificados_inseridos);
 
-        certificados = new ArrayList<>();
 
-        Button selectPdfButton = findViewById(R.id.button_select_pdf);
-        selectedFileTextView = findViewById(R.id.text_selected_file);
+        // Recuperar a lista de certificados já existentes (se houver)
+        certificados = getIntent().getIntegerArrayListExtra("certificados");
+        if (certificados == null) {
+            certificados = new ArrayList<>(); // Inicializar se for null
+        }
 
-        selectPdfButton.setOnClickListener(v -> {
-            // Verificar permissões
-            if (ContextCompat.checkSelfPermission(MeusCertificadosInseridos.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MeusCertificadosInseridos.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
-            } else {
-                // Iniciar o seletor de arquivos
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/pdf");
-                startActivityForResult(Intent.createChooser(intent, "Escolha um arquivo PDF"), PICK_PDF_REQUEST_CODE);
-            }
-        });
+
+        horizontalScrollViewLayout = findViewById(R.id.horizontal_scroll_view_layout);
+
+
+        // Botão para adicionar certificado
+        Button btnAdicionarCertificado = findViewById(R.id.btnAdicionarCertificado);
+        btnAdicionarCertificado.setOnClickListener(view -> openFilePicker());
+
+
+        // Atualiza o layout com os certificados existentes
+        for (int certificado : certificados) {
+            addCertificadoToView(certificado);
+        }
     }
 
+
+    private void openFilePicker() {
+        // Intent para abrir seletor de arquivo
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("application/pdf");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, PICK_PDF_FILE);
+    }
+
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_PDF_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                String fileName = getFileName(uri);
-                selectedFileTextView.setText(fileName);
-                // Fazer o upload do arquivo
-                uploadFile(uri);
-            }
-        }
-    }
+        if (requestCode == PICK_PDF_FILE && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri uri = data.getData();
+                if (uri != null) {
+                    addCertificadoToView(R.drawable.certificados_meuscertificados); // Exemplo de certificado
+                    certificados.add(R.drawable.certificados_meuscertificados);
 
-    private String getFileName(Uri uri) {
-        String fileName = null;
-        if (uri != null) {
-            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-            if (cursor != null) {
-                try {
-                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                    if (cursor.moveToFirst()) {
-                        fileName = cursor.getString(nameIndex);
-                    }
-                } finally {
-                    cursor.close();
+
+                    // Salvar a lista de certificados e enviar para a próxima tela
+                    Intent intent = new Intent(MeusCertificadosInseridos.this, MeusCertificados.class);
+                    intent.putIntegerArrayListExtra("certificados", certificados);
+                    startActivity(intent);
+                    finish();
                 }
             }
         }
-        return fileName;
     }
 
-    private void uploadFile(Uri fileUri) {
-        OkHttpClient client = new OkHttpClient();
 
-        // Obter o caminho do arquivo
-        String filePath = fileUri.getPath();
-        File file = new File(filePath);
+    private void addCertificadoToView(int certificadoResId) {
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(certificadoResId);
 
-        RequestBody requestFile = RequestBody.create(file, MediaType.parse("application/pdf"));
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        Request.Builder builder = new Request.Builder();
-        Request request = builder
-                .build();
+        // Definir tamanho da imagem corretamente
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                300, 400); // Largura e altura fixas
+        imageView.setLayoutParams(layoutParams);
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> Toast.makeText(MeusCertificadosInseridos.this, "Falha no upload", Toast.LENGTH_SHORT).show());
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    runOnUiThread(() -> Toast.makeText(MeusCertificadosInseridos.this, "Upload bem-sucedido", Toast.LENGTH_SHORT).show());
-                } else {
-                    runOnUiThread(() -> Toast.makeText(MeusCertificadosInseridos.this, "Falha no upload", Toast.LENGTH_SHORT).show());
-                }
-            }
-        });
+        // Adiciona a imagem ao layout da HorizontalScrollView
+        horizontalScrollViewLayout.addView(imageView);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permissão concedida, iniciar seletor de arquivos
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/pdf");
-                startActivityForResult(Intent.createChooser(intent, "Escolha um arquivo PDF"), PICK_PDF_REQUEST_CODE);
-            } else {
-                Toast.makeText(this, "Permissão negada", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void voltarmeuscertificados(View view) {
-        Intent in = new Intent(MeusCertificadosInseridos.this, MeusCertificados.class);
+    public void voltarMeusCertificadosInseridos(View view){
+        Intent in = new Intent(this, MeusCertificados.class);
         startActivity(in);
     }
 
 
-        // Método chamado ao clicar no botão de adicionar certificado
-        public void adicionarCertificado(View view) {
-            // Aqui você pode abrir um seletor de arquivos para o usuário escolher o certificado (PDF)
-            // Simulando a adição de um certificado
-            certificados.add("caminho/do/certificado.pdf");
-
-            // Depois de adicionar, vamos enviar para a tela de Meus Certificados
-            Intent intent = new Intent(this, MeusCertificados.class);
-            intent.putStringArrayListExtra("certificados", certificados);
-            startActivity(intent);
+    @SuppressLint("Range")
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            }
         }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
-
+}

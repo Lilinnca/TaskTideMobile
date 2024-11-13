@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context=".Localizacao">
+
+
+    <!-- Aqui mostra o mapa -->
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLocalizacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:visibility="visible" />
+
+
+    <!-- Texto que fica sobre a Toolbar -->
+    <TextView
+        android:id="@+id/txtLocalizacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="Distância: 0 km | Tempo estimado: 0 min"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:layout_above="@+id/toolbarLocalizacao" />
+</RelativeLayout>

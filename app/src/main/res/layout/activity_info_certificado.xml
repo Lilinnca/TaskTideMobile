@@ -7,147 +7,143 @@
     android:background="@color/white"
     tools:context=".InfoCertificado">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="70dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="258dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao de voltar"
-        android:onClick="voltaCertificado"
-        app:icon="@drawable/baseline_chevron_left_24"
-        app:iconPadding="12dp"
-        app:iconSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgInfoCertificado"
         android:layout_width="239dp"
         android:layout_height="166dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="92dp"
+        android:layout_marginBottom="60dp"
         android:contentDescription="pdf certificado"
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeInfoCertificado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/certificados_meuscertificados" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/txtNomeInfoCertificado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
         android:text="Nome do Certificado:"
         android:textSize="17sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/txtNomeCertificadoInfo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgInfoCertificado" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/txtQntdHorasInfoCertificado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="21dp"
         android:text="Quantidade de Horas:"
         android:textSize="17sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/txtQntdHorasCertificadoInfo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeInfoCertificado" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/txtDataInfoCertificado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Data de Emissão:"
         android:textSize="17sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/txtDataCertificadoInfo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQntdHorasInfoCertificado" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/txtTipoInfoCertificado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:text="Nome do Emissor:"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Tipo de Certificado:"
         android:textSize="17sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/txtTipoCertificadoInfo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDataInfoCertificado" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/txtNomeCertificadoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="60dp"
-        android:text="Teste_1"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="21dp"
+        android:text="Dia do Programador"
         android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintBottom_toTopOf="@+id/txtQntdHorasCertificadoInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtNomeInfoCertificado"
+        app:layout_constraintTop_toBottomOf="@+id/imgInfoCertificado" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/txtQntdHorasCertificadoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="2h"
+        android:layout_marginEnd="166dp"
+        android:text="5h"
         android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtQntdHorasInfoCertificado"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeCertificadoInfo" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/txtDataCertificadoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="07/09/2023"
+        android:layout_marginEnd="128dp"
+        android:text="27/10/2023"
         android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtDataInfoCertificado"
+        app:layout_constraintTop_toBottomOf="@+id/txtQntdHorasCertificadoInfo" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/txtTipoCertificadoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="IFAM - CMC"
-        android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView31"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
-
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="138dp"
         android:text="Palestra"
         android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtTipoInfoCertificado"
+        app:layout_constraintTop_toBottomOf="@+id/txtDataCertificadoInfo" />
+
+    <Button
+        android:id="@+id/btnVoltarInfoCertificado"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="botao voltar"
+        android:onClick="voltarInfoCertificado"
+        app:icon="@drawable/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
