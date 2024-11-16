@@ -1,6 +1,7 @@
 package com.example.tasktide;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -8,11 +9,13 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tasktide.DAO.DAO;
+import com.example.tasktide.Objetos.Certificado;
+
 import java.util.ArrayList;
 
 public class MeusCertificados extends AppCompatActivity {
     private LinearLayout linearLayoutCertificados;
-    private ArrayList<Integer> certificados; // Lista de IDs das imagens dos certificados
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,45 +24,45 @@ public class MeusCertificados extends AppCompatActivity {
 
         linearLayoutCertificados = findViewById(R.id.linearLayoutCertificados);
 
-        // Recebe os certificados enviados pela outra activity ou salva o estado
-        if (savedInstanceState != null) {
-            certificados = savedInstanceState.getIntegerArrayList("certificados");
-        } else {
-            certificados = getIntent().getIntegerArrayListExtra("certificados");
-        }
+        // Recuperar os certificados do banco de dados
+        DAO dao = new DAO(this);
+        ArrayList<Certificado> listaCertificados = dao.listarCertificados(getUsuarioId());
 
         // Adicionar certificados ao layout
-        if (certificados != null) {
-            for (int certificado : certificados) {
-                adicionarCertificadoAoLayout(certificado);
-            }
-        } else {
-            certificados = new ArrayList<>();
+        for (Certificado certificado : listaCertificados) {
+            adicionarCertificadoAoLayout(certificado);
         }
     }
 
-    // Adiciona a imagem do certificado ao layout
-    private void adicionarCertificadoAoLayout(int certificadoResId) {
+    // Adiciona a imagem do certificado ao layout com base nos dados do banco
+    private void adicionarCertificadoAoLayout(Certificado certificado) {
         ImageButton imageButtonCertificado = new ImageButton(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                convertDpToPx(150), // Largura em pixels
-                convertDpToPx(130)  // Altura em pixels
+                convertDpToPx(150), // Largura
+                convertDpToPx(130)  // Altura
         );
         imageButtonCertificado.setLayoutParams(layoutParams);
         imageButtonCertificado.setScaleType(ImageButton.ScaleType.CENTER_CROP);
         imageButtonCertificado.setPadding(10, 10, 10, 10);
-        imageButtonCertificado.setImageResource(certificadoResId);
         imageButtonCertificado.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        imageButtonCertificado.setContentDescription("certificado");
 
-        // Ação de clicar para abrir a tela de InfoCertificado
-        imageButtonCertificado.setOnClickListener(v -> {
+        // Exibe uma imagem genérica ou com base no tipo
+        imageButtonCertificado.setImageResource(R.drawable.certificados_meuscertificados);
+
+        // Clique no certificado para visualizar detalhes ou PDF
+        imageButtonCertificado.setOnClickListener(view -> {
             Intent intent = new Intent(MeusCertificados.this, InfoCertificado.class);
-            intent.putExtra("certificadoResId", certificadoResId);
+            intent.putExtra("certificado_id", certificado.getIdCertificado()); // Passar ID do certificado
             startActivity(intent);
         });
 
         linearLayoutCertificados.addView(imageButtonCertificado);
+    }
+
+    // Recupera o ID do usuário logado
+    private int getUsuarioId() {
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        return prefs.getInt("userId", -1); // Retorna -1 caso não encontre
     }
 
     // Função auxiliar para converter dp para pixels
@@ -68,33 +71,24 @@ public class MeusCertificados extends AppCompatActivity {
         return Math.round(dp * density);
     }
 
-    // Salva o estado atual da lista de certificados
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putIntegerArrayList("certificados", certificados);
+    // Navegação
+    public void inicialMC(View view) {
+        startActivity(new Intent(MeusCertificados.this, TelaInicial.class));
     }
 
-    // Navegação para outras telas
-    public void adicionarCertificado(View view) {
-        Intent intent = new Intent(MeusCertificados.this, MeusCertificadosInseridos.class);
-        intent.putIntegerArrayListExtra("certificados", certificados);
-        startActivity(intent);
-        finish();
+    public void addEventoMC(View view) {
+        startActivity(new Intent(MeusCertificados.this, CriarEvento.class));
     }
 
-    public void telainicial(View view) {
-        Intent in = new Intent(MeusCertificados.this, TelaInicial.class);
-        startActivity(in);
+    public void meusEventosMC(View view) {
+        startActivity(new Intent(this, MeusEventosParticipante.class));
     }
 
-    public void telacriarevento(View view) {
-        Intent in = new Intent(MeusCertificados.this, CriarEvento.class);
-        startActivity(in);
+    public void localizacaoMC(View view) {
+        startActivity(new Intent(this, Localizacao.class));
     }
 
-    public void telaperfil(View view) {
-        Intent in = new Intent(MeusCertificados.this, MinhaConta.class);
-        startActivity(in);
+    public void perfilMC(View view) {
+        startActivity(new Intent(MeusCertificados.this, MinhaConta.class));
     }
 }

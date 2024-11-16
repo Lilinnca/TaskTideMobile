@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MeusEventosParticipante">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tblInferiorME"
+        android:layout_width="411dp"
+        android:layout_height="78dp"
+        android:background="#338B85"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/imgbtnTelaInicial"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="14dp"
+        android:background="#338B85"
+        android:contentDescription="casa"
+        android:onClick="inicialMeusEventosP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tblInferiorME"
+        app:srcCompat="@drawable/casa" />
+
+
+    <ImageButton
+        android:id="@+id/imgbtnFavoritos"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginBottom="8dp"
+        android:background="#338B85"
+        android:contentDescription="localizacao"
+        android:onClick="localizacaoMeusEventosP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tblInferiorME"
+        app:layout_constraintTop_toTopOf="@+id/tblInferiorME"
+        app:layout_constraintVertical_bias="0.636"
+        app:srcCompat="@drawable/localizacao" />
+
+    <ImageButton
+        android:id="@+id/imgbtnCriarEvento"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:background="#338B85"
+        android:contentDescription="mais"
+        android:onClick="addEventoMeusEventosP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgbtnFavoritos"
+        app:layout_constraintTop_toTopOf="@+id/tblInferiorME"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/mais" />
+
+    <ImageButton
+        android:id="@+id/imgbtnVisaoVisaoGeral"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:background="#338B85"
+        android:contentDescription="calendario"
+        android:onClick="meusEventosP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgbtnCriarEvento"
+        app:layout_constraintTop_toTopOf="@+id/tblInferiorME"
+        app:layout_constraintVertical_bias="0.533"
+        app:srcCompat="@drawable/calendario" />
+
+    <ImageButton
+        android:id="@+id/imgbtnPerfil"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="15dp"
+        android:background="#338B85"
+        android:contentDescription="perfil"
+        android:onClick="perfilMeusEventosP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tblInferiorME"
+        app:layout_constraintVertical_bias="0.518"
+        app:srcCompat="@drawable/perfil" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tblSuperiorME"
+        android:layout_width="416dp"
+        android:layout_height="78dp"
+        android:background="#338B85"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtMeusEventos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:text="Meus Eventos"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnParticipante"
+        android:layout_width="167dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#338B85"
+        android:text="Participante"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorME" />
+
+
+    <Button
+        android:id="@+id/btnCriador"
+        android:layout_width="167dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="#A4D1CE"
+        android:onClick="criador"
+        android:text="Criador"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnParticipante"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnParticipante"
+        app:layout_constraintTop_toBottomOf="@+id/tblSuperiorME" />
+
+
+    <TextView
+        android:id="@+id/txtSeusProximosEventosSemana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="36dp"
+        android:text="Eventos essa semana"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnParticipante" />
+
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtSeusProximosEventosSemana"
+        app:layout_constraintBottom_toTopOf="@+id/txtEventosProximoMes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/eventosContainerSemana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+
+            <TextView
+                android:id="@+id/txtSeusProximosEventosSemanaContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <TextView
+        android:id="@+id/txtEventosProximoMes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="204dp"
+        android:text="Eventos no próximo mês"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSeusProximosEventosSemana" />
+
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/tblInferiorME"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEventosProximoMes">
+
+
+        <LinearLayout
+            android:id="@+id/eventosContainerMes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+
+            <TextView
+                android:id="@+id/txtEventosProximoMesContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

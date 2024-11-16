@@ -21,6 +21,12 @@
         android:theme="@style/Theme.TaskTide"
         tools:targetApi="31">
         <activity
+            android:name=".MeusEventosParticipante"
+            android:exported="false" />
+        <activity
+            android:name=".VisaoGeral"
+            android:exported="false" />
+        <activity
             android:name=".EventoProgramacao"
             android:exported="false" />
         <activity

@@ -22,15 +22,14 @@
         android:id="@+id/txtTituloBoasVindas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="116dp"
         android:layout_marginBottom="4dp"
         android:text="Embarque nessa jornada!"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtDescricaoBoasVindas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txtDescricaoBoasVindas"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBoasVindas" />
 
     <Button
@@ -38,13 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="217dp"
         android:backgroundTint="@color/green"
         android:onClick="criarContaBoasVindas"
         android:text="Criar conta"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnEntrar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,18 +51,15 @@
         android:id="@+id/btnEntrar"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="208dp"
         android:backgroundTint="@color/green"
         android:onClick="entrarBoasVindas"
         android:text="Entrar"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnCriarConta"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoBoasVindas" />
+        app:layout_constraintTop_toTopOf="@+id/btnCriarConta" />
 
     <TextView
         android:id="@+id/txtDescricaoBoasVindas"
@@ -75,9 +69,7 @@
         android:text="De forma prática, você pode ter acesso a diversos eventos de seu interesse."
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnCriarConta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTituloBoasVindas"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloBoasVindas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

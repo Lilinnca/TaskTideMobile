@@ -1,0 +1,68 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+
+    <ImageView
+        android:id="@+id/imgBannerEvento"
+        android:layout_width="319dp"
+        android:layout_height="161dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bannerpadrao" />
+
+
+    <ImageButton
+        android:id="@+id/imgbuttonVisaoGeral"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_button"
+        android:contentDescription="botao visao geral"
+        android:scaleType="centerCrop"
+        android:src="@drawable/olhar"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBannerEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toEndOf="@+id/imgBannerEvento"
+        app:layout_constraintTop_toTopOf="@+id/imgBannerEvento"
+        app:layout_constraintVertical_bias="0.051" />
+
+
+    <ImageButton
+        android:id="@+id/imgBtnDeletar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_button"
+        android:contentDescription="botao deletar evento"
+        android:scaleType="centerCrop"
+        android:src="@drawable/apagar"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBannerEvento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toEndOf="@+id/imgBannerEvento"
+        app:layout_constraintTop_toBottomOf="@+id/imgbuttonVisaoGeral"
+        app:layout_constraintVertical_bias="0.041" />
+
+
+    <TextView
+        android:id="@+id/nomeEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Evento"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imgBannerEvento"
+        app:layout_constraintStart_toStartOf="@+id/imgBannerEvento"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

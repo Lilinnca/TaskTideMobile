@@ -55,21 +55,21 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                Toast.makeText(Login.this, "Usuário não encontrado ou senha incorreta", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Usuário não encontrado ou senha incorreta", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(Login.this, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
     public void esqueciSenha(View view){
-        Intent in = new Intent(Login.this, EsqueciMinhaSenha.class);
+        Intent in = new Intent(this, EsqueciMinhaSenha.class);
         startActivity(in);
     }
 
     public void voltarLogin(View view) {
-        Intent in = new Intent(Login.this, TelaBoasVindas.class);
+        Intent in = new Intent(this, TelaBoasVindas.class);
         startActivity(in);
     }
 }

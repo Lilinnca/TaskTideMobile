@@ -7,60 +7,72 @@
     android:background="@color/white"
     tools:context=".TelaInicial">
 
+    <!-- Toolbar de topo -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarInicial"
         android:layout_width="match_parent"
         android:layout_height="112dp"
-        android:layout_marginBottom="30dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/searchViewInicial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/ContainerEventos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchViewInicial" />
-
-
+    <!-- Título e Descrição na parte superior -->
     <TextView
         android:id="@+id/txtTituloInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="141dp"
         android:text="Bem-vindo(a) ao TaskTide!"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtDescricaoInicial"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/toolbarInicial"
+        app:layout_constraintStart_toStartOf="@+id/txtDescricaoInicial"
         app:layout_constraintTop_toTopOf="@+id/toolbarInicial" />
 
     <TextView
         android:id="@+id/txtDescricaoInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="22dp"
         android:layout_marginBottom="33dp"
         android:text="Encontre e se inscreva em eventos de seu interesse"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbarInicial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloInicial" />
 
+    <!-- Barra de pesquisa -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewInicial"
+        android:layout_width="310dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnAjusteInicial"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarInicial" />
+
+    <!-- Botão de ajuste -->
+    <ImageButton
+        android:id="@+id/btnAjusteInicial"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="Botao de ajuste"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/searchViewInicial"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarInicial"
+        app:srcCompat="@drawable/ajustamento"
+        android:onClick="abrirFiltros"/>
+
+    <!-- Menu inferior -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMenuInicial"
         android:layout_width="match_parent"
@@ -73,29 +85,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchViewInicial"
-        android:layout_width="310dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnAjusteInicial"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarInicial" />
-
-    <ImageButton
-        android:id="@+id/btnAjusteInicial"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/white"
-        android:contentDescription="Botao de ajuste"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/searchViewInicial"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarInicial"
-        app:srcCompat="@drawable/ajustamento" />
-
+    <!-- Botões inferiores -->
     <ImageButton
         android:id="@+id/btnInicial"
         android:layout_width="48dp"
@@ -181,104 +171,173 @@
         app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
         app:srcCompat="@drawable/perfil" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="405dp"
-        android:layout_height="597dp"
+
+    <!-- Conteúdo rolável -->
+    <!-- Conteúdo rolável -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="30dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/toolbarMenuInicial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchViewInicial">
+        app:layout_constraintTop_toBottomOf="@id/searchViewInicial">
 
-        <TextView
-            android:id="@+id/txtDestaqueInicial"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="290dp"
-            android:text="Em destaque "
-            android:textColor="#95000000"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:padding="16dp">
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollViewOutros"
-            android:layout_width="wrap_content"
-            android:layout_height="123dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="19dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:id="@+id/eventosContainer"
+            <!-- Destaques -->
+            <TextView
+                android:id="@+id/txtDestaqueInicial"
                 android:layout_width="wrap_content"
-                android:layout_height="123dp"
-                android:orientation="horizontal" />
-        </HorizontalScrollView>
+                android:layout_height="wrap_content"
+                android:text="Em destaque"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtCategoriaInicial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="143dp"
-            android:layout_marginEnd="281dp"
-            android:text="Entreterimento"
-            android:textColor="#95000000"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView2"
-            android:layout_width="wrap_content"
-            android:layout_height="123dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="346dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollViewOutros"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" />
-        </HorizontalScrollView>
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:id="@+id/eventosContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="123dp"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="143dp"
-            android:layout_marginEnd="300dp"
-            android:text="Educacional"
-            android:textColor="#95000000"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDestaqueInicial" />
-
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView3"
-            android:layout_width="wrap_content"
-            android:layout_height="123dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="183dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
+            <!-- Categorias -->
+            <TextView
+                android:id="@+id/txtCategoriaInicial"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
-        </HorizontalScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:text="Entreterimento"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView2"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Educação"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView3"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!-- Novas Categorias -->
+            <TextView
+                android:id="@+id/txtEsporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Esporte"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView4"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtNetworking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Networking"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView5"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtNegocios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Negócios"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView6"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtTecnologia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tecnologia"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView7"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtArtes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artes"
+                android:textColor="#95000000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView8"
+                android:layout_width="wrap_content"
+                android:layout_height="123dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -86,6 +86,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="35dp"
         android:backgroundTint="@color/gray"
+        android:onClick="participante"
         android:text="Participante"
         android:textSize="16dp"
         android:textStyle="bold"

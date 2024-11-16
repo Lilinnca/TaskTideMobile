@@ -1,52 +1,40 @@
 package com.example.tasktide.Objetos;
 
-
 public class Participantes {
 
-
     private int id;
-    private String quantParticipantes;
+    private int quantParticipantes;
 
-
-    public Participantes(){
-
-
-    }
-
-
-    public Participantes(String quantParticipantes) {
+    public Participantes(int quantParticipantes) {
         this.quantParticipantes = quantParticipantes;
-
-
     }
 
-
-    // Getters e setters
-
+    public Participantes(int quantParticipantes, boolean anyCheckBoxChecked) {
+        this.quantParticipantes = quantParticipantes;
+        // Lógica relacionada ao checkbox pode ser adicionada aqui
+    }
 
     public int getId() {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
 
-
-    public String getQuantParticipantes() {
+    public int getQuantParticipantes() {
         return quantParticipantes;
     }
 
-
-    public void setQuantParticipantes(String quantParticipantes) {
+    public void setQuantParticipantes(int quantParticipantes) {
         this.quantParticipantes = quantParticipantes;
     }
 
-
+    @Override
+    public String toString() {
+        return "Participantes{" +
+                "id=" + id +
+                ", quantParticipantes=" + quantParticipantes +
+                '}';
+    }
 }
-
-
-
-
-

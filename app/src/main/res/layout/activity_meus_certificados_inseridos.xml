@@ -54,7 +54,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMeusCertificadosI"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
@@ -67,12 +67,9 @@
         android:id="@+id/txtMeusCertificadosI"
         android:layout_width="366dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="25dp"
         android:text="Preencha esses campos com as informações de eventos externos!"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTituloMeusCertificadosI"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloMeusCertificadosI" />
 
     <TextView
@@ -81,11 +78,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="135dp"
         android:text="Meus Certificados Inseridos"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarMeusCertificadosI" />
 
@@ -103,52 +98,40 @@
         android:id="@+id/txtNomeMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="350dp"
         android:text="Nome:"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextText"
         app:layout_constraintTop_toBottomOf="@+id/dividerMeusCertificadosI" />
 
     <TextView
         android:id="@+id/txtHorasMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="135dp"
         android:text="Qntd. de horas:"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtDataMeusCertificadosI"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextText2"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
     <TextView
         android:id="@+id/txtDataMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="129dp"
         android:text="Data:"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextText3"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
     <TextView
         android:id="@+id/txtTipoMeusCertificadosI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="270dp"
         android:text="Tipo de certificado:"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/spinnerMeusCertificadosI"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
     <EditText
@@ -218,11 +201,11 @@
         app:layout_constraintTop_toTopOf="@+id/toolbarMeusCertificadosI" />
 
     <Button
-        android:id="@+id/btnVoltarMeusCertificadosI"
+        android:id="@+id/btnVoltarMCI"
         android:layout_width="55dp"
         android:layout_height="60dp"
         android:contentDescription="botao voltar"
-        android:onClick="voltarMeusCertificadosInseridos"
+        android:onClick="voltarMCI"
         app:icon="@drawable/voltar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

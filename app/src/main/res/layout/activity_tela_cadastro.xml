@@ -11,28 +11,23 @@
         android:id="@+id/toolbarCadastro"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginBottom="40dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/txtTituloCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtTituloCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="159dp"
+        android:layout_marginTop="40dp"
         android:text="Informações necessárias"
-        android:textColor="#95000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtDescricaoCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarCadastro" />
 
@@ -40,13 +35,10 @@
         android:id="@+id/txtDescricaoCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="133dp"
         android:layout_marginBottom="20dp"
         android:text="Preencha corretamente seus dados"
-        android:textColor="#95000000"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/dividerCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/txtTituloCadastro"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloCadastro" />
 
@@ -67,12 +59,8 @@
         android:id="@+id/txtNomeCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="350dp"
-        android:layout_marginBottom="1dp"
         android:text="Nome"
-        android:textColor="#95000000"
         app:layout_constraintBottom_toTopOf="@+id/editTextNomeCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextNomeCadastro"
         app:layout_constraintTop_toBottomOf="@+id/dividerCadastro" />
 
@@ -95,11 +83,8 @@
         android:id="@+id/txtEmailCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="350dp"
         android:text="E-mail"
-        android:textColor="#95000000"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmailCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailCadastro"
         app:layout_constraintTop_toBottomOf="@+id/editTextNomeCadastro" />
 
@@ -123,13 +108,9 @@
         android:id="@+id/txtSenhaCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="349dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="25dp"
         android:text="Senha"
-        android:textColor="#95000000"
         app:layout_constraintBottom_toTopOf="@+id/editTextSenhaCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextSenhaCadastro"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCargoCadastro" />
 
@@ -137,13 +118,9 @@
         android:id="@+id/txtCargoCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="275dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="25dp"
         android:text="Cargo/Disposição"
-        android:textColor="#95000000"
         app:layout_constraintBottom_toTopOf="@+id/spinnerCargoCadastro"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/spinnerCargoCadastro"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailCadastro" />
 
@@ -188,9 +165,8 @@
         android:layout_height="77dp"
         android:layout_marginStart="167dp"
         android:layout_marginEnd="167dp"
-        android:layout_marginBottom="41dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtTituloCadastro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarCadastro"
         app:srcCompat="@drawable/logo_tasktide" />
@@ -199,7 +175,6 @@
         android:id="@+id/spinnerCargoCadastro"
         android:layout_width="365dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
         android:background="@color/gray"
         android:entries="@array/CargoUsuario"
         app:layout_constraintBottom_toTopOf="@+id/txtSenhaCadastro"
@@ -212,6 +187,7 @@
         android:id="@+id/btnVoltarCadastro"
         android:layout_width="55dp"
         android:layout_height="60dp"
+        android:contentDescription="botao voltar"
         android:onClick="voltarCadastro"
         app:icon="@drawable/voltar"
         app:layout_constraintBottom_toBottomOf="parent"

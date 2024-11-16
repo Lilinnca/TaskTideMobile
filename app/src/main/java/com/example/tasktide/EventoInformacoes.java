@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.tasktide.DAO.DAO;
+import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
 
 
@@ -30,6 +31,8 @@ public class EventoInformacoes extends AppCompatActivity {
     private long idEvento;
     private Button btnVoltarInformacoes, btnAvancarInformacoes;
     private static final String TAG = "OutrasInformacoes";
+    double valorEvento;
+    DAO dao;
 
 
     @Override
@@ -128,7 +131,6 @@ public class EventoInformacoes extends AppCompatActivity {
 
 
     public void avancarInformacoes(View view) {
-        // Capturar os valores dos campos
         String dataPrevis = editTextDataPrevista.getText().toString();
         String dataFim = editTextDataFim.getText().toString();
         String horarioInicio = editTextHorarioInicio.getText().toString();
@@ -138,41 +140,40 @@ public class EventoInformacoes extends AppCompatActivity {
         String valorEventoString = editTextValorEvento.getText().toString();
 
 
+        String pago = rbtnSim.isChecked() ? "Sim" : "Não";
+
         double valorEvento = 0.0;
-
-
-        // Verificar se o evento é pago e o campo valor foi preenchido corretamente
         if (rbtnSim.isChecked()) {
-            // Se rdbSim está selecionado, então o valor deve ser um número válido
             try {
                 valorEvento = Double.parseDouble(valorEventoString);
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Valor do evento deve ser um número válido.", Toast.LENGTH_SHORT).show();
-                return; // Saia do método se o valor não for válido
+                return;
             }
-        } else {
-            // Se rdbNao está selecionado, o valor do evento não deve ser obrigatório
-            valorEvento = 0.0; // Ou mantenha a variável com valor padrão 0.0
         }
 
-
-        String pago = rbtnSim.isChecked() ? "Sim" : "Não";
-
-
-        // Criar um objeto Informacoes com os dados capturados
+        // Create the Informacoes object
         Informacoes informacoes = new Informacoes(dataPrevis, dataFim, horarioInicio, horarioFim, prazo, local, valorEvento, pago);
 
-
-        // Inserir os dados na tabela informacoes
+        // Save the information to the database
         DAO dao = new DAO(this);
-        long id = dao.inserirInformacoes(informacoes, idEvento);
+        dao.inserirInformacoes(informacoes, idEvento);
 
-        Intent in = new Intent(this, EventoProgramacao.class);
-        in.putExtra("ID_EVENTO", idEvento);
-        startActivity(in);
-
-
+        // Navigate to the next screen
+        Intent intent = new Intent(this, EventoParticipante.class);
+        intent.putExtra("ID_EVENTO", idEvento);
+        startActivity(intent);
+        finish();
     }
+
+    private void carregarInformacoesEvento() {
+        Evento evento = dao.buscarEventoPorId(idEvento);
+        if (evento != null) {
+            editTextDataPrevista.setText(evento.getDataEvento());
+            editTextLocal.setText(evento.getLocalEvento());
+        }
+    }
+
 
     public void voltarInformacoes(View view) {
         Intent in = new Intent(this, CriarEvento.class);

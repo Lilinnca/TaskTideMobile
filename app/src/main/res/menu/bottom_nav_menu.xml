@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/casa"
+        android:icon="@drawable/casa"
+        android:title="Home" />
+    <item
+        android:id="@+id/localizacao"
+        android:icon="@drawable/localizacao"
+        android:title="Favoritos" />
+    <item
+        android:id="@+id/mais"
+        android:icon="@drawable/mais"
+        android:title="Novo Evento" />
+    <item
+        android:id="@+id/meuseventos"
+        android:icon="@drawable/calendario"
+        android:title="Meus Eventos" />
+    <item
+        android:id="@+id/perfil"
+        android:icon="@drawable/perfil"
+        android:title="Perfil" />
+</menu>

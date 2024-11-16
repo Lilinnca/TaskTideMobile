@@ -4,27 +4,11 @@
     <string name="NomedoEvento">Nome do Evento</string>
     <string name="proximo">Próximo</string>
 
-
-    <string-array name="datas_array">
-        <item>Data 1</item>
-        <item>Data 2</item>
-        <item>Data 3</item>
-    </string-array>
-
-
-    <string-array name="tipos_atividade_array">
-        <item>Tipo 1</item>
-        <item>Tipo 2</item>
-        <item>Tipo 3</item>
-    </string-array>
-
-
     <string name="next">Next</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
     <string name="previous">Previous</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-
 
     <string-array name="tipos_evento">
         <item>   </item>
@@ -42,13 +26,17 @@
         <item>Workshop</item>
     </string-array>
 
-    <string-array name="categoria_evento">
-        <item> </item>
-        <item>Educacional</item>
-        <item>Entreterimento</item>
-        <item> </item>
+    <string-array name="categorias_evento">
+        <item>   </item>
+        <item>Entretenimento</item>
+        <item>Cultura</item>
+        <item>Esporte</item>
+        <item>Educação</item>
+        <item>Networking</item>
+        <item>Negócios</item>
+        <item>Tecnologia</item>
+        <item>Artes</item>
     </string-array>
-
 
     <string-array name="QuantidadePessoas">
         <item>   </item>
@@ -60,11 +48,10 @@
     </string-array>
 
     <string-array name="CargoUsuario">
-        <item>   </item>
-        <item>Discente - Ensino Médio</item>
-        <item>Discente - Ensino Superior</item>
-        <item>Docente</item>
-        <item>Administrador</item>
+        <item> </item>
+        <item> Discente - Ensino Médio </item>
+        <item> Discentes - Ensino Superior </item>
+        <item> Docente </item>
+        <item> Administrador </item>
     </string-array>
-
 </resources>

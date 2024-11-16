@@ -3,6 +3,7 @@ package com.example.tasktide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -46,21 +47,16 @@ public class EventoParticipante extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnQuantParticipantes.setAdapter(adapter);
 
-
         btnAvancar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isAnyCheckBoxChecked()) {
-                    Toast.makeText(EventoParticipante.this, "Selecione pelo menos um participante.", Toast.LENGTH_SHORT).show();
-                } else {
-                    salvarParticipantes();
-                    Intent intent = new Intent(EventoParticipante.this, EventoConfirmacao.class);
-                    intent.putExtra("ID_EVENTO", idEvento);
-                    startActivity(intent);
-                }
+                salvarParticipantes();
+                Intent intent = new Intent(EventoParticipante.this, EventoConfirmacao.class);
+                intent.putExtra("ID_EVENTO", idEvento);
+                startActivity(intent);
+                finish();
             }
         });
-
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +74,20 @@ public class EventoParticipante extends AppCompatActivity {
 
     private void salvarParticipantes() {
         String quantParticipantes = spnQuantParticipantes.getSelectedItem().toString();
+
+        // Extrai a primeira parte numérica da string
+        String[] partes = quantParticipantes.split(" ");
+        int participantes = 0;
+        try {
+            participantes = Integer.parseInt(partes[0]); // Exemplo: "1" de "1 - 100"
+        } catch (NumberFormatException e) {
+            Log.e("EventoParticipante", "Erro ao converter número de participantes", e);
+        }
+
         DAO dao = new DAO(this);
-        Participantes participantes = new Participantes(quantParticipantes);
-        dao.inserirParticipantes(participantes, idEvento);
+        Participantes participantesObj = new Participantes(participantes, isAnyCheckBoxChecked());
+        dao.inserirParticipantes(participantesObj, idEvento);
     }
+
 }
 

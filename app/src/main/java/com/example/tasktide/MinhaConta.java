@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class MinhaConta extends AppCompatActivity {
 
@@ -40,37 +43,57 @@ public class MinhaConta extends AppCompatActivity {
         String horas = prefs.getString("horas", "0 horas contabilizadas");  // Horas cadastradas
         String cargo = prefs.getString("cargo", "Cargo não disponível");  // Cargo do usuário
         String email = prefs.getString("email", "Email não disponível");  // Email do usuário
-        String uriString = prefs.getString("imageUri", null);  // URI da imagem de perfil, se existir
+        String uriString = prefs.getString("fotoPerfil", null);  // URI da imagem de perfil, se existir
 
+        // Set user information on TextViews
         txtNomeUsuario.setText(nome);
         txtHorasUsuario.setText(horas);
         txtCargoUsuario.setText(cargo);
         txtEmailUsuario.setText(email);
 
+        // Load profile image using Glide or set a default image if URI is null
         if (uriString != null) {
             Uri imageUri = Uri.parse(uriString);
-            try {
-                imgView.setImageURI(imageUri);
-            } catch (SecurityException e) {
-                Log.e("MinhaConta", "Sem permissão para acessar a URI: " + e.getMessage());
-            }
+            Glide.with(this).load(imageUri).into(imgView);
         } else {
-            imgView.setImageResource(R.drawable.usuario_perfil);
+            imgView.setImageResource(R.drawable.usuario_perfil); // Imagem padrão
         }
     }
 
     public void meuscertificados(View view) {
-        Intent in = new Intent(MinhaConta.this, MeusCertificados.class);
+        Intent in = new Intent(this, MeusCertificados.class);
         startActivity(in);
     }
 
     public void configuracoes(View view) {
-        Intent in = new Intent(MinhaConta.this, Configuracoes.class);
+        Intent in = new Intent(this, Configuracoes.class);
         startActivity(in);
     }
 
     public void sobrenos(View view) {
-        Intent in = new Intent(MinhaConta.this, SobreNos.class);
+        Intent in = new Intent(this, SobreNos.class);
         startActivity(in);
     }
+
+    public void inicialMinhaConta(View view){
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+    public void localizaoMinhaConta(View view){
+        Intent in = new Intent(this, Localizacao.class);
+        startActivity(in);
+    }
+    public void addEventoMinhaConta(View view){
+        Intent in = new Intent(this, CriarEvento.class);
+        startActivity(in);
+    }
+    public void meusEventosMinhaConta(View view){
+        Intent in = new Intent(this, MeusEventosParticipante.class);
+        startActivity(in);
+    }
+    public void perfilMinhaConta(View view){
+        Intent in = new Intent(this, MinhaConta.class);
+        startActivity(in);
+    }
+
 }

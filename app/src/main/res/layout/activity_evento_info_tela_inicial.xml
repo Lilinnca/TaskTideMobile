@@ -7,21 +7,6 @@
     android:background="#FFFFFF"
     tools:context=".EventoInfoTelaInicial">
 
-    <ImageView
-        android:id="@+id/imgEventoInfoEvento"
-        android:layout_width="350dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="21dp"
-        android:contentDescription="evento 1"
-        android:onClick="informacaoevento"
-        app:layout_constraintBottom_toTopOf="@+id/txtNomeInfoEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVisaoInfoEvento"
-        app:srcCompat="@drawable/banner_evento" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMenuInicial"
         android:layout_width="match_parent"
@@ -148,12 +133,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
         android:text="Visão Geral"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imgEventoInfoEvento"
-        app:layout_constraintEnd_toStartOf="@+id/btnNotificacaoInfoInicial"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarInfoEvento" />
 
@@ -161,29 +143,23 @@
         android:id="@+id/txtNomeInfoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="221dp"
         android:text="Nome do evento:"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtLocalInfoEvento"
-        app:layout_constraintEnd_toStartOf="@+id/txtNomeEventoInfo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEventoInfoEvento" />
+        app:layout_constraintTop_toBottomOf="@+id/txtVisaoInfoEvento" />
 
     <TextView
         android:id="@+id/txtLocalInfoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="Local:"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDataInfoEvento"
-        app:layout_constraintEnd_toStartOf="@+id/txtLocalEventoInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeInfoEvento" />
 
@@ -191,14 +167,11 @@
         android:id="@+id/txtDataInfoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="Data:"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtProgramacaoInfoInicial"
-        app:layout_constraintEnd_toStartOf="@+id/txtDataEventoInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLocalInfoEvento" />
 
@@ -207,166 +180,88 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="245dp"
-        android:text="IFAM - CMC"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="1dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtLocalInfoEvento"
         app:layout_constraintStart_toEndOf="@+id/txtLocalInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeEventoInfo" />
+        app:layout_constraintTop_toTopOf="@+id/txtLocalInfoEvento" />
 
     <TextView
         android:id="@+id/txtDataEventoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="13dp"
-        android:text="07/10/2023 - 09/10/2023"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtProgramacaoInfoInicial"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="3dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtDataInfoEvento"
         app:layout_constraintStart_toEndOf="@+id/txtDataInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/txtLocalEventoInfo" />
+        app:layout_constraintTop_toTopOf="@+id/txtDataInfoEvento" />
 
     <TextView
         android:id="@+id/txtNomeEventoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="151dp"
-        android:layout_marginBottom="46dp"
-        android:text="Evento - Teste"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDataEventoInfo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtNomeInfoEvento"
         app:layout_constraintStart_toEndOf="@+id/txtNomeInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/imgEventoInfoEvento" />
+        app:layout_constraintTop_toTopOf="@+id/txtNomeInfoEvento" />
 
     <Button
         android:id="@+id/btnInscreverInfoInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:onClick="inscreverInfoInicial"
         android:text="INSCREVER -SE "
+        app:layout_constraintBottom_toTopOf="@+id/btnVoltarInfoInicial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProgramacao_Tres" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txtProgramacaoInfoInicial"
+        android:id="@+id/txtDescricaoInfoInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="280dp"
-        android:layout_marginBottom="20dp"
-        android:text="Programação:"
+        android:layout_marginTop="10dp"
+        android:text="Descrição:"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtData_um"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDataInfoEvento" />
-
-    <TextView
-        android:id="@+id/txtData_um"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="272dp"
-        android:text="07/10/2023["
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProgramacaoInfoInicial" />
-
-    <TextView
-        android:id="@+id/txtData_Dois"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="276dp"
-        android:text="08/10/2023"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProgramacao_Um" />
-
-    <TextView
-        android:id="@+id/txtData_Tres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="276dp"
-        android:text="09/10/2023"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProgramacao_Dois" />
-
-    <TextView
-        android:id="@+id/txtProgramacao_Um"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="255dp"
-        android:text="Programação 1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtData_um" />
-
-    <TextView
-        android:id="@+id/txtProgramacao_Dois"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="255dp"
-        android:text="Programação 2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtData_Dois" />
-
-    <TextView
-        android:id="@+id/txtProgramacao_Tres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="255dp"
-        android:text="Programação 3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtData_Tres" />
-
-    <ImageButton
-        android:id="@+id/btnNotificacaoInfoInicial"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="220dp"
-        android:layout_marginEnd="35dp"
-        android:background="@color/white"
-        android:contentDescription="notificacao"
-        android:onClick="notificacao"
-        app:layout_constraintBottom_toTopOf="@+id/imgEventoInfoEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtVisaoInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarInfoEvento"
-        app:srcCompat="@drawable/notificacao" />
 
     <Button
         android:id="@+id/btnVoltarInfoInicial"
         android:layout_width="55dp"
         android:layout_height="60dp"
+        android:layout_marginBottom="19dp"
         android:contentDescription="voltar"
         android:onClick="voltarInfoInicial"
         app:icon="@drawable/voltar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/toolbarMenuInicial"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.896" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txtDescricaoEventoInfo"
+        android:layout_width="351dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:justificationMode="inter_word"
+        app:layout_constraintStart_toStartOf="@+id/txtDescricaoInfoInicial"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoInfoInicial" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="351dp"
+        android:layout_height="221dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeInfoEvento"
+        app:layout_constraintStart_toStartOf="@+id/txtVisaoInfoEvento"
+        app:layout_constraintTop_toBottomOf="@+id/txtVisaoInfoEvento"
+        app:srcCompat="@drawable/banner_evento" />
 </androidx.constraintlayout.widget.ConstraintLayout>

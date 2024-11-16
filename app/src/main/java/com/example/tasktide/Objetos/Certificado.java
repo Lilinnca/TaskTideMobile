@@ -1,31 +1,58 @@
 package com.example.tasktide.Objetos;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "certificados")
 public class Certificado {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private int recursoId; // ID do recurso drawable
+    private int idCertificado;
+    private int idUsuario;
+    private String nomeCertificado;
+    private String tipoCertificado;
+    private String dataEmissao;
 
-    public Certificado(int recursoId) {
-        this.recursoId = recursoId;
+    public Certificado(int idCertificado, int idUsuario, String nomeCertificado, String tipoCertificado, String dataEmissao) {
+        this.idCertificado = idCertificado;
+        this.idUsuario = idUsuario;
+        this.nomeCertificado = nomeCertificado;
+        this.tipoCertificado = tipoCertificado;
+        this.dataEmissao = dataEmissao;
     }
 
-    public int getId() {
-        return id;
+    // Getters e setters
+    public int getIdCertificado() {
+        return idCertificado;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCertificado(int idCertificado) {
+        this.idCertificado = idCertificado;
     }
 
-    public int getRecursoId() {
-        return recursoId;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setRecursoId(int recursoId) {
-        this.recursoId = recursoId;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNomeCertificado() {
+        return nomeCertificado;
+    }
+
+    public void setNomeCertificado(String nomeCertificado) {
+        this.nomeCertificado = nomeCertificado;
+    }
+
+    public String getTipoCertificado() {
+        return tipoCertificado;
+    }
+
+    public void setTipoCertificado(String tipoCertificado) {
+        this.tipoCertificado = tipoCertificado;
+    }
+
+    public String getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(String dataEmissao) {
+        this.dataEmissao = dataEmissao;
     }
 }

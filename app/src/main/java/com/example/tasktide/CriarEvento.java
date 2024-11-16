@@ -21,9 +21,10 @@ import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Evento;
 
 public class CriarEvento extends AppCompatActivity {
+
     private EditText edtxtNomeEvento;
-    private EditText edtxtQuantHoras;
-    private Spinner spnTipoEvento;
+    private EditText edtxtQuantHoras, edtxtDescricao;
+    private Spinner spnTipoEvento, spnCategoriaEvento;
     private RadioGroup radioGroup;
 
     @Override
@@ -37,15 +38,17 @@ public class CriarEvento extends AppCompatActivity {
             return insets;
         });
 
-        edtxtNomeEvento = findViewById(R.id.editTextNomeEvento);
+        edtxtDescricao = findViewById(R.id.edtxtDescricao);
+        edtxtNomeEvento = findViewById(R.id.edtxtNomeEvento);
         edtxtQuantHoras = findViewById(R.id.edtxtQuantHoras);
         spnTipoEvento = findViewById(R.id.spnTipoEvento);
+        spnCategoriaEvento = findViewById(R.id.spnCategoriaEvento); // Novo spinner para a categoria
         radioGroup = findViewById(R.id.radioGroup);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this,
                 R.array.tipos_evento, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnTipoEvento.setAdapter(adapter);
+        adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnTipoEvento.setAdapter(adapterTipo);
 
         spnTipoEvento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -61,8 +64,19 @@ public class CriarEvento extends AppCompatActivity {
             }
         });
 
-        Button btnAvancarCriarEvento = findViewById(R.id.btnAvancarCriarEvento);
-        btnAvancarCriarEvento.setOnClickListener(v -> inserirEvento());
+        ArrayAdapter<CharSequence> adapterCategoria = ArrayAdapter.createFromResource(this,
+                R.array.categorias_evento, android.R.layout.simple_spinner_item);
+        adapterCategoria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnCategoriaEvento.setAdapter(adapterCategoria);
+
+        Button btnProximo = findViewById(R.id.btnAvancarCriarEvento);
+        btnProximo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inserirEvento();
+            }
+        });
+
     }
 
     private String calcularHorasComplementares(String selectedItem) {
@@ -90,32 +104,45 @@ public class CriarEvento extends AppCompatActivity {
     }
 
     private void inserirEvento() {
+        // Coleta dados da tela
         String nomeEvento = edtxtNomeEvento.getText().toString().trim();
         String tipoEvento = spnTipoEvento.getSelectedItem().toString();
         String horasComplementares = edtxtQuantHoras.getText().toString().trim();
+        String descricao = edtxtDescricao.getText().toString().trim();
+        String categoria = spnCategoriaEvento.getSelectedItem().toString();
 
+        // Coleta modalidade
         int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
         if (selectedRadioButtonId == -1) {
             Toast.makeText(CriarEvento.this, "Selecione uma modalidade.", Toast.LENGTH_SHORT).show();
             return;
         }
-
         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
         String modalidade = selectedRadioButton.getText().toString();
 
-        Evento evento = new Evento(nomeEvento, tipoEvento, horasComplementares, modalidade);
+        // Cria o objeto Evento e preenche com os dados coletados
+        Evento evento = new Evento();
+        evento.setNomeEvento(nomeEvento);
+        evento.setTipoEvento(tipoEvento);
+        evento.setHorasComplementares(horasComplementares);
+        evento.setDescricao(descricao);
+        evento.setCategoria(categoria);
+        evento.setModalidade(modalidade);
 
+        // Insere o evento no banco
         DAO dao = new DAO(this);
-        long id = dao.inserirEvento(evento);
-        if (id != -1) {
-            Log.i("CriarEvento", "Evento inserido com sucesso. ID: " + id);
+        long idEvento = dao.inserirEvento(evento);
 
-            Intent intent = new Intent(CriarEvento.this, EventoInformacoes.class);
-            intent.putExtra("ID_EVENTO", id);
+        if (idEvento != -1) {
+            // Navega para a próxima tela passando o ID do evento
+            Intent intent = new Intent(this, EventoInformacoes.class);
+            intent.putExtra("ID_EVENTO", idEvento);
             startActivity(intent);
             finish();
         } else {
-            Log.e("CriarEvento", "Erro ao inserir evento.");
+            Toast.makeText(this, "Erro ao salvar evento.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
+
