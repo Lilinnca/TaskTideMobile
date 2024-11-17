@@ -3,6 +3,7 @@ package com.example.tasktide.DAO;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -32,7 +33,8 @@ public class DAO extends SQLiteOpenHelper {
     public static final String TABELA_PARTICIPANTES = "participantes";
     private static final String TABELA_CERTIFICADOS = "Certificados";
     public static final String TABELA_CRONOGRAMA = "cronograma";
-    public static final String TABELA_ATIVIDADE = "atividade";  // Adicionado, conforme última parte do código
+    public static final String TABELA_ATIVIDADE = "atividade";
+    private Context context;
 
     public DAO(Context context) {
         super(context, NOME_BANCO, null, VERSAO_BANCO);
@@ -65,12 +67,13 @@ public class DAO extends SQLiteOpenHelper {
     }
 
     private void createCertificadoTable(SQLiteDatabase db) {
-        String createTableCertificado = "CREATE TABLE IF NOT EXISTS Certificados (" +
+        String createTableCertificado = "CREATE TABLE IF NOT EXISTS " + TABELA_CERTIFICADOS + " (" +
                 "id_certificado INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "id_usuario INTEGER, " +
                 "nome_certificado TEXT, " +
                 "tipo_certificado TEXT, " +
                 "data_emissao TEXT, " +
+                "horas_certificado TEXT, " +
                 "FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)" +
                 ");";
         db.execSQL(createTableCertificado);
@@ -175,23 +178,28 @@ public class DAO extends SQLiteOpenHelper {
         }
     }
 
-    public void inserirCertificado(int idUsuario, String nomeCertificado, String tipoCertificado, String dataEmissao) {
+    public long inserirCertificado(Certificado certificado) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("id_usuario", idUsuario);
-        values.put("nome_certificado", nomeCertificado);
-        values.put("tipo_certificado", tipoCertificado);
-        values.put("data_emissao", dataEmissao);
+        long id = -1;
 
-        long resultado = db.insert(TABELA_CERTIFICADOS, null, values);
-        if (resultado != -1) {
-            Log.i("DAO", "Certificado inserido com sucesso.");
-        } else {
-            Log.e("DAO", "Erro ao inserir o certificado.");
+        try {
+            ContentValues values = new ContentValues();
+            values.put("id_usuario", certificado.getIdUsuario());
+            values.put("nome_certificado", certificado.getNomeCertificado());
+            values.put("tipo_certificado", certificado.getTipoCertificado());
+            values.put("data_emissao", certificado.getDataEmissao());
+            values.put("horas_certificado", certificado.getHorasCertificado());
+
+            id = db.insert(TABELA_CERTIFICADOS, null, values);
+            Log.i(TAG, "Certificado inserido com ID: " + id);
+        } catch (Exception e) {
+            Log.e(TAG, "Erro ao inserir certificado: " + e.getMessage());
+        } finally {
+            db.close();
         }
-        db.close();
-    }
 
+        return id;
+    }
 
     public ArrayList<Certificado> listarCertificados(int idUsuario) {
         ArrayList<Certificado> certificados = new ArrayList<>();
@@ -206,7 +214,8 @@ public class DAO extends SQLiteOpenHelper {
                         cursor.getInt(cursor.getColumnIndexOrThrow("id_usuario")),
                         cursor.getString(cursor.getColumnIndexOrThrow("nome_certificado")),
                         cursor.getString(cursor.getColumnIndexOrThrow("tipo_certificado")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("data_emissao"))
+                        cursor.getString(cursor.getColumnIndexOrThrow("data_emissao")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("horas_certificado"))
                 );
                 certificados.add(certificado);
             } while (cursor.moveToNext());
@@ -216,28 +225,65 @@ public class DAO extends SQLiteOpenHelper {
         return certificados;
     }
 
-
-    public Certificado buscarCertificadoPorId(int idCertificado) {
+    public Certificado buscarCertificadoPorId(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABELA_CERTIFICADOS + " WHERE id_certificado = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idCertificado)});
-
         Certificado certificado = null;
-        if (cursor.moveToFirst()) {
-            certificado = new Certificado(
-                    cursor.getInt(cursor.getColumnIndexOrThrow("id_certificado")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("id_usuario")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("nome_certificado")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("tipo_certificado")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("data_emissao"))
-            );
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT * FROM " + TABELA_CERTIFICADOS + " WHERE id = ?";
+            cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                certificado = new Certificado();
+                certificado.setIdCertificado(cursor.getLong(cursor.getColumnIndexOrThrow("id")));
+                certificado.setIdUsuario(cursor.getInt(cursor.getColumnIndexOrThrow("id_usuario")));
+                certificado.setNomeCertificado(cursor.getString(cursor.getColumnIndexOrThrow("nome_certificado")));
+                certificado.setTipoCertificado(cursor.getString(cursor.getColumnIndexOrThrow("tipo_certificado")));
+                certificado.setDataEmissao(cursor.getString(cursor.getColumnIndexOrThrow("data_emissao")));
+                certificado.setHorasCertificado(cursor.getString(cursor.getColumnIndexOrThrow("horas_certificado")));
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Erro ao buscar certificado com ID: " + id, e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        cursor.close();
-        db.close();
+
         return certificado;
     }
 
-    public void deletarCertificados(int idCertificado) {
+    @SuppressLint("Range")
+    public List<Certificado> getAllCertificados() {
+        List<Certificado> certificados = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Verifica se a tabela 'certificado' existe antes de tentar fazer a consulta
+        Log.i(TAG, "Verificando existência da tabela 'certificado'...");
+        if (isTableExists(db, TABELA_CERTIFICADOS)) {
+            Log.i(TAG, "Tabela 'certificado' existe. Realizando consulta.");
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA_CERTIFICADOS, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Certificado certificado = new Certificado();
+                    certificado.setIdCertificado(cursor.getLong(cursor.getColumnIndex("id")));
+                    certificado.setNomeCertificado(cursor.getString(cursor.getColumnIndex("nome_certificado")));
+                    certificados.add(certificado);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } else {
+            Log.e(TAG, "A tabela 'certificado' não foi encontrada.");
+        }
+        db.close();
+        return certificados;
+    }
+
+
+
+    public void deletarCertificados(long idCertificado) {
         SQLiteDatabase db = this.getWritableDatabase();
         int resultado = db.delete(TABELA_CERTIFICADOS, "id_certificado = ?", new String[]{String.valueOf(idCertificado)});
         if (resultado > 0) {
@@ -1006,6 +1052,23 @@ public class DAO extends SQLiteOpenHelper {
         db.close();
         return id;
     }
+
+    public Usuario getUsuarioLogado() {
+        if (context != null) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("USER_PREF", Context.MODE_PRIVATE);
+            String usuarioEmail = sharedPreferences.getString("email", null);
+            if (usuarioEmail != null) {
+                return buscarUsuarioPorEmail(usuarioEmail);
+            }
+        } else {
+            Log.e("DAO", "Contexto nulo! Não é possível acessar SharedPreferences.");
+        }
+        return null;
+    }
+
+
+
+
 
     public long inserirAtividade(Atividade atividade) {
         SQLiteDatabase db = this.getWritableDatabase();
