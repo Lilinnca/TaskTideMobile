@@ -116,7 +116,7 @@ public class DAO extends SQLiteOpenHelper {
                 "horarioTermino TEXT," +
                 "prazo TEXT," +
                 "local TEXT," +
-                "valorEvento DOUBLE," +  // Garantir que o tipo DOUBLE está correto para o valor
+                "valorEvento DOUBLE," +
                 "Pago TEXT," +
                 "FOREIGN KEY (id_evento) REFERENCES " + TABELA_EVENTO + "(id))";
         db.execSQL(sql);
@@ -177,6 +177,17 @@ public class DAO extends SQLiteOpenHelper {
             Log.i(TAG, "Banco de dados atualizado com sucesso.");
         }
     }
+
+    public void limparTabelas() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABELA_PARTICIPANTES, null, null);
+        db.delete(TABELA_INFORMACOES, null, null);
+        db.delete(TABELA_EVENTO, null, null);
+        db.delete(TABELA_CRONOGRAMA, null, null);
+        Log.i(TAG, "Todas as tabelas foram limpas.");
+        db.close();
+    }
+
 
     public long inserirCertificado(Certificado certificado) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -259,7 +270,6 @@ public class DAO extends SQLiteOpenHelper {
         List<Certificado> certificados = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Verifica se a tabela 'certificado' existe antes de tentar fazer a consulta
         Log.i(TAG, "Verificando existência da tabela 'certificado'...");
         if (isTableExists(db, TABELA_CERTIFICADOS)) {
             Log.i(TAG, "Tabela 'certificado' existe. Realizando consulta.");
@@ -294,70 +304,59 @@ public class DAO extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Método para buscar informações
     @SuppressLint("Range")
     public String[] buscarInformacoesPorEvento(long eventoId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] informacoes = new String[3];  // Array para armazenar [dataPrevista, dataFim, local]
+        String[] informacoes = new String[3];
 
-        // Valores padrão
         String dataPrevistaPadrao = "12/12/2024";
         String dataFimPadrao = "24/12/2024";
         String localPadrao = "IFAM - CMC";
 
-        // Query para buscar as informações da tabela "informacoes"
         String query = "SELECT dataPrevista, dataFim, local FROM " + TABELA_INFORMACOES +
                 " WHERE id_evento = ?";
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(eventoId)});
 
-        // Verificar se o cursor possui dados
         if (cursor != null && cursor.moveToFirst()) {
-            // Recuperar dados da tabela informacoes
             String dataPrevista = cursor.getString(cursor.getColumnIndex("dataPrevista"));
             String dataFim = cursor.getString(cursor.getColumnIndex("dataFim"));
             String local = cursor.getString(cursor.getColumnIndex("local"));
 
-            // Verifica se a data está no formato correto
             informacoes[0] = verificarDataValida(dataPrevista) ? formatarData(dataPrevista) : dataPrevistaPadrao;
             informacoes[1] = verificarDataValida(dataFim) ? formatarData(dataFim) : dataFimPadrao;
             informacoes[2] = (local != null && !local.trim().isEmpty()) ? local : localPadrao;
 
             cursor.close();
         } else {
-            // Caso o cursor não tenha resultados, define valores padrão
             informacoes[0] = dataPrevistaPadrao;
             informacoes[1] = dataFimPadrao;
             informacoes[2] = localPadrao;
 
-            // Log para depuração
             Log.d("DAO", "Informações não encontradas. Usando valores padrão.");
         }
 
-        // Retorna o array com as informações [dataPrevista, dataFim, local]
         return informacoes;
     }
 
-    // Método para verificar se a data está no formato correto
     private boolean verificarDataValida(String data) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false);  // Desabilita a análise leniente de datas
-            sdf.parse(data);  // Se lançar uma exceção, a data é inválida
+            sdf.setLenient(false);
+            sdf.parse(data);
             return true;
         } catch (Exception e) {
-            return false;  // Retorna falso se a data não for válida
+            return false;
         }
     }
 
-    // Método para formatar a data
     private String formatarData(String data) {
         try {
-            SimpleDateFormat sdfEntrada = new SimpleDateFormat("yyyy-MM-dd"); // Formato de entrada no banco
-            SimpleDateFormat sdfSaida = new SimpleDateFormat("dd/MM/yyyy");  // Formato desejado para exibição
+            SimpleDateFormat sdfEntrada = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdfSaida = new SimpleDateFormat("dd/MM/yyyy");
             return sdfSaida.format(sdfEntrada.parse(data));
         } catch (Exception e) {
-            return data;  // Retorna a data original se não puder ser formatada
+            return data;
         }
     }
 
@@ -385,10 +384,9 @@ public class DAO extends SQLiteOpenHelper {
         return id;
     }
 
-
     public long inserirAtividade(Atividade atividade, long idEvento) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long id = -1; // Valor de retorno para indicar falha por padrão
+        long id = -1;
         try {
             ContentValues values = new ContentValues();
             values.put("id_evento", idEvento);
@@ -487,17 +485,14 @@ public class DAO extends SQLiteOpenHelper {
             cursor = db.rawQuery(sql, new String[]{String.valueOf(idEvento)});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
-                    // Recuperando os valores do cursor
                     String data = cursor.getString(cursor.getColumnIndexOrThrow("data"));
                     String horario = cursor.getString(cursor.getColumnIndexOrThrow("horario"));
                     String nomeAtividade = cursor.getString(cursor.getColumnIndexOrThrow("nomeAtividade"));
                     String responsavel = cursor.getString(cursor.getColumnIndexOrThrow("responsavel"));
                     String localAtividade = cursor.getString(cursor.getColumnIndexOrThrow("localAtividade"));
 
-                    // Instanciando a Atividade com o novo construtor
                     Atividade atividade = new Atividade(data, horario, nomeAtividade, responsavel, localAtividade);
 
-                    // Adicionando à lista
                     atividades.add(atividade);
                 } while (cursor.moveToNext());
             }
@@ -511,7 +506,6 @@ public class DAO extends SQLiteOpenHelper {
         }
         return atividades;
     }
-
 
     public Usuario buscarUsuarioPorEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -541,7 +535,6 @@ public class DAO extends SQLiteOpenHelper {
         }
         return usuario;
     }
-
 
     public boolean deletarUsuario(Usuario usuario) {
         String email = usuario.getEmail();
@@ -580,7 +573,6 @@ public class DAO extends SQLiteOpenHelper {
         List<Evento> eventos = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Verifica se a tabela 'evento' existe antes de tentar fazer a consulta
         Log.i(TAG, "Verificando existência da tabela 'evento'...");
         if (isTableExists(db, TABELA_EVENTO)) {
             Log.i(TAG, "Tabela 'evento' existe. Realizando consulta.");
@@ -603,13 +595,11 @@ public class DAO extends SQLiteOpenHelper {
     }
 
     public void inscreverNoEvento(long idUsuario, long idEvento) {
-        // Verifica se o usuário já está inscrito
         if (verificarInscricao(idUsuario, idEvento)) {
             Log.i(TAG, "O usuário já está inscrito neste evento.");
-            return;  // Ou, você pode exibir uma mensagem de aviso
+            return;
         }
 
-        // Se não estiver inscrito, realiza a inscrição
         SQLiteDatabase db = this.getWritableDatabase();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String dataInscricao = sdf.format(new Date());
@@ -628,7 +618,6 @@ public class DAO extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Evento> eventos = new ArrayList<>();
 
-        // Consulta para obter todos os eventos aos quais o usuário está inscrito
         String query = "SELECT e.* FROM " + TABELA_EVENTO + " e " +
                 "JOIN Inscricoes i ON e.id = i.id_evento " +
                 "WHERE i.id_usuario = ?";
@@ -919,7 +908,6 @@ public class DAO extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             evento = new Evento();
 
-            // Verifica se as colunas existem antes de acessá-las
             int nomeEventoIndex = cursor.getColumnIndex("nomeEvento");
             int descricaoIndex = cursor.getColumnIndex("descricao");
 
@@ -935,7 +923,6 @@ public class DAO extends SQLiteOpenHelper {
                 Log.e("DB_ERROR", "Coluna descricao não encontrada.");
             }
 
-            // Preencha os outros campos conforme necessário
         } else {
             Log.e("DB_ERROR", "Nenhum evento encontrado com o ID: " + idEvento);
         }
@@ -952,7 +939,6 @@ public class DAO extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM informacoes WHERE evento_id = ?", new String[]{String.valueOf(idEvento)});
 
         if (cursor.moveToFirst()) {
-            // Usando o construtor com parâmetros
             informacoes = new Informacoes(
                     cursor.getString(cursor.getColumnIndex("dataPrevista")),
                     cursor.getString(cursor.getColumnIndex("dataFim")),
@@ -1073,7 +1059,7 @@ public class DAO extends SQLiteOpenHelper {
     public long inserirAtividade(Atividade atividade) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id_evento", atividade.getIdEvento());  // Usar o getter correto
+        values.put("id_evento", atividade.getIdEvento());
         values.put("nomeAtividade", atividade.getNomeAtividade());
         values.put("horario", atividade.getHorario());
         values.put("palestrante", atividade.getPalestrante());

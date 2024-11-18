@@ -166,7 +166,7 @@
         android:layout_marginTop="610dp"
         android:backgroundTint="@color/green"
         android:contentDescription="Adicionar Certificado"
-        android:onClick="adicionarCertificado"
+        android:onClick="adicionarcertificado"
         app:icon="@drawable/mais"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +176,7 @@
         app:layout_constraintVertical_bias="0.326" />
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView6"
+        android:id="@+id/certificadosContainer"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:layout_marginTop="5dp"
@@ -253,7 +253,7 @@
         app:srcCompat="@drawable/perfil" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/btnlocalizacaoMeusCertificados"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="99dp"

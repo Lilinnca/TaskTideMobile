@@ -9,7 +9,6 @@ public class Usuario {
     private String senha;
     private String cargo;
 
-    // Getter e setter para 'id'
     public long getId() {
         return id;
     }
@@ -18,7 +17,6 @@ public class Usuario {
         this.id = id;
     }
 
-    // Getter e setter para 'nome'
     public String getNome() {
         return nome;
     }
@@ -27,7 +25,6 @@ public class Usuario {
         this.nome = nome;
     }
 
-    // Getter e setter para 'email' com validação simples
     public String getEmail() {
         return email;
     }
@@ -40,7 +37,6 @@ public class Usuario {
         }
     }
 
-    // Getter e setter para 'senha'
     public String getSenha() {
         return senha;
     }
@@ -53,7 +49,6 @@ public class Usuario {
         }
     }
 
-    // Getter e setter para 'cargo'
     public String getCargo() {
         return cargo;
     }
@@ -62,7 +57,6 @@ public class Usuario {
         this.cargo = cargo;
     }
 
-    // Método toString() para facilitar a depuração
     @Override
     public String toString() {
         return "Usuario{" +

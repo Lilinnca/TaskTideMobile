@@ -31,7 +31,7 @@ public class MinhaConta extends AppCompatActivity {
         txtHorasUsuario = findViewById(R.id.txtHorasUsuario);
         txtCargoUsuario = findViewById(R.id.txtCargoUsuario);
         txtEmailUsuario = findViewById(R.id.txtEmailUsuario);
-        imgView = findViewById(R.id.imgPerfilMinhaConta);  // ImageView para exibir a imagem de perfil
+        imgView = findViewById(R.id.imgPerfilMinhaConta);
 
         carregarDadosUsuario();
     }
@@ -39,24 +39,22 @@ public class MinhaConta extends AppCompatActivity {
     private void carregarDadosUsuario() {
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
-        String nome = prefs.getString("nome", "Nome não disponível");  // Nome do usuário
-        String horas = prefs.getString("horas", "0 horas contabilizadas");  // Horas cadastradas
-        String cargo = prefs.getString("cargo", "Cargo não disponível");  // Cargo do usuário
-        String email = prefs.getString("email", "Email não disponível");  // Email do usuário
-        String uriString = prefs.getString("fotoPerfil", null);  // URI da imagem de perfil, se existir
+        String nome = prefs.getString("nome", "Nome não disponível");
+        String horas = prefs.getString("horas", "0 horas contabilizadas");
+        String cargo = prefs.getString("cargo", "Cargo não disponível");
+        String email = prefs.getString("email", "Email não disponível");
+        String uriString = prefs.getString("fotoPerfil", null);
 
-        // Set user information on TextViews
         txtNomeUsuario.setText(nome);
         txtHorasUsuario.setText(horas);
         txtCargoUsuario.setText(cargo);
         txtEmailUsuario.setText(email);
 
-        // Load profile image using Glide or set a default image if URI is null
         if (uriString != null) {
             Uri imageUri = Uri.parse(uriString);
             Glide.with(this).load(imageUri).into(imgView);
         } else {
-            imgView.setImageResource(R.drawable.usuario_perfil); // Imagem padrão
+            imgView.setImageResource(R.drawable.usuario_perfil);
         }
     }
 

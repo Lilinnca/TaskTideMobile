@@ -16,13 +16,14 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtTituloCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:text="Informações necessárias"
         android:textSize="20sp"
@@ -35,10 +36,8 @@
         android:id="@+id/txtDescricaoCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text="Preencha corretamente seus dados"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/dividerCadastro"
         app:layout_constraintStart_toStartOf="@+id/txtTituloCadastro"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloCadastro" />
 
@@ -46,11 +45,8 @@
         android:id="@+id/dividerCadastro"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtNomeCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCadastro" />
@@ -59,8 +55,8 @@
         android:id="@+id/txtNomeCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Nome"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNomeCadastro"
         app:layout_constraintStart_toStartOf="@+id/editTextNomeCadastro"
         app:layout_constraintTop_toBottomOf="@+id/dividerCadastro" />
 
@@ -73,7 +69,6 @@
         android:hint="Insira seu email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/txtCargoCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,8 +78,8 @@
         android:id="@+id/txtEmailCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="E-mail"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmailCadastro"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailCadastro"
         app:layout_constraintTop_toBottomOf="@+id/editTextNomeCadastro" />
 
@@ -92,13 +87,11 @@
         android:id="@+id/editTextSenhaCadastro"
         android:layout_width="365dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="307dp"
         android:background="#D9D9D9"
         android:ems="10"
         android:hint="Insira sua senja"
         android:inputType="textPassword"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,9 +101,8 @@
         android:id="@+id/txtSenhaCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:text="Senha"
-        app:layout_constraintBottom_toTopOf="@+id/editTextSenhaCadastro"
         app:layout_constraintStart_toStartOf="@+id/editTextSenhaCadastro"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCargoCadastro" />
 
@@ -118,9 +110,8 @@
         android:id="@+id/txtCargoCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:text="Cargo/Disposição"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerCargoCadastro"
         app:layout_constraintStart_toStartOf="@+id/spinnerCargoCadastro"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailCadastro" />
 
@@ -128,13 +119,11 @@
         android:id="@+id/editTextNomeCadastro"
         android:layout_width="365dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="25dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Insira seu nome"
         android:inputType="text"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/txtEmailCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,19 +134,17 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="125dp"
         android:backgroundTint="@color/green"
         android:onClick="telaboasvindas"
         android:text="Criar minha conta"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenhaCadastro"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenhaCadastro" />
 
     <ImageView
         android:id="@+id/imgLogoCadastro"
@@ -177,7 +164,6 @@
         android:layout_height="50dp"
         android:background="@color/gray"
         android:entries="@array/CargoUsuario"
-        app:layout_constraintBottom_toTopOf="@+id/txtSenhaCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

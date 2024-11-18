@@ -42,7 +42,7 @@ public class CriarEvento extends AppCompatActivity {
         edtxtNomeEvento = findViewById(R.id.edtxtNomeEvento);
         edtxtQuantHoras = findViewById(R.id.edtxtQuantHoras);
         spnTipoEvento = findViewById(R.id.spnTipoEvento);
-        spnCategoriaEvento = findViewById(R.id.spnCategoriaEvento); // Novo spinner para a categoria
+        spnCategoriaEvento = findViewById(R.id.spnCategoriaEvento);
         radioGroup = findViewById(R.id.radioGroup);
 
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this,
@@ -104,14 +104,12 @@ public class CriarEvento extends AppCompatActivity {
     }
 
     private void inserirEvento() {
-        // Coleta dados da tela
         String nomeEvento = edtxtNomeEvento.getText().toString().trim();
         String tipoEvento = spnTipoEvento.getSelectedItem().toString();
         String horasComplementares = edtxtQuantHoras.getText().toString().trim();
         String descricao = edtxtDescricao.getText().toString().trim();
         String categoria = spnCategoriaEvento.getSelectedItem().toString();
 
-        // Coleta modalidade
         int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
         if (selectedRadioButtonId == -1) {
             Toast.makeText(CriarEvento.this, "Selecione uma modalidade.", Toast.LENGTH_SHORT).show();
@@ -120,7 +118,6 @@ public class CriarEvento extends AppCompatActivity {
         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
         String modalidade = selectedRadioButton.getText().toString();
 
-        // Cria o objeto Evento e preenche com os dados coletados
         Evento evento = new Evento();
         evento.setNomeEvento(nomeEvento);
         evento.setTipoEvento(tipoEvento);
@@ -129,12 +126,10 @@ public class CriarEvento extends AppCompatActivity {
         evento.setCategoria(categoria);
         evento.setModalidade(modalidade);
 
-        // Insere o evento no banco
         DAO dao = new DAO(this);
         long idEvento = dao.inserirEvento(evento);
 
         if (idEvento != -1) {
-            // Navega para a próxima tela passando o ID do evento
             Intent intent = new Intent(this, EventoInformacoes.class);
             intent.putExtra("ID_EVENTO", idEvento);
             startActivity(intent);

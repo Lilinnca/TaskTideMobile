@@ -75,11 +75,10 @@ public class EventoParticipante extends AppCompatActivity {
     private void salvarParticipantes() {
         String quantParticipantes = spnQuantParticipantes.getSelectedItem().toString();
 
-        // Extrai a primeira parte numérica da string
         String[] partes = quantParticipantes.split(" ");
         int participantes = 0;
         try {
-            participantes = Integer.parseInt(partes[0]); // Exemplo: "1" de "1 - 100"
+            participantes = Integer.parseInt(partes[0]);
         } catch (NumberFormatException e) {
             Log.e("EventoParticipante", "Erro ao converter número de participantes", e);
         }

@@ -11,7 +11,6 @@ public class Participantes {
 
     public Participantes(int quantParticipantes, boolean anyCheckBoxChecked) {
         this.quantParticipantes = quantParticipantes;
-        // Lógica relacionada ao checkbox pode ser adicionada aqui
     }
 
     public int getId() {

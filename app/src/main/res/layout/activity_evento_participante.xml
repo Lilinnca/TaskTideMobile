@@ -13,11 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:text="Discentes de Ensino Superior"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxDocentes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CheckBoxDiscentesEM" />
 
@@ -26,11 +24,8 @@
         android:id="@+id/txtDescricaoParticipantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text="Passo 3 de 4"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/dividerParticipantes"
         app:layout_constraintStart_toStartOf="@+id/txtTituloParticipantes"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloParticipantes" />
 
@@ -39,8 +34,8 @@
         android:id="@+id/dividerParticipantes"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtQntdParticipantes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoParticipantes" />
@@ -53,9 +48,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Quantidade de participantes"
-        android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/spnQntdParticipantes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dividerParticipantes" />
 
@@ -66,9 +59,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="18dp"
-        android:layout_marginBottom="614dp"
         android:entries="@array/QuantidadePessoas"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtQntdParticipantes" />
@@ -79,11 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Tipo de participantes"
-        android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoTipoParticipantes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spnQntdParticipantes" />
 
@@ -93,11 +82,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:text="Discentes do Ensino Médio"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxDiscentesES"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoTipoParticipantes" />
 
@@ -107,11 +94,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="336dp"
+        android:layout_marginTop="5dp"
         android:text="Servidores em geral"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxDocentes" />
 
@@ -121,11 +106,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:text="Docentes"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxServidores"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxDiscentesES" />
 
@@ -135,12 +118,10 @@
         android:layout_width="170dp"
         android:layout_height="180dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxServidores"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/trixxie_em_pe" />
 
     <TextView
@@ -148,11 +129,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:text="Sobre os participantes..."
-        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoParticipantes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarParticipantes" />
 
@@ -161,11 +141,9 @@
         android:id="@+id/toolbarParticipantes"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginBottom="40dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/txtTituloParticipantes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -216,8 +194,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="Selecione no mínimo uma opção"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/CheckBoxDiscentesEM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTipoParticipantes" />
 

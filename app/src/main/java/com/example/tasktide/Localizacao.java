@@ -34,9 +34,9 @@ import java.util.List;
 
 public class Localizacao extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1; //número para identificar a solicitação de permissão de localização.
-    private FusedLocationProviderClient fusedLocationClient;  //lida com a localização do dispositivo
-    private GoogleMap mMap; //Um objeto que representa o mapa
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private FusedLocationProviderClient fusedLocationClient;
+    private GoogleMap mMap;
 
 
     @Override
@@ -44,30 +44,21 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_localizacao);
 
-        // Configuração do fragmento de mapa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFragment);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
-
-        // Configuração do cliente de localização
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
     }
 
-
-    //Bacana de citar na apresentação
-    //Método onMapReady chamado quando o mapa está pronto para ser usado
-    // Configura o mapa, solicita permissões de localização e adiciona um marcador para o destino
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
-        // Solicitar permissões de localização se não estiverem concedidas
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -78,48 +69,27 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
             getDeviceLocation();
         }
 
-
-        // Coordenadas do destino
         LatLng enderecoIFAM = new LatLng(-3.1343665666971323, -60.012890561432684);
         mMap.addMarker(new MarkerOptions().position(enderecoIFAM).title("IFAM - Av. Sete de Setembro, 1975"));
     }
 
-
-    //Bacana de citar na apresentação
-    //Método getDeviceLocation para obter a localização atual do dispositivo/usuário
-    // Se a localização for encontrada, a câmera do mapa é movida para a posição do usuário, e a rota até o destino é desenhada
     private void getDeviceLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
-
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
 
-
-                // o amigo que adiciona a rota no mapa
                 LatLng enderecoIFAM = new LatLng(-3.1343665666971323, -60.012890561432684);
                 desenharRota(userLocation, enderecoIFAM);
             }
         });
     }
 
-
-    //Bacana de citar na apresentação
-    //Método desenharRota, responsável por desenhar a rota no mapa entre a origem e o destino fornecidos
-    // Chama o método DetalhesRota() para obter informações sobre a rota(como distancia e tempo estimado)
-
-
-
-
-    //1. Ele pergunta para o Google Maps qual é o caminho
-    //2. O Google Maps manda uma sequência de caracteres (como um código secreto) que descreve o caminho
-    //3. Esse código secreto é decodificado pelo método decodePolyline para se transformar em uma lista de pontos no mapa
-    //4. Esses pontos são usados para desenhar a linha do caminho no mapa
     private void desenharRota(LatLng origin, LatLng destination) {
         DetalhesRota(origin, destination);
         new Thread(() -> {
@@ -159,24 +129,6 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
-
-    //Bacana de citar na apresentação
-    //Método responsável por buscar os detalhes da rota
-    // como a distância e o tempo estimado, e decodificar a polyline para exibir no mapa
-    //No contexto GoogleMaps, uma polyline é usada para representar um caminho ou rota entre diferentes pontos no mapa.
-
-
-
-
-    //Sobre o JSON, que é como um pacote de informações que o Google Maps envia para o aplicativo.
-    // O aplicativo então abre esse pacote, pega as partes que precisa (como a rota, distância e tempo)
-    // e usa isso para mostrar a rota no mapa e outras informações úteis na tela
-
-
-    //1. pergunta para o Google Maps sobre o caminho
-    //2. O Google Maps manda uma sequência de caracteres (código secreto) e informações sobre a distância e o tempo
-    //3. O código secreto é decodificado pelo método decodePolyline para criar uma lista de pontos
-    //4. Esses pontos são usados para desenhar a linha do caminho no mapa e mostrar a distância e o tempo na tela
     private void DetalhesRota(LatLng origin, LatLng destination) {
         new Thread(() -> {
             try {
@@ -226,13 +178,6 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
-
-    //Bacana pra citar na apresentação
-    //Método auxiliar que decodifica uma polyline codificada em uma lista de pontos (LatLng)
-    // para ser usada ao desenhar uma rota no mapa.
-    // método usado para transformar uma sequência de caracteres (uma linha codificada) em uma lista de coordenadas geográficas (pontos no mapa)
-    // Esses pontos têm latitude e longitude, que são os números que nos dizem exatamente onde algo está no planeta
-    //resumindo: TODOS ESSES PONTOS MOSTRAM A ROTA COMPLETA NO MAPA HAHAHAH CORINGANDO AHAHAHAH
     private List<LatLng> decodePolyline(String encoded) {
         List<LatLng> poly = new ArrayList<>();
         int index = 0, len = encoded.length();
@@ -263,11 +208,6 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
         return poly;
     }
 
-
-    //Bacana de citar na apresentação
-    //Método chamado após o usuário responder a uma solicitação de permissão
-    // Verifica se as permissões de localização foram concedidas
-    // se sim, habilita a localização no mapa e obtém a localização do dispositivo
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,

@@ -22,15 +22,12 @@ public class EsqueciMinhaSenha extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esqueci_minha_senha);
 
-        // Referencie o campo de entrada de e-mail
         editTextEmailEsqueciSenha = findViewById(R.id.editTextEmailEsqueciSenha);
     }
 
-    // Método para o botão "Enviar E-mail de Recuperação"
     public void enviarEmailRecuperacao(View view) {
         String email = editTextEmailEsqueciSenha.getText().toString().trim();
 
-        // Validação do campo de e-mail
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(EsqueciMinhaSenha.this, "Por favor, insira um e-mail", Toast.LENGTH_SHORT).show();
             return;

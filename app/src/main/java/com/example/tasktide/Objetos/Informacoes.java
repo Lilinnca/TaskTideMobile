@@ -7,7 +7,7 @@ public class Informacoes {
     private String horarioFim;
     private String prazo;
     private String local;
-    private String pago; // Sim ou Não
+    private String pago;
     private Double valorEvento;
 
     public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioFim, String prazo, String local, Double valorEvento, String pago) {
@@ -18,10 +18,9 @@ public class Informacoes {
         this.prazo = prazo;
         this.local = local;
         this.valorEvento = valorEvento;
-        this.pago = pago;  // Certifique-se de inicializar
+        this.pago = pago;
     }
 
-    // Getters e setters
     public String getDataPrevista() {
         return dataPrevista;
     }
@@ -48,7 +47,7 @@ public class Informacoes {
 
     public String getPago() {
         return pago;
-    }  // Verifique se esse método existe
+    }
 
     public Double getValorEvento() {
         return valorEvento;
@@ -80,12 +79,11 @@ public class Informacoes {
 
     public void setPago(String pago) {
         this.pago = pago;
-    }  // Certifique-se de ter esse setter
+    }
 
     public void setValorEvento(Double valorEvento) {
         this.valorEvento = valorEvento;
     }
-
 
     @Override
     public String toString() {

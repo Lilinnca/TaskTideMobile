@@ -26,17 +26,14 @@ public class PagamentoEvento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagamento_evento);
 
-        // Vincula os componentes da tela
         txtValorPagamento = findViewById(R.id.txtValorPagamento);
         radioGroupPagamento = findViewById(R.id.radioGroupPagamento);
         btnConfirmarPagamento = findViewById(R.id.btnConfirmarPagamento);
         progressBar = findViewById(R.id.progressBar);
 
-        // Recebe o valor do evento passado pela Intent
         valorEvento = getIntent().getDoubleExtra("valorEvento", 0.0);
         txtValorPagamento.setText("Valor: R$ " + valorEvento);
 
-        // Ação ao clicar no botão Confirmar Pagamento
         btnConfirmarPagamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +42,6 @@ public class PagamentoEvento extends AppCompatActivity {
         });
     }
 
-    // Simula o pagamento com um tempo de espera
     private void simularPagamento() {
         int selectedId = radioGroupPagamento.getCheckedRadioButtonId();
         RadioButton radioButtonSelecionado = findViewById(selectedId);
@@ -58,11 +54,9 @@ public class PagamentoEvento extends AppCompatActivity {
         String formaPagamento = radioButtonSelecionado.getText().toString();
         Toast.makeText(this, "Processando pagamento via " + formaPagamento, Toast.LENGTH_SHORT).show();
 
-        // Exibe a ProgressBar e desabilita o botão
         progressBar.setVisibility(View.VISIBLE);
         btnConfirmarPagamento.setEnabled(false);
 
-        // Simula um tempo de espera de 3 segundos
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -71,7 +65,6 @@ public class PagamentoEvento extends AppCompatActivity {
         }, 3000);
     }
 
-    // Confirma o pagamento e redireciona para a tela de "Meus Eventos"
     private void confirmarPagamento() {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, "Pagamento confirmado! Inscrição realizada.", Toast.LENGTH_LONG).show();

@@ -17,16 +17,14 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Obtém as preferências compartilhadas (SharedPreferences)
+
                 SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                String email = sharedPreferences.getString("email", "");  // Busca o valor do email
+                String email = sharedPreferences.getString("email", "");
 
                 Intent intent;
                 if (email.isEmpty()) {
-                    // Se não houver email salvo, redireciona para a tela de login
                     intent = new Intent(SplashActivity.this, Login.class);
                 } else {
-                    // Se houver email salvo, redireciona para a tela inicial
                     intent = new Intent(SplashActivity.this, TelaInicial.class);
                 }
 

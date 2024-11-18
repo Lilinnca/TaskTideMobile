@@ -23,37 +23,30 @@ public class EventoInfoTelaInicial extends AppCompatActivity {
 
     private TextView txtNomeEventoInfo, txtLocalEventoInfo, txtDataEventoInfo, txtDescricaoEventoInfo;
     private DAO dao;
-    private long usuarioId; // Variável para armazenar o ID do usuário
+    private long usuarioId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evento_info_tela_inicial);
 
-        // Inicializar as views
         txtNomeEventoInfo = findViewById(R.id.txtNomeEventoInfo);
         txtLocalEventoInfo = findViewById(R.id.txtLocalEventoInfo);
         txtDataEventoInfo = findViewById(R.id.txtDataEventoInfo);
         txtDescricaoEventoInfo = findViewById(R.id.txtDescricaoEventoInfo);
 
-        // Inicializar o DAO
         dao = new DAO(this);
 
-        // Recuperar o ID do evento passado pela Intent
         Intent intent = getIntent();
-        long eventoId = intent.getLongExtra("evento_id", -1); // Recuperar o ID do evento
+        long eventoId = intent.getLongExtra("evento_id", -1);
 
-        // Aqui você deve obter o ID do usuário, pode ser salvo em algum lugar ao fazer login
-        usuarioId = getUsuarioId(); // Supondo que você tenha uma maneira de pegar o ID do usuário logado
+        usuarioId = getUsuarioId();
 
-        // Buscar o evento do banco de dados
         Evento evento = dao.buscarEventoPorId(eventoId);
         if (evento != null) {
-            // Preencher os TextView com as informações do evento
             txtNomeEventoInfo.setText(evento.getNomeEvento());
             txtDescricaoEventoInfo.setText(evento.getDescricao());
 
-            // Informações sobre a data e o local
             String[] informacoes = dao.buscarInformacoesPorEvento(eventoId);
             txtDataEventoInfo.setText("De " + formatarData(informacoes[0]) + " até " + formatarData(informacoes[1]));
             txtLocalEventoInfo.setText(informacoes[2]);
@@ -61,65 +54,50 @@ public class EventoInfoTelaInicial extends AppCompatActivity {
     }
 
     public void inscreverInfoInicial(View view) {
-        // Desabilitar o botão para evitar múltiplos cliques
         view.setEnabled(false);
 
-        // Recuperar o ID do evento (já foi passado pela Intent)
         Intent intent = getIntent();
         long eventoId = intent.getLongExtra("evento_id", -1);
 
         if (eventoId != -1) {
-            // Verificar se o usuário já está inscrito no evento
             if (dao.verificarInscricao(usuarioId, eventoId)) {
-                // Usuário já está inscrito
                 Toast.makeText(this, "Você já está inscrito neste evento!", Toast.LENGTH_SHORT).show();
             } else {
-                // Se não estiver inscrito, realizar a inscrição
                 dao.inscreverNoEvento(usuarioId, eventoId);
                 Toast.makeText(this, "Inscrição realizada com sucesso!", Toast.LENGTH_SHORT).show();
             }
         } else {
-            // Caso o ID do evento não seja válido
             Toast.makeText(this, "Evento não encontrado!", Toast.LENGTH_SHORT).show();
         }
 
-        // Reabilitar o botão após um curto tempo (para evitar cliques subsequentes rapidamente)
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 view.setEnabled(true);
             }
-        }, 1000); // 1000ms = 1 segundo de espera
+        }, 1000);
     }
 
     private long getUsuarioId() {
-        // Obter o e-mail do usuário logado a partir do SharedPreferences
         String usuarioEmail = getEmailUsuario();
 
         if (usuarioEmail == null) {
-            // Caso o e-mail não esteja disponível (usuário não logado)
-            return -1; // ID inválido
+            return -1;
         }
 
-        // Buscar o usuário no banco de dados utilizando o e-mail
         Usuario usuario = dao.buscarUsuarioPorEmail(usuarioEmail);
 
         if (usuario != null) {
-            // Retorna o ID do usuário encontrado
             return usuario.getId();
         } else {
-            // Caso o usuário não seja encontrado
-            return -1; // ID inválido
+            return -1;
         }
     }
 
     private String getEmailUsuario() {
-        // Obter o e-mail do usuário logado a partir do SharedPreferences
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        return prefs.getString("email", null); // Retorna null caso o e-mail não esteja salvo
+        return prefs.getString("email", null);
     }
-
-
 
     private String formatarData(String data) {
         if (data == null || data.isEmpty()) {

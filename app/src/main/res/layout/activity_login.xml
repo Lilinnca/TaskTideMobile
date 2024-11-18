@@ -33,11 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="352dp"
         android:text="E-mail"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmailLogin"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailLogin"
         app:layout_constraintTop_toBottomOf="@+id/dividerLogin" />
 
@@ -46,11 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        android:layout_marginEnd="350dp"
         android:text="Senha"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextSenhaLogin"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextSenhaLogin"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin" />
 
@@ -63,7 +57,6 @@
         android:hint="campo de senha"
         android:inputType="textPassword"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/btnEntrarLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,14 +66,13 @@
         android:id="@+id/txtTituloLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="118dp"
         android:text="Bem-vindo(a) de volta!"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoLogin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtDescricaoLogin"
@@ -88,7 +80,6 @@
         android:layout_height="wrap_content"
         android:text="Trixxie sentiu sua falta!"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/dividerLogin"
         app:layout_constraintStart_toStartOf="@+id/txtTituloLogin"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloLogin" />
 
@@ -98,7 +89,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtEmailLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoLogin" />
@@ -110,7 +100,6 @@
         android:layout_marginTop="30dp"
         android:onClick="entrarLogin"
         android:text="Entrar"
-        app:layout_constraintBottom_toTopOf="@+id/btnEsqueciMinhaSenhaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,12 +123,10 @@
         android:id="@+id/btnEsqueciMinhaSenhaLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="396dp"
         android:backgroundTint="@color/white"
         android:onClick="esqueciSenha"
         android:text="Esqueci minha senha"
         android:textColor="@color/green"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +141,6 @@
         android:hint="digite seu email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/txtSenhaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

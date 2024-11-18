@@ -5,20 +5,16 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "cronograma")
 public class Cronograma {
-
     @PrimaryKey(autoGenerate = true)
-    private int id; // ID único para o cronograma (pode ser usado pelo Room)
-
+    private int id;
     private String data;
     private String horario;
     private String atividade;
     private String palestrante;
 
-    // Construtor padrão (necessário para o Room)
     public Cronograma() {
     }
 
-    // Construtor com parâmetros (útil para inicializar objetos com dados)
     public Cronograma(String data, String horario, String atividade, String palestrante) {
         this.data = data;
         this.horario = horario;
@@ -26,7 +22,6 @@ public class Cronograma {
         this.palestrante = palestrante;
     }
 
-    // Getters e setters
     public String getData() {
         return data;
     }
@@ -59,7 +54,6 @@ public class Cronograma {
         this.palestrante = palestrante;
     }
 
-    // Método toString para facilitar a depuração e visualização do objeto
     @Override
     public String toString() {
         return "Cronograma{" +

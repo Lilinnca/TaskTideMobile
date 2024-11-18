@@ -33,7 +33,6 @@ public class Configuracoes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes);
 
-        // Inicializa DAO e os componentes da UI
         dao = new DAO(this);
         editTextNome = findViewById(R.id.editTextNomeConfiguracoes);
         editTextEmail = findViewById(R.id.editTextEmailConfiguracoes);
@@ -92,11 +91,10 @@ public class Configuracoes extends AppCompatActivity {
             spnCargo.setSelection(position);
         }
 
-        // Carregar imagem de perfil
         if (fotoPerfilUri != null) {
             Glide.with(this).load(Uri.parse(fotoPerfilUri)).into(imgPerfil);
         } else {
-            imgPerfil.setImageResource(R.drawable.usuario_perfil); // Imagem padrão
+            imgPerfil.setImageResource(R.drawable.usuario_perfil);
         }
     }
 

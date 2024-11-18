@@ -11,8 +11,8 @@ public class Evento implements Serializable {
     private String modalidade;
     private String categoria;
     private String descricao;
-    private String bannerImagem; // Se você deseja usar o caminho ou nome da imagem
-    private Bitmap banner; // Armazena a imagem em si
+    private String bannerImagem;
+    private Bitmap banner;
     private String localEvento;
     private String dataEvento;
 

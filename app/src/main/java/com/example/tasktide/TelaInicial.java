@@ -1,8 +1,13 @@
 package com.example.tasktide;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -10,21 +15,26 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import androidx.appcompat.widget.SearchView;
-
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.app.NotificationCompat;
 
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Evento;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TelaInicial extends AppCompatActivity {
 
-    private LinearLayout eventosContainer;  // Container para os banners dos eventos.
+    private static final String CHANNEL_ID = "tasktide_channel_id";
+    private static final String CHANNEL_NAME = "TaskTide Notifications";
+    private LinearLayout eventosContainer;
     private DAO dao;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +42,16 @@ public class TelaInicial extends AppCompatActivity {
         setContentView(R.layout.activity_tela_inicial);
 
         try {
-            // Inicialização das variáveis
             eventosContainer = findViewById(R.id.eventosContainer);
             dao = new DAO(this);
+            bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-            // Carregar eventos inicialmente
+            createNotificationChannel();
+
+            sendNotification("Bem-vindo ao TaskTide", "Explore novos eventos e atividades!");
+
             carregarEventos();
 
-            // Configuração da barra de pesquisa
             SearchView searchView = findViewById(R.id.searchViewInicial);
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -49,18 +61,57 @@ public class TelaInicial extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    // Filtra os eventos conforme o texto digitado
                     filtrarEventos(newText);
                     return false;
                 }
             });
+
+
+            Intent intent = getIntent();
+            String eventoNome = intent.getStringExtra("EVENTO_NOME");
+
+            if (eventoNome != null) {
+                Evento novoEvento = new Evento();
+                novoEvento.setNomeEvento(eventoNome);
+                adicionarNovoEvento(novoEvento);
+            }
 
         } catch (Exception e) {
             Log.e("TelaInicial", "Erro ao inicializar TelaInicial", e);
         }
     }
 
-    // Carregar todos os eventos na tela
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            channel.setDescription("Canal de notificações para o TaskTide");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+    private void sendNotification(String title, String message) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.icone_tasktide_foreground)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.notify(1, builder.build());
+        }
+    }
+
+
     private void carregarEventos() {
         try {
             List<Evento> eventos = dao.getAllEventos();
@@ -73,19 +124,19 @@ public class TelaInicial extends AppCompatActivity {
         }
     }
 
-    // Adicionar novo evento ao container
+
     private void adicionarNovoEvento(Evento evento) {
         try {
             Log.d("TelaInicial", "Adicionando evento: " + evento.getNomeEvento());
 
-            // Criação do ImageButton para exibir o banner
+
             ImageButton imageButton = new ImageButton(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(170), dpToPx(110));
             params.setMargins(dpToPx(7), dpToPx(10), dpToPx(7), dpToPx(10));
             imageButton.setLayoutParams(params);
             imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-            // Carregar o banner do evento ou uma imagem padrão
+
             if (evento.getBanner() != null) {
                 imageButton.setImageBitmap(evento.getBanner());
             } else {
@@ -96,7 +147,7 @@ public class TelaInicial extends AppCompatActivity {
                         .into(imageButton);
             }
 
-            // Ao clicar no banner, exibir informações detalhadas do evento
+
             imageButton.setOnClickListener(v -> {
                 Evento eventoCompleto = dao.buscarEventoPorId(evento.getId());
                 if (eventoCompleto != null) {
@@ -110,7 +161,6 @@ public class TelaInicial extends AppCompatActivity {
                 }
             });
 
-            // Adicionar o ImageButton ao container de eventos
             eventosContainer.addView(imageButton);
 
         } catch (Exception e) {
@@ -118,10 +168,9 @@ public class TelaInicial extends AppCompatActivity {
         }
     }
 
-    // Filtrar eventos pelo nome
     private void filtrarEventos(String query) {
         String queryLowerCase = query.toLowerCase();
-        eventosContainer.removeAllViews();  // Limpar a tela antes de adicionar eventos filtrados
+        eventosContainer.removeAllViews();
 
         try {
             List<Evento> eventos = dao.getAllEventos();
@@ -141,51 +190,14 @@ public class TelaInicial extends AppCompatActivity {
         }
     }
 
-    public void abrirFiltros(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Filtrar Eventos");
-
-        String[] tiposDeEvento = getResources().getStringArray(R.array.tipos_evento);  // Pegando as categorias do arquivo string.xml
-        builder.setItems(tiposDeEvento, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String tipoSelecionado = tiposDeEvento[which];
-                filtrarEventosPorTipo(tipoSelecionado);
-            }
-        });
-
-        builder.setNegativeButton("Cancelar", null);
-        builder.create().show();
-    }
-
-    // Filtrar eventos por tipo
-    private void filtrarEventosPorTipo(String tipo) {
-        eventosContainer.removeAllViews();  // Limpar a tela antes de adicionar eventos filtrados
-
-        try {
-            List<Evento> eventos = dao.getAllEventos();
-            boolean algumEventoEncontrado = false;
-            for (Evento evento : eventos) {
-                if ("Todos".equals(tipo) || evento.getTipoEvento().equals(tipo)) {
-                    Log.d("TelaInicial", "Evento encontrado: " + evento.getNomeEvento());
-                    adicionarNovoEvento(evento);
-                    algumEventoEncontrado = true;
-                }
-            }
-            if (!algumEventoEncontrado) {
-                Log.d("TelaInicial", "Nenhum evento encontrado para o tipo: " + tipo);
-            }
-        } catch (Exception e) {
-            Log.e("TelaInicial", "Erro ao filtrar eventos por tipo", e);
-        }
-    }
-
-    // Converter DP para PX
     private int dpToPx(int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+        return (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                getResources().getDisplayMetrics()
+        );
     }
 
-    // Métodos de navegação
     public void telaperfil(View view) {
         startActivity(new Intent(this, MinhaConta.class));
     }
