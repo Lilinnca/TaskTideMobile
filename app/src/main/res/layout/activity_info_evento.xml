@@ -30,26 +30,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutInfoEvento" />
 
-    <TextView
-        android:id="@+id/txtDisponibilidadeInfoEvento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="Disponível"
-        android:textColor="#008000"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutInfoEvento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrecoInfoEvento" />
-
     <LinearLayout
         android:id="@+id/linearLayoutInfoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="4dp"
         android:orientation="horizontal"
         android:paddingStart="16dp"
@@ -58,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDisponibilidadeInfoEvento">
+        app:layout_constraintTop_toBottomOf="@+id/txtPrecoInfoEvento">
 
         <Button
             android:id="@+id/btnRemoverInfoEvento"
@@ -89,11 +74,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="13dp"
         android:padding="16dp"
-        android:text="1° Lote -  R$ 10,00 "
+        android:text=" Valor - R$ 10,00 "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDisponibilidadeInfoEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

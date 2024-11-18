@@ -2,11 +2,14 @@ package com.example.tasktide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +22,6 @@ public class MeusCertificados extends AppCompatActivity {
 
     private LinearLayout linearLayoutCertificados;
     private DAO dao;
-    private List<Certificado> certificados;
     private HorizontalScrollView certificadosContainer;
 
     @Override
@@ -27,40 +29,49 @@ public class MeusCertificados extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meus_certificados);
 
-        try {
-            certificadosContainer = findViewById(R.id.certificadosContainer);
-            dao = new DAO(this);
+        certificadosContainer = findViewById(R.id.certificadosContainer);
+        linearLayoutCertificados = findViewById(R.id.linearLayoutCertificados);
 
-            carregarCertificados();
+        dao = new DAO(this);
 
-        } catch (Exception e) {
-            Log.e("MeusCertificados", "Erro ao inicializar MeusCertificados", e);
-        }
+        carregarCertificados();
     }
 
     private void carregarCertificados() {
-        try {
-            List<Certificado> certificados = dao.getAllCertificados();
-            Log.d("MeusCertificados", "Certificados carregados: " + certificados.size());
-            for (Certificado certificado : certificados) {
-                adicionarNovoCertificado(certificado);
-            }
-        } catch (Exception e) {
-            Log.e("MeusCertificados", "Erro ao carregar certificados", e);
+        List<Certificado> certificados = dao.getAllCertificados();
+        linearLayoutCertificados.removeAllViews(); // Limpa quaisquer certificados antigos antes de carregar.
+
+        if (certificados == null || certificados.isEmpty()) {
+            Log.e("MeusCertificados", "Nenhum certificado encontrado.");
+            TextView noCertificadosText = new TextView(this);
+            noCertificadosText.setText("Nenhum certificado encontrado.");
+            linearLayoutCertificados.addView(noCertificadosText);
+            return;
         }
+
+        for (Certificado certificado : certificados) {
+            Log.d("MeusCertificados", "Certificado recuperado: " + certificado.getNomeCertificado());
+            adicionarNovoCertificado(certificado);
+        }
+
     }
 
     private void adicionarNovoCertificado(Certificado certificado) {
         try {
             Log.d("MeusCertificados", "Adicionando certificado: " + certificado.getNomeCertificado());
 
-            Button button = new Button(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(170), dpToPx(110));
-            params.setMargins(dpToPx(7), dpToPx(10), dpToPx(7), dpToPx(10));
-            button.setLayoutParams(params);
-            button.setText(certificado.getNomeCertificado());
+            ImageButton imageButton = new ImageButton(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    dpToPx(170),
+                    dpToPx(110)
+            );
+            params.setMargins(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
+            imageButton.setLayoutParams(params);
+            imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageButton.setImageResource(R.drawable.certificados_meuscertificados);
+            imageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
-            button.setOnClickListener(v -> {
+            imageButton.setOnClickListener(v -> {
                 Certificado certificadoCompleto = dao.buscarCertificadoPorId(certificado.getIdCertificado());
                 if (certificadoCompleto != null) {
                     Intent intent = new Intent(this, InfoCertificado.class);
@@ -73,7 +84,7 @@ public class MeusCertificados extends AppCompatActivity {
                 }
             });
 
-            certificadosContainer.addView(button);
+            linearLayoutCertificados.addView(imageButton);
 
         } catch (Exception e) {
             Log.e("MeusCertificados", "Erro ao adicionar certificado", e);
@@ -85,28 +96,23 @@ public class MeusCertificados extends AppCompatActivity {
         return Math.round(dp * density);
     }
 
-    public void adicionarCertificado(View view) {
-        Intent intent = new Intent(MeusCertificados.this, MeusCertificadosInseridos.class);
+    public void telainicial(View view) {
+        Intent intent = new Intent(MeusCertificados.this, TelaInicial.class);
         startActivity(intent);
     }
 
-    public void telainicial(View view) {
-        Intent in = new Intent(MeusCertificados.this, TelaInicial.class);
-        startActivity(in);
-    }
-
     public void telacriarevento(View view) {
-        Intent in = new Intent(MeusCertificados.this, CriarEvento.class);
-        startActivity(in);
+        Intent intent = new Intent(MeusCertificados.this, CriarEvento.class);
+        startActivity(intent);
     }
 
     public void telaperfil(View view) {
-        Intent in = new Intent(MeusCertificados.this, MinhaConta.class);
-        startActivity(in);
+        Intent intent = new Intent(MeusCertificados.this, MinhaConta.class);
+        startActivity(intent);
     }
 
     public void adicionarcertificado(View view) {
-        Intent in = new Intent(this, MeusCertificadosInseridos.class);
-        startActivity(in);
+        Intent intent = new Intent(this, MeusCertificadosInseridos.class);
+        startActivity(intent);
     }
 }

@@ -64,13 +64,13 @@ public class MeusCertificadosInseridos extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
-            File file = new File(uri.getPath());
-            selectedPdfPath = file.getName();
-            txtSelectedFile.setText(selectedPdfPath);
+            selectedPdfPath = uri.getPath();
+            txtSelectedFile.setText(selectedPdfPath != null ? selectedPdfPath : "Arquivo não identificado");
         }
     }
+
 
     private void insertCertificate() {
         String nomeCertificado = editTextNomeCertificado.getText().toString().trim();
@@ -91,6 +91,8 @@ public class MeusCertificadosInseridos extends Activity {
 
         ArrayList<Integer> certificados = new ArrayList<>();
 
+
+
         Intent intent = new Intent(this, MeusCertificados.class);
         intent.putIntegerArrayListExtra("certificados", certificados);
         startActivity(intent);
@@ -105,7 +107,7 @@ public class MeusCertificadosInseridos extends Activity {
         values.put("data_emissao", dataEmissao);
         values.put("horas_certificado", horasCertificado);
 
-        long resultado = db.insert("tabela_certificados", null, values);
+        long resultado = db.insert("Certificados", null, values);
         if (resultado != -1) {
             Log.i("DAO", "Certificado inserido com sucesso.");
         } else {
@@ -115,16 +117,38 @@ public class MeusCertificadosInseridos extends Activity {
     }
 
     private void savePdfName(String pdfName) {
-        SQLiteDatabase db = dao.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("nome_pdf", pdfName);
-
-        long resultado = db.insert("tabela_pdfs", null, values);
-        if (resultado != -1) {
-            Log.i("DAO", "PDF salvo com sucesso.");
-        } else {
-            Log.e("DAO", "Erro ao salvar o PDF.");
+        // Verifica se o nome do PDF não está vazio ou nulo
+        if (pdfName == null || pdfName.trim().isEmpty()) {
+            Log.e("DAO", "O nome do PDF está vazio ou nulo. Operação cancelada.");
+            return;
         }
-        db.close();
+
+        SQLiteDatabase db = null;
+
+        try {
+            // Obtém a instância do banco de dados para escrita
+            db = dao.getWritableDatabase();
+
+            // Prepara os valores para inserção
+            ContentValues values = new ContentValues();
+            values.put("nome_pdf", pdfName);
+
+            // Insere o registro no banco de dados
+            long resultado = db.insert("tabela_pdfs", null, values);
+
+            if (resultado != -1) {
+                Log.i("DAO", "PDF salvo com sucesso com ID: " + resultado);
+            } else {
+                Log.e("DAO", "Erro ao salvar o PDF.");
+            }
+        } catch (Exception e) {
+            Log.e("DAO", "Erro ao salvar o PDF: " + e.getMessage(), e);
+        } finally {
+            // Fecha o banco de dados, garantindo a liberação de recursos
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
     }
+
 }

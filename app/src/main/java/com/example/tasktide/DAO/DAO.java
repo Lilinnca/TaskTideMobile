@@ -14,6 +14,7 @@ import com.example.tasktide.Objetos.Certificado;
 import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
 import com.example.tasktide.Objetos.Participantes;
+import com.example.tasktide.Objetos.Pdf;
 import com.example.tasktide.Objetos.Usuario;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +27,7 @@ public class DAO extends SQLiteOpenHelper {
 
     private static final String TAG = "DAO";
     private static final String NOME_BANCO = "tasktide_db";
-    private static final int VERSAO_BANCO = 15;
+    private static final int VERSAO_BANCO = 17;
     public static final String TABELA_USUARIOS = "usuarios";
     public static final String TABELA_EVENTO = "evento";
     public static final String TABELA_INFORMACOES = "informacoes";
@@ -64,7 +65,18 @@ public class DAO extends SQLiteOpenHelper {
         createAtividadeTable(db);
         createInscricaoTable(db);
         createCertificadoTable(db);
+        createTablePdf(db);
+
+        Log.i("DAO", "Banco de dados criado com sucesso.");
     }
+    private void createTablePdf(SQLiteDatabase db) {
+        String createTablePdf = "CREATE TABLE IF NOT EXISTS tabela_pdfs (" +
+                "id_pdf INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "nome_pdf TEXT);";
+        db.execSQL(createTablePdf);
+        Log.i("DAO", "Tabela de PDF criada com sucesso.");
+    }
+
 
     private void createCertificadoTable(SQLiteDatabase db) {
         String createTableCertificado = "CREATE TABLE IF NOT EXISTS " + TABELA_CERTIFICADOS + " (" +
@@ -212,6 +224,30 @@ public class DAO extends SQLiteOpenHelper {
         return id;
     }
 
+    public List<Certificado> getAllCertificados() {
+        List<Certificado> certificados = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA_CERTIFICADOS, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Certificado certificado = new Certificado(
+                        cursor.getLong(cursor.getColumnIndexOrThrow("id_certificado")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("id_usuario")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("nome_certificado")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("tipo_certificado")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("data_emissao")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("horas_certificado"))
+                );
+                certificados.add(certificado);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return certificados;
+    }
+
     public ArrayList<Certificado> listarCertificados(int idUsuario) {
         ArrayList<Certificado> certificados = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -238,59 +274,29 @@ public class DAO extends SQLiteOpenHelper {
 
     public Certificado buscarCertificadoPorId(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Certificado certificado = null;
         Cursor cursor = null;
+        Certificado certificado = null; // Declarar a variável 'certificado' aqui
 
         try {
-            String query = "SELECT * FROM " + TABELA_CERTIFICADOS + " WHERE id = ?";
+            String query = "SELECT * FROM " + TABELA_CERTIFICADOS + " WHERE id_certificado = ?";
             cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
 
-            if (cursor != null && cursor.moveToFirst()) {
-                certificado = new Certificado();
-                certificado.setIdCertificado(cursor.getLong(cursor.getColumnIndexOrThrow("id")));
-                certificado.setIdUsuario(cursor.getInt(cursor.getColumnIndexOrThrow("id_usuario")));
-                certificado.setNomeCertificado(cursor.getString(cursor.getColumnIndexOrThrow("nome_certificado")));
-                certificado.setTipoCertificado(cursor.getString(cursor.getColumnIndexOrThrow("tipo_certificado")));
-                certificado.setDataEmissao(cursor.getString(cursor.getColumnIndexOrThrow("data_emissao")));
-                certificado.setHorasCertificado(cursor.getString(cursor.getColumnIndexOrThrow("horas_certificado")));
+            if (cursor.moveToFirst()) {
+                certificado = new Certificado(
+                        cursor.getLong(cursor.getColumnIndexOrThrow("id_certificado")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("id_usuario")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("nome_certificado")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("tipo_certificado")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("data_emissao")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("horas_certificado"))
+                );
             }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao buscar certificado com ID: " + id, e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            if (cursor != null) cursor.close();
         }
 
         return certificado;
     }
-
-    @SuppressLint("Range")
-    public List<Certificado> getAllCertificados() {
-        List<Certificado> certificados = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Log.i(TAG, "Verificando existência da tabela 'certificado'...");
-        if (isTableExists(db, TABELA_CERTIFICADOS)) {
-            Log.i(TAG, "Tabela 'certificado' existe. Realizando consulta.");
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELA_CERTIFICADOS, null);
-
-            if (cursor.moveToFirst()) {
-                do {
-                    Certificado certificado = new Certificado();
-                    certificado.setIdCertificado(cursor.getLong(cursor.getColumnIndex("id")));
-                    certificado.setNomeCertificado(cursor.getString(cursor.getColumnIndex("nome_certificado")));
-                    certificados.add(certificado);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } else {
-            Log.e(TAG, "A tabela 'certificado' não foi encontrada.");
-        }
-        db.close();
-        return certificados;
-    }
-
 
 
     public void deletarCertificados(long idCertificado) {
@@ -304,39 +310,24 @@ public class DAO extends SQLiteOpenHelper {
         db.close();
     }
 
-    @SuppressLint("Range")
-    public String[] buscarInformacoesPorEvento(long eventoId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] informacoes = new String[3];
 
-        String dataPrevistaPadrao = "12/12/2024";
-        String dataFimPadrao = "24/12/2024";
-        String localPadrao = "IFAM - CMC";
 
-        String query = "SELECT dataPrevista, dataFim, local FROM " + TABELA_INFORMACOES +
-                " WHERE id_evento = ?";
+    public void atualizarInformacoesEvento(long eventoId, String dataPrevista, String dataFim, String prazoInscricao, String local, boolean isPago, String valorEvento) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("dataPrevista", dataPrevista);
+        values.put("dataFim", dataFim);
+        values.put("prazoInscricao", prazoInscricao);
+        values.put("local", local);
+        values.put("isPago", isPago ? 1 : 0);
+        values.put("valorEvento", valorEvento);
 
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(eventoId)});
-
-        if (cursor != null && cursor.moveToFirst()) {
-            String dataPrevista = cursor.getString(cursor.getColumnIndex("dataPrevista"));
-            String dataFim = cursor.getString(cursor.getColumnIndex("dataFim"));
-            String local = cursor.getString(cursor.getColumnIndex("local"));
-
-            informacoes[0] = verificarDataValida(dataPrevista) ? formatarData(dataPrevista) : dataPrevistaPadrao;
-            informacoes[1] = verificarDataValida(dataFim) ? formatarData(dataFim) : dataFimPadrao;
-            informacoes[2] = (local != null && !local.trim().isEmpty()) ? local : localPadrao;
-
-            cursor.close();
+        int rowsUpdated = db.update("Eventos", values, "id = ?", new String[]{String.valueOf(eventoId)});
+        if (rowsUpdated > 0) {
+            Log.d("DAO", "Informações do evento atualizadas com sucesso.");
         } else {
-            informacoes[0] = dataPrevistaPadrao;
-            informacoes[1] = dataFimPadrao;
-            informacoes[2] = localPadrao;
-
-            Log.d("DAO", "Informações não encontradas. Usando valores padrão.");
+            Log.d("DAO", "Falha ao atualizar as informações do evento.");
         }
-
-        return informacoes;
     }
 
     private boolean verificarDataValida(String data) {
@@ -412,28 +403,46 @@ public class DAO extends SQLiteOpenHelper {
         return exists;
     }
 
-    public long inserirInformacoes(Informacoes informacoes, long idEvento) {
+    public void inserirInformacoes(Informacoes informacoes, long idEvento) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long id = -1;
-        try {
-            ContentValues values = new ContentValues();
-            values.put("id_evento", idEvento);
-            values.put("dataPrevista", informacoes.getDataPrevista());
-            values.put("dataFim", informacoes.getDataFim());
+        ContentValues values = new ContentValues();
+        values.put("dataPrevista", informacoes.getDataPrevista());
+        values.put("dataFim", informacoes.getDataFim());
+        values.put("prazo", informacoes.getPrazo());
+        values.put("local", informacoes.getLocal());
+        values.put("valorEvento", informacoes.getValorEvento());
+        values.put("pago", informacoes.getPago());
+        values.put("id_evento", idEvento);
+
+        // Só insere os horários se eles não estiverem vazios
+        if (!informacoes.getHorarioInicio().isEmpty()) {
             values.put("horarioInicio", informacoes.getHorarioInicio());
-            values.put("horarioFim", informacoes.getHorarioFim());
-            values.put("prazo", informacoes.getPrazo());
-            values.put("local", informacoes.getLocal());
-            values.put("valorEvento", informacoes.getValorEvento());
-            values.put("pago", informacoes.getPago());
-            id = db.insert(TABELA_INFORMACOES, null, values);
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao inserir informações: " + e.getMessage());
-        } finally {
-            db.close();
         }
-        return id;
+        if (!informacoes.getHorarioFim().isEmpty()) {
+            values.put("horarioFim", informacoes.getHorarioFim());
+        }
+
+        db.insert("informacoes", null, values);
+        db.close();
     }
+
+
+    public String[] buscarInformacoesPorEvento(long eventoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT dataPrevista, dataFim, local FROM informacoes WHERE id = ?", new String[]{String.valueOf(eventoId)});
+
+        if (cursor.moveToFirst()) {
+            String dataPrevista = cursor.getString(0);
+            String dataFim = cursor.getString(1);
+            String local = cursor.getString(2);
+            cursor.close();
+            return new String[]{dataPrevista, dataFim, local};
+        }
+        cursor.close();
+        return new String[]{"", "", ""}; // Valores padrão
+    }
+
+
 
     @Override
     public SQLiteDatabase getWritableDatabase() {

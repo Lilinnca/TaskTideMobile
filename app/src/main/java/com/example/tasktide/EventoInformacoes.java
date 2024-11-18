@@ -1,5 +1,6 @@
 package com.example.tasktide;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,12 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
+
+
 
 
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
+
 
 public class EventoInformacoes extends AppCompatActivity {
 
@@ -45,6 +51,7 @@ public class EventoInformacoes extends AppCompatActivity {
         editTextLocal = findViewById(R.id.editTextLocalInformacoes);
         editTextValorEvento = findViewById(R.id.editTextValorInformacoes);
 
+
         radioGroup = findViewById(R.id.radioGroup);
         rbtnSim = findViewById(R.id.rbtnSimInformacoes);
         rbtnNao = findViewById(R.id.rbtnNaoInformacoes);
@@ -52,6 +59,7 @@ public class EventoInformacoes extends AppCompatActivity {
         editTextDataPrevista.addTextChangedListener(new IncluirMascara(editTextDataPrevista));
         editTextDataFim.addTextChangedListener(new IncluirMascara(editTextDataFim));
         editTextPrazo.addTextChangedListener(new IncluirMascara(editTextPrazo));
+
 
         editTextHorarioInicio.addTextChangedListener(new HorarioTextWatcher(editTextHorarioInicio));
         editTextHorarioFim.addTextChangedListener(new HorarioTextWatcher(editTextHorarioFim));
@@ -66,6 +74,7 @@ public class EventoInformacoes extends AppCompatActivity {
             }
         });
 
+
         TextWatcher dateTextWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -74,6 +83,7 @@ public class EventoInformacoes extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 verificarDatas();
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {}
@@ -86,18 +96,22 @@ public class EventoInformacoes extends AppCompatActivity {
         Log.d(TAG, "ID do evento recebido: " + idEvento);
 
 
+
+
         findViewById(R.id.btnAvancarInformacoes).setOnClickListener(this::avancarInformacoes);
         findViewById(R.id.btnVoltarInformacoes).setOnClickListener(this::voltarInformacoes);
     }
 
+
     private void verificarDatas() {
-        String dataInicio = editTextDataPrevista.getText().toString();
+        String dataPrevista = editTextDataPrevista.getText().toString();
         String dataFim = editTextDataFim.getText().toString();
 
         TextView txtHorarioInicio = findViewById(R.id.txtHorarioInicio);
         TextView txtHorarioFim = findViewById(R.id.txtHorarioFim);
 
-        if (dataInicio.equals(dataFim)) {
+
+        if (dataPrevista.equals(dataFim)) {
             editTextHorarioInicio.setVisibility(View.VISIBLE);
             editTextHorarioFim.setVisibility(View.VISIBLE);
             txtHorarioInicio.setVisibility(View.VISIBLE);
@@ -113,11 +127,15 @@ public class EventoInformacoes extends AppCompatActivity {
     public void avancarInformacoes(View view) {
         String dataPrevis = editTextDataPrevista.getText().toString();
         String dataFim = editTextDataFim.getText().toString();
-        String horarioInicio = editTextHorarioInicio.getText().toString();
-        String horarioFim = editTextHorarioFim.getText().toString();
         String prazo = editTextPrazo.getText().toString();
         String local = editTextLocal.getText().toString();
         String valorEventoString = editTextValorEvento.getText().toString();
+        String horarioInicio = editTextHorarioInicio.getVisibility() == View.VISIBLE
+                ? editTextHorarioInicio.getText().toString()
+                : ""; // Deixa vazio se o campo não estiver visível
+        String horarioFim = editTextHorarioFim.getVisibility() == View.VISIBLE
+                ? editTextHorarioFim.getText().toString()
+                : ""; // Deixa vazio se o campo não estiver visível
 
         String pago = rbtnSim.isChecked() ? "Sim" : "Não";
 
@@ -141,6 +159,8 @@ public class EventoInformacoes extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 
     private void carregarInformacoesEvento() {
         Evento evento = dao.buscarEventoPorId(idEvento);
