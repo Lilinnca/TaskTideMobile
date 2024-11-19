@@ -51,7 +51,7 @@ public class DAO extends SQLiteOpenHelper {
                 "modalidade TEXT, " +
                 "categoria TEXT, " +
                 "descricao TEXT, " +
-                "banner_imagem TEXT, " +
+                "banner_imagem BLOB, " +
                 "local_evento TEXT, " +
                 "data_evento TEXT" +
                 ");";
@@ -567,21 +567,17 @@ public class DAO extends SQLiteOpenHelper {
         return success;
     }
 
-    public void deleteEvento(long idEvento) {
+    public void deleteEvento(long eventoId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        try {
-            int rowsDeleted = db.delete(TABELA_EVENTO, "id = ?", new String[]{String.valueOf(idEvento)});
-            if (rowsDeleted > 0) {
-                Log.i(TAG, "Evento deletado com sucesso.");
-            } else {
-                Log.w(TAG, "Nenhum evento encontrado com o id: " + idEvento);
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao deletar evento: " + e.getMessage());
-        } finally {
-            db.close();
+        int rowsDeleted = db.delete("TABELA_EVENTO", "id = ?", new String[]{String.valueOf(eventoId)});
+        if (rowsDeleted > 0) {
+            Log.d("DAO", "Evento deletado com sucesso.");
+        } else {
+            Log.d("DAO", "Erro ao deletar evento. ID não encontrado: " + eventoId);
         }
+        db.close();
     }
+
 
     @SuppressLint("Range")
     public List<Evento> getAllEventos() {
@@ -689,23 +685,13 @@ public class DAO extends SQLiteOpenHelper {
     }
 
     public void atualizarNomeEvento(long idEvento, String novoNome) {
-        if (novoNome == null || novoNome.trim().isEmpty()) {
-            Log.w(TAG, "Nome do evento não pode ser vazio ou nulo");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nome_evento", novoNome);
-
-        try {
-            db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar nome do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        values.put("nomeEvento", novoNome);
+        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
+        db.close();  // Fechar a conexão após a atualização
     }
+
 
     public void atualizarLocalEvento(long idEvento, String novoLocal) {
         if (novoLocal == null || novoLocal.trim().isEmpty()) {
@@ -1049,15 +1035,15 @@ public class DAO extends SQLiteOpenHelper {
         byte[] imagemBytes = null;
 
         try {
-            cursor = db.query(TABELA_EVENTO, new String[]{"bannerImagem"}, "id = ?",
+            cursor = db.query(TABELA_EVENTO, new String[]{"banner_imagem"}, "id = ?",
                     new String[]{String.valueOf(idEvento)}, null, null, null);
 
             if (cursor != null && cursor.moveToFirst()) {
-                int colunaIndex = cursor.getColumnIndex("bannerImagem");
+                int colunaIndex = cursor.getColumnIndex("banner_imagem");
                 if (colunaIndex != -1) {
                     imagemBytes = cursor.getBlob(colunaIndex);
                 } else {
-                    Log.w("EventoDAO", "Coluna 'bannerImagem' não encontrada.");
+                    Log.w("EventoDAO", "Coluna 'banner_imagem' não encontrada.");
                 }
             }
         } catch (Exception e) {

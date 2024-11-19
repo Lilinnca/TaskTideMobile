@@ -92,7 +92,7 @@ public class VisaoGeral extends AppCompatActivity {
 
 
         // Recuperar o ID do evento que foi passado pela Intent
-            long eventoId = getIntent().getLongExtra("eventoId", -1);
+            long eventoId = getIntent().getLongExtra("id_evento", -1);
 
             if (eventoId != -1) {
                 // Buscar o evento no banco de dados usando o eventoId

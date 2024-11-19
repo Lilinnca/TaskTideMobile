@@ -126,7 +126,7 @@
         android:backgroundTint="#A4D1CE"
         android:onClick="IrTelaParticipante"
         android:text="Participante"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tblSuperiorME" />
@@ -141,7 +141,7 @@
         android:backgroundTint="#338B85"
         android:onClick="IrTelaCriador"
         android:text="Criador"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnParticipante"
         app:layout_constraintEnd_toEndOf="parent"

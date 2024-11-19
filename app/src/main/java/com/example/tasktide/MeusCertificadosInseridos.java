@@ -111,11 +111,23 @@ public class MeusCertificadosInseridos extends Activity {
         // Validar se é no formato HH:mm
         if (horasCertificado.contains(":")) {
             String[] partes = horasCertificado.split(":");
-            try {
-                int horas = Integer.parseInt(partes[0]);
-                int minutos = Integer.parseInt(partes[1]);
-                horasInseridas = horas + (minutos / 60.0); // Conversão para decimal
-            } catch (NumberFormatException e) {
+            if (partes.length == 2) {
+                try {
+                    int horas = Integer.parseInt(partes[0]);
+                    int minutos = Integer.parseInt(partes[1]);
+
+                    // Validar intervalo de horas e minutos
+                    if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
+                        Toast.makeText(this, "Horas ou minutos fora do intervalo permitido", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    horasInseridas = horas + (minutos / 60.0); // Conversão para decimal
+                } catch (NumberFormatException e) {
+                    Toast.makeText(this, "Formato de horas inválido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            } else {
                 Toast.makeText(this, "Formato de horas inválido", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -147,7 +159,6 @@ public class MeusCertificadosInseridos extends Activity {
         startActivity(intent);
         finish();
     }
-
 
     private double calcularHorasComplementares(String selectedItem, double horasInseridas) {
         double maxHorasPermitidas;
@@ -184,29 +195,24 @@ public class MeusCertificadosInseridos extends Activity {
         return Math.min(horasInseridas, maxHorasPermitidas);
     }
 
-
-
-
-
     private void insertCertificateToDatabase(String nomeCertificado, String tipoCertificado, String dataEmissao, String horasCertificado) {
         SQLiteDatabase db = dao.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nome_certificado", nomeCertificado);
         values.put("tipo_certificado", tipoCertificado);
         values.put("data_emissao", dataEmissao);
-
-        // Armazenar horas no formato decimal
-        values.put("horas_certificado", horasCertificado);
+        values.put("horas_certificado", horasCertificado);  // Armazenar horas no formato decimal
 
         long resultado = db.insert("Certificados", null, values);
+
         if (resultado != -1) {
-            Log.i("DAO", "Certificado inserido com sucesso.");
+            Log.i("DAO", "Certificado inserido com sucesso. ID: " + resultado);
         } else {
             Log.e("DAO", "Erro ao inserir certificado.");
         }
+
         db.close();
     }
-
 
     private void savePdfName(String pdfName) {
         if (pdfName == null || pdfName.trim().isEmpty()) {
@@ -237,7 +243,6 @@ public class MeusCertificadosInseridos extends Activity {
         }
     }
 
-
     private String formatarData(String data) {
         if (data == null || data.isEmpty()) {
             return "Data inválida";
@@ -255,3 +260,4 @@ public class MeusCertificadosInseridos extends Activity {
         }
     }
 }
+
