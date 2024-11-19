@@ -65,12 +65,12 @@
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/white"
         android:contentDescription="Botao de ajuste"
+        android:onClick="filtrarPorCategoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/searchViewInicial"
         app:layout_constraintTop_toBottomOf="@+id/toolbarInicial"
-        app:srcCompat="@drawable/ajustamento"
-        android:onClick="abrirFiltros"/>
+        app:srcCompat="@drawable/ajustamento" />
 
     <!-- Menu inferior -->
     <androidx.appcompat.widget.Toolbar

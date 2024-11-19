@@ -59,10 +59,11 @@ public class TelaInicial extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    filtrarEventos(newText);
+                    filtrarEventos(newText);  // Chama a função de filtro com o texto atual
                     return false;
                 }
             });
+
 
 
             Intent intent = getIntent();
@@ -180,26 +181,74 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     private void filtrarEventos(String query) {
-        String queryLowerCase = query.toLowerCase();
-        eventosContainer.removeAllViews();
+        String queryLowerCase = query.toLowerCase();  // Converte o texto da pesquisa para minúsculo
+        eventosContainer.removeAllViews();  // Limpa os eventos exibidos para mostrar apenas os eventos filtrados
 
         try {
-            List<Evento> eventos = dao.getAllEventos();
-            boolean algumEventoEncontrado = false;
+            List<Evento> eventos = dao.getAllEventos();  // Obtém todos os eventos
+            boolean algumEventoEncontrado = false;  // Flag para verificar se algum evento foi encontrado
+
             for (Evento evento : eventos) {
+                // Verifica se o nome do evento contém o texto da pesquisa (ignora maiúsculas/minúsculas)
                 if (evento.getNomeEvento().toLowerCase().contains(queryLowerCase)) {
                     Log.d("TelaInicial", "Evento encontrado: " + evento.getNomeEvento());
-                    adicionarNovoEvento(evento);
+                    adicionarNovoEvento(evento);  // Adiciona o evento que corresponde à pesquisa
                     algumEventoEncontrado = true;
                 }
             }
+
             if (!algumEventoEncontrado) {
                 Log.d("TelaInicial", "Nenhum evento encontrado para a pesquisa");
             }
+
         } catch (Exception e) {
             Log.e("TelaInicial", "Erro ao filtrar eventos", e);
         }
     }
+
+    public void filtrarPorCategoria(View view) {
+        String categoria = (String) view.getTag(); // Obtém a tag associada ao botão
+        if (categoria != null) {
+            Log.d("TelaInicial", "Filtrando por categoria: " + categoria);
+            filtrarPorCategoria(categoria);  // Chama o método de lógica com a categoria
+        } else {
+            Log.e("TelaInicial", "Tag de categoria está nula!");
+            Toast.makeText(this, "Categoria inválida!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void filtrarPorCategoria(String categoria) {
+        eventosContainer.removeAllViews();  // Limpa a exibição para mostrar apenas os eventos filtrados
+
+        try {
+            List<Evento> eventos = dao.getAllEventos();
+            boolean algumEventoEncontrado = false;
+
+            for (Evento evento : eventos) {
+                if (evento.getCategoria().equals(categoria)) {
+                    Log.d("TelaInicial", "Evento encontrado: " + evento.getNomeEvento());
+                    adicionarNovoEvento(evento);  // Adiciona o evento que corresponde à categoria
+                    algumEventoEncontrado = true;
+                }
+            }
+
+            if (!algumEventoEncontrado) {
+                Log.d("TelaInicial", "Nenhum evento encontrado para a categoria: " + categoria);
+                Toast.makeText(this, "Nenhum evento encontrado para esta categoria.", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            Log.e("TelaInicial", "Erro ao filtrar eventos por categoria", e);
+            Toast.makeText(this, "Erro ao filtrar eventos.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
+
+
+
 
     private int dpToPx(int dp) {
         return (int) TypedValue.applyDimension(
