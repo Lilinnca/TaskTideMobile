@@ -139,4 +139,28 @@ public class EventoInfoTelaInicial extends AppCompatActivity {
         }
     }
 
+    public void inicialIE (View view){
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void localizacaoIE (View view){
+        Intent in = new Intent(this, Localizacao.class);
+        startActivity(in);
+    }
+
+    public void addEventoIE(View view){
+        Intent in = new Intent(this, CriarEvento.class);
+        startActivity(in);
+    }
+
+    public void meusEventosIE (View view){
+        Intent in = new Intent(this, MeusEventosParticipante.class);
+        startActivity(in);
+    }
+
+    public void perfilIE (View view){
+        Intent in = new Intent(this, MinhaConta.class);
+        startActivity(in);
+    }
 }

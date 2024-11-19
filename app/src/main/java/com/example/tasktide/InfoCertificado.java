@@ -57,6 +57,9 @@ public class InfoCertificado extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Certificado não encontrado", Toast.LENGTH_SHORT).show();
         }
+
+        txtQntdHorasCertificadoInfo.setText(formatarHorasExibicao(certificado.getHorasCertificado()));
+
     }
 
     private long getUsuarioId() {
@@ -85,8 +88,9 @@ public class InfoCertificado extends AppCompatActivity {
             return "Data inválida";
         }
         try {
-            SimpleDateFormat sdfEntrada = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             Date date = sdfEntrada.parse(data);
+
             SimpleDateFormat sdfSaida = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             return sdfSaida.format(date);
         } catch (Exception e) {
@@ -94,6 +98,7 @@ public class InfoCertificado extends AppCompatActivity {
             return "Data inválida";
         }
     }
+
 
     private String formatarHoras(String horasStr) {
         if (horasStr == null || horasStr.isEmpty()) {
@@ -115,4 +120,27 @@ public class InfoCertificado extends AppCompatActivity {
             return "Horas inválidas";
         }
     }
+
+    private String formatarHorasExibicao(String horasStr) {
+        if (horasStr == null || horasStr.isEmpty()) {
+            return "Horas inválidas";
+        }
+        try {
+            // Convertendo string decimal para número
+            double horasDecimais = Double.parseDouble(horasStr);
+            int horas = (int) horasDecimais; // Parte inteira (horas)
+            int minutos = (int) Math.round((horasDecimais - horas) * 60); // Parte decimal convertida em minutos
+
+            // Retornar formato amigável
+            if (minutos == 0) {
+                return horas + " horas";
+            } else {
+                return horas + " horas e " + minutos + " minutos";
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return "Horas inválidas";
+        }
+    }
+
 }

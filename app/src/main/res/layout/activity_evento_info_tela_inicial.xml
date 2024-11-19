@@ -8,103 +8,6 @@
     tools:context=".EventoInfoTelaInicial">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMenuInicial"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@color/green"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="343dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao tela inicial"
-        android:onClick="telainicial"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
-        app:srcCompat="@drawable/casa" />
-
-    <ImageButton
-        android:id="@+id/btnFavoritosInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao favoritos"
-        android:onClick="telafavoritos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNovoEventoInicial"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
-        app:srcCompat="@drawable/favoritos" />
-
-    <ImageButton
-        android:id="@+id/btnNovoEventoInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao adicionar evento"
-        android:onClick="telacriarevento"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
-        app:srcCompat="@drawable/mais" />
-
-    <ImageButton
-        android:id="@+id/btnMeusEventosInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="262dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao eventosmarcados"
-        android:onClick="telameuseventos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPerfilInicial"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
-        app:srcCompat="@drawable/calendario" />
-
-    <ImageButton
-        android:id="@+id/btnPerfilInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="344dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
-        android:contentDescription="botao perfil de usuario"
-        android:onClick="telaperfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
-        app:srcCompat="@drawable/perfil" />
-
-    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarInfoEvento"
         android:layout_width="match_parent"
         android:layout_height="78dp"
@@ -235,11 +138,12 @@
         android:id="@+id/btnVoltarInfoInicial"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginTop="736dp"
+        android:layout_marginBottom="20dp"
         android:contentDescription="voltar"
         android:onClick="voltarInfoInicial"
         app:icon="@drawable/voltar"
-        app:layout_constraintBottom_toTopOf="@+id/toolbarMenuInicial"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
@@ -264,4 +168,77 @@
         app:layout_constraintStart_toStartOf="@+id/txtVisaoInfoEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtVisaoInfoEvento"
         app:srcCompat="@drawable/banner_evento" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/green"
+        android:onClick="inicialIE"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/casa" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="99dp"
+        android:background="@color/green"
+        android:onClick="localizacaoIE"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@drawable/localizacao" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/green"
+        android:onClick="addEventoIE"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@drawable/mais" />
+
+    <ImageButton
+        android:id="@+id/imageButton12"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="99dp"
+        android:background="@color/green"
+        android:onClick="meusEventosIE"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="@drawable/calendario" />
+
+    <ImageButton
+        android:id="@+id/imageButton13"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/green"
+        android:onClick="perfilIE"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/perfil" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,6 +88,29 @@ public class VisaoGeral extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visao_geral);
 
+        dao = new DAO(this);
+
+
+        // Recuperar o ID do evento que foi passado pela Intent
+            long eventoId = getIntent().getLongExtra("eventoId", -1);
+
+            if (eventoId != -1) {
+                // Buscar o evento no banco de dados usando o eventoId
+                Evento evento = dao.buscarEventoPorId(eventoId); // Supondo que você tenha esse método na DAO
+
+                if (evento != null) {
+                    // Exibir as informações do evento
+                    // Exemplo: preencher a interface com os dados do evento
+                    TextView nomeEvento = findViewById(R.id.nomeEvento);
+                    nomeEvento.setText(evento.getNomeEvento());
+                    // Continue a preencher outros campos da interface com os dados do evento
+                } else {
+                    Toast.makeText(this, "Evento não encontrado", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "ID do evento inválido", Toast.LENGTH_SHORT).show();
+            }
+
 
         imgBanner = findViewById(R.id.imgBanner);
         ImageView btnMudarBanner = findViewById(R.id.imgbtnMudarBanner);

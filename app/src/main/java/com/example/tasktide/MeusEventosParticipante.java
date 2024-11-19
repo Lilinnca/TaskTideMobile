@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +20,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tasktide.DAO.DAO;
+import com.example.tasktide.Objetos.Atividade;
 import com.example.tasktide.Objetos.Evento;
 
 import java.util.List;
@@ -53,6 +55,23 @@ public class MeusEventosParticipante extends AppCompatActivity {
         verificarPermissaoBtnCriador();
     }
 
+    private void showConfirmDialog(long eventoId) {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar")
+                .setMessage("Você deseja ver mais informações sobre este evento?")
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    Intent intent = new Intent(MeusEventosParticipante.this, VisaoGeral.class);
+                    intent.putExtra("eventoId", eventoId);  // Passando o ID do evento
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
+
+
+
+
     private void verificarPermissaoBtnCriador() {
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String cargo = prefs.getString("cargo", "");
@@ -77,16 +96,15 @@ public class MeusEventosParticipante extends AppCompatActivity {
             View eventoView = inflater.inflate(R.layout.mostrar_evento_semana, eventosContainerSemana, false);
 
             Button btnInformacoes = eventoView.findViewById(R.id.btnInformacoes);
-            btnInformacoes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showConfirmDialog();
-                }
+            btnInformacoes.setOnClickListener(v -> {
+                // Passando o eventoId para o método showConfirmDialog
+                showConfirmDialog(evento.getId());  // Aqui você passa o ID do evento
             });
 
             eventosContainerSemana.addView(eventoView);
         }
     }
+
 
     private void EventosMes() {
         List<Evento> eventos = dao.getAllEventos();
@@ -100,26 +118,6 @@ public class MeusEventosParticipante extends AppCompatActivity {
         }
     }
 
-    private void showConfirmDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Confirmar")
-                .setMessage("Você deseja ver mais informações sobre este evento?")
-                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MeusEventosParticipante.this, VisaoGeral.class);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create()
-                .show();
-    }
 
     public void IrTelaCriador(View view) {
         Intent in = new Intent(this, MeusEventosCriador.class);

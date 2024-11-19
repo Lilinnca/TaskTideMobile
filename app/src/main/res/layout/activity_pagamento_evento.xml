@@ -35,12 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="287dp"
         android:text="Pagamento"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoPagamento"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPagamento" />
 
@@ -48,23 +45,17 @@
         android:id="@+id/txtDescricaoPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="20dp"
         android:text="Escolha como você deseja realizar o pagamento"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/dividerPagamento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTituloPagamento"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloPagamento" />
 
     <View
         android:id="@+id/dividerPagamento"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtValorPagamento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoPagamento" />
@@ -73,13 +64,10 @@
         android:id="@+id/txtValorPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="335dp"
+        android:layout_marginTop="30dp"
         android:text="Valor:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextValorPagamento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextValorPagamento"
         app:layout_constraintTop_toBottomOf="@+id/dividerPagamento" />
 
     <EditText
@@ -88,12 +76,10 @@
         android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginBottom="45dp"
         android:background="@color/gray"
         android:ems="10"
         android:inputType="text"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/txtFormaPagamento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtValorPagamento"
@@ -104,12 +90,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="239dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:text="Forma de pagamento:"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroupPagamento"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextValorPagamento" />
 

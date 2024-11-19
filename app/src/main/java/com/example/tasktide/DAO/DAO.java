@@ -224,6 +224,8 @@ public class DAO extends SQLiteOpenHelper {
         return id;
     }
 
+
+
     public List<Certificado> getAllCertificados() {
         List<Certificado> certificados = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -312,6 +314,7 @@ public class DAO extends SQLiteOpenHelper {
         }
         db.close();
     }
+
 
 
 
@@ -624,6 +627,7 @@ public class DAO extends SQLiteOpenHelper {
         db.insert("Inscricoes", null, values);
         Log.i(TAG, "Usuário " + idUsuario + " inscrito no evento " + idEvento + " com sucesso.");
     }
+
 
     @SuppressLint("Range")
     public List<Evento> getEventosInscritos(long idUsuario) {
@@ -948,7 +952,7 @@ public class DAO extends SQLiteOpenHelper {
     public Informacoes getInformacoesById(long idEvento) {
         Informacoes informacoes = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM informacoes WHERE evento_id = ?", new String[]{String.valueOf(idEvento)});
+        Cursor cursor = db.rawQuery("SELECT * FROM informacoes WHERE id_evento = ?", new String[]{String.valueOf(idEvento)});
 
         if (cursor.moveToFirst()) {
             informacoes = new Informacoes(
@@ -965,6 +969,37 @@ public class DAO extends SQLiteOpenHelper {
         cursor.close();
         return informacoes;
     }
+
+    public boolean isEventoPago(long eventoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean pago = false;
+
+        String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery(query, new String[]{String.valueOf(eventoId)});
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("Pago");
+                if (columnIndex != -1) { // Verifica se a coluna existe
+                    String pagoValue = cursor.getString(columnIndex);
+                    pago = "1".equals(pagoValue); // Assumindo que "1" significa pago
+                } else {
+                    Log.e("DAO", "Coluna 'Pago' não encontrada na tabela 'informacoes'.");
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DAO", "Erro ao verificar se o evento é pago", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return pago;
+    }
+
+
 
     public void atualizarDescricaoEvento(long idEvento, String novaDescricao) {
         if (novaDescricao == null || novaDescricao.trim().isEmpty()) {

@@ -34,7 +34,6 @@ public class TelaInicial extends AppCompatActivity {
     private static final String CHANNEL_NAME = "TaskTide Notifications";
     private LinearLayout eventosContainer;
     private DAO dao;
-    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class TelaInicial extends AppCompatActivity {
         try {
             eventosContainer = findViewById(R.id.eventosContainer);
             dao = new DAO(this);
-            bottomNavigationView = findViewById(R.id.bottom_navigation);
 
             createNotificationChannel();
 
@@ -151,15 +149,28 @@ public class TelaInicial extends AppCompatActivity {
             imageButton.setOnClickListener(v -> {
                 Evento eventoCompleto = dao.buscarEventoPorId(evento.getId());
                 if (eventoCompleto != null) {
-                    Intent intent = new Intent(this, EventoInfoTelaInicial.class);
-                    intent.putExtra("evento_id", eventoCompleto.getId());
-                    intent.putExtra("evento_nome", eventoCompleto.getNomeEvento());
-                    intent.putExtra("evento_local", eventoCompleto.getLocalEvento());
-                    intent.putExtra("evento_data", eventoCompleto.getDataEvento());
-                    intent.putExtra("evento_descricao", eventoCompleto.getDescricao());
-                    startActivity(intent);
+                    // Verifique se o evento está pago
+                    boolean isPago = dao.isEventoPago(eventoCompleto.getId());
+                    if (isPago) {
+                        // Navegar para a tela de pagamento
+                        Intent intent = new Intent(this, InfoEvento.class); // Tela de pagamento
+                        intent.putExtra("evento_id", eventoCompleto.getId());
+                        startActivity(intent);
+                    } else {
+                        // Navegar para a tela de informações do evento
+                        Intent intent = new Intent(this, EventoInfoTelaInicial.class);
+                        intent.putExtra("evento_id", eventoCompleto.getId());
+                        intent.putExtra("evento_nome", eventoCompleto.getNomeEvento());
+                        intent.putExtra("evento_local", eventoCompleto.getLocalEvento());
+                        intent.putExtra("evento_data", eventoCompleto.getDataEvento());
+                        intent.putExtra("evento_descricao", eventoCompleto.getDescricao());
+                        startActivity(intent);
+                    }
                 }
             });
+
+
+
 
             eventosContainer.addView(imageButton);
 

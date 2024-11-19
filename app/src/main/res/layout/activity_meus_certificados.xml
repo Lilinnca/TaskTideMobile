@@ -279,6 +279,7 @@
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/green"
+        android:contentDescription="botao meus eventos"
         android:onClick="meusEventosMC"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"

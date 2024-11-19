@@ -96,19 +96,29 @@ public class MeusCertificados extends AppCompatActivity {
         return Math.round(dp * density);
     }
 
-    public void telainicial(View view) {
+    public void inicialMC(View view) {
         Intent intent = new Intent(MeusCertificados.this, TelaInicial.class);
         startActivity(intent);
     }
 
-    public void telacriarevento(View view) {
-        Intent intent = new Intent(MeusCertificados.this, CriarEvento.class);
+    public void localizacaoMC(View view){
+        Intent in = new Intent(this, Localizacao.class);
+        startActivity(in);
+    }
+
+    public void addEventoMC(View view) {
+        Intent intent = new Intent(this, CriarEvento.class);
         startActivity(intent);
     }
 
-    public void telaperfil(View view) {
+    public void perfilMC(View view) {
         Intent intent = new Intent(MeusCertificados.this, MinhaConta.class);
         startActivity(intent);
+    }
+
+    public void meusEventosMC(View view){
+        Intent in = new Intent(this, MeusEventosParticipante.class);
+        startActivity(in);
     }
 
     public void adicionarcertificado(View view) {

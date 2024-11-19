@@ -7,24 +7,14 @@
     android:background="#FFFFFF"
     tools:context=".InfoEvento">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
-
     <Button
         android:id="@+id/btnComprarInfoEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="195dp"
         android:onClick="avancarpagamento"
         android:padding="16dp"
         android:text="COMPRAR INGRESSOS"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,12 +65,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:padding="16dp"
-        android:text=" Valor - R$ 10,00 "
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDataInfoEvento" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoEventoInfoP" />
 
     <ImageView
         android:id="@+id/imgEventoInfoEvento"
@@ -88,24 +77,20 @@
         android:layout_height="180dp"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="33dp"
-        android:layout_marginBottom="21dp"
         android:contentDescription="evento 1"
         android:onClick="informacaoevento"
-        app:layout_constraintBottom_toTopOf="@+id/txtNomeInfoEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtVisaoInfoEvento"
-        app:srcCompat="@drawable/capa_julieandthephantoms" />
+        app:srcCompat="@drawable/banner_evento" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarInfoEvento"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginBottom="40dp"
         android:background="@color/green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/txtVisaoInfoEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +101,6 @@
         android:layout_height="78dp"
         android:layout_marginStart="166dp"
         android:layout_marginEnd="167dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarInfoEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -127,12 +111,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="291dp"
-        android:layout_marginBottom="20dp"
         android:text="Visão Geral"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imgEventoInfoEvento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarInfoEvento" />
@@ -143,11 +126,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
         android:text="Nome do evento:"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/txtNomeEventoInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgEventoInfoEvento" />
 
@@ -156,12 +137,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
         android:text="Local:"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/txtLocalEventoInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeInfoEvento" />
 
@@ -170,12 +149,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
         android:text="Data:"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/txtDataEventoInfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLocalInfoEvento" />
 
@@ -184,51 +161,144 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="102dp"
-        android:text="IFAM - CMC/Aud. Alberto Furtado"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtLocalInfoEvento"
         app:layout_constraintStart_toEndOf="@+id/txtLocalInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeEventoInfo" />
+        app:layout_constraintTop_toTopOf="@+id/txtLocalInfoEvento" />
 
     <TextView
         android:id="@+id/txtDataEventoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="250dp"
-        android:text="01/08/2024"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtDataInfoEvento"
         app:layout_constraintStart_toEndOf="@+id/txtDataInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/txtLocalEventoInfo" />
+        app:layout_constraintTop_toTopOf="@+id/txtDataInfoEvento" />
 
     <TextView
         android:id="@+id/txtNomeEventoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="89dp"
-        android:text="Julie and the phantoms"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtNomeInfoEvento"
         app:layout_constraintStart_toEndOf="@+id/txtNomeInfoEvento"
-        app:layout_constraintTop_toBottomOf="@+id/imgEventoInfoEvento" />
+        app:layout_constraintTop_toTopOf="@+id/txtNomeInfoEvento" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton14"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/green"
+        android:contentDescription="inicial"
+        android:onClick="inicialInfoEvento"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/casa" />
+
+    <ImageButton
+        android:id="@+id/imageButton15"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="99dp"
+        android:background="@color/green"
+        android:contentDescription="localizacao"
+        android:onClick="localizacaoInfoEvento"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:srcCompat="@drawable/localizacao" />
+
+    <ImageButton
+        android:id="@+id/imageButton16"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/green"
+        android:contentDescription="criar evento"
+        android:onClick="addEventoInfoEvento"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:srcCompat="@drawable/mais" />
+
+    <ImageButton
+        android:id="@+id/imageButton17"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="99dp"
+        android:background="@color/green"
+        android:contentDescription="meus eventos"
+        android:onClick="meusEventosInfoEvento"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:srcCompat="@drawable/calendario" />
+
+    <ImageButton
+        android:id="@+id/imageButton18"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/green"
+        android:contentDescription="perfil"
+        android:onClick="perfilInfoEvento"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/perfil" />
+
+    <TextView
+        android:id="@+id/txtDescricaoInfoEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:text="Descrição:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDataInfoEvento" />
+
+    <TextView
+        android:id="@+id/txtDescricaoEventoInfoP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/txtDescricaoInfoEvento"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoInfoEvento" />
 
     <Button
         android:id="@+id/btnVoltarInfoEvento"
         android:layout_width="55dp"
         android:layout_height="60dp"
-        android:contentDescription="botao voltar"
+        android:contentDescription="voltar"
+        android:onClick="voltarInfoEvento"
         app:icon="@drawable/voltar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.98" />
+        app:layout_constraintVertical_bias="0.884" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
