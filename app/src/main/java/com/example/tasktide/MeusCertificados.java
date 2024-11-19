@@ -75,11 +75,11 @@ public class MeusCertificados extends AppCompatActivity {
                 Certificado certificadoCompleto = dao.buscarCertificadoPorId(certificado.getIdCertificado());
                 if (certificadoCompleto != null) {
                     Intent intent = new Intent(this, InfoCertificado.class);
-                    intent.putExtra("certificado_id", certificadoCompleto.getIdCertificado());
-                    intent.putExtra("certificado_nome", certificadoCompleto.getNomeCertificado());
-                    intent.putExtra("certificado_tipo", certificadoCompleto.getTipoCertificado());
-                    intent.putExtra("certificado_data", certificadoCompleto.getDataEmissao());
-                    intent.putExtra("certificado_horas", certificadoCompleto.getHorasCertificado());
+                    intent.putExtra("id_certificado", certificadoCompleto.getIdCertificado());
+                    intent.putExtra("nome_certificado", certificadoCompleto.getNomeCertificado());
+                    intent.putExtra("tipo_certificado", certificadoCompleto.getTipoCertificado());
+                    intent.putExtra("data_emissao", certificadoCompleto.getDataEmissao());
+                    intent.putExtra("horas_certificado", certificadoCompleto.getHorasCertificado());
                     startActivity(intent);
                 }
             });

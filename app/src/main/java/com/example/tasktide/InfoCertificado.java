@@ -1,13 +1,17 @@
 package com.example.tasktide;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Certificado;
 import com.example.tasktide.Objetos.Usuario;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -23,44 +27,43 @@ public class InfoCertificado extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_certificado);
 
-        // Inicializando os campos de texto
+        // Inicializando as TextViews
         txtNomeCertificadoInfo = findViewById(R.id.txtNomeCertificadoInfo);
         txtQntdHorasCertificadoInfo = findViewById(R.id.txtQntdHorasCertificadoInfo);
         txtTipoCertificadoInfo = findViewById(R.id.txtTipoCertificadoInfo);
         txtDataCertificadoInfo = findViewById(R.id.txtDataCertificadoInfo);
 
+        // Inicializando a instância do DAO para acessar o banco de dados
         dao = new DAO(this);
 
-        // Recuperando o ID do certificado via Intent
+        // Recebe o ID do certificado passado pela Intent
         Intent intent = getIntent();
         long idCertificado = intent.getLongExtra("id_certificado", -1);
 
-        if (idCertificado != -1) {
-            Certificado certificado = dao.buscarCertificadoPorId(idCertificado);
-            if (certificado != null) {
-                // Populando a interface com os dados do certificado
-                txtNomeCertificadoInfo.setText(certificado.getNomeCertificado());
-                txtQntdHorasCertificadoInfo.setText(formatarHoras(certificado.getHorasCertificado()));
-                txtTipoCertificadoInfo.setText(certificado.getTipoCertificado());
-                txtDataCertificadoInfo.setText(formatarData(certificado.getDataEmissao()));
-            } else {
-                // Caso o certificado não seja encontrado
-                txtNomeCertificadoInfo.setText("Certificado não encontrado");
-            }
-        } else {
-            txtNomeCertificadoInfo.setText("ID de certificado inválido");
+        // Caso o idCertificado não seja válido, não faz nada
+        if (idCertificado == -1) {
+            Toast.makeText(this, "Certificado não encontrado", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        // Busca o ID do usuário
-        usuarioId = getUsuarioId();
+        // Buscar o certificado no banco com o ID
+        Certificado certificado = dao.buscarCertificadoPorId(idCertificado);
+        if (certificado != null) {
+            // Preencher as TextViews com os dados do certificado
+            txtNomeCertificadoInfo.setText(certificado.getNomeCertificado());
+            txtQntdHorasCertificadoInfo.setText(formatarHoras(certificado.getHorasCertificado()));
+            txtTipoCertificadoInfo.setText(certificado.getTipoCertificado());
+            txtDataCertificadoInfo.setText(formatarData(certificado.getDataEmissao()));
+        } else {
+            Toast.makeText(this, "Certificado não encontrado", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    // Método para obter o ID do usuário, buscando pelo e-mail armazenado nos SharedPreferences
     private long getUsuarioId() {
         String usuarioEmail = getEmailUsuario();
 
         if (usuarioEmail == null) {
-            return -1; // Se não encontrar o e-mail, retorna -1
+            return -1;
         }
 
         Usuario usuario = dao.buscarUsuarioPorEmail(usuarioEmail);
@@ -68,17 +71,15 @@ public class InfoCertificado extends AppCompatActivity {
         if (usuario != null) {
             return usuario.getId();
         } else {
-            return -1; // Se não encontrar o usuário no banco, retorna -1
+            return -1;
         }
     }
 
-    // Método para recuperar o e-mail do usuário armazenado nos SharedPreferences
     private String getEmailUsuario() {
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        return prefs.getString("email", null); // Retorna o e-mail ou null se não encontrado
+        return prefs.getString("email", null);
     }
 
-    // Método para formatar a data de emissão do certificado
     private String formatarData(String data) {
         if (data == null || data.isEmpty()) {
             return "Data inválida";
@@ -94,12 +95,12 @@ public class InfoCertificado extends AppCompatActivity {
         }
     }
 
-    // Método para formatar as horas do certificado
     private String formatarHoras(String horasStr) {
         if (horasStr == null || horasStr.isEmpty()) {
             return "Horas inválidas";
         }
         try {
+            // Aqui assumimos que a string de horas segue o formato "HH:mm"
             String[] partes = horasStr.split(":");
             int horas = Integer.parseInt(partes[0]);
             int minutos = Integer.parseInt(partes[1]);

@@ -275,11 +275,13 @@ public class DAO extends SQLiteOpenHelper {
     public Certificado buscarCertificadoPorId(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
-        Certificado certificado = null; // Declarar a variável 'certificado' aqui
+        Certificado certificado = null;
 
         try {
             String query = "SELECT * FROM " + TABELA_CERTIFICADOS + " WHERE id_certificado = ?";
             cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+
+            Log.d("DAO", "Certificados encontrados: " + cursor.getCount()); // Verifique o número de registros encontrados
 
             if (cursor.moveToFirst()) {
                 certificado = new Certificado(
@@ -297,6 +299,7 @@ public class DAO extends SQLiteOpenHelper {
 
         return certificado;
     }
+
 
 
     public void deletarCertificados(long idCertificado) {
