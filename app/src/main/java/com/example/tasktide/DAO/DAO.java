@@ -19,6 +19,7 @@ import com.example.tasktide.Objetos.Usuario;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -420,7 +421,6 @@ public class DAO extends SQLiteOpenHelper {
         values.put("pago", informacoes.getPago());
         values.put("id_evento", idEvento);
 
-        // Só insere os horários se eles não estiverem vazios
         if (!informacoes.getHorarioInicio().isEmpty()) {
             values.put("horarioInicio", informacoes.getHorarioInicio());
         }
@@ -489,6 +489,98 @@ public class DAO extends SQLiteOpenHelper {
 
         return evento;
     }
+
+    @SuppressLint("Range")
+    public List<Evento> buscarEventosSemana() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Evento> eventos = new ArrayList<>();
+        try {
+            String dataHoje = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(dataHoje));
+            calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek()); // Início da semana
+            String inicioSemana = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+
+            calendar.add(Calendar.DATE, 6); // Fim da semana
+            String fimSemana = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+
+            // Busca os eventos entre o início e o fim da semana
+            String query = "SELECT * FROM Evento WHERE data_evento BETWEEN ? AND ?";
+            Cursor cursor = db.rawQuery(query, new String[]{inicioSemana, fimSemana});
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Evento evento = new Evento();
+                    evento.setId(cursor.getLong(cursor.getColumnIndex("id")));
+                    evento.setNomeEvento(cursor.getString(cursor.getColumnIndex("nomeEvento")));
+                    evento.setDataEvento(cursor.getString(cursor.getColumnIndex("dataEvento")));
+                    eventos.add(evento);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return eventos;
+    }
+
+
+    @SuppressLint("Range")
+    public List<Evento> buscarEventosMes() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Evento> eventosMes = new ArrayList<>();
+
+        try {
+            // Obtendo a data atual
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar calendar = Calendar.getInstance();
+            String dataHoje = sdf.format(calendar.getTime());
+
+            // Calculando o início e fim do mês
+            calendar.setTime(sdf.parse(dataHoje));
+            calendar.set(Calendar.DAY_OF_MONTH, 1); // Início do mês
+            String inicioMes = sdf.format(calendar.getTime());
+
+            calendar.add(Calendar.MONTH, 1); // Próximo mês
+            calendar.set(Calendar.DAY_OF_MONTH, 1); // Primeira data do próximo mês
+            calendar.add(Calendar.DATE, -1); // Voltando um dia para o último dia do mês
+            String fimMes = sdf.format(calendar.getTime());
+
+            // Query para buscar eventos dentro do intervalo do mês
+            String query = "SELECT * FROM Evento WHERE data_evento BETWEEN ? AND ?";
+            Cursor cursor = db.rawQuery(query, new String[]{inicioMes, fimMes});
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Evento evento = new Evento();
+                    evento.setId(cursor.getLong(cursor.getColumnIndex("id")));
+                    evento.setNomeEvento(cursor.getString(cursor.getColumnIndex("nomeEvento")));
+                    evento.setDataEvento(cursor.getString(cursor.getColumnIndex("dataEvento")));
+                    // Adicionar outros atributos do evento conforme necessário
+                    eventosMes.add(evento);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return eventosMes;
+    }
+
+
+    // Helper para criar um Evento a partir do cursor
+    private Evento criarEventoDoCursor(Cursor cursor) {
+        Evento evento = new Evento();
+        evento.setId(cursor.getLong(cursor.getColumnIndexOrThrow("id")));
+        evento.setNomeEvento(cursor.getString(cursor.getColumnIndexOrThrow("nome_evento")));
+        evento.setDescricao(cursor.getString(cursor.getColumnIndexOrThrow("descricao")));
+        evento.setDataEvento(cursor.getString(cursor.getColumnIndexOrThrow("data_evento")));
+        evento.setLocalEvento(cursor.getString(cursor.getColumnIndexOrThrow("local_evento")));
+        // Adicione mais campos se necessário
+        return evento;
+    }
+
 
 
     public List<Atividade> buscarAtividadesPorEvento(long idEvento) {
@@ -612,7 +704,7 @@ public class DAO extends SQLiteOpenHelper {
         }
 
         SQLiteDatabase db = this.getWritableDatabase();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String dataInscricao = sdf.format(new Date());
 
         ContentValues values = new ContentValues();
@@ -1084,10 +1176,6 @@ public class DAO extends SQLiteOpenHelper {
         }
         return null;
     }
-
-
-
-
 
     public long inserirAtividade(Atividade atividade) {
         SQLiteDatabase db = this.getWritableDatabase();

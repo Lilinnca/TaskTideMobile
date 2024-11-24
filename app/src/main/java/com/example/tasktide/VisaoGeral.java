@@ -30,7 +30,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -38,7 +37,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -67,6 +65,7 @@ import java.util.Locale;
 
 public class VisaoGeral extends AppCompatActivity {
 
+
     private static final int PICK_IMAGE_REQUEST_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
     private ImageView imgBanner;
@@ -77,7 +76,7 @@ public class VisaoGeral extends AppCompatActivity {
     private EditText txtMostraHoraDeTerminoEvento;
     private EditText txtMostraTipoDoEvento, edtxtMostraPrazoInscricao, txtMostraHorasComplementaresEvento, edtxtMostrarValorDoEvento;
     private ImageButton imgbtnEditarValorEvento, imgbtnEditarDescricao;
-    private TextView txtHoraDeInicioEvento, txtHoraDeTerminoEvento, txtValorDoEvento, txtDescricaoVG;
+    private TextView  txtHoraDeInicioEvento, txtHoraDeTerminoEvento, txtValorDoEvento,txtDescricaoVG;
     private ImageButton imgbtnAlterarNome, imgbtnAlterarLocal, imgbtnAlterarData, imgbtnAlterarHorarioInicio, imgbtnEditarHoraDeTermino, imgbtnEditarTipoEvento, imgButtonEditarPrazoIncricao;
     private DAO dao;
     private long idEvento;
@@ -87,29 +86,6 @@ public class VisaoGeral extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visao_geral);
-
-        dao = new DAO(this);
-
-
-        // Recuperar o ID do evento que foi passado pela Intent
-            long eventoId = getIntent().getLongExtra("id_evento", -1);
-
-            if (eventoId != -1) {
-                // Buscar o evento no banco de dados usando o eventoId
-                Evento evento = dao.buscarEventoPorId(eventoId); // Supondo que você tenha esse método na DAO
-
-                if (evento != null) {
-                    // Exibir as informações do evento
-                    // Exemplo: preencher a interface com os dados do evento
-                    TextView nomeEvento = findViewById(R.id.nomeEvento);
-                    nomeEvento.setText(evento.getNomeEvento());
-                    // Continue a preencher outros campos da interface com os dados do evento
-                } else {
-                    Toast.makeText(this, "Evento não encontrado", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, "ID do evento inválido", Toast.LENGTH_SHORT).show();
-            }
 
 
         imgBanner = findViewById(R.id.imgBanner);
@@ -147,7 +123,7 @@ public class VisaoGeral extends AppCompatActivity {
 
 
         SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
-        idEvento = prefs.getLong("EVENTO_ID", -1);
+        idEvento = prefs.getLong("id_evento", -1);
 
 
         if (idEvento != -1) {
@@ -166,7 +142,7 @@ public class VisaoGeral extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
 
-
+        //btnMudarBanner.setOnClickListener(v -> openImageChooser());
         btnMudarBanner.setOnClickListener(v -> showImageSizeWarningDialog());
 
 
@@ -176,7 +152,6 @@ public class VisaoGeral extends AppCompatActivity {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(VisaoGeral.this, v);
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -202,13 +177,11 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
-
         imgbtnCriarCronograma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
                 builder.setTitle("Criar Cronograma");
-
 
                 builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
@@ -235,38 +208,27 @@ public class VisaoGeral extends AppCompatActivity {
                         dialogView.findViewById(R.id.btnAdicionarAtividade).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 String horario = btnEscolherDataHorario.getText().toString();
-
 
                                 String nomeAtividade = edtNomeAtividade.getText().toString();
                                 String localAtividade = edtLocalAtividade.getText().toString();
                                 String responsavel = edtResponsavelAtividade.getText().toString();
                                 String data = "";
 
-
-
                                 if (nomeAtividade.isEmpty() || localAtividade.isEmpty() || responsavel.isEmpty() || horario.isEmpty()) {
                                     Toast.makeText(VisaoGeral.this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
                                 } else {
-
                                     dao.adicionarAtividade(idEvento, nomeAtividade, horario, responsavel, localAtividade, data);
-
-
 
                                     edtNomeAtividade.setText("");
                                     edtLocalAtividade.setText("");
                                     edtResponsavelAtividade.setText("");
                                     btnEscolherDataHorario.setText("Escolher Data e Horário");
 
-
-
                                     Toast.makeText(VisaoGeral.this, "Atividade adicionada com sucesso!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
-
 
                         Button btnCancelar = new Button(VisaoGeral.this);
                         btnCancelar.setText("Cancelar");
@@ -276,8 +238,6 @@ public class VisaoGeral extends AppCompatActivity {
                                 dialogAtividades.dismiss();
                             }
                         });
-
-
 
                         ((LinearLayout) dialogView).addView(btnCancelar);
                         dialogAtividades.show();
@@ -292,13 +252,10 @@ public class VisaoGeral extends AppCompatActivity {
                     }
                 });
 
-
-
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
         });
-
 
         imgbtnAlterarNome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,14 +264,12 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
-
         imgbtnAlterarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(txtMostraLocalDoEvento);
             }
         });
-
 
         imgbtnAlterarData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,14 +278,12 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
-
         imgbtnAlterarHorarioInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(txtMostraHoraDeInicioEvento);
             }
         });
-
 
         imgbtnEditarHoraDeTermino.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,14 +292,12 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
-
         imgButtonEditarPrazoIncricao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(edtxtMostraPrazoInscricao);
             }
         });
-
 
         imgbtnEditarValorEvento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -355,7 +306,6 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
-
         imgbtnEditarDescricao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -363,20 +313,15 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
-
         imgbtnEditarTipoEvento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
                 builder.setTitle("Escolha o Tipo de Evento");
-
-
 
                 String[] tiposDeEvento = {"Atividade cultural", "Atividade esportiva", "Colóquio",
                         "Conferência", "Congresso", "Encontro", "Fórum",
                         "Mesa-redonda", "Palestra", "Seminário", "Visita técnica", "Workshop"};
-
 
                 builder.setItems(tiposDeEvento, new DialogInterface.OnClickListener() {
                     @Override
@@ -384,21 +329,14 @@ public class VisaoGeral extends AppCompatActivity {
                         String novoTipoEvento = tiposDeEvento[which];
                         txtMostraTipoDoEvento.setText(novoTipoEvento);
 
-
-
                         String novasHorasComplementares = calcularHorasComplementares(novoTipoEvento);
                         txtMostraHorasComplementaresEvento.setText(novasHorasComplementares);
 
-
-
                         atualizarTipoEhorasNoBanco(novoTipoEvento, novasHorasComplementares);
-
 
                         Toast.makeText(VisaoGeral.this, "Tipo do evento atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
                 builder.show();
             }
         });
@@ -407,7 +345,6 @@ public class VisaoGeral extends AppCompatActivity {
     private void atualizarTipoEhorasNoBanco(String tipoEvento, String horasComplementares) {
         if (idEvento != -1) {
             dao = new DAO(this);
-
 
             dao.atualizarEventoTipoEhoras(idEvento, tipoEvento, horasComplementares);
         }
@@ -438,30 +375,25 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
-
     private void escolherDataEHoras(Button btnEscolherDataHorario) {
-
         Locale locale = new Locale("pt", "BR");
         Locale.setDefault(locale);
-
-
 
         Calendar calendario = Calendar.getInstance();
         int ano = calendario.get(Calendar.YEAR);
         int mes = calendario.get(Calendar.MONTH);
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(VisaoGeral.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int anoEscolhido, int mesEscolhido, int diaEscolhido) {
-
+                //agora mostra o TimePickerDialog para escolher o horário
                 TimePickerDialog timePickerDialog = new TimePickerDialog(VisaoGeral.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int horaEscolhida, int minutoEscolhido) {
-
+                        // Data e horário foram escolhidos
                         String dataHorarioEscolhido = String.format("%02d/%02d/%d - %02d:%02d", diaEscolhido, mesEscolhido + 1, anoEscolhido, horaEscolhida, minutoEscolhido);
-                        btnEscolherDataHorario.setText(dataHorarioEscolhido);
+                        btnEscolherDataHorario.setText(dataHorarioEscolhido); // Exibe a data e o horário no botão
                     }
                 }, calendario.get(Calendar.HOUR_OF_DAY), calendario.get(Calendar.MINUTE), true);
                 timePickerDialog.show();
@@ -470,29 +402,19 @@ public class VisaoGeral extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-
     private void visualizarCronograma() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
         builder.setTitle("Cronograma");
-
-
 
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.tabela, null);
         TableLayout tableLayout = dialogView.findViewById(R.id.tableLayoutCronograma);
 
-
-
         List<Atividade> atividades = dao.buscarAtividadesPorEvento(idEvento);
-
-
 
         for (Atividade atividade : atividades) {
             TableRow row = new TableRow(VisaoGeral.this);
             row.setPadding(8, 8, 8, 8);
-
-
 
             TextView txtTimestamp = new TextView(VisaoGeral.this);
             String timestamp = atividade.getData() + " - " + atividade.getHorario();
@@ -501,14 +423,11 @@ public class VisaoGeral extends AppCompatActivity {
             txtTimestamp.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
             row.addView(txtTimestamp);
 
-
-
             TextView txtNomeAtividade = new TextView(VisaoGeral.this);
             txtNomeAtividade.setText(atividade.getNomeAtividade());
             txtNomeAtividade.setPadding(12, 12, 12, 12);
             txtNomeAtividade.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
             row.addView(txtNomeAtividade);
-
 
             TextView txtPalestrante = new TextView(VisaoGeral.this);
             txtPalestrante.setText(atividade.getPalestrante());
@@ -516,18 +435,14 @@ public class VisaoGeral extends AppCompatActivity {
             txtPalestrante.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
             row.addView(txtPalestrante);
 
-
             TextView txtLocal = new TextView(VisaoGeral.this);
             txtLocal.setText(atividade.getLocalAtividade());
             txtLocal.setPadding(12, 12, 12, 12);
-            txtLocal.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
+            txtLocal.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1)); // Define peso para responsividade
             row.addView(txtLocal);
-
-
 
             tableLayout.addView(row);
         }
-
 
         builder.setView(dialogView);
         builder.setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
@@ -536,29 +451,21 @@ public class VisaoGeral extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
-
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 
     private void habilitarEdicao(final EditText editText) {
         editText.setEnabled(true);
         editText.requestFocus();
 
-
-
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
                 if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                     salvarDados(editText);
                     editText.setEnabled(false);
-
+                    // Esconde o teclado
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
                     return true;
@@ -566,7 +473,6 @@ public class VisaoGeral extends AppCompatActivity {
                 return false;
             }
         });
-
 
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -579,11 +485,8 @@ public class VisaoGeral extends AppCompatActivity {
         });
     }
 
-
-
     private void salvarDados(EditText editText) {
         String novoTexto = editText.getText().toString().trim();
-
 
         if (editText.getId() == R.id.txtMostraNomeDoEvento) {
             dao.atualizarNomeEvento(idEvento, novoTexto);
@@ -601,29 +504,23 @@ public class VisaoGeral extends AppCompatActivity {
             dao.atualizarPrazoEvento(idEvento, novoTexto);
         } else if (editText.getId() == R.id.edtxtMostrarValorDoEvento) {
             dao.atualizarValorEvento(idEvento, novoTexto);
-        } else if (editText.getId() == R.id.edtxtMostraDescricao) {
+        }else if (editText.getId() == R.id.edtxtMostraDescricao) {
             dao.atualizarDescricaoEvento(idEvento, novoTexto);
         }
 
-
         Log.d("VisaoGeral", "Dados salvos: " + novoTexto);
     }
-
     private void configurarCamposDeHora(long idEvento) {
         Informacoes informacoes = dao.getInformacoesById(idEvento);
-
 
         if (informacoes != null) {
             String horaInicio = informacoes.getHorarioInicio();
             String horarioFim = informacoes.getHorarioFim();
 
-
-
             if (horaInicio != null && !horaInicio.isEmpty()) {
                 txtHoraDeInicioEvento.setVisibility(View.VISIBLE);
                 txtMostraHoraDeInicioEvento.setVisibility(View.VISIBLE);
                 txtMostraHoraDeInicioEvento.setText(horaInicio);
-
                 ImageButton imgbtnAlterarHorarioInicio = findViewById(R.id.imgbtnAlterarHorarioInicio);
                 imgbtnAlterarHorarioInicio.setVisibility(View.VISIBLE);
             } else {
@@ -631,12 +528,11 @@ public class VisaoGeral extends AppCompatActivity {
                 txtMostraHoraDeInicioEvento.setVisibility(View.GONE);
             }
 
-
             if (horarioFim != null && !horarioFim.isEmpty()) {
                 txtHoraDeTerminoEvento.setVisibility(View.VISIBLE);
                 txtMostraHoraDeTerminoEvento.setVisibility(View.VISIBLE);
                 txtMostraHoraDeTerminoEvento.setText(horarioFim);
-
+                // Tornar visível o botão de editar horário de término
                 ImageButton imgbtnEditarHoraDeTermino = findViewById(R.id.imgbtnEditarHoraDeTermino);
                 imgbtnEditarHoraDeTermino.setVisibility(View.VISIBLE);
             } else {
@@ -650,20 +546,15 @@ public class VisaoGeral extends AppCompatActivity {
     private void configurarDescricaoDoEvento(long idEvento) {
         String descricao = dao.obterDescricaoEvento(idEvento);
 
-
         EditText edtxtMostraDescricao = findViewById(R.id.edtxtMostraDescricao);
         ImageButton imgbtnEditarDescricao = findViewById(R.id.imgbtnEditarDescricao);
         TextView txtDescricaoVG = findViewById(R.id.txtDescricaoVG);
 
-
         if (descricao != null && !descricao.isEmpty()) {
-
             edtxtMostraDescricao.setText(descricao);
             edtxtMostraDescricao.setVisibility(View.VISIBLE);
             imgbtnEditarDescricao.setVisibility(View.VISIBLE);
             txtDescricaoVG.setVisibility(View.VISIBLE);
-
-
 
             edtxtMostraDescricao.setMinLines(1);
             edtxtMostraDescricao.setMaxLines(10);
@@ -674,7 +565,6 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
-
     private void configurarCamposValor(Double valorEvento) {
         if (valorEvento != null && valorEvento > 0) {
             txtValorDoEvento.setVisibility(View.VISIBLE);
@@ -682,13 +572,11 @@ public class VisaoGeral extends AppCompatActivity {
             imgbtnEditarValorEvento.setVisibility(View.VISIBLE);
             edtxtMostrarValorDoEvento.setText(String.format("%.2f", valorEvento));
         } else {
-
             txtValorDoEvento.setVisibility(View.GONE);
             edtxtMostrarValorDoEvento.setVisibility(View.GONE);
             imgbtnEditarValorEvento.setVisibility(View.GONE);
         }
     }
-
 
     private void limparIdEvento() {
         SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
@@ -699,12 +587,11 @@ public class VisaoGeral extends AppCompatActivity {
 
 
     private void seInscrever() {
-
     }
 
 
     private void preencherCamposComDadosDoEvento(long idEvento) {
-        Evento evento = dao.getEventoById((int) idEvento);
+        Evento evento = dao.getEventoById((int)idEvento);
         Informacoes informacoes = dao.getInformacoesById(idEvento);
 
 
@@ -712,7 +599,6 @@ public class VisaoGeral extends AppCompatActivity {
             txtMostraNomeDoEvento.setText(evento.getNomeEvento());
             txtMostraTipoDoEvento.setText(evento.getTipoEvento());
             txtMostraHorasComplementaresEvento.setText(evento.getHorasComplementares());
-
 
             edtxtMostraDescricao.setText(evento.getDescricao());
             edtxtMostraDescricao.setEnabled(true);
@@ -740,7 +626,6 @@ public class VisaoGeral extends AppCompatActivity {
                 txtMostraHoraDeInicioEvento.setVisibility(View.GONE);
             }
 
-
             if (informacoes.getHorarioFim() != null && !informacoes.getHorarioFim().isEmpty()) {
                 txtHoraDeTerminoEvento.setVisibility(View.VISIBLE);
                 txtMostraHoraDeTerminoEvento.setVisibility(View.VISIBLE);
@@ -750,16 +635,13 @@ public class VisaoGeral extends AppCompatActivity {
                 txtMostraHoraDeTerminoEvento.setVisibility(View.GONE);
             }
 
-
             double valorEvento = informacoes.getValorEvento();
             edtxtMostrarValorDoEvento.setText(String.format("%.2f", valorEvento));
             edtxtMostraPrazoInscricao.setText(informacoes.getPrazo());
 
-
             configurarCamposValor(valorEvento);
         }
     }
-
 
     private void showImageSizeWarningDialog() {
         new AlertDialog.Builder(this)
@@ -770,13 +652,11 @@ public class VisaoGeral extends AppCompatActivity {
                 .show();
     }
 
-
     private void openImageChooser() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -786,9 +666,9 @@ public class VisaoGeral extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
             try {
-
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 imgBanner.setImageBitmap(bitmap);
+
 
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
@@ -803,6 +683,4 @@ public class VisaoGeral extends AppCompatActivity {
             }
         }
     }
-
-
 }

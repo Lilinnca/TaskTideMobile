@@ -59,12 +59,10 @@ public class TelaInicial extends AppCompatActivity {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    filtrarEventos(newText);  // Chama a função de filtro com o texto atual
+                    filtrarEventos(newText);
                     return false;
                 }
             });
-
-
 
             Intent intent = getIntent();
             String eventoNome = intent.getStringExtra("EVENTO_NOME");
@@ -150,15 +148,12 @@ public class TelaInicial extends AppCompatActivity {
             imageButton.setOnClickListener(v -> {
                 Evento eventoCompleto = dao.buscarEventoPorId(evento.getId());
                 if (eventoCompleto != null) {
-                    // Verifique se o evento está pago
                     boolean isPago = dao.isEventoPago(eventoCompleto.getId());
                     if (isPago) {
-                        // Navegar para a tela de pagamento
                         Intent intent = new Intent(this, InfoEvento.class); // Tela de pagamento
                         intent.putExtra("evento_id", eventoCompleto.getId());
                         startActivity(intent);
                     } else {
-                        // Navegar para a tela de informações do evento
                         Intent intent = new Intent(this, EventoInfoTelaInicial.class);
                         intent.putExtra("evento_id", eventoCompleto.getId());
                         intent.putExtra("evento_nome", eventoCompleto.getNomeEvento());
@@ -170,9 +165,6 @@ public class TelaInicial extends AppCompatActivity {
                 }
             });
 
-
-
-
             eventosContainer.addView(imageButton);
 
         } catch (Exception e) {
@@ -181,18 +173,17 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     private void filtrarEventos(String query) {
-        String queryLowerCase = query.toLowerCase();  // Converte o texto da pesquisa para minúsculo
-        eventosContainer.removeAllViews();  // Limpa os eventos exibidos para mostrar apenas os eventos filtrados
+        String queryLowerCase = query.toLowerCase();
+        eventosContainer.removeAllViews();
 
         try {
-            List<Evento> eventos = dao.getAllEventos();  // Obtém todos os eventos
-            boolean algumEventoEncontrado = false;  // Flag para verificar se algum evento foi encontrado
+            List<Evento> eventos = dao.getAllEventos();
+            boolean algumEventoEncontrado = false;
 
             for (Evento evento : eventos) {
-                // Verifica se o nome do evento contém o texto da pesquisa (ignora maiúsculas/minúsculas)
                 if (evento.getNomeEvento().toLowerCase().contains(queryLowerCase)) {
                     Log.d("TelaInicial", "Evento encontrado: " + evento.getNomeEvento());
-                    adicionarNovoEvento(evento);  // Adiciona o evento que corresponde à pesquisa
+                    adicionarNovoEvento(evento);
                     algumEventoEncontrado = true;
                 }
             }
@@ -207,10 +198,10 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     public void filtrarPorCategoria(View view) {
-        String categoria = (String) view.getTag(); // Obtém a tag associada ao botão
+        String categoria = (String) view.getTag();
         if (categoria != null) {
             Log.d("TelaInicial", "Filtrando por categoria: " + categoria);
-            filtrarPorCategoria(categoria);  // Chama o método de lógica com a categoria
+            filtrarPorCategoria(categoria);
         } else {
             Log.e("TelaInicial", "Tag de categoria está nula!");
             Toast.makeText(this, "Categoria inválida!", Toast.LENGTH_SHORT).show();
@@ -218,7 +209,7 @@ public class TelaInicial extends AppCompatActivity {
     }
 
     private void filtrarPorCategoria(String categoria) {
-        eventosContainer.removeAllViews();  // Limpa a exibição para mostrar apenas os eventos filtrados
+        eventosContainer.removeAllViews();
 
         try {
             List<Evento> eventos = dao.getAllEventos();
@@ -227,7 +218,7 @@ public class TelaInicial extends AppCompatActivity {
             for (Evento evento : eventos) {
                 if (evento.getCategoria().equals(categoria)) {
                     Log.d("TelaInicial", "Evento encontrado: " + evento.getNomeEvento());
-                    adicionarNovoEvento(evento);  // Adiciona o evento que corresponde à categoria
+                    adicionarNovoEvento(evento);
                     algumEventoEncontrado = true;
                 }
             }

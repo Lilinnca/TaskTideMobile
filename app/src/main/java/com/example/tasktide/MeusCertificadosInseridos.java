@@ -1,8 +1,10 @@
 package com.example.tasktide;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -152,6 +154,9 @@ public class MeusCertificadosInseridos extends Activity {
         // Exibe uma mensagem de sucesso
         Toast.makeText(this, "Certificado inserido com sucesso!", Toast.LENGTH_SHORT).show();
 
+        // Atualiza as horas totais
+        atualizarHorasTotais();
+
         // Volta para a tela de Meus Certificados
         ArrayList<Integer> certificados = new ArrayList<>();
         Intent intent = new Intent(this, MeusCertificados.class);
@@ -159,6 +164,7 @@ public class MeusCertificadosInseridos extends Activity {
         startActivity(intent);
         finish();
     }
+
 
     private double calcularHorasComplementares(String selectedItem, double horasInseridas) {
         double maxHorasPermitidas;
@@ -242,6 +248,38 @@ public class MeusCertificadosInseridos extends Activity {
             }
         }
     }
+
+    private double calcularHorasTotais() {
+        double totalHoras = 0.0;
+        SQLiteDatabase db = dao.getReadableDatabase();
+
+        // Seleciona todas as horas dos certificados
+        String query = "SELECT horas_certificado FROM Certificados";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Recupera as horas de cada certificado
+                @SuppressLint("Range") String horas = cursor.getString(cursor.getColumnIndex("horas_certificado"));
+                try {
+                    totalHoras += Double.parseDouble(horas);
+                } catch (NumberFormatException e) {
+                    Log.e("DAO", "Erro ao parsear horas: " + e.getMessage());
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return totalHoras;
+    }
+
+    private void atualizarHorasTotais() {
+        double horasTotais = calcularHorasTotais();  // Chama o método que calcula as horas totais
+        TextView txtHoras = findViewById(R.id.txtHoras);
+        txtHoras.setText(String.format(Locale.getDefault(), "%.2f horas totais", horasTotais));  // Formata o texto
+    }
+
 
     private String formatarData(String data) {
         if (data == null || data.isEmpty()) {

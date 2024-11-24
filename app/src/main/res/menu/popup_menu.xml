@@ -3,9 +3,6 @@
         android:id="@+id/visualizarCronograma"
         android:title="Visualizar Cronograma" />
     <item
-        android:id="@+id/gerarRelatorio"
-        android:title="Gerar Relatório" />
-    <item
         android:id="@+id/SeInscrever"
         android:title="Se Inscrever" />
     <item

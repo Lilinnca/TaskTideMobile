@@ -156,7 +156,7 @@ public class MeusEventosCriador extends AppCompatActivity {
             imgbuttonVisaoGeral.setOnClickListener(v -> {
                 SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putLong("id_evento", evento.getId()); // Armazena o ID do evento
+                editor.putLong("EVENTO_ID", evento.getId()); // Armazena o ID do evento
                 editor.apply();
 
 
@@ -165,8 +165,6 @@ public class MeusEventosCriador extends AppCompatActivity {
             });
         }
     }
-
-
 
 
     private void showDeleteConfirmationDialog(long eventoId, View eventoView) {
@@ -201,4 +199,3 @@ public class MeusEventosCriador extends AppCompatActivity {
 
 
 }
-
