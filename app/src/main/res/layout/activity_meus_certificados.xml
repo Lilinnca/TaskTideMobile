@@ -54,7 +54,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="0 horas totais"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtHorasCoontabilizadas"
         app:layout_constraintStart_toEndOf="@+id/txtHorasCoontabilizadas"
@@ -81,7 +80,7 @@
         android:layout_height="41dp"
         android:text="Estes certificados são dos eventos gerenciados por nós!"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView5"
+        app:layout_constraintBottom_toTopOf="@+id/certificadosEventoContainer"
         app:layout_constraintStart_toStartOf="@+id/txtCertificados"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificados" />
 
@@ -96,7 +95,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridosDescricao"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView5" />
+        app:layout_constraintTop_toBottomOf="@+id/certificadosEventoContainer" />
 
     <TextView
         android:id="@+id/txtCertificadosInseridosDescricao"
@@ -111,8 +110,8 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridos" />
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView5"
-        android:layout_width="409dp"
+        android:id="@+id/certificadosEventoContainer"
+        android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:layout_marginTop="5dp"
         app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridos"
@@ -121,41 +120,10 @@
         app:layout_constraintVertical_bias="0.204">
 
         <LinearLayout
+            android:id="@+id/linearLayoutEventoCertificados"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:contentDescription="certificado 1"
-                app:srcCompat="@drawable/certificados_meuscertificados" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:layout_marginStart="20dp"
-                android:contentDescription="certificado 2"
-                app:srcCompat="@drawable/certificados_meuscertificados" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:layout_marginStart="20dp"
-                android:contentDescription="certificado 3"
-                app:srcCompat="@drawable/certificados_meuscertificados" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:layout_marginStart="20dp"
-                android:contentDescription="certificado 4"
-                app:srcCompat="@drawable/certificados_meuscertificados" />
-        </LinearLayout>
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
 

@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
@@ -58,7 +59,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -121,22 +124,26 @@ public class VisaoGeral extends AppCompatActivity {
         edtxtMostrarValorDoEvento = findViewById(R.id.edtxtMostrarValorDoEvento);
         imgbtnEditarValorEvento = findViewById(R.id.imgbtnEditarValorEvento);
 
+        dao = new DAO(this);
 
-        SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
-        idEvento = prefs.getLong("id_evento", -1);
+        Intent intent = getIntent();
+        long eventoId = intent.getLongExtra("evento_id", -1);
 
+        Evento evento = dao.buscarEventoPorId(eventoId);
+        if (evento != null) {
+            txtMostraNomeDoEvento.setText(evento.getNomeEvento());
+            edtxtMostraDescricao.setText(evento.getDescricao());
+            txtMostraTipoDoEvento.setText(evento.getTipoEvento());
+            edtxtMostraPrazoInscricao.setText(evento.getTipoEvento());
+            txtMostraHorasComplementaresEvento.setText(evento.getHorasComplementares());
 
-        if (idEvento != -1) {
-            dao = new DAO(this);
-
-            preencherCamposComDadosDoEvento(idEvento);
-            configurarCamposDeHora(idEvento);
-            configurarDescricaoDoEvento(idEvento);
-
-            limparIdEvento();
+            String[] informacoes = dao.buscarInformacoesPorEvento(eventoId);
+            txtMostraDataDoEvento.setText("De " + formatarData(informacoes[0]) + " até " + formatarData(informacoes[1]));
+            txtMostraLocalDoEvento.setText(!informacoes[2].isEmpty() ? informacoes[2] : "Local não definido");
         } else {
             Toast.makeText(this, "Evento não encontrado", Toast.LENGTH_SHORT).show();
         }
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
@@ -344,12 +351,31 @@ public class VisaoGeral extends AppCompatActivity {
 
     private void atualizarTipoEhorasNoBanco(String tipoEvento, String horasComplementares) {
         if (idEvento != -1) {
-            dao = new DAO(this);
-
+            if (dao == null) {
+                dao = new DAO(this);  // Verifique se a instância de DAO está correta
+            }
             dao.atualizarEventoTipoEhoras(idEvento, tipoEvento, horasComplementares);
         }
     }
 
+
+
+    private String formatarData(String data) {
+        if (data == null || data.isEmpty()) {
+            return "Data inválida";
+        }
+        try {
+            // Verifique se o formato da data é "dd/MM/yyyy"
+            SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            Date date = sdfEntrada.parse(data);  // Parse a data no formato esperado
+
+            SimpleDateFormat sdfSaida = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            return sdfSaida.format(date);  // Retorne a data formatada
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Data inválida";
+        }
+    }
 
     private String calcularHorasComplementares(String selectedItem) {
         switch (selectedItem) {
@@ -410,37 +436,37 @@ public class VisaoGeral extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.tabela, null);
         TableLayout tableLayout = dialogView.findViewById(R.id.tableLayoutCronograma);
 
+        // Obter atividades
         List<Atividade> atividades = dao.buscarAtividadesPorEvento(idEvento);
 
+        // Adicionar cabeçalhos, se necessário
+        TableRow headerRow = new TableRow(VisaoGeral.this);
+        headerRow.setBackgroundColor(Color.LTGRAY);  // Adiciona uma cor de fundo para a linha do cabeçalho
+        addHeaderCell(headerRow, "Data e Horário");
+        addHeaderCell(headerRow, "Nome da Atividade");
+        addHeaderCell(headerRow, "Palestrante");
+        addHeaderCell(headerRow, "Local");
+
+        tableLayout.addView(headerRow);
+
+        // Adicionar as atividades na tabela
         for (Atividade atividade : atividades) {
             TableRow row = new TableRow(VisaoGeral.this);
             row.setPadding(8, 8, 8, 8);
 
-            TextView txtTimestamp = new TextView(VisaoGeral.this);
-            String timestamp = atividade.getData() + " - " + atividade.getHorario();
-            txtTimestamp.setText(timestamp);
-            txtTimestamp.setPadding(12, 12, 12, 12);
-            txtTimestamp.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-            row.addView(txtTimestamp);
+            // Coluna de data e horário
+            addCellToRow(row, atividade.getData() + " - " + atividade.getHorario());
 
-            TextView txtNomeAtividade = new TextView(VisaoGeral.this);
-            txtNomeAtividade.setText(atividade.getNomeAtividade());
-            txtNomeAtividade.setPadding(12, 12, 12, 12);
-            txtNomeAtividade.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-            row.addView(txtNomeAtividade);
+            // Coluna de nome da atividade
+            addCellToRow(row, atividade.getNomeAtividade());
 
-            TextView txtPalestrante = new TextView(VisaoGeral.this);
-            txtPalestrante.setText(atividade.getPalestrante());
-            txtPalestrante.setPadding(12, 12, 12, 12);
-            txtPalestrante.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
-            row.addView(txtPalestrante);
+            // Coluna de palestrante
+            addCellToRow(row, atividade.getPalestrante());
 
-            TextView txtLocal = new TextView(VisaoGeral.this);
-            txtLocal.setText(atividade.getLocalAtividade());
-            txtLocal.setPadding(12, 12, 12, 12);
-            txtLocal.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1)); // Define peso para responsividade
-            row.addView(txtLocal);
+            // Coluna de local
+            addCellToRow(row, atividade.getLocalAtividade());
 
+            // Adiciona a linha à tabela
             tableLayout.addView(row);
         }
 
@@ -453,6 +479,22 @@ public class VisaoGeral extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void addHeaderCell(TableRow row, String text) {
+        TextView cell = new TextView(VisaoGeral.this);
+        cell.setText(text);
+        cell.setPadding(12, 12, 12, 12);
+        cell.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
+        row.addView(cell);
+    }
+
+    private void addCellToRow(TableRow row, String text) {
+        TextView cell = new TextView(VisaoGeral.this);
+        cell.setText(text);
+        cell.setPadding(12, 12, 12, 12);
+        cell.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
+        row.addView(cell);
     }
 
     private void habilitarEdicao(final EditText editText) {
@@ -662,20 +704,20 @@ public class VisaoGeral extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
             try {
+                // Converte a imagem para um Bitmap
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 imgBanner.setImageBitmap(bitmap);
 
-
+                // Converte o Bitmap para byte[]
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
                 byte[] imageBytes = outputStream.toByteArray();
 
+                // Atualiza o banner no banco de dados
                 dao.atualizarBannerEvento(idEvento, imageBytes);
-
 
             } catch (IOException e) {
                 e.printStackTrace();

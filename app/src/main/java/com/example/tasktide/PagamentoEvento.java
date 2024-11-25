@@ -31,7 +31,7 @@ public class PagamentoEvento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagamento_evento);
 
-        txtValorPagamento = findViewById(R.id.editTextValorPagamento);  // Agora é um EditText
+        txtValorPagamento = findViewById(R.id.editTextValorPagamento);
         radioGroupPagamento = findViewById(R.id.radioGroupPagamento);
         btnConfirmarPagamento = findViewById(R.id.btnConfirmarPagamento);
         progressBar = findViewById(R.id.progressBar);

@@ -154,13 +154,8 @@ public class MeusEventosCriador extends AppCompatActivity {
 
 
             imgbuttonVisaoGeral.setOnClickListener(v -> {
-                SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putLong("EVENTO_ID", evento.getId()); // Armazena o ID do evento
-                editor.apply();
-
-
                 Intent intent = new Intent(MeusEventosCriador.this, VisaoGeral.class);
+                intent.putExtra("evento_id", evento.getId()); // Passa o ID do evento
                 startActivity(intent);
             });
         }

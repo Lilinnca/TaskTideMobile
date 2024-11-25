@@ -276,7 +276,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
             <HorizontalScrollView
-                android:id="@+id/horizontalScrollView5"
+                android:id="@+id/certificadosEventoContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="123dp">
                 <LinearLayout

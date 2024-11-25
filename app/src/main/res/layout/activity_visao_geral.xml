@@ -102,6 +102,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:text="Nome do evento:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -120,7 +121,7 @@
         android:hint="nome"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/txtNomeDoEvento"
         app:layout_constraintTop_toBottomOf="@+id/imgBanner" />
 
@@ -218,6 +219,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="Local:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -235,6 +237,7 @@
         android:hint="local"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/txtLocalDoEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtMostraNomeDoEvento" />
 
@@ -246,6 +249,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="Data:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -263,6 +267,7 @@
         android:hint="data"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/txtDataDoEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtMostraLocalDoEvento" />
 
@@ -330,6 +335,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="Tipo do Evento:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -346,6 +352,7 @@
         android:hint="tipo"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/txtTipoDoEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtMostraHoraDeTerminoEvento" />
 
@@ -357,6 +364,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="Descrição:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -375,6 +383,7 @@
         android:hint="horas"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toEndOf="@+id/txtHorasComplementaresEvento"
@@ -388,6 +397,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="Horas Complementares:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -432,6 +442,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="Prazo de inscrição:"
+        android:gravity="start|center_vertical"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -480,7 +491,7 @@
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/txtPrazoIncricao"
         app:layout_constraintTop_toBottomOf="@+id/edtxtMostrarValorDoEvento" />
 
@@ -598,7 +609,7 @@
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/white"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/txtDescricaoVG"
         app:layout_constraintTop_toBottomOf="@+id/edtxtMostraPrazoInscricao" />
 

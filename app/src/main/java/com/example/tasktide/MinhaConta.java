@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -46,7 +44,7 @@ public class MinhaConta extends AppCompatActivity {
         String uriString = prefs.getString("fotoPerfil", null);
 
         txtNomeUsuario.setText(nome);
-        txtHorasUsuario.setText(horas);
+        txtHorasUsuario.setText(horas + " contabilizadas");
         txtCargoUsuario.setText(cargo);
         txtEmailUsuario.setText(email);
 
@@ -73,25 +71,13 @@ public class MinhaConta extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void inicialMinhaConta(View view){
+    public void inicialMinhaConta(View view) {
         Intent in = new Intent(this, TelaInicial.class);
         startActivity(in);
     }
-    public void localizaoMinhaConta(View view){
-        Intent in = new Intent(this, Localizacao.class);
-        startActivity(in);
-    }
-    public void addEventoMinhaConta(View view){
-        Intent in = new Intent(this, CriarEvento.class);
-        startActivity(in);
-    }
-    public void meusEventosMinhaConta(View view){
-        Intent in = new Intent(this, MeusEventosParticipante.class);
-        startActivity(in);
-    }
-    public void perfilMinhaConta(View view){
-        Intent in = new Intent(this, MinhaConta.class);
-        startActivity(in);
-    }
 
+    public void localizaoMinhaConta(View view) {
+        Intent in = new Intent(this, Localizacao.class);
+
+    }
 }

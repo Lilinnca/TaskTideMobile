@@ -83,6 +83,7 @@ public class DAO extends SQLiteOpenHelper {
         String createTableCertificado = "CREATE TABLE IF NOT EXISTS " + TABELA_CERTIFICADOS + " (" +
                 "id_certificado INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "id_usuario INTEGER, " +
+                "id_evento INTEGER, " +
                 "nome_certificado TEXT, " +
                 "tipo_certificado TEXT, " +
                 "data_emissao TEXT, " +
@@ -363,6 +364,7 @@ public class DAO extends SQLiteOpenHelper {
         long id = -1;
 
         try {
+            // Inserir o evento no banco de dados
             ContentValues values = new ContentValues();
             values.put("nome_evento", evento.getNomeEvento());
             values.put("tipo_evento", evento.getTipoEvento());
@@ -371,8 +373,22 @@ public class DAO extends SQLiteOpenHelper {
             values.put("categoria", evento.getCategoria());
             values.put("modalidade", evento.getModalidade());
 
-            id = db.insert(TABELA_EVENTO, null, values);
+            id = db.insert(TABELA_EVENTO, null, values); // Insere e retorna o ID do evento
             Log.i(TAG, "Evento inserido com ID: " + id);
+
+            // Verifica se o evento foi inserido corretamente
+            if (id != -1) {
+                // Criar o certificado associado ao evento
+                Certificado certificado = new Certificado();
+                certificado.setNomeCertificado("Certificado do Evento: " + evento.getNomeEvento());
+                certificado.setDataEmissao(evento.getDataEvento()); // Assumindo que evento possui data
+                certificado.setHorasCertificado(evento.getHorasComplementares());
+                certificado.setIdEvento((int) id); // Vincula o ID do evento ao certificado
+
+                // Salvar o certificado no banco
+                salvarCertificado(certificado);
+                Log.i(TAG, "Certificado criado para o evento ID: " + id);
+            }
         } catch (Exception e) {
             Log.e(TAG, "Erro ao inserir evento: " + e.getMessage());
         } finally {
@@ -381,6 +397,7 @@ public class DAO extends SQLiteOpenHelper {
 
         return id;
     }
+
 
     public long inserirAtividade(Atividade atividade, long idEvento) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -669,6 +686,68 @@ public class DAO extends SQLiteOpenHelper {
         }
         db.close();
     }
+
+    public void salvarCertificado(Certificado certificado) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("nome_certificado", certificado.getNomeCertificado());
+        values.put("tipo_certificado", certificado.getTipoCertificado());
+        values.put("data_emissao", certificado.getDataEmissao());
+        values.put("horas_certificado", certificado.getHorasCertificado());
+        values.put("id_evento", certificado.getIdEvento());
+
+        db.insert("certificados", null, values);
+        db.close();
+    }
+
+    @SuppressLint("Range")
+    public List<Certificado> getCertificadosPorEvento(int idEvento) {
+        List<Certificado> certificados = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM certificados WHERE id_evento = ?", new String[]{String.valueOf(idEvento)});
+        if (cursor.moveToFirst()) {
+            do {
+                Certificado certificado = new Certificado();
+                certificado.setIdCertificado(cursor.getInt(cursor.getColumnIndex("id_certificado")));
+                certificado.setNomeCertificado(cursor.getString(cursor.getColumnIndex("nome_certificado")));
+                certificado.setTipoCertificado(cursor.getString(cursor.getColumnIndex("tipo_certificado")));
+                certificado.setDataEmissao(cursor.getString(cursor.getColumnIndex("data_emissao")));
+                certificado.setHorasCertificado(String.valueOf(cursor.getInt(cursor.getColumnIndex("horas_certificado"))));
+                certificado.setIdEvento(cursor.getInt(cursor.getColumnIndex("id_evento")));
+
+                certificados.add(certificado);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return certificados;
+    }
+
+    @SuppressLint("Range")
+    public List<Certificado> getCertificadosGerados() {
+        List<Certificado> certificados = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM certificados", null);
+        if (cursor.moveToFirst()) {
+            do {
+                Certificado certificado = new Certificado();
+                certificado.setIdCertificado(cursor.getInt(cursor.getColumnIndex("id_certificado")));
+                certificado.setNomeCertificado(cursor.getString(cursor.getColumnIndex("nome_certificado")));
+                certificados.add(certificado);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return certificados;
+    }
+
+
+
 
 
     @SuppressLint("Range")
@@ -1002,7 +1081,7 @@ public class DAO extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             evento = new Evento();
 
-            int nomeEventoIndex = cursor.getColumnIndex("nomeEvento");
+            int nomeEventoIndex = cursor.getColumnIndex("nome_evento");
             int descricaoIndex = cursor.getColumnIndex("descricao");
 
             if (nomeEventoIndex != -1) {

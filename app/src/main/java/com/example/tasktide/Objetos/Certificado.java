@@ -1,27 +1,31 @@
 package com.example.tasktide.Objetos;
 
 public class Certificado {
-    private long idCertificado;
-    private int idUsuario;
-    private String nomeCertificado;
-    private String tipoCertificado;
-    private String dataEmissao;
-    private String horasCertificado;
+    private long idCertificado;      // ID do certificado
+    private int idUsuario;           // ID do usuário
+    private int idEvento;            // ID do evento associado
+    private String nomeCertificado;  // Nome do certificado
+    private String tipoCertificado;  // Tipo do certificado
+    private String dataEmissao;      // Data de emissão do certificado
+    private String horasCertificado; // Horas complementares do certificado
 
     // Construtor com parâmetros
-    public Certificado(long idCertificado, int idUsuario, String nomeCertificado, String tipoCertificado, String dataEmissao, String horasCertificado) {
+    public Certificado(long idCertificado, int idUsuario, String nomeCertificado,
+                       String tipoCertificado, String dataEmissao, String horasCertificado) {
         this.idCertificado = idCertificado;
         this.idUsuario = idUsuario;
+        this.idEvento = idEvento;
         this.nomeCertificado = nomeCertificado;
         this.tipoCertificado = tipoCertificado;
         this.dataEmissao = dataEmissao;
         this.horasCertificado = horasCertificado;
     }
 
+    // Construtor padrão
     public Certificado() {
     }
 
-    // Getters e setters
+    // Getters e Setters
     public long getIdCertificado() {
         return idCertificado;
     }
@@ -36,6 +40,14 @@ public class Certificado {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
     }
 
     public String getNomeCertificado() {

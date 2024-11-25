@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -126,24 +128,24 @@ public class TelaInicial extends AppCompatActivity {
         try {
             Log.d("TelaInicial", "Adicionando evento: " + evento.getNomeEvento());
 
-
             ImageButton imageButton = new ImageButton(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(170), dpToPx(110));
             params.setMargins(dpToPx(7), dpToPx(10), dpToPx(7), dpToPx(10));
             imageButton.setLayoutParams(params);
             imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-
-            if (evento.getBanner() != null) {
-                imageButton.setImageBitmap(evento.getBanner());
+            // Verifica se o bannerImagemByte não é nulo e se contém dados
+            if (evento.getBannerImagemByte() != null && evento.getBannerImagemByte().length > 0) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(evento.getBannerImagemByte(), 0, evento.getBannerImagemByte().length);
+                imageButton.setImageBitmap(bitmap);
             } else {
+                // Usa a imagem padrão
                 Picasso.get()
                         .load(R.drawable.banner_evento)
                         .resize(dpToPx(170), dpToPx(110))
                         .centerCrop()
                         .into(imageButton);
             }
-
 
             imageButton.setOnClickListener(v -> {
                 Evento eventoCompleto = dao.buscarEventoPorId(evento.getId());
