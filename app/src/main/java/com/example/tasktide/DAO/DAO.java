@@ -14,7 +14,6 @@ import com.example.tasktide.Objetos.Certificado;
 import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
 import com.example.tasktide.Objetos.Participantes;
-import com.example.tasktide.Objetos.Pdf;
 import com.example.tasktide.Objetos.Usuario;
 
 import java.text.SimpleDateFormat;
@@ -226,6 +225,19 @@ public class DAO extends SQLiteOpenHelper {
         return id;
     }
 
+    public boolean EventoPago(long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
+
+        boolean isPago = false;
+        if (cursor.moveToFirst()) {
+            String pago = cursor.getString(0); // Obtém o valor da coluna "Pago"
+            isPago = "Sim".equalsIgnoreCase(pago); // Verifica se o valor é "Sim" (ignora maiúsculas/minúsculas)
+        }
+        cursor.close();
+        return isPago;
+    }
 
 
     public List<Certificado> getAllCertificados() {
@@ -380,9 +392,10 @@ public class DAO extends SQLiteOpenHelper {
             if (id != -1) {
                 // Criar o certificado associado ao evento
                 Certificado certificado = new Certificado();
-                certificado.setNomeCertificado("Certificado do Evento: " + evento.getNomeEvento());
+                certificado.setNomeCertificado(evento.getNomeEvento());
                 certificado.setDataEmissao(evento.getDataEvento()); // Assumindo que evento possui data
                 certificado.setHorasCertificado(evento.getHorasComplementares());
+                certificado.setTipoCertificado(evento.getTipoEvento());
                 certificado.setIdEvento((int) id); // Vincula o ID do evento ao certificado
 
                 // Salvar o certificado no banco
@@ -776,10 +789,10 @@ public class DAO extends SQLiteOpenHelper {
         return eventos;
     }
 
-    public void inscreverNoEvento(long idUsuario, long idEvento) {
+    public boolean inscreverNoEvento(long idUsuario, long idEvento) {
         if (verificarInscricao(idUsuario, idEvento)) {
             Log.i(TAG, "O usuário já está inscrito neste evento.");
-            return;
+            return false;
         }
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -793,6 +806,7 @@ public class DAO extends SQLiteOpenHelper {
 
         db.insert("Inscricoes", null, values);
         Log.i(TAG, "Usuário " + idUsuario + " inscrito no evento " + idEvento + " com sucesso.");
+        return false;
     }
 
 
@@ -858,9 +872,9 @@ public class DAO extends SQLiteOpenHelper {
     public void atualizarNomeEvento(long idEvento, String novoNome) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nomeEvento", novoNome);
+        values.put("nome_evento", novoNome);
         db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        db.close();  // Fechar a conexão após a atualização
+        db.close();
     }
 
 
@@ -920,8 +934,8 @@ public class DAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("tipoEvento", tipoEvento);
-        values.put("horasComplementares", horasComplementares);
+        values.put("tipo_evento", tipoEvento);
+        values.put("horas_complementares", horasComplementares);
 
         try {
             db.update("evento", values, "id = ?", new String[]{String.valueOf(idEvento)});
@@ -940,7 +954,7 @@ public class DAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("dataPrevis", novaData);
+        values.put("dataPrevista", novaData);
 
         try {
             db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
@@ -997,7 +1011,7 @@ public class DAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("tipoEvento", novoTipo);
+        values.put("tipo_evento", novoTipo);
 
         try {
             db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
@@ -1055,7 +1069,7 @@ public class DAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("bannerImagem", bannerImagem);
+        values.put("banner_imagem", bannerImagem);
 
         try {
             int rowsAffected = db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});

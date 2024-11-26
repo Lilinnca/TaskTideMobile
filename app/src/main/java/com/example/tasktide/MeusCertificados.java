@@ -26,31 +26,36 @@ public class MeusCertificados extends AppCompatActivity {
     private LinearLayout linearLayoutCertificadosEventos;
     private TextView txtHoras;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meus_certificados);
 
+        // Inicializando os componentes da UI
         linearLayoutCertificados = findViewById(R.id.linearLayoutCertificados);
-
         linearLayoutCertificadosEventos = findViewById(R.id.linearLayoutEventoCertificados);
-
         txtHoras = findViewById(R.id.txtHoras);
 
         dao = new DAO(this);
 
-        carregarCertificados();
-        carregarCertificadosGerados();
+        // Verificando se o idEvento foi passado no Intent
+        int idEvento = getIntent().getIntExtra("id_evento", -1);  // Aqui o id_evento é recuperado do Intent
+        if (idEvento != -1) {
+            // Se o idEvento estiver presente, carrega os certificados para o evento específico
+            carregarCertificadosGerados(idEvento);
+        } else {
+            // Se o idEvento não for encontrado, exibe os certificados gerais
+            carregarCertificados();
+        }
     }
 
-    private void carregarCertificadosGerados() {
-        List<Certificado> certificados = dao.getCertificadosGerados(); // Filtrar certificados automáticos
+    private void carregarCertificadosGerados(int idEvento) {
+        List<Certificado> certificados = dao.getCertificadosPorEvento(idEvento); // Buscar certificados por evento
         linearLayoutCertificadosEventos.removeAllViews(); // Limpa certificados antigos
 
         if (certificados == null || certificados.isEmpty()) {
-            Log.e("MeusCertificados", "Nenhum certificado gerado encontrado.");
+            Log.e("MeusCertificados", "Nenhum certificado gerado encontrado para o evento.");
             TextView noCertificadosText = new TextView(this);
-            noCertificadosText.setText("Nenhum certificado gerado encontrado.");
+            noCertificadosText.setText("Nenhum certificado gerado encontrado para este evento.");
             linearLayoutCertificadosEventos.addView(noCertificadosText);
             return;
         }
@@ -61,25 +66,37 @@ public class MeusCertificados extends AppCompatActivity {
         }
     }
 
+
     private void adicionarNovoCertificadoGerado(Certificado certificado) {
-        ImageButton imageButton = new ImageButton(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                dpToPx(170),
-                dpToPx(110)
-        );
-        params.setMargins(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
-        imageButton.setLayoutParams(params);
-        imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageButton.setImageResource(R.drawable.certificados_meuscertificados);
-        imageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        try {
+            Log.d("MeusCertificados", "Adicionando certificado gerado: " + certificado.getNomeCertificado());
 
-        imageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, InfoCertificado.class);
-            intent.putExtra("id_certificado", certificado.getIdCertificado());
-            startActivity(intent);
-        });
+            ImageButton imageButton = new ImageButton(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    dpToPx(170),
+                    dpToPx(110)
+            );
+            params.setMargins(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
+            imageButton.setLayoutParams(params);
+            imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageButton.setImageResource(R.drawable.certificados_meuscertificados);
+            imageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
-        linearLayoutCertificadosEventos.addView(imageButton);
+            imageButton.setOnClickListener(v -> {
+                // Aqui, você já tem os dados do certificado
+                Intent intent = new Intent(this, InfoCertificado.class);
+                intent.putExtra("id_certificado", certificado.getIdCertificado());
+                intent.putExtra("nome_certificado", certificado.getNomeCertificado());
+                intent.putExtra("tipo_certificado", certificado.getTipoCertificado());
+                intent.putExtra("data_emissao", certificado.getDataEmissao());
+                intent.putExtra("horas_certificado", certificado.getHorasCertificado());
+                startActivity(intent);
+            });
+
+            linearLayoutCertificadosEventos.addView(imageButton);
+        } catch (Exception e) {
+            Log.e("MeusCertificados", "Erro ao adicionar certificado gerado", e);
+        }
     }
 
 

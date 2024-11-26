@@ -51,36 +51,12 @@ public class InfoCertificado extends AppCompatActivity {
         if (certificado != null) {
             // Preencher as TextViews com os dados do certificado
             txtNomeCertificadoInfo.setText(certificado.getNomeCertificado());
-            txtQntdHorasCertificadoInfo.setText(formatarHoras(certificado.getHorasCertificado()));
+            txtQntdHorasCertificadoInfo.setText(formatarHorasExibicao(certificado.getHorasCertificado())); // Use apenas uma função para exibir as horas
             txtTipoCertificadoInfo.setText(certificado.getTipoCertificado());
             txtDataCertificadoInfo.setText(formatarData(certificado.getDataEmissao()));
         } else {
             Toast.makeText(this, "Certificado não encontrado", Toast.LENGTH_SHORT).show();
         }
-
-        txtQntdHorasCertificadoInfo.setText(formatarHorasExibicao(certificado.getHorasCertificado()));
-
-    }
-
-    private long getUsuarioId() {
-        String usuarioEmail = getEmailUsuario();
-
-        if (usuarioEmail == null) {
-            return -1;
-        }
-
-        Usuario usuario = dao.buscarUsuarioPorEmail(usuarioEmail);
-
-        if (usuario != null) {
-            return usuario.getId();
-        } else {
-            return -1;
-        }
-    }
-
-    private String getEmailUsuario() {
-        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        return prefs.getString("email", null);
     }
 
     private String formatarData(String data) {
@@ -96,28 +72,6 @@ public class InfoCertificado extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             return "Data inválida";
-        }
-    }
-
-
-    private String formatarHoras(String horasStr) {
-        if (horasStr == null || horasStr.isEmpty()) {
-            return "Horas inválidas";
-        }
-        try {
-            // Aqui assumimos que a string de horas segue o formato "HH:mm"
-            String[] partes = horasStr.split(":");
-            int horas = Integer.parseInt(partes[0]);
-            int minutos = Integer.parseInt(partes[1]);
-
-            if (minutos == 0) {
-                return horas + " horas";
-            } else {
-                return horas + " horas e " + minutos + " minutos";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Horas inválidas";
         }
     }
 
@@ -142,5 +96,4 @@ public class InfoCertificado extends AppCompatActivity {
             return "Horas inválidas";
         }
     }
-
 }

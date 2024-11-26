@@ -3,8 +3,8 @@
         android:id="@+id/visualizarCronograma"
         android:title="Visualizar Cronograma" />
     <item
-        android:id="@+id/SeInscrever"
-        android:title="Se Inscrever" />
+        android:id="@+id/relatorio"
+        android:title="Relatório" />
     <item
         android:id="@+id/voltar"
         android:title="Voltar" />

@@ -39,6 +39,9 @@ android {
 
 
 dependencies {
+
+    implementation ("com.itextpdf:itext7-core:7.2.2")
+
     implementation ("com.squareup.picasso:picasso:2.8")
 
     implementation ("com.google.android.material:material:1.9.0")

@@ -1,12 +1,9 @@
 package com.example.tasktide;
 
-import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -25,7 +22,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Evento;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -156,11 +152,13 @@ public class TelaInicial extends AppCompatActivity {
                         intent.putExtra("evento_id", eventoCompleto.getId());
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(this, EventoInfoTelaInicial.class);
+                        Intent intent = new Intent(this, VisaoGeral.class);
                         intent.putExtra("evento_id", eventoCompleto.getId());
                         intent.putExtra("evento_nome", eventoCompleto.getNomeEvento());
                         intent.putExtra("evento_local", eventoCompleto.getLocalEvento());
                         intent.putExtra("evento_data", eventoCompleto.getDataEvento());
+                        intent.putExtra("tipo_evento", eventoCompleto.getTipoEvento());
+
                         intent.putExtra("evento_descricao", eventoCompleto.getDescricao());
                         startActivity(intent);
                     }
