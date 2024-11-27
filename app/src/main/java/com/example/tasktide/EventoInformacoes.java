@@ -125,40 +125,60 @@ public class EventoInformacoes extends AppCompatActivity {
     }
 
     public void avancarInformacoes(View view) {
-        String dataPrevis = editTextDataPrevista.getText().toString();
-        String dataFim = editTextDataFim.getText().toString();
-        String prazo = editTextPrazo.getText().toString();
-        String local = editTextLocal.getText().toString();
-        String valorEventoString = editTextValorEvento.getText().toString();
+        // Obtendo os dados dos campos
+        String dataPrevis = editTextDataPrevista.getText().toString().trim();
+        String dataFim = editTextDataFim.getText().toString().trim();
+        String prazo = editTextPrazo.getText().toString().trim();
+        String local = editTextLocal.getText().toString().trim();
+        String valorEventoString = editTextValorEvento.getText().toString().trim();
+
+        // Pegando os horários, se visíveis
         String horarioInicio = editTextHorarioInicio.getVisibility() == View.VISIBLE
-                ? editTextHorarioInicio.getText().toString()
+                ? editTextHorarioInicio.getText().toString().trim()
                 : ""; // Deixa vazio se o campo não estiver visível
         String horarioFim = editTextHorarioFim.getVisibility() == View.VISIBLE
-                ? editTextHorarioFim.getText().toString()
+                ? editTextHorarioFim.getText().toString().trim()
                 : ""; // Deixa vazio se o campo não estiver visível
 
+        // Verificando se o evento foi pago
         String pago = rbtnSim.isChecked() ? "Sim" : "Não";
 
+        // Convertendo o valor do evento de String para Double, se necessário
         double valorEvento = 0.0;
-        if (rbtnSim.isChecked()) {
+        if (!valorEventoString.isEmpty()) {
             try {
                 valorEvento = Double.parseDouble(valorEventoString);
             } catch (NumberFormatException e) {
+                // Se o valor não for um número válido
                 Toast.makeText(this, "Valor do evento deve ser um número válido.", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
 
-        Informacoes informacoes = new Informacoes(dataPrevis, dataFim, horarioInicio, horarioFim, prazo, local, valorEvento, pago);
+        // Criando o objeto Informacoes com os dados preenchidos
+        Informacoes informacoes = new Informacoes();
+        informacoes.setDataPrevista(dataPrevis);
+        informacoes.setDataFim(dataFim);
+        informacoes.setHorarioInicio(horarioInicio);
+        informacoes.setHorarioTermino(horarioFim);
+        informacoes.setPrazo(prazo);
+        informacoes.setLocal(local);
+        informacoes.setValorEvento(valorEvento);
+        informacoes.setPago(pago);
 
+        // Usando o DAO para inserir as informações no banco de dados
         DAO dao = new DAO(this);
-        dao.inserirInformacoes(informacoes, idEvento);
+        dao.inserirInformacoes(informacoes, idEvento);  // Certifique-se de que o método inserirInformacoes está correto
 
+        // Criando a intent para avançar para a tela EventoParticipante
         Intent intent = new Intent(this, EventoParticipante.class);
         intent.putExtra("ID_EVENTO", idEvento);
         startActivity(intent);
+
+        // Finalizando a activity atual
         finish();
     }
+
 
 
 

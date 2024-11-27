@@ -1,16 +1,18 @@
 package com.example.tasktide;
 
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.media.Image;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -28,13 +31,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -42,29 +45,28 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Atividade;
 import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
 import com.example.tasktide.Objetos.Usuario;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
 
-
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.Set;
 
 public class VisaoGeral extends AppCompatActivity {
-
 
     private static final int PICK_IMAGE_REQUEST_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
@@ -76,13 +78,12 @@ public class VisaoGeral extends AppCompatActivity {
     private EditText txtMostraHoraDeTerminoEvento;
     private EditText txtMostraTipoDoEvento, edtxtMostraPrazoInscricao, txtMostraHorasComplementaresEvento, edtxtMostrarValorDoEvento;
     private ImageButton imgbtnEditarValorEvento, imgbtnEditarDescricao;
-    private TextView txtHoraDeInicioEvento, txtHoraDeTerminoEvento, txtValorDoEvento, txtDescricaoVG;
+    private TextView  txtHoraDeInicioEvento, txtHoraDeTerminoEvento, txtValorDoEvento,txtDescricaoVG;
     private ImageButton imgbtnAlterarNome, imgbtnAlterarLocal, imgbtnAlterarData, imgbtnAlterarHorarioInicio, imgbtnEditarHoraDeTermino, imgbtnEditarTipoEvento, imgButtonEditarPrazoIncricao;
     private Button btnInscrever, btnComprarIngresso;
     private DAO dao;
     private long idEvento;
     private long usuarioId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,35 +126,45 @@ public class VisaoGeral extends AppCompatActivity {
 
         dao = new DAO(this);
 
+
         Intent intent = getIntent();
         long eventoId = intent.getLongExtra("evento_id", -1);
 
+
         usuarioId = getUsuarioId();
+
 
         Evento evento = dao.buscarEventoPorId(eventoId);
         if (evento != null) {
+
             configurarVisibilidadeBotoes(eventoId);
-            configurarCamposDeHora(idEvento);
-            configurarDescricaoDoEvento(idEvento);
+            configurarCamposDeHora(eventoId);
+            configurarDescricaoDoEvento(eventoId);
+
             txtMostraNomeDoEvento.setText(evento.getNomeEvento());
             edtxtMostraDescricao.setText(evento.getDescricao());
             txtMostraTipoDoEvento.setText(evento.getTipoEvento());
-            edtxtMostraPrazoInscricao.setText(evento.getTipoEvento());
             txtMostraHorasComplementaresEvento.setText(evento.getHorasComplementares());
 
             String[] informacoes = dao.buscarInformacoesPorEvento(eventoId);
             txtMostraDataDoEvento.setText("De " + formatarData(informacoes[0]) + " até " + formatarData(informacoes[1]));
             txtMostraLocalDoEvento.setText(!informacoes[2].isEmpty() ? informacoes[2] : "Local não definido");
+            edtxtMostraPrazoInscricao.setText(formatarData(informacoes[3]));
+
+
         } else {
             Toast.makeText(this, "Evento não encontrado", Toast.LENGTH_SHORT).show();
         }
+
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
 
+
         boolean vemDaTelaInicial = intent.getBooleanExtra("VEM_DA_TELA_INICIAL", false);
+
 
         if (vemDaTelaInicial) {
             imgbtnCriarCronograma.setVisibility(View.GONE);
@@ -170,7 +181,9 @@ public class VisaoGeral extends AppCompatActivity {
             configurarVisibilidadeBotoes(idEvento);
         }
 
+
         btnMudarBanner.setOnClickListener(v -> showImageSizeWarningDialog());
+
 
         ImageButton btnPopupMenu = findViewById(R.id.btnPopupMenu);
         btnPopupMenu.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +191,7 @@ public class VisaoGeral extends AppCompatActivity {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(VisaoGeral.this, v);
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -194,15 +208,18 @@ public class VisaoGeral extends AppCompatActivity {
                     }
                 });
 
+
                 popup.show();
             }
         });
+
 
         imgbtnCriarCronograma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
                 builder.setTitle("Criar Cronograma");
+
 
                 builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
@@ -214,6 +231,7 @@ public class VisaoGeral extends AppCompatActivity {
                                 .setCancelable(true)
                                 .create();
 
+
                         Button btnEscolherDataHorario = dialogView.findViewById(R.id.btnEscolherDataHorario);
                         btnEscolherDataHorario.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -222,35 +240,43 @@ public class VisaoGeral extends AppCompatActivity {
                             }
                         });
 
+
                         EditText edtNomeAtividade = dialogView.findViewById(R.id.edtNomeAtividade);
                         EditText edtLocalAtividade = dialogView.findViewById(R.id.edtLocalAtividade);
                         EditText edtResponsavelAtividade = dialogView.findViewById(R.id.edtResponsavelAtividade);
+
 
                         dialogView.findViewById(R.id.btnAdicionarAtividade).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
+
                                 String horario = btnEscolherDataHorario.getText().toString();
+
 
                                 String nomeAtividade = edtNomeAtividade.getText().toString();
                                 String localAtividade = edtLocalAtividade.getText().toString();
                                 String responsavel = edtResponsavelAtividade.getText().toString();
                                 String data = "";
 
+
                                 if (nomeAtividade.isEmpty() || localAtividade.isEmpty() || responsavel.isEmpty() || horario.isEmpty()) {
                                     Toast.makeText(VisaoGeral.this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     dao.adicionarAtividade(idEvento, nomeAtividade, horario, responsavel, localAtividade, data);
+
 
                                     edtNomeAtividade.setText("");
                                     edtLocalAtividade.setText("");
                                     edtResponsavelAtividade.setText("");
                                     btnEscolherDataHorario.setText("Escolher Data e Horário");
 
+
                                     Toast.makeText(VisaoGeral.this, "Atividade adicionada com sucesso!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
+
 
                         Button btnCancelar = new Button(VisaoGeral.this);
                         btnCancelar.setText("Cancelar");
@@ -261,10 +287,12 @@ public class VisaoGeral extends AppCompatActivity {
                             }
                         });
 
+
                         ((LinearLayout) dialogView).addView(btnCancelar);
                         dialogAtividades.show();
                     }
                 });
+
 
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
@@ -273,10 +301,12 @@ public class VisaoGeral extends AppCompatActivity {
                     }
                 });
 
+
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
         });
+
 
         imgbtnAlterarNome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,12 +315,14 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
+
         imgbtnAlterarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(txtMostraLocalDoEvento);
             }
         });
+
 
         imgbtnAlterarData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -299,12 +331,14 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
+
         imgbtnAlterarHorarioInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(txtMostraHoraDeInicioEvento);
             }
         });
+
 
         imgbtnEditarHoraDeTermino.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -313,12 +347,14 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
+
         imgButtonEditarPrazoIncricao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(edtxtMostraPrazoInscricao);
             }
         });
+
 
         imgbtnEditarValorEvento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,12 +363,14 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
+
         imgbtnEditarDescricao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habilitarEdicao(edtxtMostraDescricao);
             }
         });
+
 
         imgbtnEditarTipoEvento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,10 +379,12 @@ public class VisaoGeral extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
                 builder.setTitle("Escolha o Tipo de Evento");
 
+
                 // Array com os tipos de eventos
                 String[] tiposDeEvento = {"Atividade cultural", "Atividade esportiva", "Colóquio",
                         "Conferência", "Congresso", "Encontro", "Fórum",
                         "Mesa-redonda", "Palestra", "Seminário", "Visita técnica", "Workshop"};
+
 
                 builder.setItems(tiposDeEvento, new DialogInterface.OnClickListener() {
                     @Override
@@ -352,28 +392,35 @@ public class VisaoGeral extends AppCompatActivity {
                         String novoTipoEvento = tiposDeEvento[which];
                         txtMostraTipoDoEvento.setText(novoTipoEvento);
 
+
                         // Calcula e atualiza as horas complementares
                         String novasHorasComplementares = calcularHorasComplementares(novoTipoEvento);
                         txtMostraHorasComplementaresEvento.setText(novasHorasComplementares);
 
+
                         // Atualiza o banco de dados
                         atualizarTipoEhorasNoBanco(novoTipoEvento, novasHorasComplementares);
+
 
                         Toast.makeText(VisaoGeral.this, "Tipo do evento atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+
                 builder.show();
             }
         });
+
 
         btnInscrever.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnInscrever.setEnabled(false);
 
+
                 Intent intent = getIntent();
                 long eventoId = intent.getLongExtra("evento_id", -1);
+
 
                 if (eventoId != -1) {
                     if (dao.verificarInscricao(usuarioId, eventoId)) {
@@ -388,6 +435,7 @@ public class VisaoGeral extends AppCompatActivity {
                     Toast.makeText(VisaoGeral.this, "Evento não encontrado!", Toast.LENGTH_SHORT).show();
                 }
 
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -398,14 +446,18 @@ public class VisaoGeral extends AppCompatActivity {
         });
     }
 
-        private long getUsuarioId() {
+
+    private long getUsuarioId() {
         String usuarioEmail = getEmailUsuario();
+
 
         if (usuarioEmail == null) {
             return -1;
         }
 
+
         Usuario usuario = dao.buscarUsuarioPorEmail(usuarioEmail);
+
 
         if (usuario != null) {
             return usuario.getId();
@@ -414,10 +466,13 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
+
     private String getEmailUsuario() {
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         return prefs.getString("email", null);
     }
+
+
 
 
     private String formatarData(String data) {
@@ -429,6 +484,7 @@ public class VisaoGeral extends AppCompatActivity {
             SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             Date date = sdfEntrada.parse(data);  // Parse a data no formato esperado
 
+
             SimpleDateFormat sdfSaida = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             return sdfSaida.format(date);  // Retorne a data formatada
         } catch (Exception e) {
@@ -437,21 +493,21 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
-    private void configurarVisibilidadeBotoes(long idEvento) {
-        // Verificar se o evento é pago ou gratuito diretamente pelo método do DAO
-        boolean eventoPago = dao.isEventoPago(idEvento); // Usa o método correto do DAO
 
-        // Referenciar os botões no layout
+
+    private void configurarVisibilidadeBotoes(long idEvento) {
+        // Verificar se o evento é pago ou gratuito usando o DAO
+        boolean eventoPago = dao.EventoPago(idEvento); // Método que verifica se o evento é pago no banco de dados
+
         Button btnComprarIngresso = findViewById(R.id.btnComprarIngresso);
         Button btnInscrever = findViewById(R.id.btnInscrever);
 
-        // Configurar visibilidade dos botões
         if (eventoPago) {
-            btnComprarIngresso.setVisibility(View.VISIBLE); // Mostrar botão de compra
-            btnInscrever.setVisibility(View.GONE);         // Esconder botão de inscrição
+            btnComprarIngresso.setVisibility(View.VISIBLE);
+            btnInscrever.setVisibility(View.GONE);
         } else {
-            btnComprarIngresso.setVisibility(View.GONE);   // Esconder botão de compra
-            btnInscrever.setVisibility(View.VISIBLE);      // Mostrar botão de inscrição
+            btnComprarIngresso.setVisibility(View.GONE);
+            btnInscrever.setVisibility(View.VISIBLE);
         }
     }
 
@@ -633,19 +689,18 @@ public class VisaoGeral extends AppCompatActivity {
             dao.atualizarPrazoEvento(idEvento, novoTexto);
         } else if (editText.getId() == R.id.edtxtMostrarValorDoEvento) {
             dao.atualizarValorEvento(idEvento, novoTexto);
-        } else if (editText.getId() == R.id.edtxtMostraDescricao) {
+        }else if (editText.getId() == R.id.edtxtMostraDescricao) {
             dao.atualizarDescricaoEvento(idEvento, novoTexto);
         }
 
         Log.d("VisaoGeral", "Dados salvos: " + novoTexto);
     }
-
     private void configurarCamposDeHora(long idEvento) {
         Informacoes informacoes = dao.getInformacoesById(idEvento);
 
         if (informacoes != null) {
             String horaInicio = informacoes.getHorarioInicio();
-            String horarioFim = informacoes.getHorarioFim();
+            String horarioFim = informacoes.getHorarioTermino();
 
             // Define os textos dos campos de hora
             if (horaInicio != null && !horaInicio.isEmpty()) {
@@ -716,6 +771,69 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
+    private void limparIdEvento() {
+        SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("EVENTO_ID");
+        editor.apply();
+    }
+
+    private void preencherCamposComDadosDoEvento(long idEvento) {
+        Evento evento = dao.getEventoById((int) idEvento);
+        Informacoes informacoes = dao.getInformacoesById(idEvento);
+
+        if (evento != null) {
+            // Preencher os campos com os dados do Evento
+            txtMostraNomeDoEvento.setText(evento.getNomeEvento());
+            txtMostraTipoDoEvento.setText(evento.getTipoEvento());
+            txtMostraHorasComplementaresEvento.setText(evento.getHorasComplementares());
+
+            // Definir a descrição do evento e desativar o EditText
+            edtxtMostraDescricao.setText(evento.getDescricao());
+            edtxtMostraDescricao.setEnabled(true);
+            edtxtMostraDescricao.setFocusable(true);
+        }
+
+        byte[] imagemBytes = dao.obterBannerEvento(idEvento);
+        if (imagemBytes != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imagemBytes, 0, imagemBytes.length);
+            imgBanner.setImageBitmap(bitmap);
+        }
+
+        if (informacoes != null) {
+            // Preencher os campos com os dados de Informacoes
+            txtMostraLocalDoEvento.setText(informacoes.getLocal());
+            txtMostraDataDoEvento.setText(informacoes.getDataPrevista());
+
+            // Verificar e configurar as horas de início e término
+            if (informacoes.getHorarioInicio() != null && !informacoes.getHorarioInicio().isEmpty()) {
+                txtHoraDeInicioEvento.setVisibility(View.VISIBLE);
+                txtMostraHoraDeInicioEvento.setVisibility(View.VISIBLE);
+                txtMostraHoraDeInicioEvento.setText(informacoes.getHorarioInicio());
+            } else {
+                txtHoraDeInicioEvento.setVisibility(View.GONE);
+                txtMostraHoraDeInicioEvento.setVisibility(View.GONE);
+            }
+
+            if (informacoes.getHorarioTermino() != null && !informacoes.getHorarioTermino().isEmpty()) {
+                txtHoraDeTerminoEvento.setVisibility(View.VISIBLE);
+                txtMostraHoraDeTerminoEvento.setVisibility(View.VISIBLE);
+                txtMostraHoraDeTerminoEvento.setText(informacoes.getHorarioTermino());
+            } else {
+                txtHoraDeTerminoEvento.setVisibility(View.GONE);
+                txtMostraHoraDeTerminoEvento.setVisibility(View.GONE);
+            }
+
+            // Preencher os campos adicionais com os dados de Informacoes
+            double valorEvento = informacoes.getValorEvento();
+            edtxtMostrarValorDoEvento.setText(String.format("%.2f", valorEvento));
+            edtxtMostraPrazoInscricao.setText(informacoes.getPrazo());
+
+            // Configurar a visibilidade dos campos de valor
+            configurarCamposValor(valorEvento);
+        }
+    }
+
     private void showImageSizeWarningDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Aviso de Imagem")
@@ -756,9 +874,33 @@ public class VisaoGeral extends AppCompatActivity {
             }
         }
     }
-
     public void IrTelaPagar(View view) {
         Intent in = new Intent(VisaoGeral.this, PagamentoEvento.class);
+        startActivity(in);
+    }
+
+    public void inicialVG(View view){
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void localizacaoVG(View view){
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void criarVG(View view){
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void meuseventosVG(View view){
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void perfilVG(View view){
+        Intent in = new Intent(this, TelaInicial.class);
         startActivity(in);
     }
 

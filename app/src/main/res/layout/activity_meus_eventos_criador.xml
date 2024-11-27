@@ -68,7 +68,7 @@
         android:layout_height="48dp"
         android:background="#338B85"
         android:contentDescription="botao criar evento"
-        android:onClick="CriarMEC"
+        android:onClick="IrCriarEvento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

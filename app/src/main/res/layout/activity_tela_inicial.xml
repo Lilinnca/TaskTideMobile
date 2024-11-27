@@ -12,7 +12,7 @@
         android:id="@+id/toolbarInicial"
         android:layout_width="match_parent"
         android:layout_height="112dp"
-        android:background="@color/green"
+        android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,19 +65,18 @@
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/white"
         android:contentDescription="Botao de ajuste"
-        android:onClick="filtrarPorCategoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/searchViewInicial"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarInicial"
-        app:srcCompat="@drawable/ajustamento" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarInicial"/>
+    <!--  app:srcCompat="@drawable/ajustamento" -->
 
     <!-- Menu inferior -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMenuInicial"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:background="@color/green"
+        android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +93,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="343dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="#338B85"
         android:contentDescription="botao tela inicial"
         android:onClick="telainicial"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,6 +101,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
         app:srcCompat="@drawable/casa" />
+
 
     <ImageButton
         android:id="@+id/btnFavoritosInicial"
@@ -111,14 +111,15 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="#338B85"
         android:contentDescription="botao favoritos"
-        android:onClick="telafavoritos"
+        android:onClick="telalocalizacao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnNovoEventoInicial"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
         app:srcCompat="@drawable/localizacao" />
+
 
     <ImageButton
         android:id="@+id/btnNovoEventoInicial"
@@ -128,7 +129,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="182dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="#338B85"
         android:contentDescription="botao adicionar evento"
         android:onClick="telacriarevento"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -145,7 +146,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="#338B85"
         android:contentDescription="botao eventosmarcados"
         android:onClick="telameuseventos"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -153,6 +154,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
         app:srcCompat="@drawable/calendario" />
+
 
     <ImageButton
         android:id="@+id/btnPerfilInicial"
@@ -162,7 +164,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="#338B85"
         android:contentDescription="botao perfil de usuario"
         android:onClick="telaperfil"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -170,6 +172,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarMenuInicial"
         app:srcCompat="@drawable/perfil" />
+
+
 
 
     <!-- Conteúdo rolável -->
@@ -183,6 +187,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchViewInicial">
+
 
         <LinearLayout
             android:orientation="vertical"
@@ -200,6 +205,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
+
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollViewOutros"
                 android:layout_width="wrap_content"
@@ -208,8 +214,11 @@
                     android:id="@+id/eventosContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="123dp"
-                    android:orientation="horizontal" />
+                    android:orientation="horizontal"
+                    android:divider="@android:color/transparent"
+                    android:showDividers="middle"/>
             </HorizontalScrollView>
+
 
             <!-- Categorias -->
             <TextView
@@ -229,6 +238,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
+
 
             <TextView
                 android:id="@+id/textView2"
@@ -267,6 +277,7 @@
                     android:orientation="horizontal" />
             </HorizontalScrollView>
 
+
             <TextView
                 android:id="@+id/txtNetworking"
                 android:layout_width="wrap_content"
@@ -276,7 +287,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
             <HorizontalScrollView
-                android:id="@+id/certificadosEventoContainer"
+                android:id="@+id/horizontalScrollView5"
                 android:layout_width="wrap_content"
                 android:layout_height="123dp">
                 <LinearLayout
@@ -284,6 +295,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
+
 
             <TextView
                 android:id="@+id/txtNegocios"
@@ -294,7 +306,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
             <HorizontalScrollView
-                android:id="@+id/certificadosContainer"
+                android:id="@+id/horizontalScrollView6"
                 android:layout_width="wrap_content"
                 android:layout_height="123dp">
                 <LinearLayout
@@ -302,6 +314,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
+
 
             <TextView
                 android:id="@+id/txtTecnologia"
@@ -320,6 +333,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
+
 
             <TextView
                 android:id="@+id/txtArtes"

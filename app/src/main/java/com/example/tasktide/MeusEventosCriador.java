@@ -193,5 +193,25 @@ public class MeusEventosCriador extends AppCompatActivity {
         startActivity(in);
     }
 
+    public void inicialMEC(View view) {
+        Intent in = new Intent(this, TelaInicial.class);
+        startActivity(in);
+    }
+
+    public void localizacaoMEC(View view) {
+        Intent in = new Intent(this, Localizacao.class);
+        startActivity(in);
+    }
+
+    public void perfilMEC(View view) {
+        Intent in = new Intent(this, MinhaConta.class);
+        startActivity(in);
+    }
+
+
+
+
+
+
 
 }

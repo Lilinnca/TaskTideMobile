@@ -51,10 +51,7 @@ public class DAO extends SQLiteOpenHelper {
                 "modalidade TEXT, " +
                 "categoria TEXT, " +
                 "descricao TEXT, " +
-                "banner_imagem BLOB, " +
-                "local_evento TEXT, " +
-                "data_evento TEXT" +
-                ");";
+                "banner_imagem BLOB)";
         db.execSQL(createTableEvento);
         Log.i(TAG, "Tabela de eventos criada com sucesso.");
 
@@ -191,6 +188,58 @@ public class DAO extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
+    public String[] buscarInformacoesPorEvento(long eventoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT dataPrevista, dataFim, local, prazo FROM informacoes WHERE id = ?", new String[]{String.valueOf(eventoId)});
+        if (cursor.moveToFirst()) {
+            String dataPrevista = cursor.getString(0);
+            String dataFim = cursor.getString(1);
+            String local = cursor.getString(2);
+            String prazo = cursor.getString(3);
+            cursor.close();
+            return new String[]{dataPrevista, dataFim, local, prazo};
+        }
+        cursor.close();
+        return new String[]{"", "", "", ""};
+    }
+
+
+
+    public Evento buscarEventoPorId(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Evento evento = null;
+        Cursor cursorEvento = null;
+
+        try {
+            // Consulta para recuperar os dados principais do evento
+            String queryEvento = "SELECT * FROM " + TABELA_EVENTO + " WHERE id = ?";
+            cursorEvento = db.rawQuery(queryEvento, new String[]{String.valueOf(id)});
+
+            if (cursorEvento != null && cursorEvento.moveToFirst()) {
+                evento = new Evento();
+
+                evento.setId(cursorEvento.getLong(cursorEvento.getColumnIndexOrThrow("id")));
+                evento.setNomeEvento(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("nome_evento")));
+                evento.setTipoEvento(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("tipo_evento")));
+                evento.setHorasComplementares(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("horas_complementares")));
+                evento.setModalidade(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("modalidade")));
+                evento.setCategoria(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("categoria")));
+                evento.setDescricao(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("descricao")));
+                evento.setBannerImagem(cursorEvento.getString(cursorEvento.getColumnIndexOrThrow("banner_imagem")));
+            }
+
+        } catch (Exception e) {
+            Log.e(TAG, "Erro ao buscar evento com ID: " + id, e);
+        } finally {
+            if (cursorEvento != null) {
+                cursorEvento.close();
+            }
+        }
+
+        return evento;
+    }
+
     public void limparTabelas() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABELA_PARTICIPANTES, null, null);
@@ -232,13 +281,12 @@ public class DAO extends SQLiteOpenHelper {
 
         boolean isPago = false;
         if (cursor.moveToFirst()) {
-            String pago = cursor.getString(0); // Obtém o valor da coluna "Pago"
-            isPago = "Sim".equalsIgnoreCase(pago); // Verifica se o valor é "Sim" (ignora maiúsculas/minúsculas)
+            String pago = cursor.getString(0);
+            isPago = "Sim".equalsIgnoreCase(pago);
         }
         cursor.close();
         return isPago;
     }
-
 
     public List<Certificado> getAllCertificados() {
         List<Certificado> certificados = new ArrayList<>();
@@ -385,23 +433,22 @@ public class DAO extends SQLiteOpenHelper {
             values.put("categoria", evento.getCategoria());
             values.put("modalidade", evento.getModalidade());
 
-            id = db.insert(TABELA_EVENTO, null, values); // Insere e retorna o ID do evento
+            id = db.insert(TABELA_EVENTO, null, values);
             Log.i(TAG, "Evento inserido com ID: " + id);
 
-            // Verifica se o evento foi inserido corretamente
             if (id != -1) {
-                // Criar o certificado associado ao evento
                 Certificado certificado = new Certificado();
                 certificado.setNomeCertificado(evento.getNomeEvento());
-                certificado.setDataEmissao(evento.getDataEvento()); // Assumindo que evento possui data
+                certificado.setDataEmissao(evento.getDataEvento());
                 certificado.setHorasCertificado(evento.getHorasComplementares());
                 certificado.setTipoCertificado(evento.getTipoEvento());
-                certificado.setIdEvento((int) id); // Vincula o ID do evento ao certificado
+                certificado.setIdEvento((int) id);
 
-                // Salvar o certificado no banco
                 salvarCertificado(certificado);
                 Log.i(TAG, "Certificado criado para o evento ID: " + id);
             }
+
+
         } catch (Exception e) {
             Log.e(TAG, "Erro ao inserir evento: " + e.getMessage());
         } finally {
@@ -409,6 +456,26 @@ public class DAO extends SQLiteOpenHelper {
         }
 
         return id;
+    }
+
+    public Date obterDataEvento(long eventoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Date dataEvento = null;
+
+        Cursor cursor = db.query("informacoes", new String[]{"dataPrevista", "dataFim"},
+                "eventoId = ?", new String[]{String.valueOf(eventoId)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            @SuppressLint("Range") long dataPrevistaMillis = cursor.getLong(cursor.getColumnIndex("dataPrevista"));
+
+            dataEvento = new Date(dataPrevistaMillis);
+
+            cursor.close();
+        }
+
+        db.close();
+        return dataEvento;
     }
 
 
@@ -440,42 +507,29 @@ public class DAO extends SQLiteOpenHelper {
         return exists;
     }
 
-    public void inserirInformacoes(Informacoes informacoes, long idEvento) {
+    public long inserirInformacoes(Informacoes informacoes, long idEvento) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("dataPrevista", informacoes.getDataPrevista());
+        values.put("id_evento", idEvento);
+        values.put("dataPrevista", informacoes.getDataPrevista()); // Corrigido para 'dataPrevista'
         values.put("dataFim", informacoes.getDataFim());
+        values.put("horarioInicio", informacoes.getHorarioInicio());
+        values.put("horarioTermino", informacoes.getHorarioTermino());
         values.put("prazo", informacoes.getPrazo());
         values.put("local", informacoes.getLocal());
         values.put("valorEvento", informacoes.getValorEvento());
-        values.put("pago", informacoes.getPago());
-        values.put("id_evento", idEvento);
+        values.put("Pago", informacoes.getPago());
 
-        if (!informacoes.getHorarioInicio().isEmpty()) {
-            values.put("horarioInicio", informacoes.getHorarioInicio());
-        }
-        if (!informacoes.getHorarioFim().isEmpty()) {
-            values.put("horarioFim", informacoes.getHorarioFim());
+        long id = db.insert(TABELA_INFORMACOES, null, values);
+
+        if (id == -1) {
+            Log.e(TAG, "Erro ao inserir informações no banco de dados.");
+        } else {
+            Log.i(TAG, "Informações inseridas com sucesso. ID: " + id);
         }
 
-        db.insert("informacoes", null, values);
         db.close();
-    }
-
-
-    public String[] buscarInformacoesPorEvento(long eventoId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT dataPrevista, dataFim, local FROM informacoes WHERE id = ?", new String[]{String.valueOf(eventoId)});
-
-        if (cursor.moveToFirst()) {
-            String dataPrevista = cursor.getString(0);
-            String dataFim = cursor.getString(1);
-            String local = cursor.getString(2);
-            cursor.close();
-            return new String[]{dataPrevista, dataFim, local};
-        }
-        cursor.close();
-        return new String[]{"", "", ""}; // Valores padrão
+        return id;
     }
 
 
@@ -485,39 +539,6 @@ public class DAO extends SQLiteOpenHelper {
         SQLiteDatabase db = super.getWritableDatabase();
         db.execSQL("PRAGMA foreign_keys=ON;");
         return db;
-    }
-
-    public Evento buscarEventoPorId(long id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Evento evento = null;
-        Cursor cursor = null;
-
-        try {
-            String query = "SELECT * FROM " + TABELA_EVENTO + " WHERE id = ?";
-            cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
-
-            if (cursor != null && cursor.moveToFirst()) {
-                evento = new Evento();
-                evento.setId(cursor.getLong(cursor.getColumnIndexOrThrow("id")));
-                evento.setNomeEvento(cursor.getString(cursor.getColumnIndexOrThrow("nome_evento")));
-                evento.setTipoEvento(cursor.getString(cursor.getColumnIndexOrThrow("tipo_evento")));
-                evento.setHorasComplementares(cursor.getString(cursor.getColumnIndexOrThrow("horas_complementares")));
-                evento.setModalidade(cursor.getString(cursor.getColumnIndexOrThrow("modalidade")));
-                evento.setCategoria(cursor.getString(cursor.getColumnIndexOrThrow("categoria")));
-                evento.setDescricao(cursor.getString(cursor.getColumnIndexOrThrow("descricao")));
-                evento.setBannerImagem(cursor.getString(cursor.getColumnIndexOrThrow("banner_imagem")));
-                evento.setLocalEvento(cursor.getString(cursor.getColumnIndexOrThrow("local_evento")));
-                evento.setDataEvento(cursor.getString(cursor.getColumnIndexOrThrow("data_evento")));
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao buscar evento com ID: " + id, e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-
-        return evento;
     }
 
     @SuppressLint("Range")
@@ -616,31 +637,25 @@ public class DAO extends SQLiteOpenHelper {
     public List<Atividade> buscarAtividadesPorEvento(long idEvento) {
         List<Atividade> atividades = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT * FROM " + TABELA_ATIVIDADE + " WHERE id_evento = ?";
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery(sql, new String[]{String.valueOf(idEvento)});
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    String data = cursor.getString(cursor.getColumnIndexOrThrow("data"));
-                    String horario = cursor.getString(cursor.getColumnIndexOrThrow("horario"));
-                    String nomeAtividade = cursor.getString(cursor.getColumnIndexOrThrow("nomeAtividade"));
-                    String responsavel = cursor.getString(cursor.getColumnIndexOrThrow("responsavel"));
-                    String localAtividade = cursor.getString(cursor.getColumnIndexOrThrow("localAtividade"));
 
-                    Atividade atividade = new Atividade(data, horario, nomeAtividade, responsavel, localAtividade);
+        String sql = "SELECT * FROM " + TABELA_CRONOGRAMA + " WHERE id_evento = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idEvento)});
 
-                    atividades.add(atividade);
-                } while (cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao buscar atividades por evento: " + e.getMessage());
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.close();
+        if (cursor.moveToFirst()) {
+            do {
+                String data = cursor.getString(cursor.getColumnIndexOrThrow("data"));
+                String horario = cursor.getString(cursor.getColumnIndexOrThrow("horario"));
+                String nomeAtividade = cursor.getString(cursor.getColumnIndexOrThrow("nomeAtividade"));
+                String palestrante = cursor.getString(cursor.getColumnIndexOrThrow("palestrante"));
+                String localAtividade = cursor.getString(cursor.getColumnIndexOrThrow("localAtividade"));
+
+                Atividade atividade = new Atividade(data, horario, nomeAtividade, palestrante, localAtividade);
+                atividades.add(atividade);
+            } while (cursor.moveToNext());
         }
+
+        cursor.close();
+        db.close();
         return atividades;
     }
 
@@ -850,22 +865,16 @@ public class DAO extends SQLiteOpenHelper {
     public String obterDescricaoEvento(long idEvento) {
         String descricao = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT descricao FROM evento WHERE id = ?";
-        Cursor cursor = null;
 
-        try {
-            cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
-            if (cursor.moveToFirst()) {
-                descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao obter descrição do evento: " + e.getMessage());
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.close();
+        String query = "SELECT descricao FROM evento WHERE id = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
+
+        if (cursor.moveToFirst()) {
+            descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
         }
+
+        cursor.close();
+        db.close();
         return descricao;
     }
 
@@ -879,31 +888,17 @@ public class DAO extends SQLiteOpenHelper {
 
 
     public void atualizarLocalEvento(long idEvento, String novoLocal) {
-        if (novoLocal == null || novoLocal.trim().isEmpty()) {
-            Log.w(TAG, "Local do evento não pode ser vazio ou nulo.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("local_evento", novoLocal);
-
-        try {
-            db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar local do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        values.put("local", novoLocal);
+        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
-    public void adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String localAtividade, String data) {
-        if (nomeAtividade == null || nomeAtividade.isEmpty()) {
-            Log.w(TAG, "Nome da atividade não pode ser vazio.");
-            return;
-        }
 
+    public void adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String localAtividade, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put("id_evento", idEvento);
         values.put("nomeAtividade", nomeAtividade);
@@ -912,176 +907,86 @@ public class DAO extends SQLiteOpenHelper {
         values.put("localAtividade", localAtividade);
         values.put("data", data);
 
-        try {
-            long newRowId = db.insert("cronograma", null, values);
-            if (newRowId == -1) {
-                Log.e("Database Error", "Erro ao inserir atividade");
-            } else {
-                Log.d("Database Success", "Atividade adicionada com sucesso! ID: " + newRowId);
-            }
-        } catch (Exception e) {
-            Log.e("Database Error", "Erro ao adicionar atividade: " + e.getMessage());
-        } finally {
-            db.close();
+        long newRowId = db.insert("cronograma", null, values);
+
+        if (newRowId == -1) {
+            Log.e("Database Error", "Erro ao inserir atividade");
+        } else {
+            Log.d("Database Success", "Atividade adicionada com sucesso! ID: " + newRowId + ", ID Evento: " + idEvento);
         }
+        db.close();
     }
 
     public void atualizarEventoTipoEhoras(long idEvento, String tipoEvento, String horasComplementares) {
-        if (tipoEvento == null || tipoEvento.trim().isEmpty() || horasComplementares == null || horasComplementares.trim().isEmpty()) {
-            Log.w(TAG, "Tipo de evento ou horas complementares não podem ser vazios.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tipo_evento", tipoEvento);
         values.put("horas_complementares", horasComplementares);
 
-        try {
-            db.update("evento", values, "id = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar tipo de evento e horas complementares: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public void atualizarDataEvento(long idEvento, String novaData) {
-        if (novaData == null || novaData.trim().isEmpty()) {
-            Log.w(TAG, "Data do evento não pode ser vazia.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("dataPrevista", novaData);
-
-        try {
-            db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar data do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public void atualizarHorarioInicio(long idEvento, String novoHorarioInicio) {
-        if (novoHorarioInicio == null || novoHorarioInicio.trim().isEmpty()) {
-            Log.w(TAG, "Horário de início não pode ser vazio.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("horarioInicio", novoHorarioInicio);
-
-        try {
-            db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar horário de início do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public void atualizarHorarioTermino(long idEvento, String novoHorarioTermino) {
-        if (novoHorarioTermino == null || novoHorarioTermino.trim().isEmpty()) {
-            Log.w(TAG, "Horário de término não pode ser vazio.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("horarioTermino", novoHorarioTermino);
-
-        try {
-            db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar horário de término do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public void atualizarTipoEvento(long idEvento, String novoTipo) {
-        if (novoTipo == null || novoTipo.trim().isEmpty()) {
-            Log.w(TAG, "Tipo do evento não pode ser vazio.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tipo_evento", novoTipo);
-
-        try {
-            db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar tipo do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public void atualizarPrazoEvento(long idEvento, String novoPrazo) {
-        if (novoPrazo == null || novoPrazo.trim().isEmpty()) {
-            Log.w(TAG, "Prazo do evento não pode ser vazio.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("prazo", novoPrazo);
-
-        try {
-            db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar prazo do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public void atualizarValorEvento(long idEvento, String novoValor) {
-        if (novoValor == null || novoValor.trim().isEmpty()) {
-            Log.w(TAG, "Valor do evento não pode ser vazio.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("valorEvento", novoValor);
-
-        try {
-            db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar valor do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
-
     public void atualizarBannerEvento(long idEvento, byte[] bannerImagem) {
-        if (bannerImagem == null || bannerImagem.length == 0) {
-            Log.w(TAG, "Imagem do banner não pode ser vazia.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("banner_imagem", bannerImagem);
 
-        try {
-            int rowsAffected = db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-            if (rowsAffected > 0) {
-                Log.i(TAG, "Imagem do banner atualizada com sucesso para o evento ID: " + idEvento);
-            } else {
-                Log.e(TAG, "Erro ao atualizar a imagem do banner para o evento ID: " + idEvento);
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar banner do evento: " + e.getMessage());
-        } finally {
-            db.close();
+        int rowsAffected = db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
+
+        if (rowsAffected > 0) {
+            Log.i(TAG, "Imagem do banner atualizada com sucesso para o evento ID: " + idEvento);
+        } else {
+            Log.e(TAG, "Erro ao atualizar a imagem do banner para o evento ID: " + idEvento);
         }
     }
 
@@ -1125,21 +1030,26 @@ public class DAO extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM informacoes WHERE id_evento = ?", new String[]{String.valueOf(idEvento)});
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             informacoes = new Informacoes(
                     cursor.getString(cursor.getColumnIndex("dataPrevista")),
                     cursor.getString(cursor.getColumnIndex("dataFim")),
                     cursor.getString(cursor.getColumnIndex("horarioInicio")),
-                    cursor.getString(cursor.getColumnIndex("horarioFim")),
+                    cursor.getString(cursor.getColumnIndex("horarioTermino")),
                     cursor.getString(cursor.getColumnIndex("prazo")),
                     cursor.getString(cursor.getColumnIndex("local")),
                     cursor.getDouble(cursor.getColumnIndex("valorEvento")),
-                    cursor.getString(cursor.getColumnIndex("pago"))
+                    cursor.getString(cursor.getColumnIndex("Pago"))
             );
         }
-        cursor.close();
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
         return informacoes;
     }
+
 
     public boolean isEventoPago(long eventoId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1173,22 +1083,11 @@ public class DAO extends SQLiteOpenHelper {
 
 
     public void atualizarDescricaoEvento(long idEvento, String novaDescricao) {
-        if (novaDescricao == null || novaDescricao.trim().isEmpty()) {
-            Log.w(TAG, "Descrição do evento não pode ser vazia.");
-            return;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("descricao", novaDescricao);
-
-        try {
-            db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        } catch (Exception e) {
-            Log.e("DB_ERROR", "Erro ao atualizar descrição do evento: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
+        db.close();
     }
 
     public long inserirUsuario(Usuario usuario) {
@@ -1225,16 +1124,18 @@ public class DAO extends SQLiteOpenHelper {
 
             if (cursor != null && cursor.moveToFirst()) {
                 int colunaIndex = cursor.getColumnIndex("banner_imagem");
-                if (colunaIndex != -1) {
+                if (colunaIndex >= 0) {
                     imagemBytes = cursor.getBlob(colunaIndex);
                 } else {
-                    Log.w("EventoDAO", "Coluna 'banner_imagem' não encontrada.");
+                    Log.w("EventoDAO", "Coluna 'banner_imagem' não encontrada no cursor.");
                 }
             }
         } catch (Exception e) {
-            Log.e("DB_ERROR", "Erro ao obter banner do evento: " + e.getMessage());
+            e.printStackTrace();
         } finally {
-            if (cursor != null) cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
             db.close();
         }
 
@@ -1242,11 +1143,6 @@ public class DAO extends SQLiteOpenHelper {
     }
 
     public long inserirParticipantes(Participantes participantes, long idEvento) {
-        if (participantes.getQuantParticipantes() <= 0) {
-            Log.w(TAG, "Número de participantes inválido.");
-            return -1;
-        }
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("quantParticipantes", participantes.getQuantParticipantes());
@@ -1254,6 +1150,11 @@ public class DAO extends SQLiteOpenHelper {
 
         long id = db.insert(TABELA_PARTICIPANTES, null, values);
         db.close();
+        if (id != -1) {
+            Log.i(TAG, "Participantes inseridos com sucesso. ID: " + id);
+        } else {
+            Log.e(TAG, "Erro ao inserir participantes.");
+        }
         return id;
     }
 

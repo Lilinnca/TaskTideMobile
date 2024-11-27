@@ -1,24 +1,51 @@
 package com.example.tasktide.Objetos;
 
 public class Informacoes {
+    private long id;
+    private long idEvento;
     private String dataPrevista;
     private String dataFim;
     private String horarioInicio;
-    private String horarioFim;
+    private String horarioTermino;
     private String prazo;
     private String local;
     private String pago;
     private Double valorEvento;
 
-    public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioFim, String prazo, String local, Double valorEvento, String pago) {
+    public Informacoes(long id, long idEvento, String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, String pago, Double valorEvento) {
+        this.id = id;
+        this.idEvento = idEvento;
         this.dataPrevista = dataPrevista;
         this.dataFim = dataFim;
         this.horarioInicio = horarioInicio;
-        this.horarioFim = horarioFim;
+        this.horarioTermino = horarioTermino;
         this.prazo = prazo;
         this.local = local;
-        this.valorEvento = valorEvento;
         this.pago = pago;
+        this.valorEvento = valorEvento;
+    }
+
+    public Informacoes() {
+
+    }
+
+    public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, double valorEvento, String pago) {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(long idEvento) {
+        this.idEvento = idEvento;
     }
 
     public String getDataPrevista() {
@@ -33,8 +60,8 @@ public class Informacoes {
         return horarioInicio;
     }
 
-    public String getHorarioFim() {
-        return horarioFim;
+    public String getHorarioTermino() {
+        return horarioTermino;
     }
 
     public String getPrazo() {
@@ -65,8 +92,8 @@ public class Informacoes {
         this.horarioInicio = horarioInicio;
     }
 
-    public void setHorarioFim(String horarioFim) {
-        this.horarioFim = horarioFim;
+    public void setHorarioTermino(String horarioTermino) {
+        this.horarioTermino = horarioTermino;
     }
 
     public void setPrazo(String prazo) {
@@ -91,7 +118,7 @@ public class Informacoes {
                 "dataPrevista='" + dataPrevista + '\'' +
                 ", dataFim='" + dataFim + '\'' +
                 ", horarioInicio='" + horarioInicio + '\'' +
-                ", horarioFim='" + horarioFim + '\'' +
+                ", horarioTermino='" + horarioTermino + '\'' +
                 ", prazo='" + prazo + '\'' +
                 ", local='" + local + '\'' +
                 ", pago=" + (pago != null && pago.equals("Sim") ? "Sim" : "Não") +
