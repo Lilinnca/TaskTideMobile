@@ -9,10 +9,10 @@ public class Informacoes {
     private String horarioTermino;
     private String prazo;
     private String local;
-    private String pago;
+    private int pago; // Agora é int para representar 1 ("Sim") ou 0 ("Não")
     private Double valorEvento;
 
-    public Informacoes(long id, long idEvento, String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, String pago, Double valorEvento) {
+    public Informacoes(long id, long idEvento, String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, int pago, Double valorEvento) {
         this.id = id;
         this.idEvento = idEvento;
         this.dataPrevista = dataPrevista;
@@ -29,7 +29,15 @@ public class Informacoes {
 
     }
 
-    public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, double valorEvento, String pago) {
+    public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, double valorEvento, int pago) {
+        this.dataPrevista = dataPrevista;
+        this.dataFim = dataFim;
+        this.horarioInicio = horarioInicio;
+        this.horarioTermino = horarioTermino;
+        this.prazo = prazo;
+        this.local = local;
+        this.valorEvento = valorEvento;
+        this.pago = pago;
     }
 
     public long getId() {
@@ -52,60 +60,60 @@ public class Informacoes {
         return dataPrevista;
     }
 
-    public String getDataFim() {
-        return dataFim;
-    }
-
-    public String getHorarioInicio() {
-        return horarioInicio;
-    }
-
-    public String getHorarioTermino() {
-        return horarioTermino;
-    }
-
-    public String getPrazo() {
-        return prazo;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public String getPago() {
-        return pago;
-    }
-
-    public Double getValorEvento() {
-        return valorEvento;
-    }
-
     public void setDataPrevista(String dataPrevista) {
         this.dataPrevista = dataPrevista;
+    }
+
+    public String getDataFim() {
+        return dataFim;
     }
 
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 
+    public String getHorarioInicio() {
+        return horarioInicio;
+    }
+
     public void setHorarioInicio(String horarioInicio) {
         this.horarioInicio = horarioInicio;
+    }
+
+    public String getHorarioTermino() {
+        return horarioTermino;
     }
 
     public void setHorarioTermino(String horarioTermino) {
         this.horarioTermino = horarioTermino;
     }
 
+    public String getPrazo() {
+        return prazo;
+    }
+
     public void setPrazo(String prazo) {
         this.prazo = prazo;
+    }
+
+    public String getLocal() {
+        return local;
     }
 
     public void setLocal(String local) {
         this.local = local;
     }
 
-    public void setPago(String pago) {
+    public int getPago() {
+        return pago;
+    }
+
+    public void setPago(int pago) {
         this.pago = pago;
+    }
+
+    public Double getValorEvento() {
+        return valorEvento;
     }
 
     public void setValorEvento(Double valorEvento) {
@@ -121,7 +129,7 @@ public class Informacoes {
                 ", horarioTermino='" + horarioTermino + '\'' +
                 ", prazo='" + prazo + '\'' +
                 ", local='" + local + '\'' +
-                ", pago=" + (pago != null && pago.equals("Sim") ? "Sim" : "Não") +
+                ", pago=" + (pago == 1 ? "Sim" : "Não") + // Converte int para "Sim" ou "Não"
                 ", valorEvento=" + valorEvento +
                 '}';
     }

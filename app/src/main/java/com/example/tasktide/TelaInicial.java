@@ -72,7 +72,7 @@ public class TelaInicial extends AppCompatActivity {
 
             createNotificationChannel();
 
-            // sendNotification("Bem-vindo ao TaskTide", "Explore novos eventos e atividades!");
+            sendNotification("Bem-vindo ao TaskTide", "Explore novos eventos e atividades!");
 
             carregarEventos();
 
@@ -158,7 +158,7 @@ public class TelaInicial extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
+
      private void sendNotification(String title, String message) {
      NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
      .setSmallIcon(R.mipmap.icone_tasktide_foreground)
@@ -172,7 +172,7 @@ public class TelaInicial extends AppCompatActivity {
      if (notificationManager != null) {
      notificationManager.notify(1, builder.build());
      }
-     }**/
+     }
 
     private void carregarEventos() {
         try {

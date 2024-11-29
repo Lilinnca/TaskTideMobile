@@ -29,13 +29,11 @@
         android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="226dp"
-        android:layout_marginBottom="20dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="dd/mm/aaaa"
         android:inputType="date"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/txtPrazoInscricaoInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDataInicioInformacoes" />
@@ -45,8 +43,8 @@
         android:id="@+id/dividerInformacoes"
         android:layout_width="409dp"
         android:layout_height="1dp"
+        android:layout_marginTop="20dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/txtDataInicioInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoInformacoes" />
@@ -72,7 +70,6 @@
         android:layout_height="48dp"
         android:layout_marginStart="226dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="21dp"
         android:background="#d9d9d9"
         android:backgroundTint="#d9d9d9"
         android:ems="10"
@@ -80,7 +77,6 @@
         android:inputType="date"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtPrazoInscricaoInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDataFimInformacoes" />
@@ -91,10 +87,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="109dp"
         android:text="Data de fim"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDataFim"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editTextDataFim"
         app:layout_constraintTop_toBottomOf="@+id/dividerInformacoes" />
 
@@ -103,15 +100,12 @@
         android:id="@+id/editTextHorarioFim"
         android:layout_width="170dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="hh:mm"
         android:inputType="time"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toEndOf="@+id/editTextHorarioInicio"
+        app:layout_constraintStart_toStartOf="@+id/txtHorarioFim"
         app:layout_constraintTop_toBottomOf="@+id/txtHorarioFim" />
 
 
@@ -119,23 +113,20 @@
         android:id="@+id/txtHorarioFim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:text="Horário de fim"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/txtHorarioInicio"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/editTextDataFim"
         app:layout_constraintTop_toBottomOf="@+id/editTextDataFim" />
-
 
     <TextView
         android:id="@+id/txtHorarioInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:text="Horário de início"
         android:textColor="@color/black"
         android:textSize="15sp"
@@ -148,15 +139,13 @@
         android:id="@+id/editTextHorarioInicio"
         android:layout_width="170dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="hh:mm"
         android:inputType="time"
         android:textSize="18sp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtHorarioInicio"
         app:layout_constraintTop_toBottomOf="@+id/txtHorarioInicio" />
 
 
@@ -164,11 +153,10 @@
         android:id="@+id/txtPrazoInscricaoInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Prazo de inscrição"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPrazoInformacoes"
         app:layout_constraintStart_toStartOf="@+id/editTextPrazoInformacoes"
         app:layout_constraintTop_toBottomOf="@+id/editTextHorarioInicio" />
 
@@ -177,7 +165,6 @@
         android:id="@+id/editTextPrazoInformacoes"
         android:layout_width="383dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="20dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Prazo"
@@ -185,7 +172,6 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtLocalInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
@@ -196,7 +182,6 @@
         android:id="@+id/editTextLocalInformacoes"
         android:layout_width="383dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="21dp"
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="Local"
@@ -204,7 +189,6 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtEventoPagoInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLocalInformacoes" />
@@ -214,10 +198,10 @@
         android:id="@+id/txtLocalInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Local"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLocalInformacoes"
         app:layout_constraintStart_toStartOf="@+id/editTextLocalInformacoes"
         app:layout_constraintTop_toBottomOf="@+id/editTextPrazoInformacoes" />
 
@@ -227,11 +211,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
         android:text="Passo 2 de 4"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/dividerInformacoes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloInformacoes" />
 
@@ -241,10 +223,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:text="Seu evento é pago?"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLocalInformacoes" />
 
@@ -255,7 +237,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/txtValorInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -286,7 +267,6 @@
         android:id="@+id/editTextValorInformacoes"
         android:layout_width="373.4dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="259dp"
         android:background="#d9d9d9"
         android:backgroundTint="#d9d9d9"
         android:ems="10"
@@ -294,7 +274,6 @@
         android:inputType="numberDecimal"
         android:textColorHint="@color/gray"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtValorInformacoes" />
@@ -304,11 +283,10 @@
         android:id="@+id/txtValorInformacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Valor do evento"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextValorInformacoes"
         app:layout_constraintStart_toStartOf="@+id/editTextValorInformacoes"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -319,7 +297,6 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/txtTituloInformacoes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -3,13 +3,21 @@ package com.example.tasktide;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tasktide.DAO.DAO;
+import com.example.tasktide.Objetos.Evento;
+import com.example.tasktide.Objetos.Usuario;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -18,9 +26,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.tasktide.DAO.DAO;
-import com.example.tasktide.Objetos.Evento;
-
 import java.util.List;
 
 public class MeusEventosParticipante extends AppCompatActivity {
@@ -28,7 +33,8 @@ public class MeusEventosParticipante extends AppCompatActivity {
     private DAO dao;
     private Button btnCriador;
     private LinearLayout eventosContainerSemana;
-    private LinearLayout  eventosContainerMes;
+    private LinearLayout eventosContainerMes;
+    private long usuarioId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +49,16 @@ public class MeusEventosParticipante extends AppCompatActivity {
         });
 
         btnCriador = findViewById(R.id.btnCriador);
-
-
         eventosContainerSemana = findViewById(R.id.eventosContainerSemana);
         eventosContainerMes = findViewById(R.id.eventosContainerMes);
 
-
         dao = new DAO(this);
+
+        usuarioId = getUsuarioId();
+
         EventosSemana();
         EventosMes();
+
         verificarPermissaoBtnCriador();
     }
 
@@ -60,46 +67,58 @@ public class MeusEventosParticipante extends AppCompatActivity {
         String cargo = prefs.getString("cargo", "");
 
         if (cargo.equals("Docente") || cargo.equals("Administrador")) {
-            // Permitir acesso
             btnCriador.setOnClickListener(v -> {
                 Intent intent = new Intent(MeusEventosParticipante.this, MeusEventosCriador.class);
                 startActivity(intent);
             });
         } else {
-            // Desativar o botão para cargos sem permissão
             btnCriador.setEnabled(false);
-            btnCriador.setAlpha(0.5f); // Visualmente indicar que está desativado
+            btnCriador.setAlpha(0.5f);
             Toast.makeText(this, "Apenas Administradores ou Docentes podem acessar o botão criador.", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void EventosSemana() {
-        List<Evento> eventos = dao.getAllEventos();
+        if (usuarioId == -1) {
+            Toast.makeText(this, "Usuário não logado!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<Evento> eventosInscritos = dao.getEventosInscritos(usuarioId);
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        for (Evento evento : eventos) {
-            // Infla a visualização para cada evento
+        eventosContainerSemana.removeAllViews();
+
+        for (Evento evento : eventosInscritos) {
             View eventoView = inflater.inflate(R.layout.mostrar_evento_semana, eventosContainerSemana, false);
 
-            // Configura o listener no botão dentro da visualização inflada
+            ImageView imgBannerEvento = eventoView.findViewById(R.id.imgBannerEvento);
+
+
+            byte[] bannerImagemBytes = dao.obterBannerEvento(evento.getId());
+            if (bannerImagemBytes != null && bannerImagemBytes.length > 0) {
+                Bitmap bannerBitmap = BitmapFactory.decodeByteArray(bannerImagemBytes, 0, bannerImagemBytes.length);
+                imgBannerEvento.setImageBitmap(bannerBitmap);
+                imgBannerEvento.setScaleType(ImageView.ScaleType.FIT_XY);
+            } else {
+                imgBannerEvento.setImageResource(R.drawable.bannerpadrao);
+                imgBannerEvento.setScaleType(ImageView.ScaleType.FIT_XY);
+            }
+
             Button btnInformacoes = eventoView.findViewById(R.id.btnInformacoes);
             btnInformacoes.setOnClickListener(v -> {
-                // Salvar o ID do evento no SharedPreferences
+
                 SharedPreferences prefs = getSharedPreferences("EventPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong("EVENTO_ID", evento.getId());
                 editor.apply();
 
-
-                // Passar a informação de que a VisaoGeral foi acessada a partir da Tela Inicial
                 Intent intent = new Intent(this, VisaoGeral.class);
                 intent.putExtra("evento_id", evento.getId());
-                intent.putExtra("VEM_DA_TELA_INICIAL", true);  // Passa a flag
+                intent.putExtra("VEM_DA_TELA_INICIAL", true);  // Pass the flag to indicate this came from the main screen
                 startActivity(intent);
             });
 
-
-            // Adiciona a visualização ao container
             eventosContainerSemana.addView(eventoView);
         }
     }
@@ -107,7 +126,6 @@ public class MeusEventosParticipante extends AppCompatActivity {
 
     private void EventosMes() {
         List<Evento> eventos = dao.getAllEventos();
-
         LayoutInflater inflater = LayoutInflater.from(this);
 
         for (Evento evento : eventos) {
@@ -139,6 +157,25 @@ public class MeusEventosParticipante extends AppCompatActivity {
                 .show();
     }
 
+    private long getUsuarioId() {
+        String usuarioEmail = getEmailUsuario();
+        if (usuarioEmail == null) {
+            return -1;
+        }
+        Usuario usuario = dao.buscarUsuarioPorEmail(usuarioEmail);
+        if (usuario != null) {
+            return usuario.getId();
+        } else {
+            return -1;
+        }
+    }
+
+    private String getEmailUsuario() {
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        return prefs.getString("email", null);
+    }
+
+
     public void IrTelaCriador(View view) {
         Intent in = new Intent(MeusEventosParticipante.this, MeusEventosCriador.class);
         startActivity(in);
@@ -163,5 +200,4 @@ public class MeusEventosParticipante extends AppCompatActivity {
         Intent in = new Intent(this, MinhaConta.class);
         startActivity(in);
     }
-
 }

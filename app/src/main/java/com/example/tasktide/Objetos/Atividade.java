@@ -6,10 +6,9 @@ public class Atividade {
     private String nomeAtividade;
     private String palestrante;
     private String localAtividade;
-    private String responsavel;
     private long idEvento;
 
-    public Atividade(String data, String horario, String nomeAtividade, String palestrante, String localAtividade) {
+    public Atividade(String data, String horario, String nomeAtividade, String palestrante, String localAtividade, long idEvento) {
         this.data = data;
         this.horario = horario;
         this.nomeAtividade = nomeAtividade;
@@ -18,11 +17,51 @@ public class Atividade {
         this.idEvento = idEvento;
     }
 
-    public String getData() { return data; }
-    public String getHorario() { return horario; }
-    public String getNomeAtividade() { return nomeAtividade; }
-    public String getPalestrante() { return palestrante; }
-    public String getLocalAtividade() { return localAtividade; }
-    public String getResponsavel() { return responsavel;}
-    public long getIdEvento() { return idEvento; }
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public void setNomeAtividade(String nomeAtividade) {
+        this.nomeAtividade = nomeAtividade;
+    }
+
+    public void setPalestrante(String palestrante) {
+        this.palestrante = palestrante;
+    }
+
+    public void setLocalAtividade(String localAtividade) {
+        this.localAtividade = localAtividade;
+    }
+
+    public void setIdEvento(long idEvento) {
+        this.idEvento = idEvento;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public String getNomeAtividade() {
+        return nomeAtividade;
+    }
+
+    public String getPalestrante() {
+        return palestrante;
+    }
+
+    public String getLocalAtividade() {
+        return localAtividade;
+    }
+
+    public long getIdEvento() {
+        return idEvento;
+    }
 }

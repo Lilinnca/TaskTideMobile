@@ -66,6 +66,7 @@ public class DAO extends SQLiteOpenHelper {
 
         Log.i("DAO", "Banco de dados criado com sucesso.");
     }
+
     private void createTablePdf(SQLiteDatabase db) {
         String createTablePdf = "CREATE TABLE IF NOT EXISTS tabela_pdfs (" +
                 "id_pdf INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -127,7 +128,7 @@ public class DAO extends SQLiteOpenHelper {
                 "prazo TEXT," +
                 "local TEXT," +
                 "valorEvento DOUBLE," +
-                "Pago TEXT," +
+                "Pago INTEGER," +
                 "FOREIGN KEY (id_evento) REFERENCES " + TABELA_EVENTO + "(id))";
         db.execSQL(sql);
         Log.i(TAG, "Tabela de informações criada com sucesso.");
@@ -162,10 +163,10 @@ public class DAO extends SQLiteOpenHelper {
                 "id_evento INTEGER, " +
                 "nomeAtividade TEXT, " +
                 "horario TEXT, " +
-                "responsavel TEXT, " +
+                "palestrante TEXT, " +
                 "localAtividade TEXT, " +
                 "data TEXT, " +
-                "FOREIGN KEY (id_evento) REFERENCES " + TABELA_EVENTO + "(id)" +
+                "FOREIGN KEY (id_evento) REFERENCES " + TABELA_EVENTO + "(id) ON DELETE CASCADE " +
                 ");";
         db.execSQL(createAtividadeTable);
         Log.i(TAG, "Tabela de atividades criada com sucesso.");
@@ -191,17 +192,21 @@ public class DAO extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public String[] buscarInformacoesPorEvento(long eventoId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT dataPrevista, dataFim, local, prazo FROM informacoes WHERE id = ?", new String[]{String.valueOf(eventoId)});
+        Cursor cursor = db.rawQuery("SELECT dataPrevista, dataFim, local, prazo, valorEvento, horarioInicio, horarioTermino FROM informacoes WHERE id = ?",
+                new String[]{String.valueOf(eventoId)});
         if (cursor.moveToFirst()) {
             String dataPrevista = cursor.getString(0);
             String dataFim = cursor.getString(1);
             String local = cursor.getString(2);
             String prazo = cursor.getString(3);
+            String valorEvento = cursor.getString(4);
+            String horarioInicio = cursor.getString(5);
+            String horarioTermino = cursor.getString(6);
             cursor.close();
-            return new String[]{dataPrevista, dataFim, local, prazo};
+            return new String[]{dataPrevista, dataFim, local, prazo, valorEvento, horarioInicio, horarioTermino};
         }
         cursor.close();
-        return new String[]{"", "", "", ""};
+        return new String[]{"", "", "", "", "", "", ""};
     }
 
 
@@ -272,20 +277,6 @@ public class DAO extends SQLiteOpenHelper {
         }
 
         return id;
-    }
-
-    public boolean EventoPago(long idEvento) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
-
-        boolean isPago = false;
-        if (cursor.moveToFirst()) {
-            String pago = cursor.getString(0);
-            isPago = "Sim".equalsIgnoreCase(pago);
-        }
-        cursor.close();
-        return isPago;
     }
 
     public List<Certificado> getAllCertificados() {
@@ -365,7 +356,6 @@ public class DAO extends SQLiteOpenHelper {
     }
 
 
-
     public void deletarCertificados(long idCertificado) {
         SQLiteDatabase db = this.getWritableDatabase();
         int resultado = db.delete(TABELA_CERTIFICADOS, "id_certificado = ?", new String[]{String.valueOf(idCertificado)});
@@ -377,54 +367,11 @@ public class DAO extends SQLiteOpenHelper {
         db.close();
     }
 
-
-
-
-    public void atualizarInformacoesEvento(long eventoId, String dataPrevista, String dataFim, String prazoInscricao, String local, boolean isPago, String valorEvento) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("dataPrevista", dataPrevista);
-        values.put("dataFim", dataFim);
-        values.put("prazoInscricao", prazoInscricao);
-        values.put("local", local);
-        values.put("isPago", isPago ? 1 : 0);
-        values.put("valorEvento", valorEvento);
-
-        int rowsUpdated = db.update("Eventos", values, "id = ?", new String[]{String.valueOf(eventoId)});
-        if (rowsUpdated > 0) {
-            Log.d("DAO", "Informações do evento atualizadas com sucesso.");
-        } else {
-            Log.d("DAO", "Falha ao atualizar as informações do evento.");
-        }
-    }
-
-    private boolean verificarDataValida(String data) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false);
-            sdf.parse(data);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private String formatarData(String data) {
-        try {
-            SimpleDateFormat sdfEntrada = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat sdfSaida = new SimpleDateFormat("dd/MM/yyyy");
-            return sdfSaida.format(sdfEntrada.parse(data));
-        } catch (Exception e) {
-            return data;
-        }
-    }
-
     public long inserirEvento(Evento evento) {
         SQLiteDatabase db = this.getWritableDatabase();
         long id = -1;
 
         try {
-            // Inserir o evento no banco de dados
             ContentValues values = new ContentValues();
             values.put("nome_evento", evento.getNomeEvento());
             values.put("tipo_evento", evento.getTipoEvento());
@@ -458,48 +405,6 @@ public class DAO extends SQLiteOpenHelper {
         return id;
     }
 
-    public Date obterDataEvento(long eventoId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Date dataEvento = null;
-
-        Cursor cursor = db.query("informacoes", new String[]{"dataPrevista", "dataFim"},
-                "eventoId = ?", new String[]{String.valueOf(eventoId)}, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-
-            @SuppressLint("Range") long dataPrevistaMillis = cursor.getLong(cursor.getColumnIndex("dataPrevista"));
-
-            dataEvento = new Date(dataPrevistaMillis);
-
-            cursor.close();
-        }
-
-        db.close();
-        return dataEvento;
-    }
-
-
-    public long inserirAtividade(Atividade atividade, long idEvento) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        long id = -1;
-        try {
-            ContentValues values = new ContentValues();
-            values.put("id_evento", idEvento);
-            values.put("nomeAtividade", atividade.getNomeAtividade());
-            values.put("horario", atividade.getHorario());
-            values.put("responsavel", atividade.getResponsavel());
-            values.put("localAtividade", atividade.getLocalAtividade());
-            values.put("data", atividade.getData());
-
-            id = db.insert(TABELA_ATIVIDADE, null, values);
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao inserir atividade: " + e.getMessage());
-        } finally {
-            db.close();
-        }
-        return id;
-    }
-
     public boolean isTableExists(SQLiteDatabase db, String tableName) {
         Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
         boolean exists = cursor.getCount() > 0;
@@ -510,8 +415,9 @@ public class DAO extends SQLiteOpenHelper {
     public long inserirInformacoes(Informacoes informacoes, long idEvento) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put("id_evento", idEvento);
-        values.put("dataPrevista", informacoes.getDataPrevista()); // Corrigido para 'dataPrevista'
+        values.put("dataPrevista", informacoes.getDataPrevista());
         values.put("dataFim", informacoes.getDataFim());
         values.put("horarioInicio", informacoes.getHorarioInicio());
         values.put("horarioTermino", informacoes.getHorarioTermino());
@@ -532,107 +438,12 @@ public class DAO extends SQLiteOpenHelper {
         return id;
     }
 
-
-
     @Override
     public SQLiteDatabase getWritableDatabase() {
         SQLiteDatabase db = super.getWritableDatabase();
         db.execSQL("PRAGMA foreign_keys=ON;");
         return db;
     }
-
-    @SuppressLint("Range")
-    public List<Evento> buscarEventosSemana() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        List<Evento> eventos = new ArrayList<>();
-        try {
-            String dataHoje = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(dataHoje));
-            calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek()); // Início da semana
-            String inicioSemana = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
-
-            calendar.add(Calendar.DATE, 6); // Fim da semana
-            String fimSemana = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
-
-            // Busca os eventos entre o início e o fim da semana
-            String query = "SELECT * FROM Evento WHERE data_evento BETWEEN ? AND ?";
-            Cursor cursor = db.rawQuery(query, new String[]{inicioSemana, fimSemana});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    Evento evento = new Evento();
-                    evento.setId(cursor.getLong(cursor.getColumnIndex("id")));
-                    evento.setNomeEvento(cursor.getString(cursor.getColumnIndex("nomeEvento")));
-                    evento.setDataEvento(cursor.getString(cursor.getColumnIndex("dataEvento")));
-                    eventos.add(evento);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return eventos;
-    }
-
-
-    @SuppressLint("Range")
-    public List<Evento> buscarEventosMes() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        List<Evento> eventosMes = new ArrayList<>();
-
-        try {
-            // Obtendo a data atual
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar calendar = Calendar.getInstance();
-            String dataHoje = sdf.format(calendar.getTime());
-
-            // Calculando o início e fim do mês
-            calendar.setTime(sdf.parse(dataHoje));
-            calendar.set(Calendar.DAY_OF_MONTH, 1); // Início do mês
-            String inicioMes = sdf.format(calendar.getTime());
-
-            calendar.add(Calendar.MONTH, 1); // Próximo mês
-            calendar.set(Calendar.DAY_OF_MONTH, 1); // Primeira data do próximo mês
-            calendar.add(Calendar.DATE, -1); // Voltando um dia para o último dia do mês
-            String fimMes = sdf.format(calendar.getTime());
-
-            // Query para buscar eventos dentro do intervalo do mês
-            String query = "SELECT * FROM Evento WHERE data_evento BETWEEN ? AND ?";
-            Cursor cursor = db.rawQuery(query, new String[]{inicioMes, fimMes});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    Evento evento = new Evento();
-                    evento.setId(cursor.getLong(cursor.getColumnIndex("id")));
-                    evento.setNomeEvento(cursor.getString(cursor.getColumnIndex("nomeEvento")));
-                    evento.setDataEvento(cursor.getString(cursor.getColumnIndex("dataEvento")));
-                    // Adicionar outros atributos do evento conforme necessário
-                    eventosMes.add(evento);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return eventosMes;
-    }
-
-
-    // Helper para criar um Evento a partir do cursor
-    private Evento criarEventoDoCursor(Cursor cursor) {
-        Evento evento = new Evento();
-        evento.setId(cursor.getLong(cursor.getColumnIndexOrThrow("id")));
-        evento.setNomeEvento(cursor.getString(cursor.getColumnIndexOrThrow("nome_evento")));
-        evento.setDescricao(cursor.getString(cursor.getColumnIndexOrThrow("descricao")));
-        evento.setDataEvento(cursor.getString(cursor.getColumnIndexOrThrow("data_evento")));
-        evento.setLocalEvento(cursor.getString(cursor.getColumnIndexOrThrow("local_evento")));
-        // Adicione mais campos se necessário
-        return evento;
-    }
-
-
 
     public List<Atividade> buscarAtividadesPorEvento(long idEvento) {
         List<Atividade> atividades = new ArrayList<>();
@@ -649,7 +460,7 @@ public class DAO extends SQLiteOpenHelper {
                 String palestrante = cursor.getString(cursor.getColumnIndexOrThrow("palestrante"));
                 String localAtividade = cursor.getString(cursor.getColumnIndexOrThrow("localAtividade"));
 
-                Atividade atividade = new Atividade(data, horario, nomeAtividade, palestrante, localAtividade);
+                Atividade atividade = new Atividade(data, horario, nomeAtividade, palestrante, localAtividade, idEvento);
                 atividades.add(atividade);
             } while (cursor.moveToNext());
         }
@@ -704,13 +515,13 @@ public class DAO extends SQLiteOpenHelper {
         return success;
     }
 
-    public void deleteEvento(long eventoId) {
+    public void deleteEvento(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int rowsDeleted = db.delete("TABELA_EVENTO", "id = ?", new String[]{String.valueOf(eventoId)});
+        int rowsDeleted = db.delete("evento", "id = ?", new String[]{String.valueOf(id)});
         if (rowsDeleted > 0) {
             Log.d("DAO", "Evento deletado com sucesso.");
         } else {
-            Log.d("DAO", "Erro ao deletar evento. ID não encontrado: " + eventoId);
+            Log.d("DAO", "Erro ao deletar evento. ID não encontrado: " + id);
         }
         db.close();
     }
@@ -773,9 +584,6 @@ public class DAO extends SQLiteOpenHelper {
 
         return certificados;
     }
-
-
-
 
 
     @SuppressLint("Range")
@@ -861,124 +669,103 @@ public class DAO extends SQLiteOpenHelper {
         return inscrito;
     }
 
-
-    public String obterDescricaoEvento(long idEvento) {
-        String descricao = null;
+    //Visão Geral (Métodos)
+    public void atualizarNomeEvento(String nomeEvento, long idEvento) {
         SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "SELECT descricao FROM evento WHERE id = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
-
-        if (cursor.moveToFirst()) {
-            descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
-        }
-
-        cursor.close();
-        db.close();
-        return descricao;
-    }
-
-    public void atualizarNomeEvento(long idEvento, String novoNome) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nome_evento", novoNome);
-        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
+        values.put("nome_evento", nomeEvento);
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("evento", values, whereClause, whereArgs);
     }
 
 
-    public void atualizarLocalEvento(long idEvento, String novoLocal) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void atualizarLocalEvento(String localEvento, long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("local", novoLocal);
-        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
+        values.put("local", localEvento);
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("informacoes", values, whereClause, whereArgs);
     }
 
-
-    public void adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String localAtividade, String data) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
+    public void atualizarHorarioInicioEvento(String horarioInicio, long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id_evento", idEvento);
-        values.put("nomeAtividade", nomeAtividade);
-        values.put("horario", horario);
-        values.put("palestrante", palestrante);
-        values.put("localAtividade", localAtividade);
-        values.put("data", data);
+        values.put("horarioInicio", horarioInicio);
 
-        long newRowId = db.insert("cronograma", null, values);
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
 
-        if (newRowId == -1) {
-            Log.e("Database Error", "Erro ao inserir atividade");
-        } else {
-            Log.d("Database Success", "Atividade adicionada com sucesso! ID: " + newRowId + ", ID Evento: " + idEvento);
-        }
-        db.close();
+        db.update("informacoes", values, whereClause, whereArgs);
     }
 
-    public void atualizarEventoTipoEhoras(long idEvento, String tipoEvento, String horasComplementares) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void atualizarHorarioTerminoEvento(String horarioTermino, long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("horarioTermino", horarioTermino);
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("informacoes", values, whereClause, whereArgs);
+    }
+
+    public void atualizarPrazoInscricaoEvento(String prazo, long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("prazo", prazo);
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("informacoes", values, whereClause, whereArgs);
+    }
+
+    public void atualizarValorEvento(double valorEvento, long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("valorEvento", valorEvento);
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("informacoes", values, whereClause, whereArgs);
+    }
+
+    public void atualizarDescricaoEvento(String descricao, long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("descricao", descricao);
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("evento", values, whereClause, whereArgs);
+    }
+
+    public void atualizarTipoEhorasNoBanco(String tipoEvento, String horasComplementares, long IdEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put("tipo_evento", tipoEvento);
         values.put("horas_complementares", horasComplementares);
 
-        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(IdEvento)};
 
-    public void atualizarDataEvento(long idEvento, String novaData) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("dataPrevista", novaData);
-        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
-
-    public void atualizarHorarioInicio(long idEvento, String novoHorarioInicio) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("horarioInicio", novoHorarioInicio);
-        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
-
-    public void atualizarHorarioTermino(long idEvento, String novoHorarioTermino) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("horarioTermino", novoHorarioTermino);
-        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
-
-    public void atualizarTipoEvento(long idEvento, String novoTipo) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("tipo_evento", novoTipo);
-        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
-
-    public void atualizarPrazoEvento(long idEvento, String novoPrazo) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("prazo", novoPrazo);
-        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
-
-    public void atualizarValorEvento(long idEvento, String novoValor) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("valorEvento", novoValor);
-        db.update(TABELA_INFORMACOES, values, "id_evento = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
+        db.update("evento", values, whereClause, whereArgs);
     }
 
     public void atualizarBannerEvento(long idEvento, byte[] bannerImagem) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("banner_imagem", bannerImagem);
+
+        Log.d("AtualizacaoBanner", "ID do Evento: " + idEvento);
 
         int rowsAffected = db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
         db.close();
@@ -988,129 +775,6 @@ public class DAO extends SQLiteOpenHelper {
         } else {
             Log.e(TAG, "Erro ao atualizar a imagem do banner para o evento ID: " + idEvento);
         }
-    }
-
-    @SuppressLint("Range")
-    public Evento getEventoById(int idEvento) {
-        Evento evento = null;
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM evento WHERE id = ?", new String[]{String.valueOf(idEvento)});
-
-        if (cursor.moveToFirst()) {
-            evento = new Evento();
-
-            int nomeEventoIndex = cursor.getColumnIndex("nome_evento");
-            int descricaoIndex = cursor.getColumnIndex("descricao");
-
-            if (nomeEventoIndex != -1) {
-                evento.setNomeEvento(cursor.getString(nomeEventoIndex));
-            } else {
-                Log.e("DB_ERROR", "Coluna nomeEvento não encontrada.");
-            }
-
-            if (descricaoIndex != -1) {
-                evento.setDescricao(cursor.getString(descricaoIndex));
-            } else {
-                Log.e("DB_ERROR", "Coluna descricao não encontrada.");
-            }
-
-        } else {
-            Log.e("DB_ERROR", "Nenhum evento encontrado com o ID: " + idEvento);
-        }
-
-        cursor.close();
-        db.close();
-        return evento;
-    }
-
-    @SuppressLint("Range")
-    public Informacoes getInformacoesById(long idEvento) {
-        Informacoes informacoes = null;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM informacoes WHERE id_evento = ?", new String[]{String.valueOf(idEvento)});
-
-        if (cursor != null && cursor.moveToFirst()) {
-            informacoes = new Informacoes(
-                    cursor.getString(cursor.getColumnIndex("dataPrevista")),
-                    cursor.getString(cursor.getColumnIndex("dataFim")),
-                    cursor.getString(cursor.getColumnIndex("horarioInicio")),
-                    cursor.getString(cursor.getColumnIndex("horarioTermino")),
-                    cursor.getString(cursor.getColumnIndex("prazo")),
-                    cursor.getString(cursor.getColumnIndex("local")),
-                    cursor.getDouble(cursor.getColumnIndex("valorEvento")),
-                    cursor.getString(cursor.getColumnIndex("Pago"))
-            );
-        }
-
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        return informacoes;
-    }
-
-
-    public boolean isEventoPago(long eventoId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        boolean pago = false;
-
-        String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
-        Cursor cursor = null;
-
-        try {
-            cursor = db.rawQuery(query, new String[]{String.valueOf(eventoId)});
-            if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndex("Pago");
-                if (columnIndex != -1) { // Verifica se a coluna existe
-                    String pagoValue = cursor.getString(columnIndex);
-                    pago = "1".equals(pagoValue); // Assumindo que "1" significa pago
-                } else {
-                    Log.e("DAO", "Coluna 'Pago' não encontrada na tabela 'informacoes'.");
-                }
-            }
-        } catch (Exception e) {
-            Log.e("DAO", "Erro ao verificar se o evento é pago", e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.close();
-        }
-        return pago;
-    }
-
-
-
-    public void atualizarDescricaoEvento(long idEvento, String novaDescricao) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("descricao", novaDescricao);
-        db.update(TABELA_EVENTO, values, "id = ?", new String[]{String.valueOf(idEvento)});
-        db.close();
-    }
-
-    public long inserirUsuario(Usuario usuario) {
-        if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
-            Log.w(TAG, "Nome do usuário não pode ser vazio.");
-            return -1;
-        }
-        if (usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()) {
-            Log.w(TAG, "Email do usuário não pode ser vazio.");
-            return -1;
-        }
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("nome", usuario.getNome());
-        values.put("email", usuario.getEmail());
-        values.put("senha", usuario.getSenha());
-        values.put("cargo", usuario.getCargo());
-
-        long id = db.insert(TABELA_USUARIOS, null, values);
-        db.close();
-        Log.i(TAG, "Usuário inserido com sucesso. ID: " + id);
-        return id;
     }
 
     public byte[] obterBannerEvento(long idEvento) {
@@ -1142,6 +806,124 @@ public class DAO extends SQLiteOpenHelper {
         return imagemBytes;
     }
 
+    public String obterDescricaoEvento(long idEvento) {
+        String descricao = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT descricao FROM evento WHERE id = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
+
+        if (cursor.moveToFirst()) {
+            descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
+        }
+
+        cursor.close();
+        db.close();
+        return descricao;
+    }
+
+    public boolean EventoPago(long idEvento) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        boolean isPago = false;
+
+        try {
+            String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
+            cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                isPago = cursor.getInt(0) == 1;
+            }
+        } catch (Exception e) {
+            Log.e("DAO", "Erro ao verificar o pagamento do evento: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return isPago;
+    }
+
+    public void adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String localAtividade, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("id_evento", idEvento);
+        values.put("nomeAtividade", nomeAtividade);
+        values.put("horario", horario);
+        values.put("palestrante", palestrante);
+        values.put("localAtividade", localAtividade);
+        values.put("data", data);
+
+        long id = db.insert(TABELA_ATIVIDADE, null, values);
+
+        if (id == -1) {
+            Log.e(TAG, "Erro ao adicionar atividade no banco de dados.");
+        } else {
+            Log.i(TAG, "Atividade adicionada com sucesso. ID: " + id);
+        }
+        db.close();
+    }
+
+
+    //Fim Visão Geral (Métodos)
+
+    @SuppressLint("Range")
+    public Informacoes getInformacoesById(long idEvento) {
+        Informacoes informacoes = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM informacoes WHERE id_evento = ?", new String[]{String.valueOf(idEvento)});
+
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            informacoes = new Informacoes(
+                    cursor.getLong(cursor.getColumnIndex("id")),
+                    cursor.getLong(cursor.getColumnIndex("id_evento")),
+                    cursor.getString(cursor.getColumnIndex("dataPrevista")),
+                    cursor.getString(cursor.getColumnIndex("dataFim")),
+                    cursor.getString(cursor.getColumnIndex("horarioInicio")),
+                    cursor.getString(cursor.getColumnIndex("horarioTermino")),
+                    cursor.getString(cursor.getColumnIndex("prazo")),
+                    cursor.getString(cursor.getColumnIndex("local")),
+                    cursor.getInt(cursor.getColumnIndex("Pago")),
+                    cursor.getDouble(cursor.getColumnIndex("valorEvento"))
+            );
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return informacoes;
+    }
+
+    public long inserirUsuario(Usuario usuario) {
+        if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
+            Log.w(TAG, "Nome do usuário não pode ser vazio.");
+            return -1;
+        }
+        if (usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()) {
+            Log.w(TAG, "Email do usuário não pode ser vazio.");
+            return -1;
+        }
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nome", usuario.getNome());
+        values.put("email", usuario.getEmail());
+        values.put("senha", usuario.getSenha());
+        values.put("cargo", usuario.getCargo());
+
+        long id = db.insert(TABELA_USUARIOS, null, values);
+        db.close();
+        Log.i(TAG, "Usuário inserido com sucesso. ID: " + id);
+        return id;
+    }
+
     public long inserirParticipantes(Participantes participantes, long idEvento) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -1155,33 +937,6 @@ public class DAO extends SQLiteOpenHelper {
         } else {
             Log.e(TAG, "Erro ao inserir participantes.");
         }
-        return id;
-    }
-
-    public Usuario getUsuarioLogado() {
-        if (context != null) {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("USER_PREF", Context.MODE_PRIVATE);
-            String usuarioEmail = sharedPreferences.getString("email", null);
-            if (usuarioEmail != null) {
-                return buscarUsuarioPorEmail(usuarioEmail);
-            }
-        } else {
-            Log.e("DAO", "Contexto nulo! Não é possível acessar SharedPreferences.");
-        }
-        return null;
-    }
-
-    public long inserirAtividade(Atividade atividade) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("id_evento", atividade.getIdEvento());
-        values.put("nomeAtividade", atividade.getNomeAtividade());
-        values.put("horario", atividade.getHorario());
-        values.put("palestrante", atividade.getPalestrante());
-        values.put("localAtividade", atividade.getLocalAtividade());
-        values.put("data", atividade.getData());
-        long id = db.insert(TABELA_CRONOGRAMA, null, values);
-        db.close();
         return id;
     }
 }

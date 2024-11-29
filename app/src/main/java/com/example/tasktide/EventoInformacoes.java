@@ -125,59 +125,53 @@ public class EventoInformacoes extends AppCompatActivity {
     }
 
     public void avancarInformacoes(View view) {
-        // Obtendo os dados dos campos
-        String dataPrevis = editTextDataPrevista.getText().toString().trim();
+        String dataPrevista = editTextDataPrevista.getText().toString().trim();
         String dataFim = editTextDataFim.getText().toString().trim();
         String prazo = editTextPrazo.getText().toString().trim();
         String local = editTextLocal.getText().toString().trim();
         String valorEventoString = editTextValorEvento.getText().toString().trim();
 
-        // Pegando os horários, se visíveis
         String horarioInicio = editTextHorarioInicio.getVisibility() == View.VISIBLE
                 ? editTextHorarioInicio.getText().toString().trim()
-                : ""; // Deixa vazio se o campo não estiver visível
+                : "";
         String horarioFim = editTextHorarioFim.getVisibility() == View.VISIBLE
                 ? editTextHorarioFim.getText().toString().trim()
-                : ""; // Deixa vazio se o campo não estiver visível
+                : "";
 
-        // Verificando se o evento foi pago
         String pago = rbtnSim.isChecked() ? "Sim" : "Não";
 
-        // Convertendo o valor do evento de String para Double, se necessário
+        int pagoInt = "Sim".equalsIgnoreCase(pago) ? 1 : 0;
+
         double valorEvento = 0.0;
         if (!valorEventoString.isEmpty()) {
             try {
                 valorEvento = Double.parseDouble(valorEventoString);
             } catch (NumberFormatException e) {
-                // Se o valor não for um número válido
                 Toast.makeText(this, "Valor do evento deve ser um número válido.", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
 
-        // Criando o objeto Informacoes com os dados preenchidos
         Informacoes informacoes = new Informacoes();
-        informacoes.setDataPrevista(dataPrevis);
+        informacoes.setDataPrevista(dataPrevista);
         informacoes.setDataFim(dataFim);
         informacoes.setHorarioInicio(horarioInicio);
         informacoes.setHorarioTermino(horarioFim);
         informacoes.setPrazo(prazo);
         informacoes.setLocal(local);
         informacoes.setValorEvento(valorEvento);
-        informacoes.setPago(pago);
+        informacoes.setPago(pagoInt);
 
-        // Usando o DAO para inserir as informações no banco de dados
         DAO dao = new DAO(this);
         dao.inserirInformacoes(informacoes, idEvento);  // Certifique-se de que o método inserirInformacoes está correto
 
-        // Criando a intent para avançar para a tela EventoParticipante
         Intent intent = new Intent(this, EventoParticipante.class);
         intent.putExtra("ID_EVENTO", idEvento);
         startActivity(intent);
 
-        // Finalizando a activity atual
         finish();
     }
+
 
 
 

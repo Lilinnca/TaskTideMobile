@@ -10,16 +10,16 @@ public class Evento implements Serializable {
     private String modalidade;
     private String categoria;
     private String descricao;
-    private String bannerImagem; // Esse campo pode ser mantido, caso você queira uma URL ou nome de arquivo
+    private String bannerImagem;
     private String localEvento;
     private String dataEvento;
-    private byte[] bannerImagemByte; // Agora o banner será armazenado como byte[]
+
 
     // Construtor sem parâmetros
     public Evento() {}
 
     // Construtor com todos os parâmetros
-    public Evento(long id, String nomeEvento, String tipoEvento, String horasComplementares, String modalidade, String categoria, String descricao, String bannerImagem, String localEvento, String dataEvento, byte[] bannerImagemByte) {
+    public Evento(long id, String nomeEvento, String tipoEvento, String horasComplementares, String modalidade, String categoria, String descricao, String bannerImagem, String localEvento, String dataEvento) {
         this.id = id;
         this.nomeEvento = nomeEvento;
         this.tipoEvento = tipoEvento;
@@ -30,7 +30,6 @@ public class Evento implements Serializable {
         this.bannerImagem = bannerImagem;
         this.localEvento = localEvento;
         this.dataEvento = dataEvento;
-        this.bannerImagemByte = bannerImagemByte;
     }
 
     // Getters e setters
@@ -97,14 +96,6 @@ public class Evento implements Serializable {
 
     public void setBannerImagem(String bannerImagem) {
         this.bannerImagem = bannerImagem;
-    }
-
-    public byte[] getBannerImagemByte() {
-        return bannerImagemByte;
-    }
-
-    public void setBannerImagemByte(byte[] bannerImagemByte) {
-        this.bannerImagemByte = bannerImagemByte;
     }
 
     public String getLocalEvento() {

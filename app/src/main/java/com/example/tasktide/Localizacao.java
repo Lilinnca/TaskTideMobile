@@ -24,7 +24,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -33,32 +32,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Localizacao extends AppCompatActivity implements OnMapReadyCallback {
-
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private FusedLocationProviderClient fusedLocationClient;
     private GoogleMap mMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_localizacao);
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFragment);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -68,7 +60,7 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             getDeviceLocation();
         }
-
+        // Coordenadas do destino
         LatLng enderecoIFAM = new LatLng(-3.1343665666971323, -60.012890561432684);
         mMap.addMarker(new MarkerOptions().position(enderecoIFAM).title("IFAM - Av. Sete de Setembro, 1975"));
     }
@@ -78,12 +70,11 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
-
+                // o amigo que adiciona a rota no mapa
                 LatLng enderecoIFAM = new LatLng(-3.1343665666971323, -60.012890561432684);
                 desenharRota(userLocation, enderecoIFAM);
             }
@@ -98,20 +89,14 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
                         + origin.latitude + "," + origin.longitude
                         + "&destination=" + destination.latitude + "," + destination.longitude
                         + "&key=AIzaSyDXskG52GlExtiuhK_auSINgRvQubTVvjU";
-
-
                 HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
                 String line;
-
-
                 while ((line = reader.readLine()) != null) {
                     result.append(line);
                 }
                 reader.close();
-
-
                 JSONObject jsonResponse = new JSONObject(result.toString());
                 JSONArray routes = jsonResponse.getJSONArray("routes");
                 if (routes.length() > 0) {
@@ -119,8 +104,6 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
                     JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
                     String encodedPoints = overviewPolyline.getString("points");
                     List<LatLng> polylinePoints = decodePolyline(encodedPoints);
-
-
                     runOnUiThread(() -> mMap.addPolyline(new PolylineOptions().addAll(polylinePoints)));
                 }
             } catch (Exception e) {
@@ -136,37 +119,27 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
                         + origin.latitude + "," + origin.longitude
                         + "&destination=" + destination.latitude + "," + destination.longitude
                         + "&key=AIzaSyDXskG52GlExtiuhK_auSINgRvQubTVvjU";
-
-
                 HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
                 String line;
-
-
                 while ((line = reader.readLine()) != null) {
                     result.append(line);
                 }
                 reader.close();
-
-
                 JSONObject jsonResponse = new JSONObject(result.toString());
                 JSONArray routes = jsonResponse.getJSONArray("routes");
                 if (routes.length() > 0) {
                     JSONObject route = routes.getJSONObject(0);
                     JSONObject legs = route.getJSONArray("legs").getJSONObject(0);
-
                     String distance = legs.getJSONObject("distance").getString("text");
                     String duration = legs.getJSONObject("duration").getString("text");
-
                     JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
                     String encodedPoints = overviewPolyline.getString("points");
                     List<LatLng> polylinePoints = decodePolyline(encodedPoints);
-
                     runOnUiThread(() -> {
                         TextView distanceText = findViewById(R.id.txtLocalizacao);
                         distanceText.setText("Distância: " + distance + " | Tempo estimado: " + duration);
-
                         if (mMap != null) {
                             mMap.addPolyline(new PolylineOptions().addAll(polylinePoints));
                         }
@@ -182,8 +155,6 @@ public class Localizacao extends AppCompatActivity implements OnMapReadyCallback
         List<LatLng> poly = new ArrayList<>();
         int index = 0, len = encoded.length();
         int lat = 0, lng = 0;
-
-
         while (index < len) {
             int b, shift = 0, result = 0;
             do {
