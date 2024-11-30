@@ -5,12 +5,10 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
-
 
         <TableLayout
             android:id="@+id/tableLayoutCronograma"
@@ -19,13 +17,11 @@
             android:stretchColumns="1"
             android:background="@color/white">
 
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:background="#338B85">                >
-
+                android:background="#338B85">
 
                 <TextView
                     android:layout_width="0dp"
@@ -33,10 +29,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:text="Timestamp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
-
+                    android:text="Data e Hora"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -44,12 +39,9 @@
                     android:layout_weight="1.5"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:minWidth="120dp"
-                    android:maxWidth="160dp"
                     android:text="Atividade"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
-
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -57,12 +49,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:minWidth="100dp"
-                    android:maxWidth="140dp"
                     android:text="Palestrante"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
-
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -70,16 +59,12 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="4dp"
-                    android:minWidth="100dp"
-                    android:maxWidth="140dp"
                     android:text="Local"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
             </TableRow>
-
 
         </TableLayout>
     </ScrollView>
-
 
 </LinearLayout>

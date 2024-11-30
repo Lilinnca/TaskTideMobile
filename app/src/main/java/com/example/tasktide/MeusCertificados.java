@@ -37,9 +37,8 @@ public class MeusCertificados extends AppCompatActivity {
 
         dao = new DAO(this);
 
-        // Verificando se o idEvento foi passado no Intent
         int idEvento = getIntent().getIntExtra("id_evento", -1);  // Aqui o id_evento é recuperado do Intent
-        if (idEvento != -1) {
+        if (idEvento != -1) {  // Verificando se o idEvento é válido (não é -1)
             // Se o idEvento estiver presente, carrega os certificados para o evento específico
             carregarCertificadosGerados(idEvento);
         } else {
@@ -48,6 +47,7 @@ public class MeusCertificados extends AppCompatActivity {
         }
     }
 
+    // Método para carregar certificados por evento
     private void carregarCertificadosGerados(int idEvento) {
         List<Certificado> certificados = dao.getCertificadosPorEvento(idEvento); // Buscar certificados por evento
         linearLayoutCertificadosEventos.removeAllViews(); // Limpa certificados antigos
@@ -60,13 +60,14 @@ public class MeusCertificados extends AppCompatActivity {
             return;
         }
 
+        // Adiciona cada certificado ao container correto
         for (Certificado certificado : certificados) {
             Log.d("MeusCertificados", "Certificado gerado recuperado: " + certificado.getNomeCertificado());
             adicionarNovoCertificadoGerado(certificado);
         }
     }
 
-
+    // Método para adicionar certificado gerado ao layout específico (por evento)
     private void adicionarNovoCertificadoGerado(Certificado certificado) {
         try {
             Log.d("MeusCertificados", "Adicionando certificado gerado: " + certificado.getNomeCertificado());
@@ -83,7 +84,6 @@ public class MeusCertificados extends AppCompatActivity {
             imageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
             imageButton.setOnClickListener(v -> {
-                // Aqui, você já tem os dados do certificado
                 Intent intent = new Intent(this, InfoCertificado.class);
                 intent.putExtra("id_certificado", certificado.getIdCertificado());
                 intent.putExtra("nome_certificado", certificado.getNomeCertificado());
@@ -93,13 +93,14 @@ public class MeusCertificados extends AppCompatActivity {
                 startActivity(intent);
             });
 
+            // Certificado gerado automaticamente será adicionado ao container de eventos
             linearLayoutCertificadosEventos.addView(imageButton);
         } catch (Exception e) {
             Log.e("MeusCertificados", "Erro ao adicionar certificado gerado", e);
         }
     }
 
-
+    // Método para carregar todos os certificados (gerais)
     private void carregarCertificados() {
         List<Certificado> certificados = dao.getAllCertificados();
         linearLayoutCertificados.removeAllViews(); // Limpa quaisquer certificados antigos antes de carregar.
@@ -115,6 +116,7 @@ public class MeusCertificados extends AppCompatActivity {
         // Inicializar soma de horas como um decimal
         double totalHoras = 0.0;
 
+        // Adiciona certificados ao layout principal (certificados gerais)
         for (Certificado certificado : certificados) {
             Log.d("MeusCertificados", "Certificado recuperado: " + certificado.getNomeCertificado());
 
@@ -131,6 +133,7 @@ public class MeusCertificados extends AppCompatActivity {
                 Log.e("MeusCertificados", "Erro ao converter horas para número no certificado: " + certificado.getNomeCertificado(), e);
             }
 
+            // Certificados inseridos manualmente (não relacionados a eventos) serão adicionados ao container geral
             adicionarNovoCertificado(certificado);
         }
 
@@ -145,28 +148,7 @@ public class MeusCertificados extends AppCompatActivity {
         editor.apply();
     }
 
-
-    private String formatarHorasExibicao(String horasStr) {
-        if (horasStr == null || horasStr.isEmpty()) {
-            return "Horas inválidas";
-        }
-        try {
-            double horasDecimais = Double.parseDouble(horasStr);
-            int horas = (int) horasDecimais; // Parte inteira (horas)
-            int minutos = (int) Math.round((horasDecimais - horas) * 60); // Parte decimal convertida em minutos
-
-            if (minutos == 0) {
-                return horas + " horas";
-            } else {
-                return horas + " horas e " + minutos + " minutos";
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return "Horas inválidas";
-        }
-    }
-
-
+    // Método para adicionar certificado ao layout principal
     private void adicionarNovoCertificado(Certificado certificado) {
         try {
             Log.d("MeusCertificados", "Adicionando certificado: " + certificado.getNomeCertificado());
@@ -195,10 +177,31 @@ public class MeusCertificados extends AppCompatActivity {
                 }
             });
 
+            // Certificados inseridos manualmente serão adicionados ao layout principal
             linearLayoutCertificados.addView(imageButton);
-
         } catch (Exception e) {
             Log.e("MeusCertificados", "Erro ao adicionar certificado", e);
+        }
+    }
+
+
+    private String formatarHorasExibicao(String horasStr) {
+        if (horasStr == null || horasStr.isEmpty()) {
+            return "Horas inválidas";
+        }
+        try {
+            double horasDecimais = Double.parseDouble(horasStr);
+            int horas = (int) horasDecimais; // Parte inteira (horas)
+            int minutos = (int) Math.round((horasDecimais - horas) * 60); // Parte decimal convertida em minutos
+
+            if (minutos == 0) {
+                return horas + " horas";
+            } else {
+                return horas + " horas e " + minutos + " minutos";
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return "Horas inválidas";
         }
     }
 

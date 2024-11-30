@@ -81,12 +81,10 @@ public class InfoCertificado extends AppCompatActivity {
             return "Horas inválidas";
         }
         try {
-            // Convertendo string decimal para número
             double horasDecimais = Double.parseDouble(horasStr);
             int horas = (int) horasDecimais; // Parte inteira (horas)
             int minutos = (int) Math.round((horasDecimais - horas) * 60); // Parte decimal convertida em minutos
 
-            // Retornar formato amigável
             if (minutos == 0) {
                 return horas + " horas";
             } else {

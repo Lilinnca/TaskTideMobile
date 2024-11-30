@@ -163,7 +163,7 @@ public class EventoInformacoes extends AppCompatActivity {
         informacoes.setPago(pagoInt);
 
         DAO dao = new DAO(this);
-        dao.inserirInformacoes(informacoes, idEvento);  // Certifique-se de que o método inserirInformacoes está correto
+        dao.inserirInformacoes(informacoes, idEvento);
 
         Intent intent = new Intent(this, EventoParticipante.class);
         intent.putExtra("ID_EVENTO", idEvento);
