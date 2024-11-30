@@ -1,25 +1,35 @@
 package com.example.tasktide.Objetos;
-
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "cronograma")
 public class Cronograma {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
+    private String nomeAtividade;
     private String data;
     private String horario;
-    private String atividade;
     private String palestrante;
+    private String local;
 
-    public Cronograma() {
-    }
-
-    public Cronograma(String data, String horario, String atividade, String palestrante) {
+    public Cronograma(long id, String nomeAtividade, String data, String horario, String palestrante, String local) {
+        this.id = id;
+        this.nomeAtividade = nomeAtividade;
         this.data = data;
         this.horario = horario;
-        this.atividade = atividade;
         this.palestrante = palestrante;
+        this.local = local;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNomeAtividade() {
+        return nomeAtividade;
+    }
+
+    public void setNomeAtividade(String nomeAtividade) {
+        this.nomeAtividade = nomeAtividade;
     }
 
     public String getData() {
@@ -38,14 +48,6 @@ public class Cronograma {
         this.horario = horario;
     }
 
-    public String getAtividade() {
-        return atividade;
-    }
-
-    public void setAtividade(String atividade) {
-        this.atividade = atividade;
-    }
-
     public String getPalestrante() {
         return palestrante;
     }
@@ -54,13 +56,16 @@ public class Cronograma {
         this.palestrante = palestrante;
     }
 
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
     @Override
     public String toString() {
-        return "Cronograma{" +
-                "data='" + data + '\'' +
-                ", horario='" + horario + '\'' +
-                ", atividade='" + atividade + '\'' +
-                ", palestrante='" + palestrante + '\'' +
-                '}';
+        return nomeAtividade + " - " + data + " às " + horario;
     }
 }

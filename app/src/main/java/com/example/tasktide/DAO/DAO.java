@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.tasktide.Objetos.Atividade;
 import com.example.tasktide.Objetos.Certificado;
+import com.example.tasktide.Objetos.Cronograma;
 import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
 import com.example.tasktide.Objetos.Participantes;
@@ -834,52 +835,47 @@ public class DAO extends SQLiteOpenHelper {
         return isPago;
     }
 
-    public void adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String localAtividade, String data) {
+    public long adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String local, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
+
         values.put("id_evento", idEvento);
         values.put("nomeAtividade", nomeAtividade);
+        values.put("data", data);
         values.put("horario", horario);
         values.put("palestrante", palestrante);
-        values.put("localAtividade", localAtividade);
-        values.put("data", data);
+        values.put("localAtividade", local);
 
-        try {
-            long newRowId = db.insert("cronograma", null, values);
-            if (newRowId == -1) {
-                Log.e("Database Error", "Erro ao inserir atividade");
-            } else {
-                Log.d("Database Success", "Atividade adicionada com sucesso! ID: " + newRowId + ", ID Evento: " + idEvento);
-            }
-        } catch (Exception e) {
-            Log.e("Database Exception", "Erro ao adicionar atividade: " + e.getMessage());
-        } finally {
-            db.close();
-        }
+        long id = db.insert(TABELA_CRONOGRAMA, null, values);
+        db.close();
+        return id;
     }
 
-    public List<Atividade> buscarAtividadesPorEvento(long idEvento) {
-        List<Atividade> atividades = new ArrayList<>();
+    public List<Cronograma> buscarCronogramaPorEvento(long idEvento) {
+        List<Cronograma> cronogramas = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT * FROM cronograma WHERE id_evento = ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idEvento)});
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABELA_CRONOGRAMA + " WHERE id_evento = ?",
+                new String[]{String.valueOf(idEvento)}
+        );
 
         if (cursor.moveToFirst()) {
             do {
-                String data = cursor.getString(cursor.getColumnIndexOrThrow("data"));
-                String horario = cursor.getString(cursor.getColumnIndexOrThrow("horario"));
-                String nomeAtividade = cursor.getString(cursor.getColumnIndexOrThrow("nomeAtividade"));
-                String palestrante = cursor.getString(cursor.getColumnIndexOrThrow("palestrante"));
-                String localAtividade = cursor.getString(cursor.getColumnIndexOrThrow("localAtividade"));
-
-                Atividade atividade = new Atividade(data, horario, nomeAtividade, palestrante, localAtividade);
-                atividades.add(atividade);
+                @SuppressLint("Range") Cronograma cronograma = new Cronograma(
+                        cursor.getLong(cursor.getColumnIndex("id")),
+                        cursor.getString(cursor.getColumnIndex("nomeAtividade")),
+                        cursor.getString(cursor.getColumnIndex("data")),
+                        cursor.getString(cursor.getColumnIndex("horario")),
+                        cursor.getString(cursor.getColumnIndex("palestrante")),
+                        cursor.getString(cursor.getColumnIndex("localAtividade"))
+                );
+                cronogramas.add(cronograma);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return atividades;
+        return cronogramas;
     }
+
 }

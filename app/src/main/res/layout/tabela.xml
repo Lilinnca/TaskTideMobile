@@ -10,61 +10,68 @@
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
-        <TableLayout
-            android:id="@+id/tableLayoutCronograma"
+        <!-- HorizontalScrollView adiciona rolagem horizontal -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1"
-            android:background="@color/white">
+            android:layout_height="wrap_content">
 
-            <TableRow
-                android:layout_width="match_parent"
+            <TableLayout
+                android:id="@+id/tableLayoutCronograma"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:background="#338B85">
+                android:stretchColumns="1"
+                android:background="@color/white">
 
-                <TextView
-                    android:layout_width="0dp"
+                <!-- Linha de Cabeçalho -->
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="Data e Hora"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    android:padding="8dp"
+                    android:background="#338B85">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="Atividade"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Data e Hora"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="Palestrante"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Atividade"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="Local"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-            </TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Palestrante"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-        </TableLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Local"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </TableRow>
+
+            </TableLayout>
+        </HorizontalScrollView>
     </ScrollView>
 
 </LinearLayout>

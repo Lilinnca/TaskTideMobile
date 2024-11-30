@@ -48,6 +48,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tasktide.DAO.DAO;
 import com.example.tasktide.Objetos.Atividade;
+import com.example.tasktide.Objetos.Cronograma;
 import com.example.tasktide.Objetos.Evento;
 import com.example.tasktide.Objetos.Informacoes;
 import com.example.tasktide.Objetos.Usuario;
@@ -202,6 +203,7 @@ public class VisaoGeral extends AppCompatActivity {
 
         btnMudarBanner.setOnClickListener(v -> showImageSizeWarningDialog());
 
+        // Dentro do método do seu ImageButton ou onde for disparado o código
         ImageButton btnPopupMenu = findViewById(R.id.btnPopupMenu);
         btnPopupMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,22 +222,87 @@ public class VisaoGeral extends AppCompatActivity {
                             mostrarRelatorio(VisaoGeral.this, eventoId);
                             return true;
                         } else if (itemId == R.id.visualizarCronograma) {
-                            return true;
+                            // Criando o AlertDialog para mostrar o cronograma
+                            AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
+                            builder.setTitle("Cronograma");
+
+                            // Infla o layout correto para o cronograma (tabela.xml)
+                            LayoutInflater inflater = getLayoutInflater();
+                            View view = inflater.inflate(R.layout.tabela, null);  // Certifique-se de que 'tabela.xml' existe
+
+                            // Agora, você acessa o TableLayout no layout inflado
+                            TableLayout tableLayout = view.findViewById(R.id.tableLayoutCronograma);
+
+                            // Verificando se o TableLayout foi encontrado
+                            if (tableLayout != null) {
+                                // Preenche a tabela com os dados do cronograma
+                                preencherTabelaCronograma(tableLayout, eventoId);
+                            } else {
+                                Log.e("VisaoGeral", "TableLayout não encontrado no layout inflado.");
+                            }
+
+                            // Define a View do AlertDialog
+                            builder.setView(view);
+
+                            // Adiciona um botão para fechar o AlertDialog
+                            builder.setPositiveButton("Fechar", null);
+
+                            // Cria e exibe o AlertDialog
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+
+                            popup.dismiss();
+
+                            return true; // Indica que o item foi processado
                         }
-                        return false;
+                        return false; // Se não for nenhum dos itens acima
                     }
                 });
 
                 popup.show();
-
             }
         });
 
-        imgbtnCriarCronograma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
+
+        imgbtnCriarCronograma.setOnClickListener(v -> {
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.adicionar_atividades, null);
+
+            EditText edtNomeAtividade = dialogView.findViewById(R.id.edtNomeAtividade);
+            EditText edtLocalAtividade = dialogView.findViewById(R.id.edtLocalAtividade);
+            EditText edtResponsavelAtividade = dialogView.findViewById(R.id.edtResponsavelAtividade);
+            Button btnEscolherDataHorario = dialogView.findViewById(R.id.btnEscolherDataHorario);
+            Button btnAdicionarAtividade = dialogView.findViewById(R.id.btnAdicionarAtividade);
+
+            btnEscolherDataHorario.setOnClickListener(v1 -> escolherDataEHoras(btnEscolherDataHorario));
+
+            btnAdicionarAtividade.setOnClickListener(v1 -> {
+                String nomeAtividade = edtNomeAtividade.getText().toString();
+                String localAtividade = edtLocalAtividade.getText().toString();
+                String responsavelAtividade = edtResponsavelAtividade.getText().toString();
+                String dataHora = btnEscolherDataHorario.getText().toString();
+
+                if (nomeAtividade.isEmpty() || localAtividade.isEmpty() || responsavelAtividade.isEmpty() || dataHora.isEmpty()) {
+                    Toast.makeText(VisaoGeral.this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                } else {
+                    dao.adicionarAtividade(eventoId, nomeAtividade, dataHora, responsavelAtividade, localAtividade, "");
+                    preencherTabelaCronograma(tableLayoutCronograma, eventoId);
+
+                    edtNomeAtividade.setText("");
+                    edtLocalAtividade.setText("");
+                    edtResponsavelAtividade.setText("");
+                    btnEscolherDataHorario.setText("Escolher Data e Horário");
+
+                    Toast.makeText(VisaoGeral.this, "Atividade adicionada com sucesso!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(VisaoGeral.this);
+            builder.setView(dialogView);
+            builder.setCancelable(true);
+            builder.show();
         });
+
 
         imgbtnAlterarNome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -693,7 +760,67 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
+    //Métodos para notificação
+
     //Métodos para cronograma
+    private void preencherTabelaCronograma(TableLayout tableLayout, long eventoId) {
+        // Verifique se o TableLayout e a lista de atividades são válidos
+        if (tableLayout == null) {
+            Log.e("VisaoGeral", "TableLayout é nulo.");
+            return; // Retorna sem fazer nada se o TableLayout for nulo
+        }
+
+        List<Cronograma> atividades = dao.buscarCronogramaPorEvento(eventoId);
+
+        if (atividades == null || atividades.isEmpty()) {
+            Log.w("VisaoGeral", "Nenhuma atividade encontrada para o evento com ID " + eventoId);
+            return; // Retorna se a lista de atividades for nula ou vazia
+        }
+
+        // Remove as linhas antigas da tabela, preservando a primeira (cabeçalho)
+        tableLayout.removeViews(1, Math.max(0, tableLayout.getChildCount() - 1));
+
+        // Adiciona as novas linhas com dados das atividades
+        for (Cronograma atividade : atividades) {
+            TableRow row = new TableRow(this);
+
+            // Adiciona a coluna de Data e Hora
+            TextView txtDataHora = new TextView(this);
+            txtDataHora.setText(atividade.getData() + " " + atividade.getHorario());
+            txtDataHora.setGravity(Gravity.CENTER);
+            txtDataHora.setPadding(8, 8, 8, 8);
+
+            // Adiciona a coluna de Atividade
+            TextView txtAtividade = new TextView(this);
+            txtAtividade.setText(atividade.getNomeAtividade());
+            txtAtividade.setGravity(Gravity.CENTER);
+            txtAtividade.setPadding(8, 8, 8, 8);
+
+            // Adiciona a coluna de Palestrante (Responsável)
+            TextView txtResponsavel = new TextView(this);
+            txtResponsavel.setText(atividade.getPalestrante());
+            txtResponsavel.setGravity(Gravity.CENTER);
+            txtResponsavel.setPadding(8, 8, 8, 8);
+
+            // Adiciona a coluna de Local
+            TextView txtLocal = new TextView(this);
+            txtLocal.setText(atividade.getLocal());
+            txtLocal.setGravity(Gravity.CENTER);
+            txtLocal.setPadding(8, 8, 8, 8);
+
+            // Adiciona as views à linha
+            row.addView(txtDataHora);
+            row.addView(txtAtividade);
+            row.addView(txtResponsavel);
+            row.addView(txtLocal);
+
+            // Adiciona a linha à tabela
+            tableLayout.addView(row);
+        }
+    }
+
+
+
     private void escolherDataEHoras(Button btnEscolherDataHorario) {
         Locale locale = new Locale("pt", "BR");
         Locale.setDefault(locale);
