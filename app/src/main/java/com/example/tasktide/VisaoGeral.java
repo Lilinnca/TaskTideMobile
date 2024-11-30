@@ -3,7 +3,12 @@ package com.example.tasktide;
 import static com.example.tasktide.DAO.DAO.TABELA_EVENTO;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,9 +20,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -37,6 +44,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.widget.TableLayout;
@@ -176,6 +184,14 @@ public class VisaoGeral extends AppCompatActivity {
             }
 
             carregarBanner(eventoId);
+
+            String nomeEvento = evento.getNomeEvento(); // Nome do evento correto
+            String dataPrevista = informacoes[0]; // Data prevista do evento
+            long eventoData = formatarDataParaLong(dataPrevista); // Convertendo a data para timestamp
+
+            // Agendando a notificação com o nome do evento
+            agendarNotificacao(eventoData, nomeEvento);
+
         } else {
             Toast.makeText(this, "Evento não encontrado", Toast.LENGTH_SHORT).show();
         }
@@ -525,6 +541,25 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
+    private long formatarDataParaLong(String data) {
+        if (data == null || data.isEmpty()) {
+            return 0; // Retorna 0 caso a data seja inválida
+        }
+        try {
+            SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            Date date = sdfEntrada.parse(data);
+
+            // Retorna o timestamp da data (em milissegundos)
+            if (date != null) {
+                return date.getTime();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0; // Caso ocorra erro na conversão
+    }
+
+
     private long getUsuarioId() {
         String usuarioEmail = getEmailUsuario();
 
@@ -761,6 +796,95 @@ public class VisaoGeral extends AppCompatActivity {
     }
 
     //Métodos para notificação
+    public void agendarNotificacao(long eventoData, String nomeEvento) {
+        // Obtém o AlarmManager do sistema
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && alarmManager != null) {
+            if (!alarmManager.canScheduleExactAlarms()) {
+                // Se a permissão não foi concedida, solicita ao usuário para permitir
+                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                startActivity(intent);
+                return;
+            }
+        }
+
+        // Verificar se o evento é no futuro
+        Calendar calendarioAtual = Calendar.getInstance(); // Data e hora atual
+        long hojeMillis = calendarioAtual.getTimeInMillis(); // Tempo atual em milissegundos
+        Log.d("Data Atual", "Hoje é: " + calendarioAtual.getTime().toString()); // Verificando a data de hoje
+
+        // Definir a data do evento a partir do timestamp fornecido
+        Calendar calendarioEvento = Calendar.getInstance();
+        calendarioEvento.setTimeInMillis(eventoData); // Data do evento
+        long eventoMillis = calendarioEvento.getTimeInMillis(); // Tempo do evento em milissegundos
+        Log.d("Evento", "Data do Evento: " + calendarioEvento.getTime().toString()); // Verificando a data do evento
+
+        if (eventoMillis <= hojeMillis) {
+            // Se o evento for no passado ou no presente, não agendar a notificação
+            Log.e("Erro", "A data do evento deve ser no futuro!");
+            return; // Não agendar a notificação
+        }
+
+        // Subtrai 1 dia (24 horas) da data do evento para agendar a notificação para o dia anterior
+        calendarioEvento.add(Calendar.DAY_OF_MONTH, -1);  // Subtrai 1 dia da data do evento
+        long notificacaoTempo = calendarioEvento.getTimeInMillis();  // Tempo para a notificação
+        Log.d("Notificacao", "Notificação será enviada para: " + calendarioEvento.getTime().toString()); // Verificando o tempo da notificação
+
+        // Criação de Intent para não disparar nenhuma activity
+        Intent intent = new Intent(); // Nenhuma ação será disparada
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+        );
+
+        // Agendar o alarme para enviar a notificação
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, notificacaoTempo, pendingIntent);
+            Log.d("Alarme", "Notificação agendada para: " + calendarioEvento.getTime().toString()); // Confirmando o agendamento
+        }
+
+        // Envia a notificação imediatamente, se desejado
+        enviarNotificacao(nomeEvento);
+    }
+
+    public void enviarNotificacao(String nomeEvento) {
+        int notificationId = 1;
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String channelId = "evento_notificacao_channel";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notificação de Evento";
+            String description = "Canal para notificações de evento";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(channelId, name, importance);
+            channel.setDescription(description);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        // Mensagem com o nome do evento
+        String mensagem = "Seu evento \"" + nomeEvento + "\" será amanhã!";
+
+        // Intent para abrir a tela de detalhes do evento
+        Intent intent = new Intent(); // Não há necessidade de abrir nenhuma Activity aqui
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+        );
+
+        // Cria a notificação
+        Notification notification = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.mipmap.icone_tasktide_foreground)
+                .setContentTitle("Lembrete de Evento")
+                .setContentText(mensagem)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+
+        notificationManager.notify(notificationId, notification);
+    }
 
     //Métodos para cronograma
     private void preencherTabelaCronograma(TableLayout tableLayout, long eventoId) {
