@@ -11,7 +11,7 @@
         android:id="@+id/toolbarPagamento"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:background="?attr/colorPrimary"
+        android:background="#338B85"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_tasktide" />
 
+
     <TextView
         android:id="@+id/txtTituloPagamento"
         android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:text="Pagamento"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Escolha como você deseja realizar o pagamento"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/txtTituloPagamento"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloPagamento" />
@@ -60,28 +63,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescricaoPagamento" />
 
-    <TextView
-        android:id="@+id/txtValorPagamento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Valor:"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextValorPagamento"
-        app:layout_constraintTop_toBottomOf="@+id/dividerPagamento" />
 
     <EditText
         android:id="@+id/editTextValorPagamento"
-        android:layout_width="383dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="13dp"
-        android:background="@color/gray"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="#d9d9d9"
         android:ems="10"
         android:inputType="text"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        android:textColorHint="#d9d9d9"
+        app:layout_constraintStart_toStartOf="@+id/txtValorPagamento"
         app:layout_constraintTop_toBottomOf="@+id/txtValorPagamento"
         tools:hint="Valor do Pagamento" />
 
@@ -89,14 +81,47 @@
         android:id="@+id/txtFormaPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
         android:text="Forma de pagamento:"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroupPagamento"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextValorPagamento" />
+
+    <RadioButton
+        android:id="@+id/rbtnBoletoPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Boleto Bancário"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/rbtnPixPagamento"
+        app:layout_constraintTop_toBottomOf="@+id/rbtnPixPagamento" />
+
+    <RadioButton
+        android:id="@+id/rbtnPixPagamento"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Pix"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/txtFormaPagamento"
+        app:layout_constraintTop_toBottomOf="@+id/txtFormaPagamento" />
+
+    <TextView
+        android:id="@+id/txtValorPagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Valor:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtxtEscolherQuantIngressos" />
 
     <RadioGroup
         android:id="@+id/radioGroupPagamento"
@@ -108,28 +133,21 @@
         android:layout_marginBottom="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="@+id/txtFormaPagamento"
-        app:layout_constraintTop_toBottomOf="@+id/txtFormaPagamento">
+        app:layout_constraintTop_toBottomOf="@+id/txtFormaPagamento"
+        app:layout_constraintVertical_bias="0.261">
 
-        <RadioButton
-            android:id="@+id/rbtnPixPagamento"
-            android:layout_width="77dp"
-            android:layout_height="wrap_content"
-            android:text="Pix" />
 
-        <RadioButton
-            android:id="@+id/rbtnBoletoPagamento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Boleto Bancário" />
     </RadioGroup>
 
     <Button
         android:id="@+id/btnVoltarPagamento"
         android:layout_width="57dp"
         android:layout_height="66dp"
+        android:backgroundTint="#338B85"
         android:contentDescription="botão voltar"
-        android:onClick="voltarPagamento"
+        android:onClick="VoltarVisaoGeral"
         app:icon="@drawable/voltar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,23 +158,84 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="75sp"
-        android:layout_height="75sp"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
         android:layout_marginTop="20dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupPagamento" />
+        app:layout_constraintTop_toBottomOf="@+id/rbtnBoletoPagamento" />
 
     <Button
         android:id="@+id/btnConfirmarPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Confirmar Pagamento"
+        android:backgroundTint="#338B85"
+        android:text="SE INSCREVER"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnVoltarPagamento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextValorPagamento"
+        app:layout_constraintVertical_bias="0.892" />
+
+    <EditText
+        android:id="@+id/edtxtEscolherQuantIngressos"
+        android:layout_width="204dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:background="#d9d9d9"
+        android:editable="false"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="1"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtQuantIngressos" />
+
+    <Button
+        android:id="@+id/btnIncrementar"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#338B85"
+        android:contentDescription="menos"
+        android:onClick="setOnClickListener"
+        app:icon="@drawable/mais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintStart_toEndOf="@+id/edtxtEscolherQuantIngressos"
+        app:layout_constraintTop_toTopOf="@+id/edtxtEscolherQuantIngressos" />
+
+    <Button
+        android:id="@+id/btnDiscremento"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#338B85"
+        android:text="Button"
+        app:icon="@drawable/minimizar"
+        app:layout_constraintEnd_toStartOf="@+id/edtxtEscolherQuantIngressos"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edtxtEscolherQuantIngressos" />
+
+    <TextView
+        android:id="@+id/txtQuantIngressos"
+        android:layout_width="298dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="mais"
+        android:onClick="setOnClickListener"
+        android:text="Quantidade de ingressos:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerPagamento" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,10 @@ public class Informacoes {
     private String horarioTermino;
     private String prazo;
     private String local;
-    private int pago; // Agora é int para representar 1 ("Sim") ou 0 ("Não")
+    private String pago;
     private Double valorEvento;
 
-    public Informacoes(long id, long idEvento, String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, int pago, Double valorEvento) {
+    public Informacoes(long id, long idEvento, String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, String pago, Double valorEvento) {
         this.id = id;
         this.idEvento = idEvento;
         this.dataPrevista = dataPrevista;
@@ -29,7 +29,7 @@ public class Informacoes {
 
     }
 
-    public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, double valorEvento, int pago) {
+    public Informacoes(String dataPrevista, String dataFim, String horarioInicio, String horarioTermino, String prazo, String local, double valorEvento, String pago) {
         this.dataPrevista = dataPrevista;
         this.dataFim = dataFim;
         this.horarioInicio = horarioInicio;
@@ -104,11 +104,11 @@ public class Informacoes {
         this.local = local;
     }
 
-    public int getPago() {
+    public String getPago() {
         return pago;
     }
 
-    public void setPago(int pago) {
+    public void setPago(String pago) {
         this.pago = pago;
     }
 
@@ -118,19 +118,5 @@ public class Informacoes {
 
     public void setValorEvento(Double valorEvento) {
         this.valorEvento = valorEvento;
-    }
-
-    @Override
-    public String toString() {
-        return "Informacoes{" +
-                "dataPrevista='" + dataPrevista + '\'' +
-                ", dataFim='" + dataFim + '\'' +
-                ", horarioInicio='" + horarioInicio + '\'' +
-                ", horarioTermino='" + horarioTermino + '\'' +
-                ", prazo='" + prazo + '\'' +
-                ", local='" + local + '\'' +
-                ", pago=" + (pago == 1 ? "Sim" : "Não") + // Converte int para "Sim" ou "Não"
-                ", valorEvento=" + valorEvento +
-                '}';
     }
 }

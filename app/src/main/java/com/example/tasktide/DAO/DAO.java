@@ -29,7 +29,7 @@ public class DAO extends SQLiteOpenHelper {
 
     private static final String TAG = "DAO";
     private static final String NOME_BANCO = "tasktide_db";
-    private static final int VERSAO_BANCO = 17;
+    private static final int VERSAO_BANCO = 18;
     public static final String TABELA_USUARIOS = "usuarios";
     public static final String TABELA_EVENTO = "evento";
     public static final String TABELA_INFORMACOES = "informacoes";
@@ -127,7 +127,7 @@ public class DAO extends SQLiteOpenHelper {
                 "prazo TEXT," +
                 "local TEXT," +
                 "valorEvento DOUBLE," +
-                "Pago INTEGER," +
+                "Pago TEXT," +
                 "FOREIGN KEY (id_evento) REFERENCES " + TABELA_EVENTO + "(id))";
         db.execSQL(sql);
         Log.i(TAG, "Tabela de informações criada com sucesso.");
@@ -287,7 +287,7 @@ public class DAO extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("horarioTermino")),
                     cursor.getString(cursor.getColumnIndex("prazo")),
                     cursor.getString(cursor.getColumnIndex("local")),
-                    cursor.getInt(cursor.getColumnIndex("Pago")),
+                    cursor.getString(cursor.getColumnIndex("Pago")),
                     cursor.getDouble(cursor.getColumnIndex("valorEvento"))
             );
         }
@@ -812,28 +812,21 @@ public class DAO extends SQLiteOpenHelper {
         return descricao;
     }
 
+    // Método para verificar se o evento é pago baseado no valorEvento e na coluna "Pago"
     public boolean EventoPago(long idEvento) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
+        String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
+
         boolean isPago = false;
-
-        try {
-            String query = "SELECT Pago FROM informacoes WHERE id_evento = ?";
-            cursor = db.rawQuery(query, new String[]{String.valueOf(idEvento)});
-
-            if (cursor != null && cursor.moveToFirst()) {
-                isPago = cursor.getInt(0) == 1;
-            }
-        } catch (Exception e) {
-            Log.e("DAO", "Erro ao verificar o pagamento do evento: " + e.getMessage());
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+        if (cursor.moveToFirst()) {
+            String pago = cursor.getString(0); // Obtém o valor da coluna "Pago"
+            isPago = "Sim".equalsIgnoreCase(pago); // Verifica se o valor é "Sim" (ignora maiúsculas/minúsculas)
         }
-
+        cursor.close();
         return isPago;
     }
+
 
     public long adicionarAtividade(long idEvento, String nomeAtividade, String horario, String palestrante, String local, String data) {
         SQLiteDatabase db = this.getWritableDatabase();

@@ -182,7 +182,6 @@ public class VisaoGeral extends AppCompatActivity {
                 txtHoraDeTerminoEvento.setVisibility(View.GONE);
                 txtMostraHoraDeTerminoEvento.setVisibility(View.GONE);
             }
-
             carregarBanner(eventoId);
 
             String nomeEvento = evento.getNomeEvento(); // Nome do evento correto
@@ -214,7 +213,7 @@ public class VisaoGeral extends AppCompatActivity {
             imgbtnAlterarHorarioInicio.setVisibility(View.GONE);
             imgbtnEditarHoraDeTermino.setVisibility(View.GONE);
             imgbtnMudarBanner.setVisibility(View.GONE);
-            configurarVisibilidadeBotoes(idEvento);
+            configurarVisibilidadeBotoes();
         }
 
         btnMudarBanner.setOnClickListener(v -> showImageSizeWarningDialog());
@@ -494,6 +493,35 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
 
+        btnComprarIngresso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acessar a Intent e obter o ID do evento diretamente
+                Intent intent = getIntent();
+                long eventoId = intent.getLongExtra("evento_id", -1);  // Recuperando o evento_id da Intent
+
+                // Verificar se o eventoId é válido
+                if (eventoId != -1) {
+                    // Recupera o valor do evento usando o DAO
+                    Informacoes informacoes = dao.getInformacoesById(eventoId);
+                    if (informacoes != null) {
+                        double valorEvento = informacoes.getValorEvento();
+
+                        // Passa o valor do evento para a próxima tela
+                        Intent pagamentoIntent = new Intent(VisaoGeral.this, PagamentoEvento.class);
+                        pagamentoIntent.putExtra("VALOR_EVENTO", valorEvento);
+                        pagamentoIntent.putExtra("evento_id", eventoId);
+                        startActivity(pagamentoIntent);
+                    } else {
+                        Toast.makeText(VisaoGeral.this, "Informações do evento não encontradas.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(VisaoGeral.this, "ID do evento inválido.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
         btnInscrever.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -523,6 +551,7 @@ public class VisaoGeral extends AppCompatActivity {
             }
         });
     }
+
 
     private String formatarData(String data) {
         if (data == null || data.isEmpty()) {
@@ -559,18 +588,14 @@ public class VisaoGeral extends AppCompatActivity {
         return 0; // Caso ocorra erro na conversão
     }
 
-
     private long getUsuarioId() {
         String usuarioEmail = getEmailUsuario();
-
 
         if (usuarioEmail == null) {
             return -1;
         }
 
-
         Usuario usuario = dao.buscarUsuarioPorEmail(usuarioEmail);
-
 
         if (usuario != null) {
             return usuario.getId();
@@ -579,14 +604,24 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
-
     private String getEmailUsuario() {
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         return prefs.getString("email", null);
     }
 
-    private void configurarVisibilidadeBotoes(long idEvento) {
-        boolean eventoPago = dao.EventoPago(idEvento);
+    private void configurarVisibilidadeBotoes() {
+        // Acessar a Intent e obter o ID do evento diretamente
+        Intent intent = getIntent();
+        long eventoId = intent.getLongExtra("evento_id", -1);  // Recuperando o evento_id da Intent
+
+        // Verificar se o eventoId foi recuperado corretamente
+        if (eventoId == -1) {
+            Toast.makeText(this, "ID do evento inválido", Toast.LENGTH_SHORT).show();
+            return; // Se o ID for inválido, não faz sentido continuar
+        }
+
+        // Verificar se o evento é pago ou gratuito usando o DAO
+        boolean eventoPago = dao.EventoPago(eventoId); // Método que verifica se o evento é pago no banco de dados
 
         Button btnComprarIngresso = findViewById(R.id.btnComprarIngresso);
         Button btnInscrever = findViewById(R.id.btnInscrever);
@@ -599,6 +634,7 @@ public class VisaoGeral extends AppCompatActivity {
             btnInscrever.setVisibility(View.VISIBLE);
         }
     }
+
 
     private void configurarDescricaoDoEvento(long idEvento) {
         String descricao = dao.obterDescricaoEvento(idEvento);
@@ -1031,8 +1067,6 @@ public class VisaoGeral extends AppCompatActivity {
             if (bannerBytes != null) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bannerBytes, 0, bannerBytes.length);
                 imgBanner.setImageBitmap(bitmap);
-            } else {
-                Toast.makeText(this, "Banner não encontrado", Toast.LENGTH_SHORT).show();
             }
         }
     }

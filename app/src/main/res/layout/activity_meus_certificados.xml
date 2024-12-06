@@ -45,7 +45,6 @@
         android:text="Horas contabilizadas: "
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtCertificados"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar13" />
 
@@ -65,12 +64,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="304dp"
         android:text="Certificados"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescricaoCertificados"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHorasCoontabilizadas" />
 
@@ -80,7 +77,7 @@
         android:layout_height="41dp"
         android:text="Estes certificados são dos eventos gerenciados por nós!"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/certificadosEventoContainer"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/txtCertificados"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificados" />
 
@@ -90,22 +87,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
-        android:text="Certificados Inseridos"
+        android:text="Certificados"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridosDescricao"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/certificadosEventoContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHorasCoontabilizadas" />
 
     <TextView
         android:id="@+id/txtCertificadosInseridosDescricao"
         android:layout_width="347dp"
         android:layout_height="43dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="270dp"
-        android:text="Estes certificados são inseridos por você, de eventos externos, para contabilização das horas!"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddCertificado"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Estes certificados são dos eventos gerenciados por nós!"
         app:layout_constraintStart_toStartOf="@+id/txtCertificadosInseridos"
         app:layout_constraintTop_toBottomOf="@+id/txtCertificadosInseridos" />
 
@@ -114,10 +106,8 @@
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtCertificadosInseridos"
         app:layout_constraintStart_toStartOf="@+id/txtDescricaoCertificados"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados"
-        app:layout_constraintVertical_bias="0.204">
+        app:layout_constraintTop_toBottomOf="@+id/txtDescricaoCertificados">
 
         <LinearLayout
             android:id="@+id/linearLayoutEventoCertificados"
@@ -141,7 +131,7 @@
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar13"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintVertical_bias="0.279" />
 
     <HorizontalScrollView
         android:id="@+id/certificadosContainer"

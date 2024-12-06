@@ -203,20 +203,24 @@
                 android:text="Em destaque"
                 android:textColor="#95000000"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
 
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollViewOutros"
                 android:layout_width="wrap_content"
-                android:layout_height="123dp">
+                android:layout_height="123dp"
+                android:visibility="gone">
+
                 <LinearLayout
                     android:id="@+id/eventosContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="123dp"
-                    android:orientation="horizontal"
                     android:divider="@android:color/transparent"
-                    android:showDividers="middle"/>
+                    android:orientation="horizontal"
+                    android:showDividers="middle"
+                    android:visibility="gone" />
             </HorizontalScrollView>
 
 
@@ -225,7 +229,7 @@
                 android:id="@+id/txtCategoriaInicial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Entreterimento"
+                android:text="Entretenimento"
                 android:textColor="#95000000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -233,7 +237,9 @@
                 android:id="@+id/horizontalScrollView2"
                 android:layout_width="wrap_content"
                 android:layout_height="123dp">
+
                 <LinearLayout
+                    android:id="@+id/entretenimentoContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
@@ -252,7 +258,9 @@
                 android:id="@+id/horizontalScrollView3"
                 android:layout_width="wrap_content"
                 android:layout_height="123dp">
+
                 <LinearLayout
+                    android:id="@+id/educacaoContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
@@ -260,10 +268,10 @@
 
             <!-- Novas Categorias -->
             <TextView
-                android:id="@+id/txtEsporte"
+                android:id="@+id/txtOutros"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Esporte"
+                android:text="Outros"
                 android:textColor="#95000000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -271,87 +279,15 @@
                 android:id="@+id/horizontalScrollView4"
                 android:layout_width="wrap_content"
                 android:layout_height="123dp">
+
                 <LinearLayout
+                    android:id="@+id/outrosContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
 
 
-            <TextView
-                android:id="@+id/txtNetworking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Networking"
-                android:textColor="#95000000"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView5"
-                android:layout_width="wrap_content"
-                android:layout_height="123dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
-
-
-            <TextView
-                android:id="@+id/txtNegocios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Negócios"
-                android:textColor="#95000000"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView6"
-                android:layout_width="wrap_content"
-                android:layout_height="123dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
-
-
-            <TextView
-                android:id="@+id/txtTecnologia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tecnologia"
-                android:textColor="#95000000"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView7"
-                android:layout_width="wrap_content"
-                android:layout_height="123dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
-
-
-            <TextView
-                android:id="@+id/txtArtes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Artes"
-                android:textColor="#95000000"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView8"
-                android:layout_width="wrap_content"
-                android:layout_height="123dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
