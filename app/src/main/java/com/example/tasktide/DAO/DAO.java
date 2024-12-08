@@ -705,6 +705,20 @@ public class DAO extends SQLiteOpenHelper {
         db.update("informacoes", values, whereClause, whereArgs);
     }
 
+    public void atualizarDatasEvento(String dataPrevista, String dataFim, long idEvento) {
+        SQLiteDatabase db = this.getWritableDatabase(); // Usando getWritableDatabase porque vamos fazer uma atualização
+        ContentValues values = new ContentValues();
+        values.put("dataPrevista", dataPrevista); // Coluna dataPrevista
+        values.put("dataFim", dataFim); // Coluna dataFim
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(idEvento)};
+
+        db.update("informacoes", values, whereClause, whereArgs);
+    }
+
+
+
     public void atualizarPrazoInscricaoEvento(String prazo, long idEvento) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();

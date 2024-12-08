@@ -5,11 +5,13 @@ import static com.example.tasktide.DAO.DAO.TABELA_EVENTO;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +24,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -40,6 +43,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -68,7 +72,10 @@ import com.itextpdf.layout.properties.TextAlignment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -101,6 +108,10 @@ public class VisaoGeral extends AppCompatActivity {
     private boolean isEditingPrazoInscricao = false;
     private boolean isEditingValorEvento = false;
     private boolean isEditingDescricao = false;
+    private boolean isEditingData = false;
+
+    private String conteudoRelatorio;
+
 
 
     @Override
@@ -398,6 +409,40 @@ public class VisaoGeral extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Hora de término do evento atualizada com sucesso!", Toast.LENGTH_SHORT).show();
                 }
                 isEditingHorarioTermino = !isEditingHorarioTermino;
+            }
+        });
+
+        imgbtnAlterarData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isEditingData) {
+                    // Habilita a edição das duas datas em um único campo de texto
+                    txtMostraDataDoEvento.setEnabled(true);
+                    imgbtnAlterarData.setImageResource(R.drawable.botao_salvar);
+                } else {
+                    // Obtém a nova string com a data alterada (formato "De dataPrevista até dataFim")
+                    String dataAlterada = txtMostraDataDoEvento.getText().toString();
+
+                    // Extrai as datas individuais da string para enviar ao banco
+                    String[] datas = dataAlterada.split(" até ");
+                    if (datas.length == 2) {
+                        String dataPrevistaAlterada = datas[0].replace("De ", "").trim();
+                        String dataFimAlterada = datas[1].trim();
+
+                        // Atualiza no banco de dados
+                        dao.atualizarDatasEvento(dataPrevistaAlterada, dataFimAlterada, eventoId);
+
+                        // Atualiza o TextView com a nova data no formato correto
+                        txtMostraDataDoEvento.setText("De " + dataPrevistaAlterada + " até " + dataFimAlterada);
+                        txtMostraDataDoEvento.setEnabled(false);
+                        imgbtnAlterarData.setImageResource(R.drawable.editarinformacoes);
+
+                        // Exibe uma mensagem de sucesso
+                        Toast.makeText(getApplicationContext(), "Datas do evento atualizadas com sucesso!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                // Alterna o estado de edição
+                isEditingData = !isEditingData;
             }
         });
 
@@ -730,7 +775,7 @@ public class VisaoGeral extends AppCompatActivity {
         }
     }
 
-    //Métoddos para relatório
+    // Método para exibir o relatório
     private void mostrarRelatorio(Context context, long eventoId) {
         Evento evento = dao.buscarEventoPorId(eventoId);
         Informacoes informacoes = dao.getInformacoesById(eventoId);
@@ -767,68 +812,6 @@ public class VisaoGeral extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-
-    public void gerarRelatorioPDF(Context context, long eventoId) {
-        Evento evento = dao.buscarEventoPorId(eventoId);
-        Informacoes informacoes = dao.getInformacoesById(eventoId);
-        String[] participantes = dao.buscarParticipantes(eventoId);
-
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            return;
-        }
-
-        // Diretório onde o PDF será salvo
-        File pdfDir = new File(context.getExternalFilesDir(null), "Relatorios");
-        if (!pdfDir.exists()) pdfDir.mkdir();
-        File pdfFile = new File(pdfDir, "relatorio_evento_" + eventoId + ".pdf");
-
-        try {
-            PdfWriter writer = new PdfWriter(pdfFile);
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
-
-            // Adiciona título ao relatório
-            document.add(new Paragraph("Relatório do Evento")
-                    .setFontSize(20)
-                    .setBold()
-                    .setTextAlignment(TextAlignment.CENTER));
-
-            // Adiciona informações do evento
-            document.add(new Paragraph("Evento: " + evento.getNomeEvento())
-                    .setFontSize(14));
-            document.add(new Paragraph("Tipo: " + evento.getTipoEvento()));
-            document.add(new Paragraph("Horas Complementares: " + evento.getHorasComplementares()));
-            document.add(new Paragraph("Descrição: " + evento.getDescricao()));
-            document.add(new Paragraph("Modalidade: " + evento.getModalidade()));
-            document.add(new Paragraph("Categoria: " + evento.getCategoria()));
-
-            // Adiciona informações adicionais
-            if (informacoes != null) {
-                document.add(new Paragraph("Informações do Evento:"));
-                document.add(new Paragraph("Local: " + informacoes.getLocal()));
-                document.add(new Paragraph("Data de Início: " + informacoes.getDataPrevista()));
-                document.add(new Paragraph("Data de Término: " + informacoes.getDataFim()));
-                document.add(new Paragraph("Horário: " + informacoes.getHorarioInicio() + " - " + informacoes.getHorarioTermino()));
-                document.add(new Paragraph("Valor: R$ " + informacoes.getValorEvento()));
-            }
-
-            // Adiciona lista de participantes
-            document.add(new Paragraph("Participantes:"));
-            for (String participante : participantes) {
-                document.add(new Paragraph("- " + participante));
-            }
-
-            document.close();
-            Toast.makeText(context, "PDF gerado em: " + pdfFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Log.e("PDF", "Erro ao criar PDF: ", e);
-            Toast.makeText(context, "Erro ao gerar PDF", Toast.LENGTH_LONG).show();
-        }
     }
 
     //Métodos para notificação
@@ -1028,6 +1011,7 @@ public class VisaoGeral extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Lógica para atualizar o banner (já existente)
         if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
             try {

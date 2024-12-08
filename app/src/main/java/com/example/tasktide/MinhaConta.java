@@ -32,6 +32,7 @@ public class MinhaConta extends AppCompatActivity {
         imgView = findViewById(R.id.imgPerfilMinhaConta);
 
         carregarDadosUsuario();
+
     }
 
     private void carregarDadosUsuario() {
@@ -56,6 +57,12 @@ public class MinhaConta extends AppCompatActivity {
         }
     }
 
+    public void manual(View view) {
+        Intent in = new Intent(this, Manual.class);
+        startActivity(in);
+    }
+
+
     public void meuscertificados(View view) {
         Intent in = new Intent(this, MeusCertificados.class);
         startActivity(in);
@@ -71,13 +78,27 @@ public class MinhaConta extends AppCompatActivity {
         startActivity(in);
     }
 
-    public void inicialMinhaConta(View view) {
+    public void inicial(View view) {
         Intent in = new Intent(this, TelaInicial.class);
         startActivity(in);
     }
 
-    public void localizaoMinhaConta(View view) {
+    public void localizacao(View view) {
         Intent in = new Intent(this, Localizacao.class);
+        startActivity(in);
+    }
 
+    public void addevento(View view) {
+        Intent in = new Intent(this, CriarEvento.class);
+        startActivity(in);
+    }
+
+    public void perfil(View view) {
+        Intent in = new Intent(this, MinhaConta.class);
+        startActivity(in);
+    }
+
+    public void meuseventos(View view) {
+        Intent in = new Intent(this, MeusEventosCriador.class);
     }
 }

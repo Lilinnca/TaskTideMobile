@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="230dp"
+    android:layout_marginTop="20dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <!-- Texto do certificado -->
+    <TextView
+        android:id="@+id/txtCertificado"
+        android:layout_width="wrap_content"
+        android:layout_height="230dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="start|center_vertical"
+        android:text="Certificamos que (Nome do Usuario), participou com êxito do evento (Nome do Evento), com carga horária total de (Qntd de horas) horas."
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <!-- Botão para fechar o popup -->
+    <ImageButton
+        android:id="@+id/btnFecharPopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Fechar"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+</LinearLayout>

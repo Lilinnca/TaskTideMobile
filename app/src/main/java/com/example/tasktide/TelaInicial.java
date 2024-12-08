@@ -214,43 +214,56 @@ public class TelaInicial extends AppCompatActivity {
         }
     }
 
-
-    private void copiarDadosDoEvento(Evento evento, View eventoViewCopy) {
-        // Método auxiliar para copiar os dados do evento para o novo eventoView
-        TextView nomeEventoCopy = eventoViewCopy.findViewById(R.id.nomeEvento);
-        nomeEventoCopy.setText(evento.getNomeEvento());
-
-        ImageView imgBannerEventoCopy = eventoViewCopy.findViewById(R.id.imgBannerEvento);
-        byte[] bannerImagemBytes = dao.obterBannerEvento(evento.getId());
-
-        if (bannerImagemBytes != null && bannerImagemBytes.length > 0) {
-            Bitmap bannerBitmap = BitmapFactory.decodeByteArray(bannerImagemBytes, 0, bannerImagemBytes.length);
-            imgBannerEventoCopy.setImageBitmap(bannerBitmap);
-            imgBannerEventoCopy.setScaleType(ImageView.ScaleType.FIT_XY);
-        } else {
-            imgBannerEventoCopy.setImageResource(R.drawable.bannerpadrao);
-            imgBannerEventoCopy.setScaleType(ImageView.ScaleType.FIT_XY);
-        }
-    }
-
     // Filtra os eventos com base na pesquisa do usuário
     private void filtrarEventos(String query) {
         String queryLowerCase = query.toLowerCase();
-        eventosContainer.removeAllViews();
+
+        // Remover todas as views dos containers de cada categoria (usando o tipo correto)
+        LinearLayout entretenimentoContainer = findViewById(R.id.entretenimentoContainer);
+        LinearLayout educacaoContainer = findViewById(R.id.educacaoContainer);
+        LinearLayout outrosContainer = findViewById(R.id.outrosContainer);
+
+        // Certificando-se de que estamos chamando removeAllViews no LinearLayout
+        entretenimentoContainer.removeAllViews();
+        educacaoContainer.removeAllViews();
+        outrosContainer.removeAllViews();
 
         try {
+            // Buscar todos os eventos
             List<Evento> eventos = dao.getAllEventos();
             boolean algumEventoEncontrado = false;
+
             for (Evento evento : eventos) {
+                // Verifica se o nome do evento contém o termo da pesquisa
                 if (evento.getNomeEvento().toLowerCase().contains(queryLowerCase)) {
                     Log.d("TelaInicial", "Evento encontrado: " + evento.getNomeEvento());
+
+                    // Adiciona o evento no container correto com base na categoria
+                    String categoria = evento.getCategoria();
+                    LinearLayout container;
+
+                    if (categoria != null) {
+                        if (categoria.equalsIgnoreCase("Entretenimento")) {
+                            container = entretenimentoContainer;
+                        } else if (categoria.equalsIgnoreCase("Educação")) {
+                            container = educacaoContainer;
+                        } else {
+                            container = outrosContainer;
+                        }
+                    } else {
+                        container = outrosContainer; // Categoria nula vai para "outros"
+                    }
+
+                    // Adicionar o evento ao container da categoria correspondente
                     adicionarNovoEvento(evento.getId());
                     algumEventoEncontrado = true;
                 }
             }
+
             if (!algumEventoEncontrado) {
                 Log.d("TelaInicial", "Nenhum evento encontrado para a pesquisa");
             }
+
         } catch (Exception e) {
             Log.e("TelaInicial", "Erro ao filtrar eventos", e);
         }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,10 +79,15 @@ public class InfoCertificado extends AppCompatActivity {
 
     private String formatarHorasExibicao(String horasStr) {
         if (horasStr == null || horasStr.isEmpty()) {
+            Log.e("Horas", "Horas inválidas: A string está vazia ou nula.");
             return "Horas inválidas";
         }
         try {
-            double horasDecimais = Double.parseDouble(horasStr);
+            // Remove qualquer texto extra, como " horas" ou " hora"
+            String horasLimpa = horasStr.replaceAll("[^0-9.]", ""); // Remove qualquer caractere não numérico
+
+            // Agora tenta converter para número
+            double horasDecimais = Double.parseDouble(horasLimpa);
             int horas = (int) horasDecimais; // Parte inteira (horas)
             int minutos = (int) Math.round((horasDecimais - horas) * 60); // Parte decimal convertida em minutos
 
@@ -91,10 +97,12 @@ public class InfoCertificado extends AppCompatActivity {
                 return horas + " horas e " + minutos + " minutos";
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Log.e("Horas", "Erro ao tentar converter horas: " + horasStr, e);
             return "Horas inválidas";
         }
     }
+
+
 
     public void voltarInfoCertificado(View view){
         Intent in = new Intent(this,MeusCertificados.class);

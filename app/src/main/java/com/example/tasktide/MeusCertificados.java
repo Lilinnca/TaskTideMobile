@@ -1,9 +1,12 @@
 package com.example.tasktide;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -60,11 +63,42 @@ public class MeusCertificados extends AppCompatActivity {
             return;
         }
 
-        // Adiciona cada certificado ao container correto
+        // Inicializar soma de horas como um decimal
+        double totalHorasGeradas = 0.0;
+
+        // Adiciona cada certificado ao container de certificados gerados
         for (Certificado certificado : certificados) {
             Log.d("MeusCertificados", "Certificado gerado recuperado: " + certificado.getNomeCertificado());
+
+            String horasStr = certificado.getHorasCertificado();
+            if (horasStr == null || horasStr.isEmpty()) {
+                Log.e("MeusCertificados", "Horas inválidas para certificado: " + certificado.getNomeCertificado());
+                continue; // Pula certificados com valores inválidos
+            }
+
+            try {
+                // Remover texto não numérico (como "horas") e converter para número
+                String horasNumericas = horasStr.replaceAll("[^0-9]", "");
+                if (!horasNumericas.isEmpty()) {
+                    totalHorasGeradas += Double.parseDouble(horasNumericas);
+                }
+            } catch (NumberFormatException e) {
+                Log.e("MeusCertificados", "Erro ao converter horas para número no certificado: " + certificado.getNomeCertificado(), e);
+            }
+
+            // Certificados gerados serão adicionados ao container específico de evento
             adicionarNovoCertificadoGerado(certificado);
         }
+
+        // Formatar o total de horas para exibição
+        String totalHorasGeradasFormatado = formatarHorasExibicao(String.valueOf(totalHorasGeradas));
+        txtHoras.setText(totalHorasGeradasFormatado);
+
+        // Salvar o total de horas geradas em SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("horas_geradas", totalHorasGeradasFormatado); // Salva o valor formatado (ex.: "5 horas e 30 minutos")
+        editor.apply();
     }
 
     // Método para adicionar certificado gerado ao layout específico (por evento)
@@ -72,18 +106,16 @@ public class MeusCertificados extends AppCompatActivity {
         try {
             Log.d("MeusCertificados", "Adicionando certificado gerado: " + certificado.getNomeCertificado());
 
-            ImageButton imageButton = new ImageButton(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    dpToPx(170),
-                    dpToPx(110)
-            );
-            params.setMargins(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
-            imageButton.setLayoutParams(params);
-            imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageButton.setImageResource(R.drawable.certificados_meuscertificados);
-            imageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            // Infla o layout do certificado
+            View certificadoView = getLayoutInflater().inflate(R.layout.certificado_layout, null);
 
-            imageButton.setOnClickListener(v -> {
+            // Configura a imagem principal do certificado
+            ImageView imgCertificado = certificadoView.findViewById(R.id.imgCertificado);
+            imgCertificado.setImageResource(R.drawable.certificados_meuscertificados);
+
+            // Configura o botão de informações
+            ImageButton btnInfo = certificadoView.findViewById(R.id.btnInfo);
+            btnInfo.setOnClickListener(v -> {
                 Intent intent = new Intent(this, InfoCertificado.class);
                 intent.putExtra("id_certificado", certificado.getIdCertificado());
                 intent.putExtra("nome_certificado", certificado.getNomeCertificado());
@@ -93,11 +125,49 @@ public class MeusCertificados extends AppCompatActivity {
                 startActivity(intent);
             });
 
-            // Certificado gerado automaticamente será adicionado ao container de eventos
-            linearLayoutCertificadosEventos.addView(imageButton);
+            // Configura o botão de download (adicione sua lógica aqui)
+            ImageButton btnDownload = certificadoView.findViewById(R.id.btnDownload);
+            btnDownload.setOnClickListener(v -> {
+                // Recupera o nome do usuário, nome do evento e as horas (substitua com os valores reais)
+                String nomeUsuario = "Nome do Usuário";  // Você pode pegar o nome do usuário com SharedPreferences ou outra forma
+                String nomeEvento = "Nome do Evento";  // Nome do evento que está sendo exibido
+                String horasCertificado = certificado.getHorasCertificado();  // Quantidade de horas do certificado
+
+                // Criando a mensagem do certificado
+                String mensagemCertificado = String.format(
+                        "Certificamos que %s, participou com êxito do evento %s, com carga horária total de %s horas.",
+                        nomeUsuario, nomeEvento, horasCertificado);
+
+                // Exibindo o pop-up
+                showCertificadoPopup(mensagemCertificado);
+            });
+
+            // Adiciona o layout do certificado ao container de eventos
+            linearLayoutCertificadosEventos.addView(certificadoView);
         } catch (Exception e) {
             Log.e("MeusCertificados", "Erro ao adicionar certificado gerado", e);
         }
+    }
+
+    // Método para exibir o pop-up
+    private void showCertificadoPopup(String mensagem) {
+        // Criação do LayoutInflater e View do Pop-up
+        LayoutInflater inflater = getLayoutInflater();
+        View popupView = inflater.inflate(R.layout.popup_certificado, null);
+
+        // Definir o texto do certificado
+        TextView txtCertificado = popupView.findViewById(R.id.txtCertificado);
+        txtCertificado.setText(mensagem);
+
+        // Criar um Dialog para exibir o Pop-up
+        Dialog popupDialog = new Dialog(this);
+        popupDialog.setContentView(popupView);
+        popupDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT); // Tamanho do pop-up
+        popupDialog.getWindow().setGravity(Gravity.CENTER); // Posicionamento do pop-up
+        popupDialog.show(); // Exibe o pop-up
+
+        // Se quiser adicionar um botão de fechar ou algo mais, pode fazer aqui
+        popupView.findViewById(R.id.btnFecharPopup).setOnClickListener(v -> popupDialog.dismiss());
     }
 
     // Método para carregar todos os certificados (gerais)
@@ -128,7 +198,8 @@ public class MeusCertificados extends AppCompatActivity {
 
             try {
                 // Converte string para número decimal e soma
-                totalHoras += Double.parseDouble(horasStr);
+                double horasDecimal = parseHorasParaDecimal(horasStr);  // Método para tratar horas em formato "5 horas" ou "5h"
+                totalHoras += horasDecimal;
             } catch (NumberFormatException e) {
                 Log.e("MeusCertificados", "Erro ao converter horas para número no certificado: " + certificado.getNomeCertificado(), e);
             }
@@ -138,7 +209,7 @@ public class MeusCertificados extends AppCompatActivity {
         }
 
         // Formatar o total de horas para exibição
-        String totalHorasFormatado = formatarHorasExibicao(String.valueOf(totalHoras));
+        String totalHorasFormatado = formatarHorasExibicao(totalHoras);
         txtHoras.setText(totalHorasFormatado);
 
         // Salvar o total de horas em SharedPreferences
@@ -148,23 +219,52 @@ public class MeusCertificados extends AppCompatActivity {
         editor.apply();
     }
 
-    // Método para adicionar certificado ao layout principal
+    // Método para tratar a conversão de horas no formato "5 horas" ou "5h"
+    private double parseHorasParaDecimal(String horasStr) {
+        horasStr = horasStr.trim().toLowerCase();
+
+        // Remove a palavra "horas" ou "h" no final da string, caso exista
+        if (horasStr.endsWith("horas") || horasStr.endsWith("h")) {
+            horasStr = horasStr.replace("horas", "").replace("h", "").trim();
+        }
+
+        // Verifica se o valor restante é um número
+        try {
+            return Double.parseDouble(horasStr);
+        } catch (NumberFormatException e) {
+            Log.e("MeusCertificados", "Erro ao converter horas para número: " + horasStr, e);
+            return 0.0;  // Retorna 0 caso não consiga fazer a conversão
+        }
+    }
+
+    // Método para formatar horas decimais para exibição (ex: "5 horas e 30 minutos")
+    private String formatarHorasExibicao(double totalHoras) {
+        int horas = (int) totalHoras;
+        int minutos = (int) Math.round((totalHoras - horas) * 60);
+
+        if (minutos == 0) {
+            return horas + " horas";
+        } else {
+            return horas + " horas e " + minutos + " minutos";
+        }
+    }
+
+
+    // Método para adicionar certificado ao layout principal (certificados gerais)
     private void adicionarNovoCertificado(Certificado certificado) {
         try {
             Log.d("MeusCertificados", "Adicionando certificado: " + certificado.getNomeCertificado());
 
-            ImageButton imageButton = new ImageButton(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    dpToPx(170),
-                    dpToPx(110)
-            );
-            params.setMargins(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
-            imageButton.setLayoutParams(params);
-            imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageButton.setImageResource(R.drawable.certificados_meuscertificados);
-            imageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            // Infla o layout do certificado
+            View certificadoView = getLayoutInflater().inflate(R.layout.certificado_layout, null);
 
-            imageButton.setOnClickListener(v -> {
+            // Configura a imagem principal do certificado
+            ImageView imgCertificado = certificadoView.findViewById(R.id.imgCertificado);
+            imgCertificado.setImageResource(R.drawable.certificados_meuscertificados);
+
+            // Configura o botão de informações
+            ImageButton btnInfo = certificadoView.findViewById(R.id.btnInfo);
+            btnInfo.setOnClickListener(v -> {
                 Certificado certificadoCompleto = dao.buscarCertificadoPorId(certificado.getIdCertificado());
                 if (certificadoCompleto != null) {
                     Intent intent = new Intent(this, InfoCertificado.class);
@@ -177,8 +277,26 @@ public class MeusCertificados extends AppCompatActivity {
                 }
             });
 
-            // Certificados inseridos manualmente serão adicionados ao layout principal
-            linearLayoutCertificados.addView(imageButton);
+            // Configura o botão de download (adicione sua lógica aqui)
+            ImageButton btnDownload = certificadoView.findViewById(R.id.btnDownload);
+            btnDownload.setOnClickListener(v -> {
+                SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
+                String nomeUsuario = prefs.getString("nome", "Nome não disponível");
+                String nomeEvento = certificado.getNomeCertificado(); // Nome do evento que está sendo exibido
+                String horasCertificado = certificado.getHorasCertificado();  // Quantidade de horas do certificado
+
+                // Criando a mensagem do certificado
+                String mensagemCertificado = String.format(
+                        "Certificamos que %s, participou com êxito do evento %s, com carga horária total de %s.",
+                        nomeUsuario, nomeEvento, horasCertificado);
+
+                // Exibindo o pop-up
+                showCertificadoPopup(mensagemCertificado);
+            });
+
+            // Adiciona o layout do certificado ao container principal
+            linearLayoutCertificados.addView(certificadoView);
         } catch (Exception e) {
             Log.e("MeusCertificados", "Erro ao adicionar certificado", e);
         }

@@ -8,14 +8,27 @@
 
     <!-- Aqui mostra o mapa -->
     <fragment
-        android:id="@+id/mapFragment"
+        android:id="@+id/map_fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
+    <!-- Botão flutuante que aparece no canto inferior direito -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:contentDescription="Localizar posição atual"
+        android:src="@android:drawable/ic_menu_mylocation"
+        android:tint="@android:color/white" />
+
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarLocalizacao"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -26,7 +39,7 @@
 
     <!-- Texto que fica sobre a Toolbar -->
     <TextView
-        android:id="@+id/txtLocalizacao"
+        android:id="@+id/distance_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -37,5 +50,5 @@
         android:textSize="16sp"
         android:background="@android:color/white"
         android:padding="8dp"
-        android:layout_above="@+id/toolbarLocalizacao" />
+        android:layout_above="@+id/toolbar" />
 </RelativeLayout>

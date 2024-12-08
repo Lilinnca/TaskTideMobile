@@ -57,7 +57,7 @@
         android:layout_marginStart="40dp"
         android:background="#338B85"
         android:contentDescription="mais"
-        android:onClick="criarMEP"
+        android:onClick="criarevento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgbtnFavoritos"
         app:layout_constraintTop_toTopOf="@+id/tblInferiorME"
