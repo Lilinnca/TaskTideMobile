@@ -24,12 +24,12 @@
         <ImageButton
             android:id="@+id/btnInfo"
             android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="40dp"
             android:background="@null"
             android:contentDescription="info"
             android:scaleType="fitCenter"
-            android:src="@drawable/baseline_brightness_1_24" />
+            android:src="@drawable/botao_de_informacao" />
 
         <ImageButton
             android:id="@+id/btnDownload"

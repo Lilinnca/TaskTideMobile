@@ -32,6 +32,7 @@
         android:background="#d9d9d9"
         android:ems="10"
         android:hint="dd/mm/aaaa"
+        android:paddingStart="10dp"
         android:inputType="date"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +68,7 @@
     <EditText
         android:id="@+id/editTextDataFim"
         android:layout_width="170dp"
+        android:paddingStart="10dp"
         android:layout_height="48dp"
         android:layout_marginStart="226dp"
         android:layout_marginEnd="15dp"
