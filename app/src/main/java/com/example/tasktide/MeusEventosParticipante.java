@@ -57,7 +57,6 @@ public class MeusEventosParticipante extends AppCompatActivity {
         usuarioId = getUsuarioId();
 
         EventosSemana();
-        EventosMes();
 
         verificarPermissaoBtnCriador();
     }
@@ -120,18 +119,6 @@ public class MeusEventosParticipante extends AppCompatActivity {
             });
 
             eventosContainerSemana.addView(eventoView);
-        }
-    }
-
-
-    private void EventosMes() {
-        List<Evento> eventos = dao.getAllEventos();
-        LayoutInflater inflater = LayoutInflater.from(this);
-
-        for (Evento evento : eventos) {
-            View eventoView = inflater.inflate(R.layout.mostrar_evento_mes, eventosContainerMes, false);
-
-            eventosContainerMes.addView(eventoView);
         }
     }
 

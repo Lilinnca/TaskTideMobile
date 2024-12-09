@@ -83,6 +83,7 @@
                 android:layout_height="48dp"
                 android:background="@color/gray"
                 android:hint="Nome"
+                android:paddingStart="10dp"
                 android:textColorHint="@color/gray" />
 
             <TextView
@@ -98,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/gray"
+                android:paddingStart="10dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/gray" />
@@ -115,6 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/gray"
+                android:paddingStart="10dp"
                 android:hint="Senha"
                 android:inputType="textPassword"
                 android:textColorHint="@color/gray" />

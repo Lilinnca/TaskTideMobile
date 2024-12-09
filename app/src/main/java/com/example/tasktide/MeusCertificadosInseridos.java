@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +57,53 @@ public class MeusCertificadosInseridos extends Activity {
         btnSelecionarPDF.setOnClickListener(v -> selectPdfFile());
 
         btnAdicionarCertificado.setOnClickListener(v -> insertCertificate());
+
+        editTextData.addTextChangedListener(new TextWatcher() {
+            private String currentText = "";
+            private boolean isUpdating = false;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Nenhuma ação necessária aqui
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Nenhuma ação necessária aqui
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isUpdating) return;
+
+                isUpdating = true;
+
+                String cleanText = s.toString().replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+                String formattedText = "";
+
+                // Aplica formatação progressiva para data
+                int length = cleanText.length();
+                if (length >= 2) {
+                    formattedText = cleanText.substring(0, 2) + "/";
+                    if (length >= 4) {
+                        formattedText += cleanText.substring(2, 4) + "/";
+                        if (length > 4) {
+                            formattedText += cleanText.substring(4, Math.min(length, 8));
+                        }
+                    } else {
+                        formattedText += cleanText.substring(2);
+                    }
+                } else {
+                    formattedText = cleanText;
+                }
+
+                // Atualiza o campo com o texto formatado
+                currentText = formattedText;
+                editTextData.setText(formattedText);
+                editTextData.setSelection(formattedText.length()); // Coloca o cursor no final
+                isUpdating = false;
+            }
+        });
     }
 
     private void selectPdfFile() {

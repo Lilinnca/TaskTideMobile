@@ -26,9 +26,6 @@
             android:name=".Manual"
             android:exported="false" />
         <activity
-            android:name=".Pdf_viewer"
-            android:exported="false" />
-        <activity
             android:name=".MeusEventosParticipante"
             android:exported="false" />
         <activity
@@ -39,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".EsqueciMinhaSenha"
-            android:exported="false" />
-        <activity
-            android:name=".EventoInfoTelaInicial"
             android:exported="false" />
         <activity
             android:name=".PagamentoEvento"
@@ -59,9 +53,6 @@
             android:name=".TelaBoasVindas"
             android:exported="false" />
         <activity
-            android:name=".InfoEvento"
-            android:exported="false" />
-        <activity
             android:name=".Configuracoes"
             android:exported="false" />
         <activity
@@ -69,9 +60,6 @@
             android:exported="false" />
         <activity
             android:name=".TelaInicial"
-            android:exported="false" />
-        <activity
-            android:name=".MeusEventos"
             android:exported="false" />
         <activity
             android:name=".MeusCertificados"
