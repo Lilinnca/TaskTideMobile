@@ -20,7 +20,7 @@ import com.example.tasktide.Objetos.Informacoes;
 
 public class EventoInformacoes extends AppCompatActivity {
 
-    private EditText edtxtDataPrevis, edtxtDataFim, edtxHorarioInicio, edtxHorarioFim, edtxtPrazo, edtxtLocal, edtxtValorEvento;
+    private EditText edtxtDataPrevista, edtxtDataFim, edtxHorarioInicio, edtxHorarioFim, edtxtPrazo, edtxtLocal, edtxtValorEvento;
     private RadioGroup radioGroup;
     private RadioButton rdbSim, rdbNao;
     private long idEvento;
@@ -32,7 +32,7 @@ public class EventoInformacoes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evento_informacoes);
 
-        edtxtDataPrevis = findViewById(R.id.editTextDataPrevista);
+        edtxtDataPrevista = findViewById(R.id.editTextDataPrevista);
         edtxtDataFim = findViewById(R.id.editTextDataFim);
         edtxHorarioInicio = findViewById(R.id.editTextHorarioInicio);
         edtxHorarioFim = findViewById(R.id.editTextHorarioFim);
@@ -44,7 +44,7 @@ public class EventoInformacoes extends AppCompatActivity {
         rdbSim = findViewById(R.id.rbtnSimInformacoes);
         rdbNao = findViewById(R.id.rbtnNaoInformacoes);
 
-        edtxtDataPrevis.addTextChangedListener(new IncluirMascara(edtxtDataPrevis));
+        edtxtDataPrevista.addTextChangedListener(new IncluirMascara(edtxtDataPrevista));
         edtxtDataFim.addTextChangedListener(new IncluirMascara(edtxtDataFim));
         edtxtPrazo.addTextChangedListener(new IncluirMascara(edtxtPrazo));
 
@@ -74,7 +74,7 @@ public class EventoInformacoes extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         };
 
-        edtxtDataPrevis.addTextChangedListener(dateTextWatcher);
+        edtxtDataPrevista.addTextChangedListener(dateTextWatcher);
         edtxtDataFim.addTextChangedListener(dateTextWatcher);
 
         // Recuperar o idEvento do Intent
@@ -82,11 +82,10 @@ public class EventoInformacoes extends AppCompatActivity {
         Log.d(TAG, "ID do evento recebido: " + idEvento);
 
         findViewById(R.id.btnAvancarInformacoes).setOnClickListener(this::inserirInformacoesEIrParaSobreParticipantes);
-        findViewById(R.id.btnVoltarInformacoes).setOnClickListener(this::voltarParaTelaCriarEvento);
     }
 
     private void verificarDatas() {
-        String dataInicio = edtxtDataPrevis.getText().toString();
+        String dataInicio = edtxtDataPrevista.getText().toString();
         String dataFim = edtxtDataFim.getText().toString();
 
         TextView txtHorarioInicio = findViewById(R.id.txtHorarioInicio);
@@ -105,10 +104,9 @@ public class EventoInformacoes extends AppCompatActivity {
         }
     }
 
-
     public void inserirInformacoesEIrParaSobreParticipantes(View view) {
         // Capturar os valores dos campos
-        String dataPrevis = edtxtDataPrevis.getText().toString();
+        String dataPrevista = edtxtDataPrevista.getText().toString();
         String dataFim = edtxtDataFim.getText().toString();
         String horarioInicio = edtxHorarioInicio.getText().toString();
         String horarioFim = edtxHorarioFim.getText().toString();
@@ -135,7 +133,7 @@ public class EventoInformacoes extends AppCompatActivity {
         String pago = rdbSim.isChecked() ? "Sim" : "Não";
 
         // Criar um objeto Informacoes com os dados capturados
-        Informacoes informacoes = new Informacoes(dataPrevis, dataFim, horarioInicio, horarioFim, prazo, local, valorEvento, pago);
+        Informacoes informacoes = new Informacoes(dataPrevista, dataFim, horarioInicio, horarioFim, prazo, local, valorEvento, pago);
 
         // Inserir os dados na tabela informacoes
         DAO dao = new DAO(this);
@@ -149,7 +147,7 @@ public class EventoInformacoes extends AppCompatActivity {
 
 
     public void IrParaTelaSobreParticipantes(View view) {
-        Intent in = new Intent(EventoInformacoes.this, EventoInformacoes.class);
+        Intent in = new Intent(EventoInformacoes.this, EventoParticipante.class);
         in.putExtra("ID_EVENTO", idEvento);
         startActivity(in);
     }
