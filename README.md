@@ -1,7 +1,7 @@
 Esse projeto foi realizado pelas alunas Giovanna Bembom da Silva Bandeira, Lilian do Carmo Almeida e Sabrina Mota de Lima, do 3º ano de Informática do Instituto Federal de Educação, Ciência e Tecnologia do Amazonas.
 O TaskTide é um aplicativo móvel desenvolvido para auxiliar usuários a gerenciar eventos, atividades e o controle de horas complementares de forma eficiente e intuitiva. Ideal para estudantes, profissionais e qualquer pessoa que precise registrar e organizar eventos, tarefas e horas extras de trabalho ou estudo.
 
-Com o TaskTdie, você pode:
+Com o TaskTide, você pode:
 
 - Criar, editar e organizar eventos.
 - Registrar horas complementares de forma prática.
