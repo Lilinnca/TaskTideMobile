@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- res/drawable/circular_button.xml -->
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="@android:color/transparent"/> <!-- Cor de fundo transparente -->
+        <size android:width="62.7dp" android:height="62.7dp"/> <!-- Tamanho do botão -->
+        <corners android:radius="31.35dp"/> <!-- Metade do tamanho para fazer um círculo -->
+    </shape>
+
+</selector>
